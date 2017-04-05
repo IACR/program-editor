@@ -1,2 +1,4 @@
 # program-editor
 Freelance work done for IACR
+
+Creating a program for a conference is a complicated task. My aim with this project is to make a GUI for conference program creation.
