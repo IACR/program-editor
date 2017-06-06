@@ -15,22 +15,60 @@
 
   </head>
   <body>
-    <main class="container-fluid">
+    <main id="parent" class="container-fluid">
+
+      <section class="jumbotron">
+        <h1>
+          Program Creator/Editor
+        </h1>
+        <p>Created exclusively for IACR</p>
+      </section>
 
       <div class="row">
-        <section class="col-md-12">
-          <h1>sup world</h1>
-        </section>
+        <!-- avoiding adding class="container", as I believe it would interfere with bootstrap. gonna try to see if I can work without it -->
+        <article id="talks-list" class="col-md-4">
+          <h4 class="category-title">
+            Theory
+          </h4>
+          <section id="category1" class="category">
+            <p id="21" class="talk">
+              talk title 1<br/ >
+              talk authors A, B, and C for talk 1
+            </p>
+            <p id="22" class="talk">
+              talk title 2<br/ >
+              talk author for talk 2
+            </p>
+          </section>
+
+          <h4 class="category-title">
+            Number-Theory
+          </h4>
+          <section id="category1" class="category">
+            <p id="23" class="talk">
+              Gettysburg Address<br/ >
+              Abraham Lincoln
+            </p>
+            <p id="24" class="talk">
+              Snazzy Monologue<br/ >
+              Stephen Colbert
+            </p>
+            <div id="25" class="talk">
+              Uber Academic Talk<br/ >
+              a bunch of authors I decided not to type out but still wanted a long string
+            </div>
+          </section>
+        </article>
       </div>
 
-      <div class="row">
-        <section class="col-md-6">
+      <!-- <div class="row">
+        <section id="left" class="col-md-6">
           <p>maybe you'll drag me</p>
         </section>
-        <section class="col-md-6">
+        <section id="right" class="col-md-6">
           <p>or maybe you'll drag me</p>
         </section>
-      </div>
+      </div> -->
 
     </main>
 
