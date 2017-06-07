@@ -13,7 +13,6 @@ dragula(containers).on('drop', function(el, target, source, sibling) {
 
   if (source.classList.contains('session-talks')) {
     console.log('removed from a session');
-    // console.dir(source);
 
     // Restore the drag & drop hint.
     if (source.childNodes.length == 1) {

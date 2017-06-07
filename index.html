@@ -5,270 +5,217 @@
 
     <title>Program Editor</title>
 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet"> -->
+
     <!-- Styling -->
     <link href="./dist/dragula.css" rel="stylesheet">
     <link href="./styles/main.css" rel="stylesheet">
 
   </head>
-  <body>
-    <main id="parent">
-
-      <div id="talks-list" class="container">
-        <p class="category-title">
-          Theory
-        </p>
-        <div class="category" id="category-1">
-          <div class="talk" id="21">
-            First talk title<br/>
-            First talk authors
-          </div>
-          <div class="talk" id="22">
-            Second talk title<br/>
-            Second talk authors
-          </div>
-        </div>
-
-        <p class="category-title">
-          Number Theory
-        </p>
-        <div class="category" id="category-2">
-          <div class="talk" id="23">
-            Gettysburg Address<br/>
-            Abraham Lincoln
-          </div>
-          <div class="talk" id="24">
-            Pithy Monologue<br/>
-            Stephen Colbert
-          </div>
-          <div class="talk" id="25">
-            Third talk title<br/>
-            Long list of third talk authors
-          </div>
-          <div class="talk" id="26">
-            Fourth talk title<br/>
-            Long list of authors
-          </div>
-        </div>
-
-        <p class="category-title">
-          Practice
-        </p>
-        <div class="category" id="category-3">
-          <div class="talk" id="27">
-            Fifth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="28">
-            Sixth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="29">
-            Seventh talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="30">
-            Eighth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="31">
-            Ninth talk title<br/>
-            Long list of  authors
-          </div>
-          <div class="talk" id="32">
-            Tenth talk title<br/>
-            Long list of  authors
-          </div>
-        </div>
-
-      </div>
-      <div id="program">
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks container" id="morning1">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks container" id="morning2">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks container" id="morning3">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks container" id="morning4">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks container" id="morning5">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks container" id="morning6">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks container" id="morning7">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">Click to edit session moderator.</div>
-           <div class="session-talks container" id="morning8">Drag talks here.</div>
-         </div>
-      </div>
-    </main>
-
-    <!-- <main id="parent" class="container-fluid">
-
-      <section class="jumbotron">
+  <body class="container-fluid">
+    <div class="row">
+      <header class="col-md-12 jumbotron">
         <h1>
           Program Creator/Editor
         </h1>
         <p>Created exclusively for IACR</p>
-      </section>
+      </header>
+    </div>
 
-      <div class="row"> -->
-        <!-- avoiding adding class="container", as I believe it would interfere with bootstrap. gonna try to see if I can work without it -->
-        <!-- <article id="talks-list" class="col-md-4">
-          <h4 class="category-title">
+    <main id="parent">
+      <div class="row">
+        <div id="talks-list" class="container col-md-4">
+          <p class="category-title">
             Theory
-          </h4>
-          <section id="category1" class="category">
-            <p id="21" class="talk">
-              talk title 1<br/ >
-              talk authors A, B, and C for talk 1
-            </p>
-            <p id="22" class="talk">
-              talk title 2<br/ >
-              talk author for talk 2
-            </p>
-          </section>
-
-          <h4 class="category-title">
-            Number-Theory
-          </h4>
-          <section id="category1" class="category">
-            <p id="23" class="talk">
-              Gettysburg Address<br/ >
-              Abraham Lincoln
-            </p>
-            <p id="24" class="talk">
-              Snazzy Monologue<br/ >
-              Stephen Colbert
-            </p>
-            <div id="25" class="talk">
-              Uber Academic Talk<br/ >
-              a bunch of authors I decided not to type out but still wanted a long string
+          </p>
+          <div class="category" id="category-1">
+            <div class="talk" id="21">
+              First talk title<br/>
+              First talk authors
             </div>
-          </section>
-        </article>
+            <div class="talk" id="22">
+              Second talk title<br/>
+              Second talk authors
+            </div>
+          </div>
 
-        <article id="program" class="col-md-8">
-          <section class="session">
-            <h5 class="session-title">
-              Edit session title
-            </h5>
-            <h6 class="session-moderator">
-              Edit session moderator
-            </h6> -->
-            <!-- avoiding adding class="container", as I believe it would interfere with bootstrap. gonna try to see if I can work without it -->
-            <!-- <p id="morning1" class="session-talks">
-              drag talks here
-            </p>
-          </section>
+          <p class="category-title">
+            Number Theory
+          </p>
+          <div class="category" id="category-2">
+            <div class="talk" id="23">
+              Gettysburg Address<br/>
+              Abraham Lincoln
+            </div>
+            <div class="talk" id="24">
+              Pithy Monologue<br/>
+              Stephen Colbert
+            </div>
+            <div class="talk" id="25">
+              Third talk title<br/>
+              Long list of third talk authors
+            </div>
+            <div class="talk" id="26">
+              Fourth talk title<br/>
+              Long list of authors
+            </div>
+          </div>
 
-          <section class="session">
-            <h5 class="session-title">
-              Edit session title
-            </h5>
-            <h6 class="session-moderator">
-              Edit session moderator
-            </h6> -->
-            <!-- avoiding adding class="container", as I believe it would interfere with bootstrap. gonna try to see if I can work without it -->
-            <!-- <p id="morning2" class="session-talks">
-              drag more talks here
-            </p>
-          </section>
-        </article>
+          <p class="category-title">
+            Practice
+          </p>
+          <div class="category" id="category-3">
+            <div class="talk" id="27">
+              Fifth talk title<br/>
+              Long list of authors
+            </div>
+            <div class="talk" id="28">
+              Sixth talk title<br/>
+              Long list of authors
+            </div>
+            <div class="talk" id="29">
+              Seventh talk title<br/>
+              Long list of authors
+            </div>
+            <div class="talk" id="30">
+              Eighth talk title<br/>
+              Long list of authors
+            </div>
+            <div class="talk" id="31">
+              Ninth talk title<br/>
+              Long list of  authors
+            </div>
+            <div class="talk" id="32">
+              Tenth talk title<br/>
+              Long list of  authors
+            </div>
+          </div>
+        </div>
+
+        <div id="program" class="col-md-9">
+          <div class="session">
+            <div class="session-title">
+              <strong>
+                Click to edit session title.
+              </strong>
+            </div>
+            <div class="session-moderator">
+              Click to edit session moderator.
+            </div>
+            <!-- TODO: what makes this div not extend past the end of the session surrounding it but all the others do?? doesn't do it on the original... -->
+            <div class="session-talks" id="morning1">
+              Drag talks here.
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-title">
+              <strong>
+                Click to edit session title.
+              </strong>
+            </div>
+            <div class="session-moderator">
+              Click to edit session moderator.
+            </div>
+            <div class="session-talks container" id="morning2">
+              Drag talks here.
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-title">
+              <strong>
+                Click to edit session title.
+              </strong>
+            </div>
+            <div class="session-moderator">
+              Click to edit session moderator.
+            </div>
+            <div class="session-talks container" id="morning3">
+              Drag talks here.
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-title">
+              <strong>
+                Click to edit session title.
+              </strong>
+            </div>
+            <div class="session-moderator">
+              Click to edit session moderator.
+            </div>
+            <div class="session-talks container" id="morning4">
+              Drag talks here.
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-title">
+              <strong>
+                Click to edit session title.
+              </strong>
+            </div>
+            <div class="session-moderator">
+              Click to edit session moderator.
+            </div>
+            <div class="session-talks container" id="morning5">
+              Drag talks here.
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-title">
+              <strong>
+                Click to edit session title.
+              </strong>
+            </div>
+            <div class="session-moderator">
+              Click to edit session moderator.
+            </div>
+            <div class="session-talks container" id="morning6">
+              Drag talks here.
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-title">
+              <strong>
+                Click to edit session title.
+              </strong>
+            </div>
+            <div class="session-moderator">
+              Click to edit session moderator.
+            </div>
+            <div class="session-talks container" id="morning7">
+              Drag talks here.
+            </div>
+          </div>
+
+          <div class="session">
+            <div class="session-title">
+              <strong>
+                Click to edit session title.
+              </strong>
+            </div>
+            <div class="session-moderator">
+              Click to edit session moderator.
+            </div>
+            <div class="session-talks container" id="morning8">
+              Drag talks here.
+            </div>
+          </div>
+        </div>
       </div>
+    </main>
 
-    </main> -->
+    <!-- Bootstrap scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- Required scripts -->
+    <!-- Dragula (for drag & drop) -->
     <script src="./dist/dragula.js"></script>
 
     <!-- Additional scripts -->
