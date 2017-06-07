@@ -1,0 +1,53 @@
+div.category {
+ min-height: 20px;
+ background: #c9c2ce;
+ padding: 5px;
+}
+#parent {
+  display: flex;
+}
+#talks-list {
+ max-height: 700px;
+ overflow-y: auto;
+ width: 200px;
+ background: #a9c2ee;
+ border: 1px solid black;
+ margin: 5px;
+ padding:5px;
+}
+#program {
+ max-height: 700px;
+ overflow-y: auto;
+ flex: 1;
+ background: #ddeeff;
+ margin:5px;
+ padding:5px;
+ border: 1px solid black;
+}
+div.session {
+ padding: 5px;
+ background: #a9c2ee;
+ margin: 5px;
+}
+
+div.session-talks {
+ min-height: 50px;
+ background: #c9c2ce;
+ padding: 5px;
+}
+div.talk {
+ border-radius: 10px;
+ background: lightblue;
+ border: 1px solid darkgray;
+ margin: 5px;
+ padding: 5px;
+}
+p.category-title {
+ margin-top: 5px;
+ margin-bottom: 5px;
+}
+
+div.talk:hover {
+  border: 1px solid gray;
+  background: #AACAE6;
+}
