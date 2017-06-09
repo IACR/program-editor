@@ -1,11 +1,22 @@
+/*** General Styling ***/
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h3, h4 {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.mainTitle {
+  font-size: 5em;
+}
+
+
+/*** Talks Section ***/
 div.category {
   /*min-height: 20px;*/
   background: #c9c2ce;
   padding: 5px;
-}
-
-#parent {
-  /*display: flex;*/
 }
 
 #talks-list {
@@ -17,6 +28,21 @@ div.category {
   padding: 5px;
 }
 
+div.talk {
+  border-radius: 10px;
+  background: lightblue;
+  border: 1px solid darkgray;
+  margin: 5px;
+  padding: 5px;
+}
+
+div.talk:hover {
+  border: 1px solid gray;
+  background: #AACAE6;
+}
+
+
+/*** Schedule Section ***/
 #program {
   max-height: 700px;
   overflow-y: auto;
@@ -36,17 +62,4 @@ div.session-talks {
   /*min-height: 50px;*/
   background: #c9c2ce;
   padding: 5px;
-}
-
-div.talk {
-  border-radius: 10px;
-  background: lightblue;
-  border: 1px solid darkgray;
-  margin: 5px;
-  padding: 5px;
-}
-
-div.talk:hover {
-  border: 1px solid gray;
-  background: #AACAE6;
 }
