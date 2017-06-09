@@ -11,19 +11,17 @@ div.category {
 #talks-list {
   max-height: 700px;
   overflow-y: auto;
-  /*width: 200px;*/
   background: #a9c2ee;
   border: 1px solid black;
-  margin-right: 10px;
+  /*margin-right: 10px;*/
   padding: 5px;
 }
 
 #program {
   max-height: 700px;
   overflow-y: auto;
-  /*flex: 1;*/
   background: #ddeeff;
-  margin-left: 10px;
+  /*margin-left: 10px;*/
   padding:5px;
   border: 1px solid black;
 }
@@ -46,11 +44,6 @@ div.talk {
   border: 1px solid darkgray;
   margin: 5px;
   padding: 5px;
-}
-
-p.category-title {
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 div.talk:hover {

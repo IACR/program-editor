@@ -15,21 +15,22 @@
     <link href="./styles/main.css" rel="stylesheet">
 
   </head>
-  <body class="container-fluid">
+  <body class="container">
     <div class="row">
       <header class="col-md-12 jumbotron">
         <h1>
           Program Creator/Editor
         </h1>
-        <p>Created exclusively for IACR</p>
+        <p>For creating IACR-sponsored conference programs</p>
       </header>
     </div>
 
     <main id="parent">
-      <div id="talks-list" class="col-md-3">
-        <p class="category-title">
+      <article id="talks-list" class="col-md-3">
+        <h4 class="category-title">
           Theory
-        </p>
+        </h4>
+        <!-- TODO: change div.category to sections, modify JS as needed to preserve functionality -->
         <div class="category" id="category-1">
           <div class="talk" id="21">
             First talk title<br/>
@@ -41,9 +42,9 @@
           </div>
         </div>
 
-        <p class="category-title">
+        <h4 class="category-title">
           Number Theory
-        </p>
+        </h4>
         <div class="category" id="category-2">
           <div class="talk" id="23">
             Gettysburg Address<br/>
@@ -63,9 +64,9 @@
           </div>
         </div>
 
-        <p class="category-title">
+        <h4 class="category-title">
           Practice
-        </p>
+        </h4>
         <div class="category" id="category-3">
           <div class="talk" id="27">
             Fifth talk title<br/>
@@ -92,9 +93,9 @@
             Long list of authors
           </div>
         </div>
-      </div>
+      </article>
 
-      <div id="program" class="col-md-8">
+      <article id="program" class="col-md-9">
         <div class="session">
           <div class="session-title">
             <strong>
@@ -206,7 +207,7 @@
             Drag talks here.
           </div>
         </div>
-      </div>
+      </article>
     </main>
 
     <!-- Bootstrap scripts -->
