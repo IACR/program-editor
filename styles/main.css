@@ -8,7 +8,11 @@ h1, h3, h4 {
 }
 
 .mainTitle {
-  font-size: 5em;
+  font-size: 4.7em;
+}
+
+h3 {
+  margin-top: 0px;
 }
 
 

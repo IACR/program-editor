@@ -20,9 +20,3 @@ dragula(containers).on('drop', function(el, target, source, sibling) {
     }
   }
 });
-
-// onclick .sesstion-title, focus change to input box that autosaves on blur
-function editSessionTitle() {
-  var titleClick = document.getElementsByClassName("session-title");
-  titleClick.onclick = console.log("you clicked a title");
-}
