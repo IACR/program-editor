@@ -1,5 +1,5 @@
 var talks = Array.prototype.slice.call(document.querySelectorAll("div.category"));
-var sessions = Array.prototype.slice.call(document.querySelectorAll(".session-talks"));
+var sessions = Array.prototype.slice.call(document.querySelectorAll("div.session-talks"));
 var containers = talks.concat(sessions);
 
 dragula(containers).on('drop', function(el, target, source, sibling) {
@@ -20,3 +20,9 @@ dragula(containers).on('drop', function(el, target, source, sibling) {
     }
   }
 });
+
+// onclick .sesstion-title, focus change to input box that autosaves on blur
+function editSessionTitle() {
+  var titleClick = document.getElementsByClassName("session-title");
+  titleClick.onclick = console.log("you clicked a title");
+}
