@@ -1,8 +1,9 @@
 function divClicked() {
     // get elements with class name session-title
     // change them to <input> onclick
+    // make them not all change at once
     var divHtml = document.getElementsByClassName('session-title');
-    var editableText = $("<input />");
+    var editableText = $("<input type='text' class='form-control' placholder='Type in your new title here' />");
     editableText.val(divHtml);
     $(divHtml).replaceWith(editableText);
     editableText.focus();
