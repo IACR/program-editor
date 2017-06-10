@@ -27,7 +27,9 @@
 $(document).ready(function() {
   $(".session-title").click(function() {
     var clickity = $(this).attr("id");
-    $(this).replaceWith("<input type='text' class='form-control input-sm' placeholder='Enter new session name here' />");
-    //TODO: autofocus on the input box
+    $(this).replaceWith("<input type='text' class='form-control input-sm newInput' placeholder='Enter new session name here' />");
+    $(".newInput").focus();
   });
+
+  //TODO: take val of .newInput, replaceWith<h5>that value</h5
 });
