@@ -1,3 +1,11 @@
+/*
+- html file > editor.js > functions for event handling
+- editor.js = path to progData setup (see prog creator docs)
+  - for now stick to one .js file (editor.js)
+
+- run progData through template to create display of program and setup event handlers for editing and dragging
+*/
+
 var talks = Array.prototype.slice.call(document.querySelectorAll("div.category"));
 var sessions = Array.prototype.slice.call(document.querySelectorAll("div.session-talks"));
 var containers = talks.concat(sessions);
