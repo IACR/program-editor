@@ -26,7 +26,40 @@
       </header>
     </div>
 
-    <div class="row">
+    <div id="setupPrompts">
+      <!-- TODO: make full length (or at least 1 step per row) -->
+      <div class="row">
+        <section id="newOrExisting" class="col-md-6 setupStep">
+          <p>If you've been here before, you can edit an existing program. Otherwise, start from a new one.</p>
+          <button type="button" name="newProg" onclick="createNew()" class="btn btn-success btn-sm">New</button>
+          <button type="button" name="existingProg" onclick="editExisting()" class="btn btn-success btn-sm" disabled="true">Existing</button>
+        </section>
+      </div>
+      <div class="row">
+        <section id="templateSelector" class="col-md-6 setupStep">
+          <p>Select a template to start from.</p>
+          <select id="templateSelect" class="form-control" onchange="getConfig(this.value)">
+            <option value="crypto_config.json">Crypto</option>
+            <option value="broken.json">Broken</option>
+          </select>
+        </section>
+      </div>
+      <div class="row">
+        <section id="datePicker" class="col-md-6 setupStep">
+          <!-- TODO: try jquery datePicker -->
+          <p>Choose the start and end date for your conference.</p>
+          <input type="date" name="acceptedPapers" /> to <input type="date" name="acceptedPapers" />
+        </section>
+      </div>
+      <div class="row">
+        <section id="uploadTalks" class="col-md-6 form-group">
+          <input type="file" name="acceptedPapers" accept=".json" id="uploadTalks" />
+          <button type="submit" name="button" class="btn btn-success btn-sm">Upload</button>
+        </section>
+      </div>
+    </div>
+
+    <main id="parent">
       <div class="col-md-3">
         <h3 class="text-center">
           Talks
@@ -37,9 +70,7 @@
           Schedule
         </h3>
       </div>
-    </div>
 
-    <main id="parent">
       <article id="talks-list" class="col-md-3">
         <h4 class="category-title">
           Theory
@@ -110,7 +141,7 @@
       </article>
 
       <article id="renderedProgram" class="col-md-9">
-        
+
         <!-- Handlebars script that will render the program template based on the program.json file -->
           <script id="program-template" type="text/x-handlebars-template">
             {{#each days}}

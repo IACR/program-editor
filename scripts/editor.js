@@ -15,6 +15,16 @@ Handlebars.registerHelper('empty', function(data, options) {
  }
 });
 
+// creating a new program
+function createNew() {
+
+}
+
+// set dates in progData
+function setDates(startdate, enddate) {
+  // validate dates, modify progData, and show upload
+}
+
 // adds dragula functionality
 function addDrag() {
   var talks = Array.prototype.slice.call(document.querySelectorAll("div.category"));
@@ -72,41 +82,25 @@ function getConfig(name) {
       }
     }
     progData = data;
-
-/*
-    var talks = data['config']['unassigned_talks'];
-    var categories = {};
-    if (talks) {
-      for (var i = 0; i < talks.length; i++) {
-        if ('undefined' == typeof talks[i].category) {
-          category = 'Uncategorized';
-        } else {
-          category = talks[i].category;
-        }
-        if (!(category in categories)) {
-          categories[category] = [];
-        }
-        categories[category].push(talks[i]);
-      }
-    }
-    console.dir(categories);
-    */
-    drawProgram();
+    $('#datePicker').show(500);
+    // drawProgram();
   })
   .fail(function(jqxhr, textStatus, error) {
     document.getElementById('renderedProgram');
     renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
 
     if (textStatus === 'error') {
-      console.log('program.json not found, check file name and try again');
+      console.log(name + ' not found, check file name and try again');
     }
     else {
-      console.log('There is a problem with program.json. The problem is ' + error);
+      console.log('There is a problem with ' + name +  '. The problem is ' + error);
     }
   });
 }
 
 // executes functions once document is ready
 $(document).ready(function() {
-   getConfig('crypto_config.json');
+  //  getConfig('crypto_config.json');
+
+  document.getElementById('parent').style.display = 'none';
  });

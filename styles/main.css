@@ -16,6 +16,12 @@ h3 {
 }
 
 
+/*** Setup Section Styling ***/
+.setupStep {
+  margin-bottom: 20px;
+}
+
+
 /*** Talks Section ***/
 div.category {
   background: #c9c2ce;
