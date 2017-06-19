@@ -18,6 +18,7 @@ Handlebars.registerHelper('empty', function(data, options) {
 // creating a new program
 function createNew() {
   // TODO: code to reveal div with template selection
+  // TODO: do reveals with jQuery-UI (.show(), https://jqueryui.com/show/)
 }
 
 // jQuery-UI for date picker
