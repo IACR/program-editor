@@ -5,6 +5,8 @@
 // Global configuration object.
 var progData = null;
 
+// TODO: add notification for when browser is too small using media breakpoint
+
 // custom helper for _____
 Handlebars.registerHelper('empty', function(data, options) {
  //  console.dir(data);
@@ -32,7 +34,6 @@ function addDrag() {
 
   	    // hide the drag & drop hint.
         target.firstChild.data = '';
-        target.style.background = '#0000ff';
         target.style.border = '';
         console.dir(target);
       }
@@ -43,7 +44,6 @@ function addDrag() {
         // Restore the drag & drop hint.
         if (source.childNodes.length == 1) {
           source.firstChild.data = 'Drag talks here';
-          target.style.background = '#ff0000';
         }
       }
     });
