@@ -27,9 +27,22 @@
     <div class="row">
       <article class="col-md-12">
         <p>
-          Welcome to the program creator for the International Association for Cryptologic Research (IACR). This tool is designed to make creating a program for your conference easier.
+          Welcome to the program creator for the International Association for Cryptologic Research (IACR). This tool is designed to make creating a program for your conference easier. We'll start with uploading the JSON file containing accepted papers and talks.
         </p>
-        
+        <aside class="form-group">
+          <input type="file" name="acceptedPapers" accept=".json" id="uploadTalks" />
+          <!-- TODO: once the submit button is pressed, the below section appears -->
+          <button type="submit" name="button" class="btn btn-success btn-xs">Upload</button>
+        </aside>
+      </article>
+    </div>
+
+    <div class="row">
+      <article class="col-md-12">
+        <p>
+          hidden until file is uploaded, date range picker
+        </p>
+        <input type="date" name="acceptedPapers" /> to <input type="date" name="acceptedPapers" />
       </article>
     </div>
 
