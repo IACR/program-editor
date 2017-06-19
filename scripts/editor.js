@@ -17,8 +17,43 @@ Handlebars.registerHelper('empty', function(data, options) {
 
 // creating a new program
 function createNew() {
-
+  // TODO: code to reveal div with template selection
 }
+
+// jQuery-UI for date picker
+//TODO: should name this function, yes?
+$(function() {
+  var dateFormat = "mm/dd/yy",
+    from = $( "#from" ).datepicker({
+      showButtonPanel: true,
+      changeMonth: true,
+      changeYear: true,
+      numberOfMonths: 2
+    })
+    .on( "change", function() {
+      to.datepicker( "option", "minDate", getDate( this ) );
+    }),
+
+    to = $( "#to" ).datepicker({
+      showButtonPanel: true,
+      changeMonth: true,
+      changeYear: true,
+      numberOfMonths: 2
+    })
+    .on( "change", function() {
+      from.datepicker( "option", "maxDate", getDate( this ) );
+    });
+
+  function getDate( element ) {
+    var date;
+    try {
+      date = $.datepicker.parseDate( dateFormat, element.value );
+    } catch( error ) {
+      date = null;
+    }
+    return date;
+  }
+});
 
 // set dates in progData
 function setDates(startdate, enddate) {
@@ -27,7 +62,7 @@ function setDates(startdate, enddate) {
 
 // adds dragula functionality
 function addDrag() {
-  var talks = Array.prototype.slice.call(document.querySelectorAll("div.category"));
+  var talks = Array.prototype.slice.call(document.querySelectorAll("section.category"));
   var sessions = Array.prototype.slice.call(document.querySelectorAll(".session-talks"));
   var containers = talks.concat(sessions);
 

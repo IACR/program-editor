@@ -10,8 +10,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet">
     <!-- favorite options include flatly or solar -->
 
-    <!-- Styling -->
+    <!-- jQuery-UI and Dragula -->
+    <link href="./dependencies/jquery-ui/jquery-ui.css" rel="stylesheet">
     <link href="./dependencies/dragula/dragula.css" rel="stylesheet">
+
+    <!-- Styling: Custom -->
     <link href="./styles/main.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet">
 
@@ -46,9 +49,13 @@
       </div>
       <div class="row">
         <section id="datePicker" class="col-md-6 setupStep">
-          <!-- TODO: try jquery datePicker -->
           <p>Choose the start and end date for your conference.</p>
-          <input type="date" name="acceptedPapers" /> to <input type="date" name="acceptedPapers" />
+          <label for="from">From
+            <input type="text" id="from" name="from" />
+          </label>
+          <label for="to">to
+            <input type="text" id="to" name="to" />
+          </label>
         </section>
       </div>
       <div class="row">
@@ -76,7 +83,7 @@
           Theory
         </h4>
         <!-- TODO: change div.category to sections, modify JS as needed to preserve functionality -->
-        <div class="category" id="category-1">
+        <section class="category" id="category-1">
           <div class="talk" id="21">
             First talk title<br/>
             First talk authors
@@ -85,12 +92,12 @@
             Second talk title<br/>
             Second talk authors
           </div>
-        </div>
+        </section>
 
         <h4 class="category-title">
           Number Theory
         </h4>
-        <div class="category" id="category-2">
+        <section class="category" id="category-2">
           <div class="talk" id="23">
             Gettysburg Address<br/>
             Abraham Lincoln
@@ -107,12 +114,12 @@
             Fourth talk title<br/>
             Long list of authors
           </div>
-        </div>
+        </section>
 
         <h4 class="category-title">
           Practice
         </h4>
-        <div class="category" id="category-3">
+        <section class="category" id="category-3">
           <div class="talk" id="27">
             Fifth talk title<br/>
             Long list of authors
@@ -137,7 +144,7 @@
             Tenth talk title<br/>
             Long list of authors
           </div>
-        </div>
+        </section>
       </article>
 
       <article id="renderedProgram" class="col-md-9">
@@ -189,7 +196,6 @@
                         </p>
                       {{/each}}
                       {{/empty}}
-                      <!-- TODO: symbol links, to papers and so on, would go here (except location, that goes directly after moderator) -->
                     </div>
                   </div>
                   <div class="col-md-5">
@@ -222,7 +228,6 @@
                         </div>
                       {{/each}}
                       {{/empty}}
-                      <!-- TODO: symbol links, to papers and so on, would go here (except location, that goes directly after moderator) -->
                     </div>
                   </div>
                 {{else}}
@@ -278,7 +283,6 @@
 
     <!-- Additional scripts -->
     <script src="./scripts/editor.js"></script>
-    <!-- <script src="./scripts/editableFields.js"></script> -->
 
   </body>
 </html>
