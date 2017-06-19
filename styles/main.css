@@ -1,11 +1,25 @@
-div.category {
-  /*min-height: 20px;*/
-  background: #c9c2ce;
-  padding: 5px;
+/*** General Styling ***/
+body {
+  font-family: 'Raleway', sans-serif;
 }
 
-#parent {
-  /*display: flex;*/
+h1, h3, h4 {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.mainTitle {
+  font-size: 4.7em;
+}
+
+h3 {
+  margin-top: 0px;
+}
+
+
+/*** Talks Section ***/
+div.category {
+  background: #c9c2ce;
+  padding: 5px;
 }
 
 #talks-list {
@@ -13,28 +27,6 @@ div.category {
   overflow-y: auto;
   background: #a9c2ee;
   border: 1px solid black;
-  /*margin-right: 10px;*/
-  padding: 5px;
-}
-
-#program {
-  max-height: 700px;
-  overflow-y: auto;
-  background: #ddeeff;
-  /*margin-left: 10px;*/
-  padding:5px;
-  border: 1px solid black;
-}
-
-div.session {
-  padding: 5px;
-  background: #a9c2ee;
-  margin: 5px;
-}
-
-div.session-talks {
-  /*min-height: 50px;*/
-  background: #c9c2ce;
   padding: 5px;
 }
 
@@ -49,4 +41,83 @@ div.talk {
 div.talk:hover {
   border: 1px solid gray;
   background: #AACAE6;
+}
+
+
+/*** Schedule Section ***/
+#renderedProgram {
+  max-height: 700px;
+  overflow-y: auto;
+  border: 1px solid black;
+}
+
+div.session {
+  padding: 5px;
+  background: #a9c2ee;
+  margin: 5px;
+}
+
+div.session-talks {
+  min-height: 3em;
+  background: #c9c2ce;
+  padding: 5px;
+}
+
+a.iconLink {
+  font-size: 1.3em;
+}
+
+p.timeSlot {
+  font-size: 0.9em;
+  text-align: right;
+  margin-top: 25px;
+}
+
+p.talkTitle {
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: left;
+}
+
+p.trackSwitch {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.mutualEvent {
+  background-color: rgba(177, 181, 231, 0.3);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+p.eventDescr {
+  text-align: center;
+}
+
+p.mutualEventTalkTitle {
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.track1Event {
+  background-color: rgba(242, 210, 166, 0.3);
+  margin-bottom: 10px;
+}
+
+.track2Event {
+  background-color: rgba(164, 244, 199, 0.3);
+  margin-bottom: 10px;
+}
+
+p.dualTrackDescr {
+  text-align: left;
+}
+
+span.authorName:after {
+  content: ',';
+}
+
+span.authorName:last-of-type:after {
+  content: '';
 }

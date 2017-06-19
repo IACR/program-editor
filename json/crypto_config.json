@@ -1,0 +1,1682 @@
+{
+    "config": {
+	"default_track_locations": [{"name": "Lotte Lehman Hall"}, {"name": "Campbell Hall"}],
+	"default_talk_minutes": 25,
+	"unassigned_talks": [
+            {
+                "title": "Key-alternating Ciphers and Key-length Extension: Exact Bounds and Multi-user Security",
+                "authors": [
+                    {
+                        "name": "Viet Tung Hoang"
+                    },
+                    {
+                        "name": "Stefano Tessaro"
+                    }
+                ],
+                "category": "Symmetric cryptography"
+            },
+            {
+                "title": "Counter-in-Tweak: Authenticated Encryption Modes for Tweakable Block Ciphers",
+                "authors": [
+                    {
+                        "name": "Thomas Peyrin"
+                    },
+                    {
+                        "name": "Yannick Seurin"
+                    }
+                ],
+                "category": "Symmetric cryptography"
+            },
+            {
+                "title": "Network-Hiding Communication and Applications to Multi-Party Protocols",
+                "authors": [
+                    {
+                        "name": "Martin Hirt"
+                    },
+                    {
+                        "name": "Ueli Maurer"
+                    },
+                    {
+                        "name": "Daniel Tschudi"
+                    },
+                    {
+                        "name": "Vassilis Zikas"
+                    }
+                ],
+                "category": "Secure Computation"
+            },
+            {
+                "title": "Network Oblivious Transfer",
+                "authors": [
+                    {
+                        "name": "Ranjit Kumaresan"
+                    },
+                    {
+                        "name": "Srinivasan Raghuraman"
+                    },
+                    {
+                        "name": "Adam Sealfon"
+                    }
+                ],
+                "category": "Secure Computation"
+            },
+            {
+                "title": "XPX: Generalized Tweakable Even-Mansour with Improved Security Guarantees",
+                "authors": [
+                    {
+                        "name": "Bart Mennink"
+                    }
+                ]
+            },
+            {
+                "title": "Indifferentiability of 8-Round Feistel Networks",
+                "authors": [
+                    {
+                        "name": "Yuanxi Dai"
+                    },
+                    {
+                        "name": "John Steinberger"
+                    }
+                ]
+            },
+            {
+                "title": "EWCDM: An Efficient, Beyond-Birthday Secure, Nonce-Misuse Resistant MAC",
+                "authors": [
+                    {
+                        "name": "Beno\u00eet Cogliati"
+                    },
+                    {
+                        "name": "Yannick Seurin"
+                    }
+                ]
+            },
+            {
+                "title": "On the Power of Secure Two-Party Computation",
+                "authors": [
+                    {
+                        "name": "Carmit Hazay"
+                    },
+                    {
+                        "name": "Muthuramakrishnan Venkitasubramaniam"
+                    }
+                ],
+                "category": "Secure Computation"
+            },
+            {
+                "title": "Secure Protocol Transformations",
+                "authors": [
+                    {
+                        "name": "Yuval Ishai"
+                    },
+                    {
+                        "name": "Eyal Kushilevitz"
+                    },
+                    {
+                        "name": "Manoj Prabhakaran"
+                    },
+                    {
+                        "name": "Amit Sahai"
+                    },
+                    {
+                        "name": "Ching-Hua Yu"
+                    }
+                ]
+            },
+            {
+                "title": "On the Communication required for Unconditionally Secure Multiplication",
+                "authors": [
+                    {
+                        "name": "Ivan Damg\u00e5rd"
+                    },
+                    {
+                        "name": "Jesper Buus Nielsen"
+                    },
+                    {
+                        "name": "Antigoni Polychroniadou"
+                    },
+                    {
+                        "name": "Michael Raskin"
+                    }
+                ],
+                "category": "Secure Computation"
+            },
+	    {
+		"title": "Akamai Faster Forward: Crypto at Scale",
+		"authors": [
+		    {"name": "Brian Sniffen",
+                     "affiliation": "Chief Security Architect, Akamai Technologies, Inc."
+		    }
+		],
+                "category": "Invited presentation"
+            },
+	    {
+                "title": "A subfield lattice attack on overstretched NTRU assumptions: Cryptanalysis of some FHE and Graded Encoding Schemes",
+                "authors": [
+                    {
+                        "name": "Martin R. Albrecht"
+                    },
+                    {
+                        "name": "Shi Bai"
+                    },
+                    {
+                        "name": "L\u00e9o Ducas"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+            {
+                "title": "Lattice-Based Fully Dynamic Multi-Key FHE with Short Ciphertexts",
+                "authors": [
+                    {
+                        "name": "Zvika Brakerski"
+                    },
+                    {
+                        "name": "Renen Perlman"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+	    {
+                "title": "Universal Obfuscation and Witness Encryption: Boosting Correctness and Combining Security",
+                "authors": [
+                    {
+                        "name": "Prabhanjan Ananth"
+                    },
+                    {
+                        "name": "Aayush Jain"
+                    },
+                    {
+                        "name": "Moni Naor"
+                    },
+                    {
+                        "name": "Amit Sahai"
+                    },
+                    {
+                        "name": "Eylon Yogev"
+                    }
+                ],
+		"category": "Obfuscation"
+            },
+            {
+                "title": "Obfuscation Combiners",
+                "authors": [
+                    {
+                        "name": "Marc Fischlin"
+                    },
+                    {
+                        "name": "Amir Herzberg"
+                    },
+                    {
+                        "name": "Hod Bin Noon"
+                    },
+                    {
+                        "name": "Haya Shulman"
+                    }
+                ],
+		"category": "Obfuscation"
+            },
+	    {
+                "title": "A Practical Cryptanalysis of the Algebraic Eraser",
+                "authors": [
+                    {
+                        "name": "Adi Ben-Zvi"
+                    },
+                    {
+                        "name": "Simon R. Blackburn"
+                    },
+                    {
+                        "name": "Boaz Tsaban"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+            {
+                "title": "Cryptography with Auxiliary Input and Trapdoor from Constant-Noise LPN",
+                "authors": [
+                    {
+                        "name": "Yu Yu"
+                    },
+                    {
+                        "name": "Jiang Zhang"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+	    {
+                "title": "On Statistically Secure Obfuscation with Approximate Correctness",
+                "authors": [
+                    {
+                        "name": "Zvika Brakerski"
+                    },
+                    {
+                        "name": "Christina Brzuska"
+                    },
+                    {
+                        "name": "Nils Fleischhacker"
+                    }
+                ],
+		"category": "Obfuscation"
+            },
+            {
+                "title": "Revisiting the Cryptographic Hardness of Finding a Nash Equilibrium",
+                "authors": [
+                    {
+                        "name": "Sanjam Garg"
+                    },
+                    {
+                        "name": "Omkant Pandey"
+                    },
+                    {
+                        "name": "Akshayaram Srinivasan"
+                    }
+                ],
+		"category": "Obfuscation"
+            },
+	    {
+                "title": "The Multi-User Security of Authenticated Encryption: AES-GCM in TLS 1.3",
+                "authors": [
+                    {
+                        "name": "Mihir Bellare"
+                    },
+                    {
+                        "name": "Bj\u00f6rn Tackmann"
+                    }
+                ],
+		"category": "Theory and practice"
+            },
+            {
+                "title": "A Modular Treatment of Cryptographic APIs: the Symmetric-Key Case",
+                "authors": [
+                    {
+                        "name": "Thomas Shrimpton"
+                    },
+                    {
+                        "name": "Martijn Stam"
+                    },
+                    {
+                        "name": "Bogdan Warinschi"
+                    }
+                ],
+		"category": "Theory and practice"
+            },
+            {
+                "title": "Encryption Switching Protocols",
+                "authors": [
+                    {
+                        "name": "Geoffroy Couteau"
+                    },
+                    {
+                        "name": "Thomas Peters"
+                    },
+                    {
+                        "name": "David Pointcheval"
+                    }
+                ],
+		"category": "Theory and practice"
+            },
+	    {
+                "title": "Cryptanalysis of GGH15 Multilinear Maps",
+                "authors": [
+                    {
+                        "name": "Jean-Sebastien Coron"
+                    },
+                    {
+                        "name": "Moon Sung Lee"
+                    },
+                    {
+                        "name": "Tancrede Lepoint"
+                    },
+                    {
+                        "name": "Mehdi Tibouchi"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+            {
+                "title": "Annihilation Attacks for Multilinear Maps: Cryptanalysis of Indistinguishability Obfuscation over GGH13",
+                "authors": [
+                    {
+                        "name": "Eric Miles"
+                    },
+                    {
+                        "name": "Amit Sahai"
+                    },
+                    {
+                        "name": "Mark Zhandry"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+            {
+                "title": "Separate Separations of CPA and Circular Security (for Any Cycle Length)",
+                "authors": [
+                    {
+                        "name": "Navid Alamati"
+                    },
+                    {
+                        "name": "Venkata Koppula"
+                    },
+                    {
+                        "name": "Chris Peikert"
+                    },
+                    {
+                        "name": "Brent Waters"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+	    {
+                "title": "Message Transmission with Reverse Firewalls \u2013 Secure Communication on Corrupted Machines",
+                "authors": [
+                    {
+                        "name": "Yevgeniy Dodis"
+                    },
+                    {
+                        "name": "Ilya Mironov"
+                    },
+                    {
+                        "name": "Noah Stephens-Davidowitz"
+                    }
+                ],
+		"category": "Cryptanalysis"
+            },
+            {
+                "title": "Big-Key Symmetric Encryption: Resisting Key Exfiltration",
+                "authors": [
+                    {
+                        "name": "Mihir Bellare"
+                    },
+                    {
+                        "name": "Daniel Kane"
+                    },
+                    {
+                        "name": "Phillip Rogaway"
+                    }
+                ],
+		"category": "Cryptanalysis"
+            },
+            {
+                "title": "Backdoors in Pseudorandom Number Generators: Possibility and Impossibility Results",
+                "authors": [
+                    {
+                        "name": "Jean Paul Degabriele"
+                    },
+                    {
+                        "name": "Kenneth G Paterson"
+                    },
+                    {
+                        "name": "Jacob C. N. Schuldt"
+                    },
+                    {
+                        "name": "Joanne Woodage"
+                    }
+                ],
+		"category": "Cryptanalysis"
+            },
+	    {
+                "title": "Quantum Homomorphic Encryption for Polynomial-sized Circuits",
+                "authors": [
+                    {
+                        "name": "Yfke Dulek"
+                    },
+                    {
+                        "name": "Christian Schaffner"
+                    },
+                    {
+                        "name": "Florian Speelman"
+                    }
+                ],
+		"category": "Quantum cryptography"
+            },
+            {
+                "title": "Adaptive Versus Non-Adaptive Strategies in the Quantum Setting with Applications",
+                "authors": [
+                    {
+                        "name": "Fr\u00e9d\u00e9ric Dupuis"
+                    },
+                    {
+                        "name": "Serge Fehr"
+                    },
+                    {
+                        "name": "Philippe Lamontagne"
+                    },
+                    {
+                        "name": "Louis Salvail"
+                    }
+                ],
+		"category": "Quantum cryptography"
+            },
+            {
+                "title": "Semantic Security and Indistinguishability in the Quantum World",
+                "authors": [
+                    {
+                        "name": "Tommaso Gagliardoni"
+                    },
+                    {
+                        "name": "Andreas H\u00fclsing"
+                    },
+                    {
+                        "name": "Christian Schaffner"
+                    }
+                ],
+		"category": "Quantum cryptography"
+            },
+            {
+                "title": "A 270 Attack on the Full MISTY1",
+                "authors": [
+                    {
+                        "name": "Achiya Bar-On"
+                    },
+                    {
+                        "name": "Nathan Keller"
+                    }
+                ],
+		"category": "Cryptanalysis"
+            },
+            {
+                "title": "Cryptanalysis of the FLIP Family of Stream Ciphers",
+                "authors": [
+                    {
+                        "name": "S\u00e9bastien Duval"
+                    },
+                    {
+                        "name": "Virginie Lallemand"
+                    },
+                    {
+                        "name": "Yann Rotella"
+                    }
+                ],
+		"category": "Cryptanalysis"
+            },
+            {
+                "title": "Spooky Encryption and its Applications",
+                "authors": [
+                    {
+                        "name": "Yevgeniy Dodis"
+                    },
+                    {
+                        "name": "Shai Halevi"
+                    },
+                    {
+                        "name": "Ron D. Rothblum"
+                    },
+                    {
+                        "name": "Daniel Wichs"
+                    }
+                ],
+		"category": "Spooky encryption"
+            },
+            {
+                "title": "Spooky Interaction and its Discontents: Compilers for Succinct Two-Message Argument Systems",
+                "authors": [
+                    {
+                        "name": "Cynthia Dwork"
+                    },
+                    {
+                        "name": "Moni Naor"
+                    },
+                    {
+                        "name": "Guy N. Rothblum"
+                    }
+                ],
+		"category": "Spooky encryption"
+            },
+	    {
+                "title": "The Magic of ELFs",
+                "authors": [
+                    {
+                        "name": "Mark Zhandry"
+                    }
+                ],
+		"category": "Best paper"
+            },
+            {
+                "title": "Breaking the Circuit Size Barrier for Secure Computation Under DDH",
+                "authors": [
+                    {
+                        "name": "Elette Boyle"
+                    },
+                    {
+                        "name": "Niv Gilboa"
+                    },
+                    {
+                        "name": "Yuval Ishai"
+                    }
+                ],
+		"category": "Secure computation"
+            },
+            {
+                "title": "Extended Tower Number Field Sieve: A New Complexity for the Medium Prime Case",
+                "authors": [
+                    {
+                        "name": "Taechan Kim"
+                    },
+                    {
+                        "name": "Razvan Barbulescu"
+                    }
+                ],
+		"category": "Algorithmic number theory"
+            },
+            {
+                "title": "Efficient Algorithms for Supersingular Isogeny Diffie-Hellman",
+                "authors": [
+                    {
+                        "name": "Craig Costello"
+                    },
+                    {
+                        "name": "Patrick Longa"
+                    },
+                    {
+                        "name": "Michael Naehrig"
+                    }
+                ],
+		"category": "Algorithmic number theory"
+            },
+            {
+                "title": "Adaptively Secure Garbled Circuits from One-Way Functions",
+                "authors": [
+                    {
+                        "name": "Brett Hemenway"
+                    },
+                    {
+                        "name": "Zahra Jafargholi"
+                    },
+                    {
+                        "name": "Rafail Ostrovsky"
+                    },
+                    {
+                        "name": "Alessandra Scafuro"
+                    },
+                    {
+                        "name": "Daniel Wichs"
+                    }
+                ],
+		"category": "Secure computation"
+            },
+            {
+                "title": "Rate-1, Linear Time and Additively Homomorphic UC Commitments",
+                "authors": [
+                    {
+                        "name": "Ignacio Cascudo"
+                    },
+                    {
+                        "name": "Ivan Damg\u00e5rd"
+                    },
+                    {
+                        "name": "Bernardo David"
+                    },
+                    {
+                        "name": "Nico D\u00f6ttling"
+                    },
+                    {
+                        "name": "Jesper Buus Nielsen"
+                    }
+                ]
+            },
+            {
+                "title": "New Insights on AES-Like SPN Ciphers",
+                "authors": [
+                    {
+                        "name": "Bing Sun"
+                    },
+                    {
+                        "name": "Meicheng Liu"
+                    },
+                    {
+                        "name": "Jian Guo"
+                    },
+                    {
+                        "name": "Longjiang Qu"
+                    },
+                    {
+                        "name": "Vincent Rijmen"
+                    }
+                ],
+		"category": "Block ciphers"
+            },
+            {
+                "title": "Lightweight Multiplication in GF(2n) with Applications to MDS Matrices",
+                "authors": [
+                    {
+                        "name": "Christof Beierle"
+                    },
+                    {
+                        "name": "Thorsten Kranz"
+                    },
+                    {
+                        "name": "Gregor Leander"
+                    }
+                ],
+		"category": "Algorithmic number theory"
+            },
+            {
+                "title": "Another View of the Division Property",
+                "authors": [
+                    {
+                        "name": "Christina Boura"
+                    },
+                    {
+                        "name": "Anne Canteaut"
+                    }
+                ],
+		"category": "Symmetric cryptography"
+            },
+            {
+                "title": "UC Commitments for Modular Protocol Design and Applications to Revocation and Attribute Tokens",
+                "authors": [
+                    {
+                        "name": "Jan Camenisch"
+                    },
+                    {
+                        "name": "Maria Dubovitskaya"
+                    },
+                    {
+                        "name": "Alfredo Rial"
+                    }
+                ],
+		"category": "Secure computation"
+            },
+            {
+                "title": "Probabilistic Termination and Composability of Cryptographic Protocols",
+                "authors": [
+                    {
+                        "name": "Ran Cohen"
+                    },
+                    {
+                        "name": "Sandro Coretti"
+                    },
+                    {
+                        "name": "Juan A. Garay"
+                    },
+                    {
+                        "name": "Vassilis Zikas"
+                    }
+                ],
+		"category": "Secure computation"
+            },
+            {
+                "title": "Concurrent Non-Malleable Commitments (and More) in 3 Rounds",
+                "authors": [
+                    {
+                        "name": "Michele Ciampi"
+                    },
+                    {
+                        "name": "Rafail Ostrovsky"
+                    },
+                    {
+                        "name": "Luisa Siniscalchi"
+                    },
+                    {
+                        "name": "Ivan Visconti"
+                    }
+                ],
+		"category": "Secure computation"
+            },
+            {
+                "title": "TBD",
+                "authors": [
+                    {
+                        "name": "Paul Kocher",
+                        "affiliation": "Cryptography Research a Division of Rambus"
+                    }
+                ],
+                "category": "Invited presentation"
+            },
+            {
+                "title": "FHE Circuit Privacy Almost For Free",
+                "authors": [
+                    {
+                        "name": "Florian Bourse"
+                    },
+                    {
+                        "name": "Rafael Del Pino"
+                    },
+                    {
+                        "name": "Michele Minelli"
+                    },
+                    {
+                        "name": "Hoeteck Wee"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+            {
+                "title": "Optimal Security Proofs for Signatures from Identification Schemes",
+                "authors": [
+                    {
+                        "name": "Eike Kiltz"
+                    },
+                    {
+                        "name": "Daniel Masny"
+                    },
+                    {
+                        "name": "Jiaxin Pan"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+            {
+                "title": "Adversary-dependent Lossy Trapdoor Function from Hardness of Factoring Semi-smooth RSA Subgroup Moduli",
+                "authors": [
+                    {
+                        "name": "Takashi Yamakawa"
+                    },
+                    {
+                        "name": "Shota Yamada"
+                    },
+                    {
+                        "name": "Goichiro Hanaoka"
+                    },
+                    {
+                        "name": "Noboru Kunihiro"
+                    }
+                ],
+		"category": "Asymmetric cryptography"
+            },
+            {
+                "title": "Programmable Hash Functions from Lattices: Short Signatures and IBEs with Small Key Sizes",
+                "authors": [
+                    {
+                        "name": "Jiang Zhang"
+                    },
+                    {
+                        "name": "Yu Chen"
+                    },
+                    {
+                        "name": "Zhenfeng Zhang"
+                    }
+                ]
+            },
+            {
+                "title": "Fully Secure Functional Encryption for Inner Products, from Standard Assumptions",
+                "authors": [
+                    {
+                        "name": "Shweta Agrawal"
+                    },
+                    {
+                        "name": "Beno\u00eet Libert"
+                    },
+                    {
+                        "name": "Damien Stehl\u00e9"
+                    }
+                ]
+            },
+            {
+                "title": "Circuit-ABE from LWE: Unbounded Attributes and Semi-Adaptive Security",
+                "authors": [
+                    {
+                        "name": "Zvika Brakerski"
+                    },
+                    {
+                        "name": "Vinod Vaikuntanathan"
+                    }
+                ]
+            },
+            {
+                "title": "Design in Type-I, Run in Type-III: Fast and Scalable Bilinear-Type Conversion using Integer Programming",
+                "authors": [
+                    {
+                        "name": "Masayuki Abe"
+                    },
+                    {
+                        "name": "Fumitaka Hoshino"
+                    },
+                    {
+                        "name": "Miyako Ohkubo"
+                    }
+                ]
+            },
+            {
+                "title": "Linicrypt: A Model for Practical Cryptography",
+                "authors": [
+                    {
+                        "name": "Brent Carmer"
+                    },
+                    {
+                        "name": "Mike Rosulek"
+                    }
+                ]
+            },
+            {
+                "title": "Cryptanalysis of a Theorem: Decomposing the Only Known Solution to the Big APN Problem",
+                "authors": [
+                    {
+                        "name": "L\u00e9o Perrin"
+                    },
+                    {
+                        "name": "Aleksei Udovenko"
+                    },
+                    {
+                        "name": "Alex Biryukov"
+                    }
+                ],
+		"category": "Symmetric cryptography"
+            },
+            {
+                "title": "The SKINNY Family of Block Ciphers and its Low-Latency Variant MANTIS",
+                "authors": [
+                    {
+                        "name": "Christof Beierle"
+                    },
+                    {
+                        "name": "J\u00e9r\u00e9my Jean"
+                    },
+                    {
+                        "name": "Stefan K\u00f6lbl"
+                    },
+                    {
+                        "name": "Gregor Leander"
+                    },
+                    {
+                        "name": "Amir Moradi"
+                    },
+                    {
+                        "name": "Thomas Peyrin"
+                    },
+                    {
+                        "name": "Yu Sasaki"
+                    },
+                    {
+                        "name": "Pascal Sasdrich"
+                    },
+                    {
+                        "name": "Siang Meng Sim"
+                    }
+                ],
+		"category": "Block ciphers"
+            },
+            {
+                "title": "Efficiently Computing Data-Independent Memory-Hard Functions",
+                "authors": [
+                    {
+                        "name": "Joel Alwen"
+                    },
+                    {
+                        "name": "Jeremiah Blocki"
+                    }
+                ]
+            },
+            {
+                "title": "Towards Sound Fresh Re-Keying with Hard (Physical) Learning Problems",
+                "authors": [
+                    {
+                        "name": "Stefan Dziembowski"
+                    },
+                    {
+                        "name": "Sebastian Faust"
+                    },
+                    {
+                        "name": "Gottfried Herold"
+                    },
+                    {
+                        "name": "Anthony Journault"
+                    },
+                    {
+                        "name": "Daniel Masny"
+                    },
+                    {
+                        "name": "Fran\u00e7ois-Xavier Standaert"
+                    }
+                ]
+            },
+            {
+                "title": "ParTI - Towards Combined Hardware Countermeasures against Side-Channel and Fault-Injection Attacks",
+                "authors": [
+                    {
+                        "name": "Tobias Schneider"
+                    },
+                    {
+                        "name": "Amir Moradi"
+                    },
+                    {
+                        "name": "Tim G\u00fcneysu"
+                    }
+                ]
+            },
+            {
+                "title": "Fine-grained Cryptography",
+                "authors": [
+                    {
+                        "name": "Akshay Degwekar"
+                    },
+                    {
+                        "name": "Vinod Vaikuntanathan"
+                    },
+                    {
+                        "name": "Prashant Nalini Vasudevan"
+                    }
+                ]
+            },
+            {
+                "title": "TWORAM: Efficient Oblivious RAM in Two Rounds with Applications to Searchable Encryption",
+                "authors": [
+                    {
+                        "name": "Sanjam Garg"
+                    },
+                    {
+                        "name": "Payman Mohassel"
+                    },
+                    {
+                        "name": "Charalampos Papamanthou"
+                    }
+                ]
+            },
+            {
+                "title": "Bounded Indistinguishability and the Complexity of Recovering Secrets",
+                "authors": [
+                    {
+                        "name": "Andrej Bogdanov"
+                    },
+                    {
+                        "name": "Yuval Ishai"
+                    },
+                    {
+                        "name": "Emanuele Viola"
+                    },
+                    {
+                        "name": "Christopher Williamson"
+                    }
+                ]
+            },
+            {
+                "title": "Two Message Oblivious Evaluation of Cryptographic Functionalities",
+                "authors": [
+                    {
+                        "name": "Nico Doettling"
+                    },
+                    {
+                        "name": "Nils Fleischhacker"
+                    },
+                    {
+                        "name": "Johannes Krupp"
+                    },
+                    {
+                        "name": "Dominique Schr\u00f6der"
+                    }
+                ]
+            }
+        ]
+    },
+    "days": [
+        {
+            "date": "2016-08-14",
+            "timeslots": [
+                {
+                    "starttime": "17:00",
+                    "endtime": "20:00",
+                    "sessions": [
+                        {
+                            "session_title": "Registration",
+                            "location": {
+                                "name": "Anacapa Formal Lounge"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "starttime": "17:30",
+                    "endtime": "21:30",
+                    "sessions": [
+                        {
+                            "session_title": "Reception Dinner",
+                            "location": {
+                                "name": "Anacapa Lawn"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "date": "2016-08-15",
+            "timeslots": [
+                {
+                    "endtime": "8:45",
+                    "starttime": "7:30",
+                    "sessions": [
+                        {
+                            "session_title": "Breakfast",
+                            "location": {
+                                "name": "De La Guerra Dining Commons"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "8:55",
+                    "starttime": "8:45",
+                    "sessions": [
+                        {
+                            "moderator": "Crypto 2016 General Chair, Brian LaMacchia",
+                            "session_title": "Opening remarks",
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "9:50",
+                    "starttime": "9:00",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+			    "talks": [],
+                            "location": {
+                                "name": "Corwin Pavillion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+			    "talks": [],
+			    "location": {
+				"name": "Lotte Lehman Hall"
+			    }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "9:55",
+                    "starttime": "9:50",
+                    "sessions": [
+                        {
+                            "session_title": "Track-switch break"
+                        }
+                    ]
+                },
+                {
+                    "endtime": "11:10",
+                    "starttime": "9:55",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+			    "talks": [],
+                            "location": {
+                                "name": "Corwin Pavillion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+			    "talks": [],
+                            "location": {
+                                "name": "Lotte lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "11:40",
+                    "starttime": "11:10",
+                    "sessions": [
+                        {
+                            "session_title": "Break",
+                            "location": {
+                                "name": "University Center Lagoon Plaza"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "12:40",
+                    "starttime": "11:40",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "14:00",
+                    "starttime": "12:40",
+                    "sessions": [
+                        {
+                            "session_title": "Lunch",
+                            "location": {
+                                "name": "De La Guerra Dining Commons"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "14:50",
+                    "starttime": "14:00",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavillion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "14:55",
+                    "starttime": "14:50",
+                    "sessions": [
+                        {
+                            "session_title": "Track-switch break"
+                        }
+                    ]
+                },
+                {
+                    "endtime": "15:45",
+                    "starttime": "14:55",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavillion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "16:15",
+                    "starttime": "15:45",
+                    "sessions": [
+                        {
+                            "session_title": "Break",
+                            "location": {
+                                "name": "University Center Lagoon Plaza"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "17:30",
+                    "starttime": "16:15",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavillion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "21:00",
+                    "starttime": "19:00",
+                    "sessions": [
+                        {
+                            "session_title": "Dinner",
+                            "location": {
+                                "name": "Anacapa Lawn"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "date": "2016-08-16",
+            "timeslots": [
+                {
+                    "endtime": "9:00",
+                    "starttime": "7:30",
+                    "sessions": [
+                        {
+                            "session_title": "Breakfast",
+                            "location": {
+                                "name": "De La Guerra Dining Commons"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "10:25",
+                    "starttime": "9:10",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehman Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "10:55",
+                    "starttime": "10:25",
+                    "sessions": [
+                        {
+                            "session_title": "Break",
+                            "location": {
+                                "name": "University Center Lagoon Plaza"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "11:45",
+                    "starttime": "10:55",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": []
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": []
+                        }
+                    ]
+                },
+                {
+                    "endtime": "11:50",
+                    "starttime": "11:45",
+                    "sessions": [
+                        {
+                            "session_title": "Track-switch break"
+                        }
+                    ]
+                },
+                {
+                    "endtime": "12:40",
+                    "starttime": "11:50",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "14:00",
+                    "starttime": "12:40",
+                    "sessions": [
+                        {
+                            "session_title": "Lunch",
+                            "location": {
+                                "name": "De La Guerra Dining Commons"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "18:00",
+                    "starttime": "14:00",
+                    "sessions": [
+                        {
+                            "session_title": "Free afternoon"
+                        }
+                    ]
+                },
+                {
+                    "endtime": "21:00",
+                    "starttime": "18:00",
+                    "sessions": [
+                        {
+                            "session_title": "Dinner Reception",
+                            "location": {
+                                "name": "University Center Lagoon Plaza"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "19:30",
+                    "starttime": "19:00",
+                    "sessions": [
+                        {
+                            "session_title": "IACR Award Ceremony",
+                            "location": {
+                                "name": "University Center Corwin Pavilion"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "23:00",
+                    "starttime": "19:30",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Rump Session",
+                            "location": {
+                                "name": "University Center Corwin Pavilion"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "date": "2016-08-17",
+            "timeslots": [
+                {
+                    "endtime": "8:50",
+                    "starttime": "7:30",
+                    "sessions": [
+                        {
+                            "session_title": "Breakfast",
+                            "location": {
+                                "name": "De La Guerra Dining Commons"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "9:40",
+                    "starttime": "8:50",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "9:45",
+                    "starttime": "9:40",
+                    "sessions": [
+                        {
+                            "session_title": "Track-switch break"
+                        }
+                    ]
+                },
+                {
+                    "endtime": "11:00",
+                    "starttime": "9:45",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "11:30",
+                    "starttime": "11:00",
+                    "sessions": [
+                        {
+                            "session_title": "Coffee Break",
+                            "location": {
+                                "name": "Plaza outside Campbell Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "12:30",
+                    "starttime": "11:30",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Campbell Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "14:00",
+                    "starttime": "12:30",
+                    "sessions": [
+                        {
+                            "session_title": "Lunch",
+                            "location": {
+                                "name": "De La Guerra Dining Commons"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "15:15",
+                    "starttime": "14:00",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": []
+                        }
+                    ]
+                },
+                {
+                    "endtime": "15:45",
+                    "starttime": "15:15",
+                    "sessions": [
+                        {
+                            "session_title": "Break",
+                            "location": {
+                                "name": "University Center Lagoon Plaza"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "16:35",
+                    "starttime": "15:45",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "17:45",
+                    "starttime": "16:45",
+                    "sessions": [
+                        {
+                            "session_title": "IACR Membership Meeting",
+                            "location": {
+                                "name": "University Center Corwin Pavilion"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "19:30",
+                    "starttime": "18:00",
+                    "sessions": [
+                        {
+                            "session_title": "Beach Barbeque",
+                            "location": {
+                                "name": "Goleta Beach"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "22:30",
+                    "starttime": "19:30",
+                    "sessions": [
+                        {
+                            "starttime": "21:00",
+                            "session_title": "Crypto Caf\u00e9 (with CHES)",
+                            "location": {
+                                "name": "Anacapa Formal Lounge and Anacapa Front Lawn"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "date": "2016-08-18",
+            "timeslots": [
+                {
+                    "endtime": "8:50",
+                    "starttime": "7:30",
+                    "sessions": [
+                        {
+                            "session_title": "Breakfast",
+                            "location": {
+                                "name": "De La Guerra Dining Commons"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "10:05",
+                    "starttime": "8:50",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "10:30",
+                    "starttime": "10:05",
+                    "sessions": [
+                        {
+                            "session_title": "Break",
+                            "location": {
+                                "name": "University Center Lagoon Plaza"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "12:10",
+                    "starttime": "10:30",
+                    "sessions": [
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Corwin Pavilion"
+                            }
+                        },
+                        {
+                            "moderator": "Click to edit session moderator",
+                            "session_title": "Click to edit session title.",
+                            "talks": [],
+                            "location": {
+                                "name": "Lotte Lehmann Hall"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "endtime": "14:00",
+                    "starttime": "12:10",
+                    "sessions": [
+                        {
+                            "session_title": "Lunch",
+                            "location": {
+                                "name": "De La Guerra Dining Commons"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

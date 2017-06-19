@@ -13,16 +13,30 @@
     <!-- Styling -->
     <link href="./dist/dragula.css" rel="stylesheet">
     <link href="./styles/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet">
 
   </head>
-  <body class="container">
+  <body class="container-fluid">
     <div class="row">
-      <header class="col-md-12 jumbotron">
-        <h1>
+      <header class="col-md-12">
+        <h1 class="mainTitle">
           Program Creator/Editor
         </h1>
-        <p>For creating IACR-sponsored conference programs</p>
+        <hr />
       </header>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <h3 class="text-center">
+          Talks
+        </h3>
+      </div>
+      <div class="col-md-9">
+        <h3 class="text-center">
+          Schedule
+        </h3>
+      </div>
     </div>
 
     <main id="parent">
@@ -95,118 +109,128 @@
         </div>
       </article>
 
-      <article id="program" class="col-md-9">
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks" id="morning1">
-            Drag talks here.
-          </div>
-        </div>
+      <article id="renderedProgram" class="col-md-9">
+        
+        <!-- Handlebars script that will render the program template based on the program.json file -->
+          <script id="program-template" type="text/x-handlebars-template">
+            {{#each days}}
+              <div class="row">
+                <div class="col-md-5">
+                 <hr />
+                 <h3 class="pageSubtitle">
+                   {{date}}
+                 </h3>
+                </div>
+              </div>
+              {{#each timeslots}}
+                <div class="row">
+                  <div class="col-md-2">
+                    <p class="timeSlot">
+                      {{starttime}}-{{endtime}}
+                    </p>
+                  </div>
+                {{#if twosessions}}
+                  <div class="col-md-5">
+                    <div class="track1Event panel-body">
+                      <h4 class="text-center">
+                        {{sessions.0.session_title}}
+                      </h4>
+                      {{#if sessions.0.location.name.name}}
+                        <p class="dualTrackDescr">
+                          {{sessions.0.location.name.name}}
+                        </p>
+                      {{/if}}
+                      {{#if sessions.0.moderator}}
+                        <p class="dualTrackDescr">
+                          {{sessions.0.moderator}}
+                        </p>
+                      {{/if}}
+                      {{#empty sessions.0.talks}}
+                        Drag talks to this session.
+                      {{#each sessions.0.talks}}
+                        <p class="talkTitle">
+                          {{title}}
+                        </p>
+                        <p class="dualTrackDescr">
+                          {{#each authors}}
+                            <span class="authorName">{{name}}</span>
+                          {{/each}}
+                        </p>
+                      {{/each}}
+                      {{/empty}}
+                      <!-- TODO: symbol links, to papers and so on, would go here (except location, that goes directly after moderator) -->
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="panel-body track2Event">
+                      <h4 class="text-center">
+                        {{sessions.1.session_title}}
+                      </h4>
+                      {{#if sessions.1.location.name}}
+                        <p class="dualTrackDescr">
+                          {{sessions.1.location.name}}
+                        </p>
+                      {{/if}}
+                      {{#if sessions.1.moderator}}
+                        <p class="dualTrackDescr">
+                          {{sessions.1.moderator}}
+                        </p>
+                      {{/if}}
+                      {{#empty sessions.1.talks}}
+                        Drag talks to this session.
+                      {{#each sessions.1.talks}}
+                        <div class="talk">
+                        <p class="talkTitle">
+                          {{title}}
+                        </p>
+                        <p class="dualTrackDescr">
+                          {{#each authors}}
+                            <span class="authorName">{{name}}</span>
+                          {{/each}}
+                        </p>
+                        </div>
+                      {{/each}}
+                      {{/empty}}
+                      <!-- TODO: symbol links, to papers and so on, would go here (except location, that goes directly after moderator) -->
+                    </div>
+                  </div>
+                {{else}}
+         	        <div class="col-md-10">
+                    <div class="panel-body mutualEvent">
+                      <h4>
+                        {{sessions.0.session_title}}
+                      </h4>
+                      {{#if sessions.0.location.name}}
+                        <p class="eventDescr">
+                          {{sessions.0.location.name}}
+                        </p>
+                      {{/if}}
+                      {{#if sessions.0.moderator}}
+                        <p class="eventDescr">
+                          {{sessions.0.moderator}}
+                        </p>
+                      {{/if}}
+                      {{#empty sessions.0.talks}}
+                        Drag talks to this session.
+                      {{#each sessions.0.talks}}
+                        <p class="mutualEventTalkTitle">
+                          {{title}}
+                        </p>
+                        <p class="eventDescr">
+                          {{#each authors}}
+                            <span class="authorName">{{name}}</span>
+                          {{/each}}
+                        </p>
+                      {{/each}}
+                     {{/empty}}
+                    </div>
+                  </div>
+                {{/if}}
+                </div>
+              {{/each}}
+            {{/each}}
+          </script>
 
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks" id="morning2">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks" id="morning3">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks" id="morning4">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks" id="morning5">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks" id="morning6">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks" id="morning7">
-            Drag talks here.
-          </div>
-        </div>
-
-        <div class="session">
-          <div class="session-title">
-            <strong>
-              Click to edit session title.
-            </strong>
-          </div>
-          <div class="session-moderator">
-            Click to edit session moderator.
-          </div>
-          <div class="session-talks" id="morning8">
-            Drag talks here.
-          </div>
-        </div>
       </article>
     </main>
 
@@ -214,11 +238,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <!-- Handlebars templates -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js" type="text/javascript"></script>
+
     <!-- Dragula (for drag & drop) -->
     <script src="./dist/dragula.js"></script>
 
     <!-- Additional scripts -->
-    <script src="./scripts/main.js"></script>
+    <script src="./scripts/editor.js"></script>
+    <script src="./scripts/editableFields.js"></script>
 
   </body>
 </html>
