@@ -1,3 +1,7 @@
+// purpose: to run progData through template to create display of program and set up event handlers for editing and dragging
+
+// editor.js = path to progData setup (see prog creator docs)
+
 // Global configuration object.
 var progData = null;
 
@@ -25,6 +29,7 @@ function addDrag() {
 
       if (target.classList.contains('session-talks')) {
         console.log('added to a session');
+
   	    // hide the drag & drop hint.
         target.firstChild.data = '';
         target.style.background = '#0000ff';
