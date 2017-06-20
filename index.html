@@ -6,17 +6,17 @@
     <title>Program Editor</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" />
     <!-- favorite options include flatly or solar -->
 
-    <!-- jQuery-UI and Dragula -->
-    <link href="./dependencies/jquery-ui/jquery-ui.css" rel="stylesheet">
-    <link href="./dependencies/dragula/dragula.css" rel="stylesheet">
+    <!-- jQuery daterangepicker, and Dragula -->
+    <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css"rel="stylesheet" />
+    <link href="./dependencies/dragula/dragula.css" rel="stylesheet" />
 
     <!-- Styling: Custom -->
-    <link href="./styles/main.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet">
+    <link href="./styles/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet" />
 
   </head>
   <body class="container-fluid">
@@ -30,17 +30,27 @@
     </div>
 
     <div id="setupPrompts">
-      <!-- TODO: make full length (or at least 1 step per row) -->
+      <div class="row">
+        <section class="col-md-12 setupStep">
+          <p class="text-justify">
+            Welcome to the program creator for the International Association for Cryptologic Research (IACR). This tool is designed to make creating a program for your conference easier. We'll guide you through a series of questions to create the right program for you, the first of which is below.
+          </p>
+        </section>
+      </div>
       <div class="row">
         <section id="newOrExisting" class="col-md-6 setupStep">
-          <p>If you've been here before, you can edit an existing program. Otherwise, start from a new one.</p>
+          <p>
+            If you've been here before, you can edit an existing program. Otherwise, start from a new one.
+          </p>
           <button type="button" name="newProg" onclick="createNew()" class="btn btn-success btn-sm">New</button>
           <button type="button" name="existingProg" onclick="editExisting()" class="btn btn-success btn-sm" disabled="true">Existing</button>
         </section>
       </div>
       <div class="row">
         <section id="templateSelector" class="col-md-6 setupStep">
-          <p>Select a template to start from.</p>
+          <p>
+            Select a template to start from.
+          </p>
           <select id="templateSelect" class="form-control" onchange="getConfig(this.value)">
             <option value=""></option>
             <option value="crypto_config.json">Crypto</option>
@@ -50,18 +60,20 @@
       </div>
       <div class="row">
         <section id="datePicker" class="col-md-6 setupStep">
-          <p>Choose the start and end date for your conference.</p>
-          <label for="from">From
-            <input type="text" id="from" name="from" />
+          <p>
+            Choose the start and end date for your conference.
+          </p>
+          <label for="startdate">From
+            <input type="text" id="startdate" name="startdate" />
           </label>
-          <label for="to">to
-            <input type="text" id="to" name="to" />
+          <label for="enddate">to
+            <input type="text" id="enddate" name="enddate" />
           </label>
         </section>
       </div>
       <div class="row">
         <section id="uploadTalks" class="col-md-6 form-group">
-          <input type="file" name="acceptedPapers" accept=".json" id="uploadTalks" />
+          <input type="file" name="acceptedPapers" accept=".json" id="uploadTalksSelector" />
           <button type="submit" name="button" class="btn btn-success btn-sm">Upload</button>
         </section>
       </div>
@@ -277,9 +289,10 @@
     <!-- Handlebars templates -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js" type="text/javascript"></script>
 
-    <!-- Dependencies (dragula & jquery-UI) -->
+    <!-- Dependencies (dragula & momentJS) -->
     <script src="./dependencies/dragula/dragula.js"></script>
-    <script src="./dependencies/jquery-ui/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="./dependencies/jquery-daterange-picker/jquery.daterangepicker.min.js"></script>
 
     <!-- Additional scripts -->
     <script src="./scripts/editor.js"></script>
