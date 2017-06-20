@@ -18,46 +18,38 @@ function createNew() {
   $('#templateSelector').show(500);
 }
 
-// jQuery-UI for date picker
-//TODO: should name this function, yes?
-$(function() {
-  var dateFormat = "mm/dd/yy",
-    from = $( "#from" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-      numberOfMonths: 2
-    })
-    .on( "change", function() {
-      to.datepicker( "option", "minDate", getDate( this ) );
-      if (getDate(from)) {
-
-      }
-    }),
-
-    to = $( "#to" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-      numberOfMonths: 2
-    })
-    .on( "change", function() {
-      from.datepicker( "option", "maxDate", getDate( this ) );
-    });
-
-  function getDate( element ) {
-    var date;
-    try {
-      date = $.datepicker.parseDate( dateFormat, element.value );
-    } catch( error ) {
-      date = null;
-    }
-    return date;
-  }
-});
+// jQuery date picker
+function createDatePicker(numDays) {
+  $('#datePicker').dateRangePicker(
+	{
+		separator : ' to ',
+    autoClose: true,
+    minDays: numDays,
+    maxDays: numDays,
+		getValue: function()
+		{
+			if ($('#startdate').val() && $('#enddate').val() )
+				return $('#startdate').val() + ' to ' + $('#enddate').val();
+			else
+				return '';
+		},
+		setValue: function(s,s1,s2)
+		{
+			$('#startdate').val(s1);
+			$('#enddate').val(s2);
+      setDates(s1);
+		}
+	});
+}
 
 // set dates in progData
-function setDates(startdate, enddate) {
-  // TODO: validate dates, modify progData, and show upload
-  // TODO: once both dates are set, use .show on #uploadTalks
+function setDates(startdate) {
+  var day = moment(startdate);
+  for (var i = 0; i < progData.days.length; i++) {
+    progData.days[i].date = day.format('YYYY-MM-DD');
+    day.add(1, 'days');
+  }
+  $('#uploadTalks').show(500);
 }
 
 // paper validation
@@ -190,6 +182,7 @@ function getConfig(name) {
     }
     progData = data;
     console.dir(progData);
+    createDatePicker(progData.days.length);
     $('#datePicker').show(500);
   })
   .fail(function(jqxhr, textStatus, error) {
@@ -208,6 +201,6 @@ function getConfig(name) {
 // executes functions once document is ready
 $(document).ready(function() {
   //  getConfig('crypto_config.json');
-  document.getElementById('uploadTalks').addEventListener('change', uploadTalks);
+  document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
   // TODO: once upload is in and parsed, .show #parent with filled templates
  });
