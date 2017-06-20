@@ -33,14 +33,21 @@
       <!-- TODO: make full length (or at least 1 step per row) -->
       <div class="row">
         <section id="newOrExisting" class="col-md-6 setupStep">
-          <p>If you've been here before, you can edit an existing program. Otherwise, start from a new one.</p>
+          <p>
+            Welcome to the program creator for the International Association for Cryptologic Research (IACR). This tool is designed to make creating a program for your conference easier. We'll start with uploading the JSON file containing accepted papers and talks.
+          </p>
+          <p>
+            If you've been here before, you can edit an existing program. Otherwise, start from a new one.
+          </p>
           <button type="button" name="newProg" onclick="createNew()" class="btn btn-success btn-sm">New</button>
           <button type="button" name="existingProg" onclick="editExisting()" class="btn btn-success btn-sm" disabled="true">Existing</button>
         </section>
       </div>
       <div class="row">
         <section id="templateSelector" class="col-md-6 setupStep">
-          <p>Select a template to start from.</p>
+          <p>
+            Select a template to start from.
+          </p>
           <select id="templateSelect" class="form-control" onchange="getConfig(this.value)">
             <option value=""></option>
             <option value="crypto_config.json">Crypto</option>
@@ -50,7 +57,9 @@
       </div>
       <div class="row">
         <section id="datePicker" class="col-md-6 setupStep">
-          <p>Choose the start and end date for your conference.</p>
+          <p>
+            Choose the start and end date for your conference.
+          </p>
           <label for="from">From
             <input type="text" id="from" name="from" />
           </label>
