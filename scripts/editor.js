@@ -114,6 +114,8 @@ function uploadTalks(evt) {
         return;
       }
       drawProgram();
+      $('#setupPrompts').hide();
+      $('#parent').show(500);
     } catch (ee) {
       console.dir(ee);
       alert('Unable to parse file as JSON.');
@@ -202,5 +204,4 @@ function getConfig(name) {
 $(document).ready(function() {
   //  getConfig('crypto_config.json');
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
-  // TODO: once upload is in and parsed, .show #parent with filled templates
  });
