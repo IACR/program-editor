@@ -19,6 +19,7 @@ Handlebars.registerHelper('empty', function(data, options) {
 function createNew() {
   // TODO: code to reveal div with template selection
   // TODO: do reveals with jQuery-UI (.show(), https://jqueryui.com/show/)
+  $('#templateSelector').show(500);
 }
 
 // jQuery-UI for date picker
@@ -26,17 +27,18 @@ function createNew() {
 $(function() {
   var dateFormat = "mm/dd/yy",
     from = $( "#from" ).datepicker({
-      showButtonPanel: true,
       changeMonth: true,
       changeYear: true,
       numberOfMonths: 2
     })
     .on( "change", function() {
       to.datepicker( "option", "minDate", getDate( this ) );
+      if (getDate(from)) {
+        
+      }
     }),
 
     to = $( "#to" ).datepicker({
-      showButtonPanel: true,
       changeMonth: true,
       changeYear: true,
       numberOfMonths: 2
@@ -59,6 +61,78 @@ $(function() {
 // set dates in progData
 function setDates(startdate, enddate) {
   // validate dates, modify progData, and show upload
+}
+
+// paper validation
+function validatePapers(data) {
+  if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
+    alert('JSON file is not websubrev format');
+    return null;
+  }
+  var acceptedPapers = data.acceptedPapers;
+  var re = /\s+and\s+/;
+
+  for (var i = 0; i < acceptedPapers.length; i++) {
+    var paper = acceptedPapers[i];
+
+    if (!paper.hasOwnProperty('title') || !paper.hasOwnProperty('authors')) {
+      alert('JSON file has a paper with a missing title or authors');
+      return null;
+    }
+
+    if (!paper.hasOwnProperty('category')) {
+      paper.category = 'Uncategorized';
+    }
+
+    var authorNames = paper.authors.split(re);
+    var authors = [];
+
+    for (j = 0; j < authorNames.length; j++) {
+      authors.push({'name': authorNames[j]});
+    }
+
+    paper.authors = authors;
+  }
+  return data;
+}
+
+// file upload
+function uploadTalks(evt) {
+  console.dir(evt);
+
+  var files = evt.target.files;
+  if (files == null || files.length == 0) {
+    alert('You must select a file.');
+    evt.target.value = '';
+    return;
+  }
+  var file = evt.target.files[0];
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var textFile = e.target;
+    if (textFile == null || textFile.result == null) {
+      alert('Unable to read file.');
+      evt.target.value = '';
+      return;
+    }
+    try {
+      var data = JSON.parse(textFile.result);
+      var acceptedPapers = validatePapers(data);
+      console.dir(acceptedPapers);
+      progData.config.unassigned_talks = acceptedPapers;
+      if (acceptedPapers == null) {
+        evt.target.value = '';
+        return;
+      }
+      drawProgram();
+    } catch (ee) {
+      console.dir(ee);
+      alert('Unable to parse file as JSON.');
+      evt.target.value = '';
+      return;
+    }
+  }
+  reader.readAsText(file, 'UTF-8');
 }
 
 // adds dragula functionality
@@ -118,8 +192,8 @@ function getConfig(name) {
       }
     }
     progData = data;
+    console.dir(progData);
     $('#datePicker').show(500);
-    // drawProgram();
   })
   .fail(function(jqxhr, textStatus, error) {
     document.getElementById('renderedProgram');
@@ -139,4 +213,6 @@ $(document).ready(function() {
   //  getConfig('crypto_config.json');
 
   document.getElementById('parent').style.display = 'none';
+
+  document.getElementById('uploadTalks').addEventListener('change', uploadTalks);
  });
