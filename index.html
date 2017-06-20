@@ -79,11 +79,11 @@
         </h3>
       </div>
 
+      <!-- TODO: need handlebars template to draw talks -->
       <article id="talks-list" class="col-md-3">
         <h4 class="category-title">
           Theory
         </h4>
-        <!-- TODO: change div.category to sections, modify JS as needed to preserve functionality -->
         <section class="category" id="category-1">
           <div class="talk" id="21">
             First talk title<br/>
@@ -149,7 +149,6 @@
       </article>
 
       <article id="renderedProgram" class="col-md-9">
-
         <!-- Handlebars script that will render the program template based on the program.json file -->
           <script id="program-template" type="text/x-handlebars-template">
             {{#each days}}

@@ -35,6 +35,10 @@ h3 {
 
 
 /*** Talks Section ***/
+#parent {
+  display: none;
+}
+
 div.category {
   background: #c9c2ce;
   padding: 5px;

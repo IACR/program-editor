@@ -1,7 +1,5 @@
 // purpose: to run progData through template to create display of program and set up event handlers for editing and dragging
 
-// editor.js = path to progData setup (see prog creator docs)
-
 // Global configuration object.
 var progData = null;
 
@@ -17,8 +15,6 @@ Handlebars.registerHelper('empty', function(data, options) {
 
 // creating a new program
 function createNew() {
-  // TODO: code to reveal div with template selection
-  // TODO: do reveals with jQuery-UI (.show(), https://jqueryui.com/show/)
   $('#templateSelector').show(500);
 }
 
@@ -34,7 +30,7 @@ $(function() {
     .on( "change", function() {
       to.datepicker( "option", "minDate", getDate( this ) );
       if (getDate(from)) {
-        
+
       }
     }),
 
@@ -60,7 +56,8 @@ $(function() {
 
 // set dates in progData
 function setDates(startdate, enddate) {
-  // validate dates, modify progData, and show upload
+  // TODO: validate dates, modify progData, and show upload
+  // TODO: once both dates are set, use .show on #uploadTalks
 }
 
 // paper validation
@@ -211,8 +208,6 @@ function getConfig(name) {
 // executes functions once document is ready
 $(document).ready(function() {
   //  getConfig('crypto_config.json');
-
-  document.getElementById('parent').style.display = 'none';
-
   document.getElementById('uploadTalks').addEventListener('change', uploadTalks);
+  // TODO: once upload is in and parsed, .show #parent with filled templates
  });
