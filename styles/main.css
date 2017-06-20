@@ -16,7 +16,29 @@ h3 {
 }
 
 
+/*** Setup Section Styling ***/
+.setupStep {
+  margin-bottom: 20px;
+}
+
+#templateSelector {
+  display: none;
+}
+
+#datePicker {
+  display: none;
+}
+
+#uploadTalks {
+  display: none;
+}
+
+
 /*** Talks Section ***/
+#parent {
+  display: none;
+}
+
 div.category {
   background: #c9c2ce;
   padding: 5px;

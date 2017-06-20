@@ -1,9 +1,9 @@
 // purpose: to run progData through template to create display of program and set up event handlers for editing and dragging
 
-// editor.js = path to progData setup (see prog creator docs)
-
 // Global configuration object.
 var progData = null;
+
+// TODO: add notification for when browser is too small using media breakpoint
 
 // custom helper for _____
 Handlebars.registerHelper('empty', function(data, options) {
@@ -13,9 +13,128 @@ Handlebars.registerHelper('empty', function(data, options) {
  }
 });
 
+// creating a new program
+function createNew() {
+  $('#templateSelector').show(500);
+}
+
+// jQuery-UI for date picker
+//TODO: should name this function, yes?
+$(function() {
+  var dateFormat = "mm/dd/yy",
+    from = $( "#from" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      numberOfMonths: 2
+    })
+    .on( "change", function() {
+      to.datepicker( "option", "minDate", getDate( this ) );
+      if (getDate(from)) {
+
+      }
+    }),
+
+    to = $( "#to" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      numberOfMonths: 2
+    })
+    .on( "change", function() {
+      from.datepicker( "option", "maxDate", getDate( this ) );
+    });
+
+  function getDate( element ) {
+    var date;
+    try {
+      date = $.datepicker.parseDate( dateFormat, element.value );
+    } catch( error ) {
+      date = null;
+    }
+    return date;
+  }
+});
+
+// set dates in progData
+function setDates(startdate, enddate) {
+  // TODO: validate dates, modify progData, and show upload
+  // TODO: once both dates are set, use .show on #uploadTalks
+}
+
+// paper validation
+function validatePapers(data) {
+  if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
+    alert('JSON file is not websubrev format');
+    return null;
+  }
+  var acceptedPapers = data.acceptedPapers;
+  var re = /\s+and\s+/;
+
+  for (var i = 0; i < acceptedPapers.length; i++) {
+    var paper = acceptedPapers[i];
+
+    if (!paper.hasOwnProperty('title') || !paper.hasOwnProperty('authors')) {
+      alert('JSON file has a paper with a missing title or authors');
+      return null;
+    }
+
+    if (!paper.hasOwnProperty('category')) {
+      paper.category = 'Uncategorized';
+    }
+
+    var authorNames = paper.authors.split(re);
+    var authors = [];
+
+    for (j = 0; j < authorNames.length; j++) {
+      authors.push({'name': authorNames[j]});
+    }
+
+    paper.authors = authors;
+  }
+  return data;
+}
+
+// file upload
+function uploadTalks(evt) {
+  console.dir(evt);
+
+  var files = evt.target.files;
+  if (files == null || files.length == 0) {
+    alert('You must select a file.');
+    evt.target.value = '';
+    return;
+  }
+  var file = evt.target.files[0];
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var textFile = e.target;
+    if (textFile == null || textFile.result == null) {
+      alert('Unable to read file.');
+      evt.target.value = '';
+      return;
+    }
+    try {
+      var data = JSON.parse(textFile.result);
+      var acceptedPapers = validatePapers(data);
+      console.dir(acceptedPapers);
+      progData.config.unassigned_talks = acceptedPapers;
+      if (acceptedPapers == null) {
+        evt.target.value = '';
+        return;
+      }
+      drawProgram();
+    } catch (ee) {
+      console.dir(ee);
+      alert('Unable to parse file as JSON.');
+      evt.target.value = '';
+      return;
+    }
+  }
+  reader.readAsText(file, 'UTF-8');
+}
+
 // adds dragula functionality
 function addDrag() {
-  var talks = Array.prototype.slice.call(document.querySelectorAll("div.category"));
+  var talks = Array.prototype.slice.call(document.querySelectorAll("section.category"));
   var sessions = Array.prototype.slice.call(document.querySelectorAll(".session-talks"));
   var containers = talks.concat(sessions);
 
@@ -32,7 +151,6 @@ function addDrag() {
 
   	    // hide the drag & drop hint.
         target.firstChild.data = '';
-        target.style.background = '#0000ff';
         target.style.border = '';
         console.dir(target);
       }
@@ -43,7 +161,6 @@ function addDrag() {
         // Restore the drag & drop hint.
         if (source.childNodes.length == 1) {
           source.firstChild.data = 'Drag talks here';
-          target.style.background = '#ff0000';
         }
       }
     });
@@ -72,41 +189,25 @@ function getConfig(name) {
       }
     }
     progData = data;
-
-/*
-    var talks = data['config']['unassigned_talks'];
-    var categories = {};
-    if (talks) {
-      for (var i = 0; i < talks.length; i++) {
-        if ('undefined' == typeof talks[i].category) {
-          category = 'Uncategorized';
-        } else {
-          category = talks[i].category;
-        }
-        if (!(category in categories)) {
-          categories[category] = [];
-        }
-        categories[category].push(talks[i]);
-      }
-    }
-    console.dir(categories);
-    */
-    drawProgram();
+    console.dir(progData);
+    $('#datePicker').show(500);
   })
   .fail(function(jqxhr, textStatus, error) {
     document.getElementById('renderedProgram');
     renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
 
     if (textStatus === 'error') {
-      console.log('program.json not found, check file name and try again');
+      console.log(name + ' not found, check file name and try again');
     }
     else {
-      console.log('There is a problem with program.json. The problem is ' + error);
+      console.log('There is a problem with ' + name +  '. The problem is ' + error);
     }
   });
 }
 
 // executes functions once document is ready
 $(document).ready(function() {
-   getConfig('crypto_config.json');
+  //  getConfig('crypto_config.json');
+  document.getElementById('uploadTalks').addEventListener('change', uploadTalks);
+  // TODO: once upload is in and parsed, .show #parent with filled templates
  });
