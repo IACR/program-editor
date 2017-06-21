@@ -6,7 +6,7 @@
 // create progData, used to store info relevant parsed JSON files for use by the Handlebars template to create program
 var progData = null;
 
-// creating a new program
+// creating a new program template from available templates
 function createNew() {
   $('#templateSelector').show(500);
 }
@@ -32,7 +32,7 @@ function createDatePicker(numDays) {
   });
 }
 
-// parses JSON file
+// parses JSON file to create initial program structure
 function getConfig(name) {
   $.getJSON('./json/' + name, function(data) {
     var days = data['days'];
