@@ -3,15 +3,8 @@
 
 
 
-// Global configuration object.
+// create progData, used to store info relevant parsed JSON files for use by the Handlebars template to create program
 var progData = null;
-
-// custom helper for _____
-Handlebars.registerHelper('empty', function(data, options) {
-  if (data && data.length >= 0) {
-    return new Handlebars.SafeString('<div class="session-talks">' + options.fn(this) + '</div>');
-  }
-});
 
 // creating a new program
 function createNew() {
@@ -21,22 +14,52 @@ function createNew() {
 // jQuery date picker
 function createDatePicker(numDays) {
   $('#datePicker').dateRangePicker( {
-		separator : ' to ',
+    separator : ' to ',
     autoClose: true,
     minDays: numDays,
     maxDays: numDays,
-		getValue: function() {
-  		if ($('#startdate').val() && $('#enddate').val() )
-  			return $('#startdate').val() + ' to ' + $('#enddate').val();
-  		else
-  			return '';
-		},
-		setValue: function(s,s1,s2) {
-			$('#startdate').val(s1);
-			$('#enddate').val(s2);
+    getValue: function() {
+      if ($('#startdate').val() && $('#enddate').val() )
+      return $('#startdate').val() + ' to ' + $('#enddate').val();
+      else
+      return '';
+    },
+    setValue: function(s,s1,s2) {
+      $('#startdate').val(s1);
+      $('#enddate').val(s2);
       setDates(s1);
-		}
-	});
+    }
+  });
+}
+
+// parses JSON file
+function getConfig(name) {
+  $.getJSON('./json/' + name, function(data) {
+    var days = data['days'];
+    for (var i = 0; i < days.length; i++) {
+      var timeslots = days[i]['timeslots'];
+      for (var j = 0; j < timeslots.length; j++) {
+        if(timeslots[j]['sessions'].length > 1) {
+          timeslots[j]['twosessions'] = true;
+        }
+      }
+    }
+    progData = data;
+    console.dir(progData);
+    createDatePicker(progData.days.length);
+    $('#datePicker').show(500);
+  })
+  .fail(function(jqxhr, textStatus, error) {
+    document.getElementById('renderedProgram');
+    renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
+
+    if (textStatus === 'error') {
+      console.log(name + ' not found, check file name and try again');
+    }
+    else {
+      console.log('There is a problem with ' + name +  '. The problem is ' + error);
+    }
+  });
 }
 
 // set dates in progData
@@ -48,6 +71,19 @@ function setDates(startdate) {
   }
   $('#uploadTalks').show(500);
 }
+
+
+
+
+
+// custom helper for _____
+Handlebars.registerHelper('empty', function(data, options) {
+  if (data && data.length >= 0) {
+    return new Handlebars.SafeString('<div class="session-talks">' + options.fn(this) + '</div>');
+  }
+});
+
+
 
 // paper validation
 function validatePapers(data) {
@@ -165,36 +201,6 @@ function drawProgram() {
   var renderedProgram = document.getElementById('renderedProgram');
   renderedProgram.innerHTML = theCompiledHtml;
   addDrag();
-}
-
-// parses JSON file
-function getConfig(name) {
-  $.getJSON('./json/' + name, function(data) {
-    var days = data['days'];
-    for (var i = 0; i < days.length; i++) {
-      var timeslots = days[i]['timeslots'];
-      for (var j = 0; j < timeslots.length; j++) {
-        if(timeslots[j]['sessions'].length > 1) {
-          timeslots[j]['twosessions'] = true;
-        }
-      }
-    }
-    progData = data;
-    console.dir(progData);
-    createDatePicker(progData.days.length);
-    $('#datePicker').show(500);
-  })
-  .fail(function(jqxhr, textStatus, error) {
-    document.getElementById('renderedProgram');
-    renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
-
-    if (textStatus === 'error') {
-      console.log(name + ' not found, check file name and try again');
-    }
-    else {
-      console.log('There is a problem with ' + name +  '. The problem is ' + error);
-    }
-  });
 }
 
 // executes functions once document is ready
