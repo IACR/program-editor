@@ -1,9 +1,10 @@
-// purpose: to run progData through template to create display of program and set up event handlers for editing and dragging
+// TODO: add notification for when browser is too small using media breakpoint
+
+
+
 
 // Global configuration object.
 var progData = null;
-
-// TODO: add notification for when browser is too small using media breakpoint
 
 // custom helper for _____
 Handlebars.registerHelper('empty', function(data, options) {
