@@ -8,10 +8,9 @@ var progData = null;
 
 // custom helper for _____
 Handlebars.registerHelper('empty', function(data, options) {
- //  console.dir(data);
- if (data && data.length >= 0) {
-   return new Handlebars.SafeString('<div class="session-talks">' + options.fn(this) + '</div>');
- }
+  if (data && data.length >= 0) {
+    return new Handlebars.SafeString('<div class="session-talks">' + options.fn(this) + '</div>');
+  }
 });
 
 // creating a new program
@@ -21,21 +20,18 @@ function createNew() {
 
 // jQuery date picker
 function createDatePicker(numDays) {
-  $('#datePicker').dateRangePicker(
-	{
+  $('#datePicker').dateRangePicker( {
 		separator : ' to ',
     autoClose: true,
     minDays: numDays,
     maxDays: numDays,
-		getValue: function()
-		{
-			if ($('#startdate').val() && $('#enddate').val() )
-				return $('#startdate').val() + ' to ' + $('#enddate').val();
-			else
-				return '';
+		getValue: function() {
+  		if ($('#startdate').val() && $('#enddate').val() )
+  			return $('#startdate').val() + ' to ' + $('#enddate').val();
+  		else
+  			return '';
 		},
-		setValue: function(s,s1,s2)
-		{
+		setValue: function(s,s1,s2) {
 			$('#startdate').val(s1);
 			$('#enddate').val(s2);
       setDates(s1);
@@ -59,6 +55,7 @@ function validatePapers(data) {
     alert('JSON file is not websubrev format');
     return null;
   }
+
   var acceptedPapers = data.acceptedPapers;
   var re = /\s+and\s+/;
 
@@ -91,29 +88,33 @@ function uploadTalks(evt) {
   console.dir(evt);
 
   var files = evt.target.files;
+
   if (files == null || files.length == 0) {
     alert('You must select a file.');
     evt.target.value = '';
     return;
   }
+
   var file = evt.target.files[0];
   var reader = new FileReader();
+
   reader.onload = function(e) {
     var textFile = e.target;
     if (textFile == null || textFile.result == null) {
       alert('Unable to read file.');
       evt.target.value = '';
       return;
-    }
-    try {
+    } try {
       var data = JSON.parse(textFile.result);
       var acceptedPapers = validatePapers(data);
       console.dir(acceptedPapers);
       progData.config.unassigned_talks = acceptedPapers;
+
       if (acceptedPapers == null) {
         evt.target.value = '';
         return;
       }
+
       drawProgram();
       $('#setupPrompts').hide();
       $('#parent').show(500);
@@ -133,33 +134,28 @@ function addDrag() {
   var sessions = Array.prototype.slice.call(document.querySelectorAll(".session-talks"));
   var containers = talks.concat(sessions);
 
-  // console.log('calling addDrag');
-  // console.dir(progData);
-  // console.log('number of containers = ' + containers.length);
+  dragula(containers).on('drop', function(el, target, source, sibling) {
+    console.log('drop event');
 
-  dragula(containers).on('drop',
-    function(el, target, source, sibling) {
-      console.log('drop event');
+    if (target.classList.contains('session-talks')) {
+      console.log('added to a session');
 
-      if (target.classList.contains('session-talks')) {
-        console.log('added to a session');
+	    // hide the drag & drop hint.
+      target.firstChild.data = '';
+      target.style.border = '';
+      console.dir(target);
+    }
 
-  	    // hide the drag & drop hint.
-        target.firstChild.data = '';
-        target.style.border = '';
-        console.dir(target);
+    if (source.classList.contains('session-talks')) {
+      console.log('removed from a session');
+
+      // Restore the drag & drop hint.
+      if (source.childNodes.length == 1) {
+        source.firstChild.data = 'Drag talks here';
       }
-
-      if (source.classList.contains('session-talks')) {
-        console.log('removed from a session');
-        // console.dir(source);
-        // Restore the drag & drop hint.
-        if (source.childNodes.length == 1) {
-          source.firstChild.data = 'Drag talks here';
-        }
-      }
-    });
-  }
+    }
+  });
+}
 
 // draws template (assume progData has already been set)
 function drawProgram() {
@@ -203,6 +199,5 @@ function getConfig(name) {
 
 // executes functions once document is ready
 $(document).ready(function() {
-  //  getConfig('crypto_config.json');
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
  });
