@@ -72,51 +72,14 @@ function setDates(startdate) {
   $('#uploadTalks').show(500);
 }
 
-
-
-
-
-// custom helper for _____
-Handlebars.registerHelper('empty', function(data, options) {
-  if (data && data.length >= 0) {
-    return new Handlebars.SafeString('<div class="session-talks">' + options.fn(this) + '</div>');
-  }
-});
-
-
-
-// paper validation
-function validatePapers(data) {
-  if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
-    alert('JSON file is not websubrev format');
-    return null;
-  }
-
-  var acceptedPapers = data.acceptedPapers;
-  var re = /\s+and\s+/;
-
-  for (var i = 0; i < acceptedPapers.length; i++) {
-    var paper = acceptedPapers[i];
-
-    if (!paper.hasOwnProperty('title') || !paper.hasOwnProperty('authors')) {
-      alert('JSON file has a paper with a missing title or authors');
-      return null;
-    }
-
-    if (!paper.hasOwnProperty('category')) {
-      paper.category = 'Uncategorized';
-    }
-
-    var authorNames = paper.authors.split(re);
-    var authors = [];
-
-    for (j = 0; j < authorNames.length; j++) {
-      authors.push({'name': authorNames[j]});
-    }
-
-    paper.authors = authors;
-  }
-  return data;
+// draws template (assume progData has already been set)
+function drawProgram() {
+  var theTemplateScript = $("#program-template").html();
+  var theTemplate = Handlebars.compile(theTemplateScript);
+  var theCompiledHtml = theTemplate(progData);
+  var renderedProgram = document.getElementById('renderedProgram');
+  renderedProgram.innerHTML = theCompiledHtml;
+  addDrag();
 }
 
 // file upload
@@ -164,6 +127,47 @@ function uploadTalks(evt) {
   reader.readAsText(file, 'UTF-8');
 }
 
+// paper validation
+function validatePapers(data) {
+  if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
+    alert('JSON file is not websubrev format');
+    return null;
+  }
+
+  var acceptedPapers = data.acceptedPapers;
+  var re = /\s+and\s+/;
+
+  for (var i = 0; i < acceptedPapers.length; i++) {
+    var paper = acceptedPapers[i];
+
+    if (!paper.hasOwnProperty('title') || !paper.hasOwnProperty('authors')) {
+      alert('JSON file has a paper with a missing title or authors');
+      return null;
+    }
+
+    if (!paper.hasOwnProperty('category')) {
+      paper.category = 'Uncategorized';
+    }
+
+    var authorNames = paper.authors.split(re);
+    var authors = [];
+
+    for (j = 0; j < authorNames.length; j++) {
+      authors.push({'name': authorNames[j]});
+    }
+
+    paper.authors = authors;
+  }
+  return data;
+}
+
+// custom helper for _____
+Handlebars.registerHelper('empty', function(data, options) {
+  if (data && data.length >= 0) {
+    return new Handlebars.SafeString('<div class="session-talks">' + options.fn(this) + '</div>');
+  }
+});
+
 // adds dragula functionality
 function addDrag() {
   var talks = Array.prototype.slice.call(document.querySelectorAll("section.category"));
@@ -191,16 +195,6 @@ function addDrag() {
       }
     }
   });
-}
-
-// draws template (assume progData has already been set)
-function drawProgram() {
-  var theTemplateScript = $("#program-template").html();
-  var theTemplate = Handlebars.compile(theTemplateScript);
-  var theCompiledHtml = theTemplate(progData);
-  var renderedProgram = document.getElementById('renderedProgram');
-  renderedProgram.innerHTML = theCompiledHtml;
-  addDrag();
 }
 
 // executes functions once document is ready
