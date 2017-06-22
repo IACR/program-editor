@@ -74,17 +74,25 @@
       <div class="row">
         <section id="uploadTalks" class="col-md-6 form-group">
           <p>
-            The upload button below will allow you to select the JSON file on your computer containing the accepted talks. This will only work correctly if it is a properly formatted JSON file in websubrev format.
+            Next, upload a JSON file of accepted papers from websubrev.
           </p>
           <label for="uploadTalksSelector" class="btn btn-sm btn-success">
             <input type="file" accept=".json" id="uploadTalksSelector" />
-            Upload
+            Upload JSON file
           </label>
         </section>
       </div>
     </div>
 
     <main id="parent">
+      <div class="row">
+        <section class="col-md-12">
+          <p>
+            Instructions: Drag talks from the left column to the sessions on the right. Once you have placed all of the talks into sessions, you can export the JSON or html and edit that to suit any other requirements.
+          </p>
+        </section>
+      </div>
+
       <div class="col-md-3">
         <h3 class="text-center">
           Talks
@@ -307,6 +315,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
+            <!-- TODO: style the heading with more bold/larger text, change background color of header to make it more explicit that this is a warning (orange? green to match buttons?). poss. use contextual background to accomplish -->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

@@ -133,7 +133,7 @@ function uploadTalks(evt) {
 // paper validation
 function validatePapers(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
-    warningBox('JSON file is not websubrev format');
+    warningBox('JSON file is not websubrev format.');
     return null;
   }
 
