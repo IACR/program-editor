@@ -33,6 +33,10 @@ h3 {
   display: none;
 }
 
+#uploadTalksSelector {
+  display: none;
+}
+
 
 /*** Talks Section ***/
 #parent {

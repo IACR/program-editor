@@ -51,7 +51,7 @@
           <p>
             Select a template to start from.
           </p>
-          <select id="templateSelect" class="form-control" onchange="getConfig(this.value)">
+          <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value)">
             <option value=""></option>
             <option value="crypto_config.json">Crypto</option>
             <option value="broken.json">Broken</option>
@@ -73,8 +73,13 @@
       </div>
       <div class="row">
         <section id="uploadTalks" class="col-md-6 form-group">
-          <input type="file" name="acceptedPapers" accept=".json" id="uploadTalksSelector" />
-          <button type="submit" name="button" class="btn btn-success btn-sm">Upload</button>
+          <p>
+            The upload button below will allow you to select the JSON file on your computer containing the accepted talks. This will only work correctly if it is a properly formatted JSON file in websubrev format.
+          </p>
+          <label for="uploadTalksSelector" class="btn btn-sm btn-success">
+            <input type="file" accept=".json" id="uploadTalksSelector" />
+            Upload
+          </label>
         </section>
       </div>
     </div>
@@ -296,6 +301,30 @@
 
     <!-- Additional scripts -->
     <script src="./scripts/editor.js"></script>
+
+    <!-- Modal for warnings and errors -->
+    <div class="modal fade" id="modalBox" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 id="modalTitle" class="modal-title">
+              Warning
+            </h4>
+          </div>
+          <div class="modal-body">
+              <p id="modal-message">
+                Something's not quite right here.
+              </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>
