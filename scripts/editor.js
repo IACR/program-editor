@@ -161,6 +161,34 @@ function validatePapers(data) {
 
     paper.authors = authors;
   }
+  // create map from category name to array of talks for that category
+  var categoryMap = {};
+  for (var i = 0; i < acceptedPapers.length; i++) {
+    var paper = acceptedPapers[i];
+
+    if (paper.category in categoryMap) {
+      categoryMap[paper.category].push(paper);
+    } else {
+      categoryMap[paper.category] = [paper];
+    }
+  }
+  var categoryList = [];
+  for (var name in categoryMap) {
+    if (categoryMap.hasOwnProperty(name)) {
+      categoryList.push({'name': name, 'talks': categoryMap[name]});
+    }
+  }
+  categoryList.sort(function(c1, c2) {
+    if (c1.name < c2.name) {
+      return -1;
+    }
+    if (c1.name > c2.name) {
+      return 1;
+    }
+    return 0;
+  });
+
+  return data.acceptedPapers = categoryList;
   return data;
 }
 
