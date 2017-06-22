@@ -50,8 +50,11 @@ function getConfig(name) {
     $('#datePicker').show(500);
   })
   .fail(function(jqxhr, textStatus, error) {
-    document.getElementById('renderedProgram');
-    renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
+    warningBox('There was a problem with this conference template. Please try another.');
+
+    // may be rendered obsolete by above?
+    // document.getElementById('renderedProgram');
+    // renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
 
     if (textStatus === 'error') {
       console.log(name + ' not found, check file name and try again');
@@ -89,7 +92,7 @@ function uploadTalks(evt) {
   var files = evt.target.files;
 
   if (files == null || files.length == 0) {
-    alert('You must select a file.');
+    warningBox('You must select a file.');
     evt.target.value = '';
     return;
   }
@@ -100,7 +103,7 @@ function uploadTalks(evt) {
   reader.onload = function(e) {
     var textFile = e.target;
     if (textFile == null || textFile.result == null) {
-      alert('Unable to read file.');
+      warningBox('Unable to read file.');
       evt.target.value = '';
       return;
     } try {
@@ -119,7 +122,7 @@ function uploadTalks(evt) {
       $('#parent').show(500);
     } catch (ee) {
       console.dir(ee);
-      alert('Unable to parse file as JSON.');
+      warningBox('Unable to parse file as JSON.');
       evt.target.value = '';
       return;
     }
@@ -130,7 +133,7 @@ function uploadTalks(evt) {
 // paper validation
 function validatePapers(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
-    alert('JSON file is not websubrev format');
+    warningBox('JSON file is not websubrev format');
     return null;
   }
 
@@ -141,7 +144,7 @@ function validatePapers(data) {
     var paper = acceptedPapers[i];
 
     if (!paper.hasOwnProperty('title') || !paper.hasOwnProperty('authors')) {
-      alert('JSON file has a paper with a missing title or authors');
+      warningBox('JSON file has a paper with a missing title or authors');
       return null;
     }
 
@@ -159,6 +162,12 @@ function validatePapers(data) {
     paper.authors = authors;
   }
   return data;
+}
+
+// styles warnings and error message appropriately/in a way that is immediately evident to the user
+function warningBox(text) {
+  $('#modal-message').text(text);
+  $('#modalBox').modal();
 }
 
 // custom helper for _____
@@ -184,6 +193,15 @@ function addDrag() {
       target.firstChild.data = '';
       target.style.border = '';
       console.dir(target);
+
+      if (target.childNodes.length == 5) {
+        var start = moment("10:55", "HH:MM");
+        console.dir(start);
+        var end = moment("11:35", "HH:MM");
+        console.dir(end);
+        warningBox('diff is ' + end.diff(start));
+        warningBox('Are you sure you want more than 3 talks in a session?');
+        }
     }
 
     if (source.classList.contains('session-talks')) {
