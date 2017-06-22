@@ -199,8 +199,5 @@ function addDrag() {
 
 // executes functions once document is ready
 $(document).ready(function() {
-  // $('button#uploadTalksSelector').click(function() {
-  //   $('input[type=file]').trigger('click', uploadTalks);
-  // });
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
  });
