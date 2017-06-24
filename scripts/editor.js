@@ -52,7 +52,7 @@ function getConfig(name) {
   .fail(function(jqxhr, textStatus, error) {
     warningBox('There was a problem with this conference template. Please try another.');
 
-    // may be rendered obsolete by above?
+    // TODO: may be rendered obsolete by above?
     // document.getElementById('renderedProgram');
     // renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
 
@@ -75,7 +75,18 @@ function setDates(startdate) {
   $('#uploadTalks').show(500);
 }
 
-// draws template (assume progData has already been set)
+// draws talks template
+function drawTalks() {
+  var theTemplateScript = $("#talks-template").html();
+  var theTemplate = Handlebars.compile(theTemplateScript);
+  var theCompiledHtml = theTemplate(progData.config);
+  var renderedTalks = document.getElementById('talksList');
+  renderedTalks.innerHTML = theCompiledHtml;
+  console.log(theCompiledHtml);
+  addDrag();
+}
+
+// draws program template
 function drawProgram() {
   var theTemplateScript = $("#program-template").html();
   var theTemplate = Handlebars.compile(theTemplateScript);
@@ -118,6 +129,7 @@ function uploadTalks(evt) {
       }
 
       drawProgram();
+      drawTalks();
       $('#setupPrompts').hide();
       $('#parent').show(500);
     } catch (ee) {
@@ -131,6 +143,7 @@ function uploadTalks(evt) {
 }
 
 // paper validation
+//TODO: add ids to each paper (use i)
 function validatePapers(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
     warningBox('JSON file is not websubrev format.');
@@ -152,6 +165,8 @@ function validatePapers(data) {
       paper.category = 'Uncategorized';
     }
 
+    paper.id = "talk-" + i;
+
     var authorNames = paper.authors.split(re);
     var authors = [];
 
@@ -161,6 +176,7 @@ function validatePapers(data) {
 
     paper.authors = authors;
   }
+
   // create map from category name to array of talks for that category
   var categoryMap = {};
   for (var i = 0; i < acceptedPapers.length; i++) {
@@ -175,7 +191,7 @@ function validatePapers(data) {
   var categoryList = [];
   for (var name in categoryMap) {
     if (categoryMap.hasOwnProperty(name)) {
-      categoryList.push({'name': name, 'talks': categoryMap[name]});
+      categoryList.push({'name': name, 'talks': categoryMap[name], 'id': 'category-' + categoryList.length});
     }
   }
   categoryList.sort(function(c1, c2) {
@@ -222,6 +238,7 @@ function addDrag() {
       target.style.border = '';
       console.dir(target);
 
+      // TODO: only an example of how to calculate length; will need to be changed
       if (target.childNodes.length == 5) {
         var start = moment("10:55", "HH:MM");
         console.dir(start);
@@ -229,7 +246,7 @@ function addDrag() {
         console.dir(end);
         warningBox('diff is ' + end.diff(start));
         warningBox('Are you sure you want more than 3 talks in a session?');
-        }
+      }
     }
 
     if (source.classList.contains('session-talks')) {
@@ -246,4 +263,7 @@ function addDrag() {
 // executes functions once document is ready
 $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
+
+  //fetch complete config for testing purposes
+
  });
