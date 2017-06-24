@@ -3,7 +3,7 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-h1, h3, h4 {
+h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
@@ -11,12 +11,12 @@ h1, h3, h4 {
   font-size: 4.7em;
 }
 
-h3 {
+.editorTitles {
   margin-top: 0px;
 }
 
 
-/*** Setup Section Styling ***/
+/*** Setup Section ***/
 .setupStep {
   margin-bottom: 20px;
 }
@@ -43,12 +43,12 @@ h3 {
   display: none;
 }
 
-div.category {
+section.category {
   background: #c9c2ce;
   padding: 5px;
 }
 
-#talks-list {
+#talksList {
   max-height: 700px;
   overflow-y: auto;
   background: #a9c2ee;
@@ -69,6 +69,10 @@ div.talk:hover {
   background: #AACAE6;
 }
 
+.talkTitle, .authorName {
+  font-family: 'Raleway', sans-serif;
+}
+
 
 /*** Schedule Section ***/
 #renderedProgram {
@@ -77,11 +81,11 @@ div.talk:hover {
   border: 1px solid black;
 }
 
-div.session {
+/*div.session {
   padding: 5px;
   background: #a9c2ee;
   margin: 5px;
-}
+}*/
 
 div.session-talks {
   min-height: 3em;
@@ -99,7 +103,7 @@ p.timeSlot {
   margin-top: 25px;
 }
 
-p.talkTitle {
+.talkTitle {
   font-size: 1.1em;
   font-weight: bold;
   text-align: left;

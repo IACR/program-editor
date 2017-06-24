@@ -96,12 +96,12 @@
       </div>
 
       <div class="col-md-3">
-        <h3 class="text-center">
+        <h3 class="text-center editorTitles">
           Talks
         </h3>
       </div>
       <div class="col-md-9">
-        <h3 class="text-center">
+        <h3 class="text-center editorTitles">
           Schedule
         </h3>
       </div>
@@ -111,9 +111,9 @@
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
           {{#each unassigned_talks}}
-            <h4 class="category-title">
+            <h3>
               {{name}}
-            </h4>
+            </h3>
             <section class="category" id="{{id}}">
               {{#each talks}}
                 <div class="talk" id="{{id}}">
@@ -169,19 +169,21 @@
                           {{sessions.0.moderator}}
                         </p>
                       {{/if}}
-                      {{#empty sessions.0.talks}}
-                        Drag talks to this session.
-                      {{#each sessions.0.talks}}
-                        <p class="talkTitle">
-                          {{title}}
-                        </p>
-                        <p class="dualTrackDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{name}}</span>
-                          {{/each}}
-                        </p>
-                      {{/each}}
-                      {{/empty}}
+                      <div class="session-talks">
+                        {{#empty sessions.0.talks}}
+                          Drag talks to this session.
+                        {{#each sessions.0.talks}}
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{name}}</span>
+                            {{/each}}
+                          </p>
+                        {{/each}}
+                        {{/empty}}
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-5">
@@ -199,21 +201,23 @@
                           {{sessions.1.moderator}}
                         </p>
                       {{/if}}
-                      {{#empty sessions.1.talks}}
-                        Drag talks to this session.
-                      {{#each sessions.1.talks}}
-                        <div class="talk">
-                        <p class="talkTitle">
-                          {{title}}
-                        </p>
-                        <p class="dualTrackDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{name}}</span>
-                          {{/each}}
-                        </p>
-                        </div>
-                      {{/each}}
-                      {{/empty}}
+                      <div class="session-talks">
+                        {{#empty sessions.1.talks}}
+                          Drag talks to this session.
+                        {{#each sessions.1.talks}}
+                          <div class="talk">
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{name}}</span>
+                            {{/each}}
+                          </p>
+                          </div>
+                        {{/each}}
+                        {{/empty}}
+                      </div>
                     </div>
                   </div>
                 {{else}}
@@ -232,19 +236,19 @@
                           {{sessions.0.moderator}}
                         </p>
                       {{/if}}
-                      {{#empty sessions.0.talks}}
-                        Drag talks to this session.
-                      {{#each sessions.0.talks}}
-                        <p class="mutualEventTalkTitle">
-                          {{title}}
-                        </p>
-                        <p class="eventDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{name}}</span>
-                          {{/each}}
-                        </p>
-                      {{/each}}
-                     {{/empty}}
+                        {{#empty sessions.0.talks}}
+                          Drag talks to this session.
+                        {{#each sessions.0.talks}}
+                          <p class="mutualEventTalkTitle">
+                            {{title}}
+                          </p>
+                          <p class="eventDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{name}}</span>
+                            {{/each}}
+                          </p>
+                        {{/each}}
+                       {{/empty}}
                     </div>
                   </div>
                 {{/if}}
