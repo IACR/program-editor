@@ -1,9 +1,7 @@
 // TODO: add notification for when browser is too small using media breakpoint
 
 
-
-
-// create progData, used to store info relevant parsed JSON files for use by the Handlebars template to create program
+// create progData, used to store info relevant parsed JSON files for use by the Handlebars template to create program and list of talks
 var progData = null;
 
 // creating a new program template from available templates
@@ -20,9 +18,9 @@ function createDatePicker(numDays) {
     maxDays: numDays,
     getValue: function() {
       if ($('#startdate').val() && $('#enddate').val() )
-      return $('#startdate').val() + ' to ' + $('#enddate').val();
+        return $('#startdate').val() + ' to ' + $('#enddate').val();
       else
-      return '';
+        return '';
     },
     setValue: function(s,s1,s2) {
       $('#startdate').val(s1);
@@ -45,7 +43,7 @@ function getConfig(name) {
       }
     }
     progData = data;
-    console.dir(progData);
+    // console.dir(progData);
     createDatePicker(progData.days.length);
     $('#datePicker').show(500);
   })
@@ -56,12 +54,13 @@ function getConfig(name) {
     // document.getElementById('renderedProgram');
     // renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
 
-    if (textStatus === 'error') {
-      console.log(name + ' not found, check file name and try again');
-    }
-    else {
-      console.log('There is a problem with ' + name +  '. The problem is ' + error);
-    }
+    // TODO: may have been rendered obsolete by use of warningBox (see above)
+    // if (textStatus === 'error') {
+    //   console.log(name + ' not found, check file name and try again');
+    // }
+    // else {
+    //   console.log('There is a problem with ' + name +  '. The problem is ' + error);
+    // }
   });
 }
 
@@ -82,7 +81,6 @@ function drawTalks() {
   var theCompiledHtml = theTemplate(progData.config);
   var renderedTalks = document.getElementById('talksList');
   renderedTalks.innerHTML = theCompiledHtml;
-  console.log(theCompiledHtml);
   addDrag();
 }
 
@@ -98,8 +96,7 @@ function drawProgram() {
 
 // file upload
 function uploadTalks(evt) {
-  console.dir(evt);
-
+  // console.dir(evt);
   var files = evt.target.files;
 
   if (files == null || files.length == 0) {
@@ -120,7 +117,7 @@ function uploadTalks(evt) {
     } try {
       var data = JSON.parse(textFile.result);
       var acceptedPapers = validatePapers(data);
-      console.dir(acceptedPapers);
+      // console.dir(acceptedPapers);
       progData.config.unassigned_talks = acceptedPapers;
 
       if (acceptedPapers == null) {
@@ -133,7 +130,7 @@ function uploadTalks(evt) {
       $('#setupPrompts').hide();
       $('#parent').show(500);
     } catch (ee) {
-      console.dir(ee);
+      // console.dir(ee);
       warningBox('Unable to parse file as JSON.');
       evt.target.value = '';
       return;
@@ -143,7 +140,6 @@ function uploadTalks(evt) {
 }
 
 // paper validation
-//TODO: add ids to each paper (use i)
 function validatePapers(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
     warningBox('JSON file is not websubrev format.');
@@ -173,7 +169,6 @@ function validatePapers(data) {
     for (j = 0; j < authorNames.length; j++) {
       authors.push({'name': authorNames[j]});
     }
-
     paper.authors = authors;
   }
 
@@ -214,6 +209,7 @@ function warningBox(text) {
   $('#modalBox').modal();
 }
 
+// TODO: clarify what this custom helper is for
 // custom helper for _____
 Handlebars.registerHelper('empty', function(data, options) {
   if (data && data.length >= 0) {
@@ -228,29 +224,27 @@ function addDrag() {
   var containers = talks.concat(sessions);
 
   dragula(containers).on('drop', function(el, target, source, sibling) {
-    console.log('drop event');
+    // console.log('drop event');
 
     if (target.classList.contains('session-talks')) {
-      console.log('added to a session');
+      // console.log('added to a session');
 
-	    // hide the drag & drop hint.
       target.firstChild.data = '';
       target.style.border = '';
-      console.dir(target);
+      // console.dir(target);
 
       // TODO: only an example of how to calculate length; will need to be changed
       if (target.childNodes.length == 5) {
         var start = moment("10:55", "HH:MM");
-        console.dir(start);
+        // console.dir(start);
         var end = moment("11:35", "HH:MM");
-        console.dir(end);
+        // console.dir(end);
         warningBox('diff is ' + end.diff(start));
         warningBox('Are you sure you want more than 3 talks in a session?');
       }
     }
-
     if (source.classList.contains('session-talks')) {
-      console.log('removed from a session');
+      // console.log('removed from a session');
 
       // Restore the drag & drop hint.
       if (source.childNodes.length == 1) {
@@ -264,6 +258,5 @@ function addDrag() {
 $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
 
-  //fetch complete config for testing purposes
-
+  // TODO: fetch complete config (../json/test.json) for testing purposes
  });
