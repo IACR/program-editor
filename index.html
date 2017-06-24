@@ -106,10 +106,9 @@
         </h3>
       </div>
 
-      <!-- TODO: need handlebars template to draw talks -->
-      <!-- tried: data, acceptedPapers, unassigned_talks, data.acceptedPapers, data.unassigned_talks, categoryMap, categoryList, category, paper, Object in categoryList, Object, paper.category, _, this, .,  -->
-      <!-- each this and this printed object Object but that's the only output I've managed to get...this.name doesn't work -->
+      <!-- TODO: better styling for talks, make title of talk more explicit, mark off categories from one another, etc -->
       <article id="talksList" class="col-md-3">
+        <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
           {{#each unassigned_talks}}
             <h4 class="category-title">
@@ -123,7 +122,9 @@
                   </span>
                   <div class="authorList">
                     {{#each authors}}
-                      <span class="authorName">{{name}}</span>
+                      <span class="authorName">
+                        {{name}}
+                      </span>
                     {{/each}}
                   </div>
                 </div>
@@ -131,78 +132,10 @@
             </section>
           {{/each}}
         </script>
-
-
-
-        <!-- <h4 class="category-title">
-          Theory
-        </h4>
-        <section class="category" id="category-1">
-          <div class="talk" id="21">
-            First talk title<br/>
-            First talk authors
-          </div>
-          <div class="talk" id="22">
-            Second talk title<br/>
-            Second talk authors
-          </div>
-        </section>
-
-        <h4 class="category-title">
-          Number Theory
-        </h4>
-        <section class="category" id="category-2">
-          <div class="talk" id="23">
-            Gettysburg Address<br/>
-            Abraham Lincoln
-          </div>
-          <div class="talk" id="24">
-            Pithy Monologue<br/>
-            Stephen Colbert
-          </div>
-          <div class="talk" id="25">
-            Third talk title<br/>
-            Long list of third talk authors
-          </div>
-          <div class="talk" id="26">
-            Fourth talk title<br/>
-            Long list of authors
-          </div>
-        </section>
-
-        <h4 class="category-title">
-          Practice
-        </h4>
-        <section class="category" id="category-3">
-          <div class="talk" id="27">
-            Fifth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="28">
-            Sixth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="29">
-            Seventh talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="30">
-            Eighth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="31">
-            Ninth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="32">
-            Tenth talk title<br/>
-            Long list of authors
-          </div>
-        </section> -->
       </article>
 
       <article id="renderedProgram" class="col-md-9">
-        <!-- Handlebars script that will render the program template based on the program.json file -->
+        <!-- Handlebars script that will render the editable program based on the user-selected program template -->
           <script id="program-template" type="text/x-handlebars-template">
             {{#each days}}
               <div class="row">
@@ -319,8 +252,8 @@
               {{/each}}
             {{/each}}
           </script>
-
       </article>
+
     </main>
 
     <!-- Bootstrap scripts -->
