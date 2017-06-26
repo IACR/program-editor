@@ -147,7 +147,7 @@ function validatePapers(data) {
   }
 
   var acceptedPapers = data.acceptedPapers;
-  var re = /\s+and\s+/;
+  var re = /\s+and\s+|\s*;\s*/;
 
   for (var i = 0; i < acceptedPapers.length; i++) {
     var paper = acceptedPapers[i];
