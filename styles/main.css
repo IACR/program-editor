@@ -1,6 +1,9 @@
 /*** General Styling ***/
 body {
   font-family: 'Raleway', sans-serif;
+  background-color: rgba(203, 131, 30, 0.1);
+  color: #12323C;
+  font-size: 1.7em;
 }
 
 h1, h2, h3, h4, h5 {
@@ -19,6 +22,14 @@ h1, h2, h3, h4, h5 {
 /*** Setup Section ***/
 .setupStep {
   margin-bottom: 20px;
+}
+
+.instructions {
+  padding: 20px;
+  margin-bottom: 30px;
+  font-size: 1.1em;
+  background-color: rgba(24, 188, 156, 0.4);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #templateSelector {
