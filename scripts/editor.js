@@ -42,8 +42,15 @@ function getConfig(name) {
         }
       }
     }
+
+    // if (option test = selected) {
+    // 1) populate progData with info as if you'd picked crypto
+    // 2) skip datepicker and proceed to talks upload
+    // 3) automatically choose the the talks file we've been using to test (/Downloads/websubrev.json locally)
+    // 4) populate template for drag/drop
+    // }
+
     progData = data;
-    // console.dir(progData);
     createDatePicker(progData.days.length);
     $('#datePicker').show(500);
   })
@@ -258,5 +265,5 @@ function addDrag() {
 $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
 
-  // TODO: fetch complete config (../json/test.json) for testing purposes
+  // TODO: fetch complete config (../json/test.json) for testing purposes --> see code in getConfig(), line 46ish
  });
