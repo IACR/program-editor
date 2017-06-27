@@ -152,3 +152,11 @@ span.authorName:after {
 span.authorName:last-of-type:after {
   content: '';
 }
+
+
+
+/*** Warning/Error Modal ***/
+.modal-header {
+  background-color: rgba(186, 0, 26, 0.7);
+  color: #EDF6F7;
+}
