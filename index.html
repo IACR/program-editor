@@ -88,6 +88,7 @@
     <main id="parent">
       <div class="row">
         <section class="col-md-12 instructions">
+          <!-- TODO: this font could probably be a bit smaller -->
           <p>
             Instructions: Drag talks from the left column to the sessions on the right. Once you have placed all of the talks into sessions, you can export the JSON or html and edit that to suit any other requirements.
           </p>
@@ -105,18 +106,17 @@
         </h3>
       </div>
 
-      <!-- TODO: better styling for talks, make title of talk more explicit, mark off categories from one another, etc -->
       <article id="talksList" class="col-md-3">
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
           {{#each unassigned_talks}}
-            <h3>
+            <h3 id="categoryTitle">
               {{name}}
             </h3>
             <section class="category" id="{{id}}">
               {{#each talks}}
                 <div class="talk" id="{{id}}">
-                  <span class="talkTitle">
+                  <span class="toAddTalkTitle">
                     {{title}}
                   </span>
                   <div class="authorList">

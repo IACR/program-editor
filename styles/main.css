@@ -16,7 +16,10 @@ h1, h2, h3, h4, h5 {
 
 .editorTitles {
   margin-top: 0px;
+  font-size: 1.7em;
+  font-weight: bold;
 }
+
 
 
 /*** Setup Section ***/
@@ -32,21 +35,10 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#templateSelector {
+#templateSelector, #datePicker, #uploadTalks, #uploadTalksSelector {
   display: none;
 }
 
-#datePicker {
-  display: none;
-}
-
-#uploadTalks {
-  display: none;
-}
-
-#uploadTalksSelector {
-  display: none;
-}
 
 
 /*** Talks Section ***/
@@ -54,35 +46,42 @@ h1, h2, h3, h4, h5 {
   display: none;
 }
 
+#categoryTitle {
+  font-size: 1.5em;
+}
+
 section.category {
-  background: #c9c2ce;
   padding: 5px;
 }
 
 #talksList {
   max-height: 700px;
   overflow-y: auto;
-  background: #a9c2ee;
-  border: 1px solid black;
   padding: 5px;
 }
 
 div.talk {
-  border-radius: 10px;
-  background: lightblue;
-  border: 1px solid darkgray;
+  border-radius: 8px;
+  background: #86BFCB;
+  border: 1px solid #1D707A;
   margin: 5px;
-  padding: 5px;
+  padding: 8px;
 }
 
 div.talk:hover {
-  border: 1px solid gray;
-  background: #AACAE6;
+  border: 1px solid #1D707A;
+  background: #14A6B5;
 }
 
-.talkTitle, .authorName {
+.toAddTalkTitle, .authorName {
   font-family: 'Raleway', sans-serif;
+  text-align: left;
 }
+
+.toAddTalkTitle {
+  text-decoration: underline;
+}
+
 
 
 /*** Schedule Section ***/
@@ -91,12 +90,6 @@ div.talk:hover {
   overflow-y: auto;
   border: 1px solid black;
 }
-
-/*div.session {
-  padding: 5px;
-  background: #a9c2ee;
-  margin: 5px;
-}*/
 
 div.session-talks {
   min-height: 3em;
