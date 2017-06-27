@@ -216,8 +216,7 @@ function warningBox(text) {
   $('#modalBox').modal();
 }
 
-// TODO: clarify what this custom helper is for
-// custom helper for _____
+// custom helper for generating droppable div (i.e. distinguishing between sessions that can accept talks and those that can't)
 Handlebars.registerHelper('empty', function(data, options) {
   if (data && data.length >= 0) {
     return new Handlebars.SafeString('<div class="session-talks">' + options.fn(this) + '</div>');
@@ -226,7 +225,7 @@ Handlebars.registerHelper('empty', function(data, options) {
 
 // adds dragula functionality
 function addDrag() {
-  var talks = Array.prototype.slice.call(document.querySelectorAll("section.category"));
+  var talks = Array.prototype.slice.call(document.querySelectorAll(".category"));
   var sessions = Array.prototype.slice.call(document.querySelectorAll(".session-talks"));
   var containers = talks.concat(sessions);
 
