@@ -52,6 +52,7 @@ h1, h2, h3, h4, h5 {
 
 section.category {
   padding: 5px;
+  min-height: 20px;
 }
 
 #talksList {
@@ -76,10 +77,6 @@ div.talk:hover {
 .toAddTalkTitle, .authorName {
   font-family: 'Raleway', sans-serif;
   text-align: left;
-}
-
-.toAddTalkTitle {
-  text-decoration: underline;
 }
 
 
