@@ -8,7 +8,6 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" />
-    <!-- favorite options include flatly or solar -->
 
     <!-- jQuery daterangepicker, and Dragula -->
     <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css"rel="stylesheet" />
@@ -31,14 +30,14 @@
 
     <div id="setupPrompts">
       <div class="row">
-        <section class="col-md-12 setupStep">
+        <section class="col-md-12 setupStep instructions">
           <p class="text-justify">
-            Welcome to the program creator for the International Association for Cryptologic Research (IACR). This tool is designed to make creating a program for your conference easier. We'll guide you through a series of questions to create the right program for you, the first of which is below.
+            Welcome to the program creator and editor for the International Association for Cryptologic Research (IACR). This tool is designed to make creating a program for your conference easier. We'll guide you through a series of questions to create the right program for you, the first of which is below.
           </p>
         </section>
       </div>
       <div class="row">
-        <section id="newOrExisting" class="col-md-6 setupStep">
+        <section id="newOrExisting" class="col-md-8 col-md-offset-2 setupStep">
           <p>
             If you've been here before, you can edit an existing program. Otherwise, start from a new one.
           </p>
@@ -47,7 +46,7 @@
         </section>
       </div>
       <div class="row">
-        <section id="templateSelector" class="col-md-6 setupStep">
+        <section id="templateSelector" class="col-md-8 col-md-offset-2 setupStep">
           <p>
             Select a template to start from.
           </p>
@@ -55,11 +54,12 @@
             <option value=""></option>
             <option value="crypto_config.json">Crypto</option>
             <option value="broken.json">Broken</option>
+            <option value="test.json">Test</option>
           </select>
         </section>
       </div>
       <div class="row">
-        <section id="datePicker" class="col-md-6 setupStep">
+        <section id="datePicker" class="col-md-8 col-md-offset-2 setupStep">
           <p>
             Choose the start and end date for your conference.
           </p>
@@ -72,101 +72,69 @@
         </section>
       </div>
       <div class="row">
-        <section id="uploadTalks" class="col-md-6 form-group">
+        <section id="uploadTalks" class="col-md-8 col-md-offset-2 form-group">
           <p>
-            The upload button below will allow you to select the JSON file on your computer containing the accepted talks. This will only work correctly if it is a properly formatted JSON file in websubrev format.
+            Next, upload a JSON file of accepted papers from websubrev.
           </p>
           <label for="uploadTalksSelector" class="btn btn-sm btn-success">
             <input type="file" accept=".json" id="uploadTalksSelector" />
-            Upload
+            Upload JSON file
           </label>
+          <button type="button" name="skipThis">skip</button>
         </section>
       </div>
     </div>
 
     <main id="parent">
+      <div class="row">
+        <section class="col-md-12 instructions">
+          <!-- TODO: this font could probably be a bit smaller -->
+          <p>
+            Instructions: Drag talks from the left column to the sessions on the right. Once you have placed all of the talks into sessions, you can export the JSON or html and edit that to suit any other requirements.
+          </p>
+        </section>
+      </div>
+
       <div class="col-md-3">
-        <h3 class="text-center">
+        <h3 class="text-center editorTitles">
           Talks
         </h3>
       </div>
       <div class="col-md-9">
-        <h3 class="text-center">
+        <h3 class="text-center editorTitles">
           Schedule
         </h3>
       </div>
 
-      <!-- TODO: need handlebars template to draw talks -->
-      <article id="talks-list" class="col-md-3">
-        <h4 class="category-title">
-          Theory
-        </h4>
-        <section class="category" id="category-1">
-          <div class="talk" id="21">
-            First talk title<br/>
-            First talk authors
-          </div>
-          <div class="talk" id="22">
-            Second talk title<br/>
-            Second talk authors
-          </div>
-        </section>
-
-        <h4 class="category-title">
-          Number Theory
-        </h4>
-        <section class="category" id="category-2">
-          <div class="talk" id="23">
-            Gettysburg Address<br/>
-            Abraham Lincoln
-          </div>
-          <div class="talk" id="24">
-            Pithy Monologue<br/>
-            Stephen Colbert
-          </div>
-          <div class="talk" id="25">
-            Third talk title<br/>
-            Long list of third talk authors
-          </div>
-          <div class="talk" id="26">
-            Fourth talk title<br/>
-            Long list of authors
-          </div>
-        </section>
-
-        <h4 class="category-title">
-          Practice
-        </h4>
-        <section class="category" id="category-3">
-          <div class="talk" id="27">
-            Fifth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="28">
-            Sixth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="29">
-            Seventh talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="30">
-            Eighth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="31">
-            Ninth talk title<br/>
-            Long list of authors
-          </div>
-          <div class="talk" id="32">
-            Tenth talk title<br/>
-            Long list of authors
-          </div>
-        </section>
+      <article id="talksList" class="col-md-3">
+        <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
+        <script id="talks-template" type="text/x-handlebars-template">
+          {{#each unassigned_talks}}
+            <h3 id="categoryTitle">
+              {{name}}
+            </h3>
+            <section class="category" id="{{id}}">
+              {{#each talks}}
+                <div class="talk" id="{{id}}">
+                  <h5 class="toAddTalkTitle">
+                    {{title}}
+                  </h5>
+                  <div class="authorList">
+                    {{#each authors}}
+                      <span class="authorName">
+                        {{name}}
+                      </span>
+                    {{/each}}
+                  </div>
+                </div>
+              {{/each}}
+            </section>
+          {{/each}}
+        </script>
       </article>
 
       <article id="renderedProgram" class="col-md-9">
-        <!-- Handlebars script that will render the program template based on the program.json file -->
+        <!-- Handlebars script that will render the editable program based on the user-selected program template -->
           <script id="program-template" type="text/x-handlebars-template">
             {{#each days}}
               <div class="row">
@@ -200,19 +168,21 @@
                           {{sessions.0.moderator}}
                         </p>
                       {{/if}}
-                      {{#empty sessions.0.talks}}
-                        Drag talks to this session.
-                      {{#each sessions.0.talks}}
-                        <p class="talkTitle">
-                          {{title}}
-                        </p>
-                        <p class="dualTrackDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{name}}</span>
-                          {{/each}}
-                        </p>
-                      {{/each}}
-                      {{/empty}}
+                      <div class="session-talks">
+                        {{#empty sessions.0.talks}}
+                          Drag talks to this session.
+                        {{#each sessions.0.talks}}
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{name}}</span>
+                            {{/each}}
+                          </p>
+                        {{/each}}
+                        {{/empty}}
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-5">
@@ -230,21 +200,23 @@
                           {{sessions.1.moderator}}
                         </p>
                       {{/if}}
-                      {{#empty sessions.1.talks}}
-                        Drag talks to this session.
-                      {{#each sessions.1.talks}}
-                        <div class="talk">
-                        <p class="talkTitle">
-                          {{title}}
-                        </p>
-                        <p class="dualTrackDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{name}}</span>
-                          {{/each}}
-                        </p>
-                        </div>
-                      {{/each}}
-                      {{/empty}}
+                      <div class="session-talks">
+                        {{#empty sessions.1.talks}}
+                          Drag talks to this session.
+                        {{#each sessions.1.talks}}
+                          <div class="talk">
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{name}}</span>
+                            {{/each}}
+                          </p>
+                          </div>
+                        {{/each}}
+                        {{/empty}}
+                      </div>
                     </div>
                   </div>
                 {{else}}
@@ -263,19 +235,19 @@
                           {{sessions.0.moderator}}
                         </p>
                       {{/if}}
-                      {{#empty sessions.0.talks}}
-                        Drag talks to this session.
-                      {{#each sessions.0.talks}}
-                        <p class="mutualEventTalkTitle">
-                          {{title}}
-                        </p>
-                        <p class="eventDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{name}}</span>
-                          {{/each}}
-                        </p>
-                      {{/each}}
-                     {{/empty}}
+                        {{#empty sessions.0.talks}}
+                          Drag talks to this session.
+                        {{#each sessions.0.talks}}
+                          <p class="mutualEventTalkTitle">
+                            {{title}}
+                          </p>
+                          <p class="eventDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{name}}</span>
+                            {{/each}}
+                          </p>
+                        {{/each}}
+                       {{/empty}}
                     </div>
                   </div>
                 {{/if}}
@@ -283,8 +255,8 @@
               {{/each}}
             {{/each}}
           </script>
-
       </article>
+
     </main>
 
     <!-- Bootstrap scripts -->
@@ -310,9 +282,9 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 id="modalTitle" class="modal-title">
+            <h2 id="modalTitle" class="modal-title">
               Warning
-            </h4>
+            </h2>
           </div>
           <div class="modal-body">
               <p id="modal-message">

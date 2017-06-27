@@ -1,9 +1,12 @@
 /*** General Styling ***/
 body {
   font-family: 'Raleway', sans-serif;
+  background-color: rgba(134, 191, 203, 0.1);
+  color: #12323C;
+  font-size: 1.7em;
 }
 
-h1, h3, h4 {
+h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
@@ -11,31 +14,31 @@ h1, h3, h4 {
   font-size: 4.7em;
 }
 
-h3 {
+.editorTitles {
   margin-top: 0px;
+  font-size: 1.7em;
+  font-weight: bold;
 }
 
 
-/*** Setup Section Styling ***/
+
+/*** Setup Section ***/
 .setupStep {
   margin-bottom: 20px;
 }
 
-#templateSelector {
+.instructions {
+  padding: 20px;
+  margin-bottom: 30px;
+  font-size: 1.1em;
+  background-color: rgba(24, 188, 156, 0.4);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#templateSelector, #datePicker, #uploadTalks, #uploadTalksSelector {
   display: none;
 }
 
-#datePicker {
-  display: none;
-}
-
-#uploadTalks {
-  display: none;
-}
-
-#uploadTalksSelector {
-  display: none;
-}
 
 
 /*** Talks Section ***/
@@ -43,31 +46,39 @@ h3 {
   display: none;
 }
 
-div.category {
-  background: #c9c2ce;
-  padding: 5px;
+#categoryTitle {
+  font-size: 1.5em;
 }
 
-#talks-list {
+section.category {
+  padding: 5px;
+  min-height: 20px;
+}
+
+#talksList {
   max-height: 700px;
   overflow-y: auto;
-  background: #a9c2ee;
-  border: 1px solid black;
   padding: 5px;
 }
 
 div.talk {
-  border-radius: 10px;
-  background: lightblue;
-  border: 1px solid darkgray;
+  border-radius: 8px;
+  background: #86BFCB;
+  border: 1px solid #1D707A;
   margin: 5px;
-  padding: 5px;
+  padding: 8px;
 }
 
 div.talk:hover {
-  border: 1px solid gray;
-  background: #AACAE6;
+  border: 1px solid #1D707A;
+  background: #14A6B5;
 }
+
+.toAddTalkTitle, .authorName {
+  font-family: 'Raleway', sans-serif;
+  text-align: left;
+}
+
 
 
 /*** Schedule Section ***/
@@ -75,12 +86,6 @@ div.talk:hover {
   max-height: 700px;
   overflow-y: auto;
   border: 1px solid black;
-}
-
-div.session {
-  padding: 5px;
-  background: #a9c2ee;
-  margin: 5px;
 }
 
 div.session-talks {
@@ -99,7 +104,7 @@ p.timeSlot {
   margin-top: 25px;
 }
 
-p.talkTitle {
+.talkTitle {
   font-size: 1.1em;
   font-weight: bold;
   text-align: left;
@@ -146,4 +151,12 @@ span.authorName:after {
 
 span.authorName:last-of-type:after {
   content: '';
+}
+
+
+
+/*** Warning/Error Modal ***/
+.modal-header {
+  background-color: rgba(186, 0, 26, 0.7);
+  color: #EDF6F7;
 }
