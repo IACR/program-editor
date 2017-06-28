@@ -110,25 +110,27 @@
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
           {{#each unassigned_talks}}
-            <h3 id="categoryTitle">
-              {{name}}
-            </h3>
-            <section class="category" id="{{id}}">
-              {{#each talks}}
+            <div id="{{id}}">
+              <h3 id="categoryTitle">
+                {{name}}
+              </h3>
+              <section class="category">
+                {{#each talks}}
                 <div class="talk" id="{{id}}">
                   <h5 class="toAddTalkTitle">
                     {{title}}
                   </h5>
                   <div class="authorList">
                     {{#each authors}}
-                      <span class="authorName">
-                        {{name}}
-                      </span>
+                    <span class="authorName">
+                      {{name}}
+                    </span>
                     {{/each}}
                   </div>
                 </div>
-              {{/each}}
-            </section>
+                {{/each}}
+              </section>
+            </div>
           {{/each}}
         </script>
       </article>
