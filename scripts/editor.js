@@ -88,7 +88,6 @@ function drawProgram() {
 
 // file upload
 function uploadTalks(evt) {
-  // console.dir(evt);
   var files = evt.target.files;
 
   if (files == null || files.length == 0) {
@@ -109,7 +108,6 @@ function uploadTalks(evt) {
     } try {
       var data = JSON.parse(textFile.result);
       var acceptedPapers = validatePapers(data);
-      // console.dir(acceptedPapers);
       progData.config.unassigned_talks = acceptedPapers;
 
       if (acceptedPapers == null) {
@@ -123,7 +121,6 @@ function uploadTalks(evt) {
       $('#setupPrompts').hide();
       $('#parent').show(500);
     } catch (ee) {
-      // console.dir(ee);
       warningBox('Unable to parse file as JSON.');
       evt.target.value = '';
       return;
@@ -138,7 +135,6 @@ function validatePapers(data) {
     warningBox('JSON file is not websubrev format.');
     return null;
   }
-
   var acceptedPapers = data.acceptedPapers;
   var re = /\s+and\s+|\s*;\s*/;
 
@@ -153,9 +149,7 @@ function validatePapers(data) {
     if (!paper.hasOwnProperty('category')) {
       paper.category = 'Uncategorized';
     }
-
     paper.id = "talk-" + i;
-
     var authorNames = paper.authors.split(re);
     var authors = [];
 
@@ -216,28 +210,20 @@ function addDrag() {
   var containers = talks.concat(sessions);
 
   dragula(containers).on('drop', function(el, target, source, sibling) {
-    // console.log('drop event');
-
     if (target.classList.contains('session-talks')) {
-      // console.log('added to a session');
-
+      // hide drag & drop hint
       target.firstChild.data = '';
       target.style.border = '';
-      // console.dir(target);
 
       // TODO: only an example of how to calculate length; will need to be changed
       if (target.childNodes.length == 5) {
         var start = moment("10:55", "HH:MM");
-        // console.dir(start);
         var end = moment("11:35", "HH:MM");
-        // console.dir(end);
         warningBox('diff is ' + end.diff(start));
         warningBox('Are you sure you want more than 3 talks in a session?');
       }
     }
     if (source.classList.contains('session-talks')) {
-      // console.log('removed from a session');
-
       // Restore the drag & drop hint.
       if (source.childNodes.length == 1) {
         source.firstChild.data = 'Drag talks here';
@@ -246,20 +232,18 @@ function addDrag() {
   });
 }
 
-// Function for debug only to bypass most of the original setup.
+// DEBUG ONLY, remove in production
 function debugStart() {
- // when you click the "New" button:
- createNew();
- // Just use crypto config.
- getConfig('crypto_config.json');
- // Ignore the date selection - we just use the defaults.
- $('#uploadTalks').show(500);
- // You still have to upload the talks.
+  createNew();
+  getConfig('crypto_config.json');
+  $('#uploadTalks').show(500);
+  // all you have to do is upload talks
 }
 
 // executes functions once document is ready
 $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
 
+  // NOTE: for debug purposes only, remove in production
   debugStart();
  });
