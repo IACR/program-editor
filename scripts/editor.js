@@ -17,10 +17,11 @@ function createDatePicker(numDays) {
     minDays: numDays,
     maxDays: numDays,
     getValue: function() {
+      // TODO: fixes part of drag/drog issue but damned if I know why (b/c is key-value pair??)
       if ($('#startdate').val() && $('#enddate').val() )
-        return $('#startdate').val() + ' to ' + $('#enddate').val();
+      return $('#startdate').val() + ' to ' + $('#enddate').val();
       else
-        return '';
+      return '';
     },
     setValue: function(s,s1,s2) {
       $('#startdate').val(s1);
