@@ -17,7 +17,6 @@ function createDatePicker(numDays) {
     minDays: numDays,
     maxDays: numDays,
     getValue: function() {
-      // TODO: fixes part of drag/drog issue but damned if I know why (b/c is key-value pair??)
       if ($('#startdate').val() && $('#enddate').val() )
       return $('#startdate').val() + ' to ' + $('#enddate').val();
       else
@@ -43,32 +42,12 @@ function getConfig(name) {
         }
       }
     }
-
-    // if (option test = selected) {
-    // 1) populate progData with info as if you'd picked crypto
-    // 2) skip datepicker and proceed to talks upload
-    // 3) automatically choose the the talks file we've been using to test (/Downloads/websubrev.json locally)
-    // 4) populate template for drag/drop
-    // }
-
     progData = data;
     createDatePicker(progData.days.length);
     $('#datePicker').show(500);
   })
   .fail(function(jqxhr, textStatus, error) {
     warningBox('There was a problem with this conference template. Please try another.');
-
-    // TODO: may be rendered obsolete by above?
-    // document.getElementById('renderedProgram');
-    // renderedProgram.innerHTML = '<p>The conference program is not currently available. Please check back later.</p>';
-
-    // TODO: may have been rendered obsolete by use of warningBox (see above)
-    // if (textStatus === 'error') {
-    //   console.log(name + ' not found, check file name and try again');
-    // }
-    // else {
-    //   console.log('There is a problem with ' + name +  '. The problem is ' + error);
-    // }
   });
 }
 
@@ -89,7 +68,6 @@ function drawTalks() {
   var theCompiledHtml = theTemplate(progData.config);
   var renderedTalks = document.getElementById('talksList');
   renderedTalks.innerHTML = theCompiledHtml;
-  addDrag();
 }
 
 // draws program template
@@ -99,7 +77,6 @@ function drawProgram() {
   var theCompiledHtml = theTemplate(progData);
   var renderedProgram = document.getElementById('renderedProgram');
   renderedProgram.innerHTML = theCompiledHtml;
-  addDrag();
 }
 
 // file upload
@@ -135,6 +112,7 @@ function uploadTalks(evt) {
 
       drawProgram();
       drawTalks();
+      addDrag();
       $('#setupPrompts').hide();
       $('#parent').show(500);
     } catch (ee) {
@@ -261,9 +239,20 @@ function addDrag() {
   });
 }
 
+// Function for debug only to bypass most of the original setup.
+function debugStart() {
+ // when you click the "New" button:
+ createNew();
+ // Just use crypto config.
+ getConfig('crypto_config.json');
+ // Ignore the date selection - we just use the defaults.
+ $('#uploadTalks').show(500);
+ // You still have to upload the talks.
+}
+
 // executes functions once document is ready
 $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
 
-  // TODO: fetch complete config (../json/test.json) for testing purposes --> see code in getConfig(), line 46ish
+  debugStart();
  });

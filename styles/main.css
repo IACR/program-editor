@@ -53,6 +53,8 @@ h1, h2, h3, h4, h5 {
 section.category {
   padding: 5px;
   min-height: 20px;
+  /*TODO: needs bg color to match bg color of draggable areas*/
+  /*background-color: purple;*/
 }
 
 #talksList {
