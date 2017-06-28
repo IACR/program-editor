@@ -229,7 +229,136 @@ function addDrag() {
         source.firstChild.data = 'Drag talks here';
       }
     }
+    updateProgData(el, target, source, sibling);
   });
+}
+
+// Recurse through a javascript object looking for a node with a given id.
+// This is used to update progData whenever a drop happens, because we have
+// to find the relevant session and category to update when a talk is moved.
+// In this function, currentNode could be either a string, a number,
+// an array, or an object.  It could only have an id inside it if it's
+// an object, but if it's an array then we have to call findObj on
+// each element in the array to look for the id.
+function findObj(id, currentNode) {
+  if (typeof currentNode === "string" || typeof currentNode === "number") {
+    return false;
+  }
+  // console.dir(currentNode);
+  var i, currentChild, result;
+  if (Array.isArray(currentNode)) {
+    for (i = 0; i < currentNode.length; i++) {
+      currentChild = currentNode[i];
+      result = findObj(id, currentChild);
+      if (result != false) {
+        return result;
+      }
+    }
+    return false;
+  }
+  // At this point we know that currentNode is an object, so we check
+  // for the id.
+  if (currentNode.hasOwnProperty('id') && currentNode.id == id) {
+    return currentNode;
+  }
+  // At this point we have to check all the subobjects. First build a list
+  // of the properties.
+  var properties = [];
+  for (var property in currentNode) {
+    if (currentNode.hasOwnProperty(property)) {
+      properties.push(property);
+    }
+  }
+  // Now check each child node.
+  for (i = 0; i < properties.length; i++) {
+    currentChild = currentNode[properties[i]];
+    result = findObj(id, currentChild);
+    if (result != false) {
+      return result;
+    }
+  }
+  // We didn't find it anywhere, and there were no children to check.
+  return false;
+}
+
+// When a talk in el is dragged from source to target and placed next
+// to sibling, we have to update progData to reflect the move. Updating
+// progdata requires knowing the ids of everything, finding the correct
+// arrays, and updating them.
+// el is the talk, so el.id is the id of the talk.
+// target is where the talk was dropped,
+// source is where it was dragged from.
+// sibling is what it is placed in front of.
+function updateProgData(el, target, source, sibling) {
+  // first find the ids of the talk, source, and destination.  It's
+  // possible to move things between categories and sessions, so we
+  // have to handle all those cases. The algorithm is to find all the
+  // relevant ids of the target, source, and talk, then use findObj
+  // to find the appropriate node in progdata, and update the relevant
+  // arrays.
+  // console.log('updating progData');
+  // console.log('el follows');
+  // console.dir(el);
+  // console.log('target follows');
+  // console.dir(target);
+  // console.log('source follows');
+  // console.dir(source);
+  console.dir(sibling);
+  var talkObj = findObj(el.id, progData);
+  if (talkObj === false) {
+    console.log('unable to find talk in progData');
+    return false;
+  }
+  // sourceArray and targetArray point to a talks array, either in a
+  // category or a session.
+  console.log('source id is ' + source.parentNode.id);
+  var sourceObj = findObj(source.parentNode.id, progData);
+  if (sourceObj === false) {
+    console.log('unable to update source');
+    return false;
+  }
+  var sourceTalks = sourceObj.talks;
+  var targetObj = findObj(target.parentNode.id, progData);
+  if (targetObj === false) {
+    console.log('unable to update target');
+    return false;
+  }
+  
+  // remove from sourceTalks and add to targetTalks.
+  var sourceIndex = sourceTalks.findIndex(function(t) {
+    if (t.id == el.id) {
+      return true;
+    }
+    return false;
+  });
+  if (sourceIndex < 0) {
+    console.log('unable to find talk in source talks.');
+    return false;
+  }
+  console.log('removing talk at index ' + sourceIndex);
+  sourceTalks.splice(sourceIndex, 1);
+
+  var targetTalks = targetObj.talks;
+  // if sibling is null then put at end of targetTalks.
+  // if sibling is not null, insert before that.
+  if (sibling === null) {
+    targetTalks.push(talkObj);
+  } else {
+    var siblingIndex = targetTalks.findIndex(function(t) {
+      if (t.id == sibling.id) {
+        return true;
+      }
+      return false;
+    });
+    if (siblingIndex < 0) {
+      console.log('sibling not found');
+      targetTalks.push(talkObj);
+    } else {
+      targetTalks.splice(siblingIndex, 0, talkObj);
+      console.log('inserting at position ' + siblingIndex);
+    }
+  }
+  return true;
 }
 
 // DEBUG ONLY, remove in production

@@ -30,7 +30,6 @@ h1, h2, h3, h4, h5 {
 .instructions {
   padding: 20px;
   margin-bottom: 30px;
-  font-size: 1.1em;
   background-color: rgba(24, 188, 156, 0.4);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
