@@ -33,10 +33,17 @@ function createDatePicker(numDays) {
 // parses JSON file to create initial program structure
 function getConfig(name) {
   $.getJSON('./json/' + name, function(data) {
+    var idCounter = 0;
     var days = data['days'];
+
     for (var i = 0; i < days.length; i++) {
       var timeslots = days[i]['timeslots'];
       for (var j = 0; j < timeslots.length; j++) {
+        for (var k = 0; k < timeslots[j]['sessions'].length; k++) {
+          timeslots[j]['sessions'][k].id = 'session-' + idCounter;
+          idCounter++;
+        }
+
         if(timeslots[j]['sessions'].length > 1) {
           timeslots[j]['twosessions'] = true;
         }

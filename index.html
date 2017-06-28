@@ -156,7 +156,7 @@
                   </div>
                 {{#if twosessions}}
                   <div class="col-md-5">
-                    <div class="track1Event panel-body">
+                    <div class="track1Event panel-body" id="{{sessions.0.id}}">
                       <h4 class="text-center">
                         {{sessions.0.session_title}}
                       </h4>
@@ -186,7 +186,7 @@
                     </div>
                   </div>
                   <div class="col-md-5">
-                    <div class="panel-body track2Event">
+                    <div class="panel-body track2Event" id="{{sessions.1.id}}">
                       <h4 class="text-center">
                         {{sessions.1.session_title}}
                       </h4>
@@ -219,7 +219,7 @@
                   </div>
                 {{else}}
          	        <div class="col-md-10">
-                    <div class="panel-body mutualEvent">
+                    <div class="panel-body mutualEvent" id="{{sessions.0.id}}">
                       <h4>
                         {{sessions.0.session_title}}
                       </h4>
