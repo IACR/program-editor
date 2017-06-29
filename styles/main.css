@@ -75,7 +75,14 @@ div.talk:hover {
   background: #14A6B5;
 }
 
-.toAddTalkTitle, .authorName {
+.toAddTalkTitle {
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-align: left;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.authorList, .authorName {
   font-family: 'Raleway', sans-serif;
   text-align: left;
 }
