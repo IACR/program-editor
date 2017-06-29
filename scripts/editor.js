@@ -237,7 +237,7 @@ function addDrag() {
 // This is used to update progData whenever a drop happens, because we have
 // to find the relevant session and category to update when a talk is moved.
 // In this function, currentNode could be either a string, a number,
-// an array, or an object.  It could only have an id inside it if it's
+// an array, or an object. It could only have an id inside it if it's
 // an object, but if it's an array then we have to call findObj on
 // each element in the array to look for the id.
 function findObj(id, currentNode) {
@@ -323,7 +323,7 @@ function updateProgData(el, target, source, sibling) {
     console.log('unable to update target');
     return false;
   }
-  
+
   // remove from sourceTalks and add to targetTalks.
   var sourceIndex = sourceTalks.findIndex(function(t) {
     if (t.id == el.id) {
@@ -339,6 +339,7 @@ function updateProgData(el, target, source, sibling) {
   sourceTalks.splice(sourceIndex, 1);
 
   var targetTalks = targetObj.talks;
+
   // if sibling is null then put at end of targetTalks.
   // if sibling is not null, insert before that.
   if (sibling === null) {
@@ -361,7 +362,7 @@ function updateProgData(el, target, source, sibling) {
   return true;
 }
 
-// DEBUG ONLY, remove in production
+// NOTE: DEBUG ONLY, remove in production
 function debugStart() {
   createNew();
   getConfig('crypto_config.json');
