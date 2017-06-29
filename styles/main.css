@@ -45,6 +45,16 @@ h1, h2, h3, h4, h5 {
   display: none;
 }
 
+#addTalkBtn {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  padding: 2px 1px;
+  /*font-size: 1.6em;
+  line-height: 1.35;*/
+  border-radius: 30px;
+}
+
 #categoryTitle {
   font-size: 1.5em;
 }
