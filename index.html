@@ -85,38 +85,38 @@
             <input type="file" accept=".json" id="uploadTalksSelector" />
             Upload JSON file
           </label>
-          <button type="button" name="skipThis">skip</button>
         </section>
       </div>
     </div>
 
     <main id="parent">
       <div class="row">
-        <section class="col-md-12 instructions">
+        <section class="col-md-10 instructions">
           <p>
             Instructions: Drag talks from the left column to the sessions on the right. Once you have placed all of the talks into sessions, you can export the JSON or html and edit that to suit any other requirements.
           </p>
         </section>
+        <aside class="col-md-2">
+          <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">Download JSON</button>
+        </aside>
       </div>
-
       <div class="col-md-3">
         <h3 class="text-center editorTitles">
           Talks
-          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          </button>
         </h3>
       </div>
       <div class="col-md-9">
         <h3 class="text-center editorTitles">
           Schedule
         </h3>
-        <button type="button" name="addSession" class="btn btn-success btn-sm pull-right">+</button>
       </div>
 
       <article id="talksList" class="col-md-3">
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
+          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
           {{#each unassigned_talks}}
             <div id="{{id}}">
               <h3 id="categoryTitle">

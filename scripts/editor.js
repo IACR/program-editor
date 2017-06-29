@@ -362,6 +362,21 @@ function updateProgData(el, target, source, sibling) {
   return true;
 }
 
+// to download new JSON program
+function downloadJSON() {
+  var atag = document.createElement('a');
+  atag.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(progData, null, 2)));
+  atag.setAttribute('download', 'program.json');
+
+  if (document.createEvent) {
+    var event = document.createEvent('MouseEvents');
+    event.initEvent('click', true, true);
+    atag.dispatchEvent(event);
+  } else {
+    atag.click();
+  }
+}
+
 // NOTE: DEBUG ONLY, remove in production
 function debugStart() {
   createNew();
