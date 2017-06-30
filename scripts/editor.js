@@ -363,10 +363,11 @@ function updateProgData(el, target, source, sibling) {
 }
 
 // to save a new talk after talk data has already been used to generate the template
-function addNewTalk() {
+function addNewTalk(val) {
   // triggers on clicking save button in add new talk form, will add new talk to progData
   // to add to progData, will look up category, add id to new talk, and append it to appropriate category
   // TODO: in order to make ids work correctly, there needs to be a global variable that is basically a counter for talk ids. would then use that to increment ids correctly for talks added after the initial talks have been uploaded
+  console.log(val);
 }
 
 // to download new JSON program
@@ -395,6 +396,8 @@ function debugStart() {
 // executes functions once document is ready
 $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
+
+  // TODO: find categories from config to populate select for addNewTalk modal
 
   // NOTE: for debug purposes only, remove in production
   debugStart();

@@ -347,7 +347,14 @@
                 <label for="newTalkCategory">
                   Talk Category
                 </label>
-                <input type="text" name="newTalkCategory" placeholder="Select new talk category" class="form-control">
+                <select id="newTalkCategory" class="form-control" onchange="addNewTalk(this.value)">
+                  <option value=""></option>
+                  <option value="whoKnows">who knows</option>
+                  <option value="aThing">a thing</option>
+                  <option value="deepQ">why ask why</option>
+                  <option value="srsly">srsly</option>
+                </select>
+                <!-- <input type="text" name="newTalkCategory" placeholder="Select new talk category" class="form-control"> -->
               </div>
             </form>
             <br />
