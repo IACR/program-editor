@@ -54,9 +54,8 @@ h1, h2, h3, h4, h5 {
   height: 35px;
   text-align: center;
   padding: 2px 1px;
-  /*font-size: 1.6em;
-  line-height: 1.35;*/
   border-radius: 30px;
+  margin: 5px;
 }
 
 #categoryTitle {
