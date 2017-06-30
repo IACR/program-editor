@@ -193,7 +193,7 @@ function validatePapers(data) {
 // styles warnings and error message appropriately/in a way that is immediately evident to the user
 function warningBox(text) {
   $('#modal-message').text(text);
-  $('#modalBox').modal();
+  $('#errorBox').modal();
 }
 
 // custom helper for generating droppable div (i.e. distinguishing between sessions that can accept talks and those that can't)
