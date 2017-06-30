@@ -362,9 +362,11 @@ function updateProgData(el, target, source, sibling) {
   return true;
 }
 
-// to add a new talk to the left-hand column after talk data has already been used to generate the template
+// to save a new talk after talk data has already been used to generate the template
 function addNewTalk() {
-  
+  // triggers on clicking save button in add new talk form, will add new talk to progData
+  // to add to progData, will look up category, add id to new talk, and append it to appropriate category
+  // TODO: in order to make ids work correctly, there needs to be a global variable that is basically a counter for talk ids. would then use that to increment ids correctly for talks added after the initial talks have been uploaded
 }
 
 // to download new JSON program

@@ -187,3 +187,7 @@ span.authorName:last-of-type:after {
   background-color: rgba(24, 188, 156, 0.9);
   color: #EDF6F7;
 }
+
+#newAuthorHelp, #newAffiliationHelp {
+  font-size: 0.8em;
+}
