@@ -362,6 +362,11 @@ function updateProgData(el, target, source, sibling) {
   return true;
 }
 
+// to add a new talk to the left-hand column after talk data has already been used to generate the template
+function addNewTalk() {
+  
+}
+
 // to download new JSON program
 function downloadJSON() {
   var atag = document.createElement('a');

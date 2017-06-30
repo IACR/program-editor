@@ -114,7 +114,7 @@
       <article id="talksList" class="col-md-3">
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
-          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn">
+          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn" data-toggle="modal" data-target="#addTalkBox">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
           </button>
           {{#each unassigned_talks}}
@@ -281,14 +281,14 @@
     <script src="./scripts/editor.js"></script>
 
     <!-- Modal for warnings and errors -->
-    <div class="modal fade" id="errorBox" role="dialog" aria-labelledby="modalTitle">
+    <aside class="modal fade" id="errorBox" role="dialog" aria-labelledby="modalTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" id="warnBoxTitle">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h2 id="modalTitle" class="modal-title">
+            <h2 class="modal-title">
               Warning
             </h2>
           </div>
@@ -302,22 +302,51 @@
           </div>
         </div>
       </div>
-    </div>
+    </aside>
 
     <!-- Modal for adding a new talk -->
-    <div class="modal fade" id="addTalkBox" role="dialog" aria-labelledby="modalTitle">
+    <aside class="modal fade" id="addTalkBox" role="dialog" aria-labelledby="modalTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" id="addTalkTitle">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h2 id="addTalkModal" class="modal-title">
+            <h2 class="modal-title">
               Add a New Talk
             </h2>
           </div>
           <div class="modal-body">
-              <!-- TODO: add talk form here -->
+            <form>
+              <div class="form-group">
+                <label for="newTalkTitle">
+                  Talk Title
+                </label>
+                <input type="text" name="newTalkTitle" placeholder="Enter new talk title" class="form-control">
+              </div>
+              <div class="form-group">
+                <!-- TODO: individual fields for each author, help text about bibtech formatting, plus to right of each input to add another field (additional field also added on hitting enter?) -->
+                <label for="newTalkAuthors">
+                  Talk Author(s)
+                </label>
+                <input type="text" name="newTalkAuthor" placeholder="Enter author name" class="form-control">
+              </div>
+              <div class="form-group">
+                <!-- TODO: help text for formatting, comma separated affiliations -->
+                <label for="newTalkAffiliation">
+                  Affiliation
+                </label>
+                <input type="text" name="newTalkAffiliation" placeholder="Enter author affiliation(s)" class="form-control">
+              </div>
+              <div class="form-group">
+                <!-- TODO: this should be a dropdown select, generated dynamically from current categories in crypto_config. will not allow new categories to be added at this time, is potential future enhancement -->
+                <label for="newTalkCategory">
+                  Talk Category
+                </label>
+                <input type="text" name="newTalkCategory" placeholder="Select new talk category" class="form-control">
+              </div>
+            </form>
+            <p>When you have completed this form, please press save below. The talk will be added to the list of talks at left.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
@@ -325,7 +354,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </aside>
 
   </body>
 </html>
