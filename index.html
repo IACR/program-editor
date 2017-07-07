@@ -114,7 +114,7 @@
       <article id="talksList" class="col-md-3">
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
-          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn" data-toggle="modal" data-target="#addTalkBox">
+          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn" data-toggle="modal" data-target="#addTalkBox" onclick="addCategories()">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
           </button>
           {{#each unassigned_talks}}
@@ -129,11 +129,7 @@
                     {{title}}
                   </h4>
                   <div class="authorList">
-                    {{#each authors}}
-                    <span class="authorName">
-                      {{name}}
-                    </span>
-                    {{/each}}
+                    {{#each authors}}<span class="authorName">{{this}}</span>{{/each}}
                   </div>
                 </div>
                 {{/each}}
@@ -186,7 +182,7 @@
                         </p>
                         <p class="dualTrackDescr">
                           {{#each authors}}
-                            <span class="authorName">{{name}}</span>
+                            <span class="authorName">{{this}}</span>
                           {{/each}}
                         </p>
                       {{/each}}
@@ -217,7 +213,7 @@
                         </p>
                         <p class="dualTrackDescr">
                           {{#each authors}}
-                            <span class="authorName">{{name}}</span>
+                            <span class="authorName">{{this}}</span>
                           {{/each}}
                         </p>
                         </div>
@@ -249,7 +245,7 @@
                           </p>
                           <p class="eventDescr">
                             {{#each authors}}
-                              <span class="authorName">{{name}}</span>
+                              <span class="authorName">{{this}}</span>
                             {{/each}}
                           </p>
                         {{/each}}
@@ -322,7 +318,7 @@
                 <label for="newTalkTitle">
                   Talk Title
                 </label>
-                <input type="text" name="newTalkTitle" placeholder="Enter new talk title" class="form-control" />
+                <input type="text" name="newTalkTitle" placeholder="Enter new talk title" class="form-control" id="newTalkTitle" />
               </div>
               <div class="form-group">
                 <label for="newTalkAuthors">
@@ -331,7 +327,7 @@
                 <span id="newAuthorHelp" class="help-block">
                   When entering author names, make sure to use BibTeX formatting (i.e. names are separated by and).
                 </span>
-                <input type="text" name="newTalkAuthor" placeholder="Enter author name" class="form-control" aria-describedby="newAuthorHelp" />
+                <input type="text" name="newTalkAuthor" placeholder="Enter author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
               </div>
               <div class="form-group">
                 <label for="newTalkAffiliation">
@@ -340,10 +336,9 @@
                 <span id="newAffiliationHelp" class="help-block">
                   Enter affiliations for authors, separated by comma. If two or more authors share an affiliation, there is no need to enter the same institution twice.
                 </span>
-                <input type="text" name="newTalkAffiliation" placeholder="Enter author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" />
+                <input type="text" name="newTalkAffiliation" placeholder="Enter author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
               </div>
               <div class="form-group">
-                <!-- TODO: this should be a dropdown select, generated dynamically from current categories in crypto_config. will not allow new categories to be added at this time, is potential future enhancement -->
                 <label for="newTalkCategory">
                   Talk Category
                 </label>
@@ -354,15 +349,12 @@
                   <option value="deepQ">why ask why</option>
                   <option value="srsly">srsly</option>
                 </select>
-                <!-- <input type="text" name="newTalkCategory" placeholder="Select new talk category" class="form-control"> -->
               </div>
             </form>
-            <br />
-            <span class="glyphicon glyphicon-warning-sign text-danger" aria-hidden="true"></span> When you have completed this form, don't forget to press save below. The talk will then be added to the list of talks at left.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addNewTalk()">Add talk</button>
           </div>
         </div>
       </div>

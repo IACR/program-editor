@@ -129,6 +129,12 @@ function uploadTalks(evt) {
   reader.readAsText(file, 'UTF-8');
 }
 
+// makes authors an array of strings
+function splitAuthors(val) {
+  var re = /\s+and\s+|\s*;\s*/;
+  return val.split(re);
+}
+
 // paper validation
 function validatePapers(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
@@ -136,7 +142,6 @@ function validatePapers(data) {
     return null;
   }
   var acceptedPapers = data.acceptedPapers;
-  var re = /\s+and\s+|\s*;\s*/;
 
   for (var i = 0; i < acceptedPapers.length; i++) {
     var paper = acceptedPapers[i];
@@ -150,13 +155,7 @@ function validatePapers(data) {
       paper.category = 'Uncategorized';
     }
     paper.id = "talk-" + i;
-    var authorNames = paper.authors.split(re);
-    var authors = [];
-
-    for (j = 0; j < authorNames.length; j++) {
-      authors.push({'name': authorNames[j]});
-    }
-    paper.authors = authors;
+    paper.authors = splitAuthors(paper.authors);
   }
 
   // create map from category name to array of talks for that category
@@ -363,13 +362,31 @@ function updateProgData(el, target, source, sibling) {
 }
 
 // to save a new talk after talk data has already been used to generate the template
-function addNewTalk(val) {
-  // NOTE: realistically this is the function for the save button but right now I'm using it as a function to get the value of the select in the add new talk modal
-  // NOTE: not in this function, but this will come in handy for building the select from the categories - http://derpturkey.com/drop-down-lists-with-handlebars/
-  // triggers on clicking save button in add new talk form, will add new talk to progData
-  // to add new talk to progData, will look up category, add id to new talk, and append it to appropriate category
-  // TODO: in order to make ids work correctly, there needs to be a global variable that is basically a counter for talk ids. would then use that to increment ids correctly for talks added after the initial talks have been uploaded
-  console.log(val);
+function addNewTalk() {
+  var talk = {};
+  talk.id = "new talk id";
+  talk.title = $('#newTalkTitle').val();
+  talk.authors = splitAuthors($('#newTalkAuthor').val());
+  // talk.affiliation = $('#newTalkAffiliation').val();
+
+  var category = $('#newTalkCategory').children(':selected');
+  talk.category = category.text();
+  console.dir(category);
+  var categoryIndex = new Number(category.attr('value'));
+  progData.config.unassigned_talks[categoryIndex].talks.push(talk);
+  drawTalks();
+}
+
+// populate categories in modal to add talk from current config
+function addCategories() {
+  // remove all categories in case loop has already been triggered, so you don't get duplicate categories
+  $('#newTalkCategory').find('option').remove().end()
+
+  for (var i = 0; i < progData.config.unassigned_talks.length; i++) {
+    $('#newTalkCategory').append($('<option>', {
+      value:i, text:progData.config.unassigned_talks[i].name
+    }));
+  }
 }
 
 // to download new JSON program

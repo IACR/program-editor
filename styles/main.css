@@ -168,7 +168,7 @@ p.dualTrackDescr {
 }
 
 span.authorName:after {
-  content: ',';
+  content: ', ';  
 }
 
 span.authorName:last-of-type:after {
