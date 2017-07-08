@@ -36,6 +36,11 @@
           </p>
         </section>
       </div>
+      <!-- <div class="row">
+        <aside class="testing col-md-3 col-md-offset-1">
+
+        </aside>
+      </div> -->
       <div class="row">
         <section id="newOrExisting" class="col-md-8 col-md-offset-2 setupStep">
           <p>
@@ -80,20 +85,21 @@
             <input type="file" accept=".json" id="uploadTalksSelector" />
             Upload JSON file
           </label>
-          <button type="button" name="skipThis">skip</button>
         </section>
       </div>
     </div>
 
     <main id="parent">
       <div class="row">
-        <section class="col-md-12 instructions">
+        <section class="col-md-10 instructions">
           <p>
             Instructions: Drag talks from the left column to the sessions on the right. Once you have placed all of the talks into sessions, you can export the JSON or html and edit that to suit any other requirements.
           </p>
         </section>
+        <aside class="col-md-2">
+          <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">Download JSON</button>
+        </aside>
       </div>
-
       <div class="col-md-3">
         <h3 class="text-center editorTitles">
           Talks
@@ -108,6 +114,9 @@
       <article id="talksList" class="col-md-3">
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
+          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn" data-toggle="modal" data-target="#addTalkBox" onclick="addCategories()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
           {{#each unassigned_talks}}
             <div id="{{id}}">
               <h3 id="categoryTitle">
@@ -120,11 +129,7 @@
                     {{title}}
                   </h4>
                   <div class="authorList">
-                    {{#each authors}}
-                    <span class="authorName">
-                      {{name}}
-                    </span>
-                    {{/each}}
+                    {{#each authors}}<span class="authorName">{{this}}</span>{{/each}}
                   </div>
                 </div>
                 {{/each}}
@@ -177,7 +182,7 @@
                         </p>
                         <p class="dualTrackDescr">
                           {{#each authors}}
-                            <span class="authorName">{{name}}</span>
+                            <span class="authorName">{{this}}</span>
                           {{/each}}
                         </p>
                       {{/each}}
@@ -208,7 +213,7 @@
                         </p>
                         <p class="dualTrackDescr">
                           {{#each authors}}
-                            <span class="authorName">{{name}}</span>
+                            <span class="authorName">{{this}}</span>
                           {{/each}}
                         </p>
                         </div>
@@ -240,7 +245,7 @@
                           </p>
                           <p class="eventDescr">
                             {{#each authors}}
-                              <span class="authorName">{{name}}</span>
+                              <span class="authorName">{{this}}</span>
                             {{/each}}
                           </p>
                         {{/each}}
@@ -272,14 +277,14 @@
     <script src="./scripts/editor.js"></script>
 
     <!-- Modal for warnings and errors -->
-    <div class="modal fade" id="modalBox" role="dialog" aria-labelledby="modalTitle">
+    <aside class="modal fade" id="errorBox" role="dialog" aria-labelledby="modalTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" id="warnBoxTitle">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h2 id="modalTitle" class="modal-title">
+            <h2 class="modal-title">
               Warning
             </h2>
           </div>
@@ -293,7 +298,63 @@
           </div>
         </div>
       </div>
-    </div>
+    </aside>
+
+    <!-- Modal for adding a new talk -->
+    <aside class="modal fade" id="addTalkBox" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" id="addTalkTitle">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="modal-title">
+              Add a New Talk
+            </h2>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="newTalkTitle">
+                  Talk Title
+                </label>
+                <input type="text" name="newTalkTitle" placeholder="Enter new talk title" class="form-control" id="newTalkTitle" />
+              </div>
+              <div class="form-group">
+                <label for="newTalkAuthors">
+                  Talk Author(s)
+                </label>
+                <span id="newAuthorHelp" class="help-block">
+                  When entering author names, make sure to use BibTeX formatting (i.e. names are separated by and).
+                </span>
+                <input type="text" name="newTalkAuthor" placeholder="Enter author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
+              </div>
+              <div class="form-group">
+                <label for="newTalkAffiliation">
+                  Affiliation
+                </label>
+                <span id="newAffiliationHelp" class="help-block">
+                  Enter affiliations for authors, separated by comma. If two or more authors share an affiliation, there is no need to enter the same institution twice.
+                </span>
+                <input type="text" name="newTalkAffiliation" placeholder="Enter author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
+              </div>
+              <div class="form-group">
+                <label for="newTalkCategory">
+                  Talk Category
+                </label>
+                <select id="newTalkCategory" class="form-control">
+                  <option value=""></option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addNewTalk()">Add talk</button>
+          </div>
+        </div>
+      </div>
+    </aside>
 
   </body>
 </html>

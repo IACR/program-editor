@@ -1,10 +1,13 @@
 // TODO: add notification for when browser is too small using media breakpoint
 
 
-// create progData, used to store info relevant parsed JSON files for use by the Handlebars template to create program and list of talks
-var progData = null;
+// create global variables: to store parsed JSON files for use in templates (progData), the template for the program (progTemplate), the template for the unassigned talks listed at left (talksTemplate), and for keeping track of the indeces of talks (lastTalkIndex)
+var progData;
+var progTemplate;
+var talksTemplate;
+var lastTalkIndex;
 
-// creating a new program template from available templates
+// create new program template from available templates
 function createNew() {
   $('#templateSelector').show(500);
 }
@@ -30,7 +33,7 @@ function createDatePicker(numDays) {
   });
 }
 
-// parses JSON file to create initial program structure
+// parse JSON file to create initial program structure
 function getConfig(name) {
   $.getJSON('./json/' + name, function(data) {
     var idCounter = 0;
@@ -58,7 +61,7 @@ function getConfig(name) {
   });
 }
 
-// set dates in progData
+// set start/end dates in progData
 function setDates(startdate) {
   var day = moment(startdate);
   for (var i = 0; i < progData.days.length; i++) {
@@ -68,25 +71,21 @@ function setDates(startdate) {
   $('#uploadTalks').show(500);
 }
 
-// draws talks template
+// draw talks template
 function drawTalks() {
-  var theTemplateScript = $("#talks-template").html();
-  var theTemplate = Handlebars.compile(theTemplateScript);
-  var theCompiledHtml = theTemplate(progData.config);
+  var theCompiledHtml = talksTemplate(progData.config);
   var renderedTalks = document.getElementById('talksList');
   renderedTalks.innerHTML = theCompiledHtml;
 }
 
-// draws program template
+// draw program template
 function drawProgram() {
-  var theTemplateScript = $("#program-template").html();
-  var theTemplate = Handlebars.compile(theTemplateScript);
-  var theCompiledHtml = theTemplate(progData);
+  var theCompiledHtml = progTemplate(progData);
   var renderedProgram = document.getElementById('renderedProgram');
   renderedProgram.innerHTML = theCompiledHtml;
 }
 
-// file upload
+// upload JSON file of talks and parse
 function uploadTalks(evt) {
   var files = evt.target.files;
 
@@ -129,6 +128,12 @@ function uploadTalks(evt) {
   reader.readAsText(file, 'UTF-8');
 }
 
+// make authors an array of strings
+function splitAuthors(val) {
+  var re = /\s+and\s+|\s*;\s*/;
+  return val.split(re);
+}
+
 // paper validation
 function validatePapers(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
@@ -136,7 +141,7 @@ function validatePapers(data) {
     return null;
   }
   var acceptedPapers = data.acceptedPapers;
-  var re = /\s+and\s+|\s*;\s*/;
+  lastTalkIndex = acceptedPapers.length;
 
   for (var i = 0; i < acceptedPapers.length; i++) {
     var paper = acceptedPapers[i];
@@ -150,13 +155,7 @@ function validatePapers(data) {
       paper.category = 'Uncategorized';
     }
     paper.id = "talk-" + i;
-    var authorNames = paper.authors.split(re);
-    var authors = [];
-
-    for (j = 0; j < authorNames.length; j++) {
-      authors.push({'name': authorNames[j]});
-    }
-    paper.authors = authors;
+    paper.authors = splitAuthors(paper.authors);
   }
 
   // create map from category name to array of talks for that category
@@ -190,10 +189,10 @@ function validatePapers(data) {
   return data;
 }
 
-// styles warnings and error message appropriately/in a way that is immediately evident to the user
+// style warnings and error message for better visibility to user
 function warningBox(text) {
   $('#modal-message').text(text);
-  $('#modalBox').modal();
+  $('#errorBox').modal();
 }
 
 // custom helper for generating droppable div (i.e. distinguishing between sessions that can accept talks and those that can't)
@@ -203,7 +202,7 @@ Handlebars.registerHelper('empty', function(data, options) {
   }
 });
 
-// adds dragula functionality
+// add dragula functionality
 function addDrag() {
   var talks = Array.prototype.slice.call(document.querySelectorAll(".category"));
   var sessions = Array.prototype.slice.call(document.querySelectorAll(".session-talks"));
@@ -215,7 +214,7 @@ function addDrag() {
       target.firstChild.data = '';
       target.style.border = '';
 
-      // TODO: only an example of how to calculate length; will need to be changed
+      // TODO: only an example of how to calculate length; will need to be changed for production
       if (target.childNodes.length == 5) {
         var start = moment("10:55", "HH:MM");
         var end = moment("11:35", "HH:MM");
@@ -224,7 +223,7 @@ function addDrag() {
       }
     }
     if (source.classList.contains('session-talks')) {
-      // Restore the drag & drop hint.
+      // restore drag & drop hint
       if (source.childNodes.length == 1) {
         source.firstChild.data = 'Drag talks here';
       }
@@ -296,13 +295,6 @@ function updateProgData(el, target, source, sibling) {
   // relevant ids of the target, source, and talk, then use findObj
   // to find the appropriate node in progdata, and update the relevant
   // arrays.
-  // console.log('updating progData');
-  // console.log('el follows');
-  // console.dir(el);
-  // console.log('target follows');
-  // console.dir(target);
-  // console.log('source follows');
-  // console.dir(source);
   console.dir(sibling);
   var talkObj = findObj(el.id, progData);
   if (talkObj === false) {
@@ -324,7 +316,7 @@ function updateProgData(el, target, source, sibling) {
     return false;
   }
 
-  // remove from sourceTalks and add to targetTalks.
+  // remove from sourceTalks and add to targetTalks
   var sourceIndex = sourceTalks.findIndex(function(t) {
     if (t.id == el.id) {
       return true;
@@ -340,8 +332,8 @@ function updateProgData(el, target, source, sibling) {
 
   var targetTalks = targetObj.talks;
 
-  // if sibling is null then put at end of targetTalks.
-  // if sibling is not null, insert before that.
+  // if sibling is null then put at end of targetTalks
+  // if sibling is not null, insert before that
   if (sibling === null) {
     targetTalks.push(talkObj);
   } else {
@@ -362,12 +354,56 @@ function updateProgData(el, target, source, sibling) {
   return true;
 }
 
-// NOTE: DEBUG ONLY, remove in production
+// save new talk after talk data has already been used to generate template
+function addNewTalk() {
+  var talk = {};
+  talk.id = "talk-" + lastTalkIndex;
+  lastTalkIndex++;
+  talk.title = $('#newTalkTitle').val();
+  talk.authors = splitAuthors($('#newTalkAuthor').val());
+  // TODO: handle affiliations
+  // talk.affiliation = $('#newTalkAffiliation').val();
+
+  var category = $('#newTalkCategory').children(':selected');
+  talk.category = category.text();
+  var categoryIndex = new Number(category.attr('value'));
+  progData.config.unassigned_talks[categoryIndex].talks.push(talk);
+  drawTalks();
+  addDrag();
+}
+
+// populate categories from current config in add talk modal
+function addCategories() {
+  // remove all categories in case loop has already been triggered, so you don't get duplicate categories
+  $('#newTalkCategory').find('option').remove().end()
+
+  for (var i = 0; i < progData.config.unassigned_talks.length; i++) {
+    $('#newTalkCategory').append($('<option>', {
+      value:i, text:progData.config.unassigned_talks[i].name
+    }));
+  }
+}
+
+// download edited JSON program
+function downloadJSON() {
+  var atag = document.createElement('a');
+  atag.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(progData, null, 2)));
+  atag.setAttribute('download', 'program.json');
+
+  if (document.createEvent) {
+    var event = document.createEvent('MouseEvents');
+    event.initEvent('click', true, true);
+    atag.dispatchEvent(event);
+  } else {
+    atag.click();
+  }
+}
+
+// NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
 function debugStart() {
   createNew();
   getConfig('crypto_config.json');
   $('#uploadTalks').show(500);
-  // all you have to do is upload talks
 }
 
 // executes functions once document is ready
@@ -376,4 +412,10 @@ $(document).ready(function() {
 
   // NOTE: for debug purposes only, remove in production
   debugStart();
+
+  // compile templates to html
+  var theTemplateScript = $("#program-template").html();
+  progTemplate = Handlebars.compile(theTemplateScript);
+  theTemplateScript = $("#talks-template").html();
+  talksTemplate = Handlebars.compile(theTemplateScript);
  });
