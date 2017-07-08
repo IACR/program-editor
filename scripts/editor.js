@@ -3,6 +3,9 @@
 
 // create progData, used to store info relevant parsed JSON files for use by the Handlebars template to create program and list of talks
 var progData = null;
+var progTemplate = null;
+var talksTemplate = null;
+var lastTalkIndex = null;
 
 // creating a new program template from available templates
 function createNew() {
@@ -70,18 +73,14 @@ function setDates(startdate) {
 
 // draws talks template
 function drawTalks() {
-  var theTemplateScript = $("#talks-template").html();
-  var theTemplate = Handlebars.compile(theTemplateScript);
-  var theCompiledHtml = theTemplate(progData.config);
+  var theCompiledHtml = talksTemplate(progData.config);
   var renderedTalks = document.getElementById('talksList');
   renderedTalks.innerHTML = theCompiledHtml;
 }
 
 // draws program template
 function drawProgram() {
-  var theTemplateScript = $("#program-template").html();
-  var theTemplate = Handlebars.compile(theTemplateScript);
-  var theCompiledHtml = theTemplate(progData);
+  var theCompiledHtml = progTemplate(progData);
   var renderedProgram = document.getElementById('renderedProgram');
   renderedProgram.innerHTML = theCompiledHtml;
 }
@@ -142,6 +141,7 @@ function validatePapers(data) {
     return null;
   }
   var acceptedPapers = data.acceptedPapers;
+  lastTalkIndex = acceptedPapers.length;
 
   for (var i = 0; i < acceptedPapers.length; i++) {
     var paper = acceptedPapers[i];
@@ -364,17 +364,19 @@ function updateProgData(el, target, source, sibling) {
 // to save a new talk after talk data has already been used to generate the template
 function addNewTalk() {
   var talk = {};
-  talk.id = "new talk id";
+  talk.id = "talk-" + lastTalkIndex;
+  lastTalkIndex++;
   talk.title = $('#newTalkTitle').val();
   talk.authors = splitAuthors($('#newTalkAuthor').val());
+  // TODO: handle affiliations
   // talk.affiliation = $('#newTalkAffiliation').val();
 
   var category = $('#newTalkCategory').children(':selected');
   talk.category = category.text();
-  console.dir(category);
   var categoryIndex = new Number(category.attr('value'));
   progData.config.unassigned_talks[categoryIndex].talks.push(talk);
   drawTalks();
+  addDrag();
 }
 
 // populate categories in modal to add talk from current config
@@ -404,20 +406,23 @@ function downloadJSON() {
   }
 }
 
-// NOTE: DEBUG ONLY, remove in production
+// NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
 function debugStart() {
   createNew();
   getConfig('crypto_config.json');
   $('#uploadTalks').show(500);
-  // all you have to do is upload talks
 }
 
 // executes functions once document is ready
 $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
 
-  // TODO: find categories from config to populate select for addNewTalk modal
-
   // NOTE: for debug purposes only, remove in production
   debugStart();
+
+  // compile templates once document is ready
+  var theTemplateScript = $("#program-template").html();
+  progTemplate = Handlebars.compile(theTemplateScript);
+  theTemplateScript = $("#talks-template").html();
+  talksTemplate = Handlebars.compile(theTemplateScript);
  });
