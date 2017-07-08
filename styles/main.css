@@ -168,11 +168,17 @@ p.dualTrackDescr {
 }
 
 span.authorName:after {
-  content: ', ';  
+  content: ', ';
 }
 
 span.authorName:last-of-type:after {
   content: '';
+}
+
+/* edit button for each session */
+/* TODO: appear only on mouseover on session; less bright green; changes color on hover/click; triggers edit session modal (does NOT edit individual talks) */
+.editSession {
+  
 }
 
 

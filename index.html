@@ -161,6 +161,9 @@
                 {{#if twosessions}}
                   <div class="col-md-5">
                     <div class="track1Event panel-body" id="{{sessions.0.id}}">
+                      <a href="http://geekscat.com" class="pull-right editSession">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
                       <h4 class="text-center">
                         {{sessions.0.session_title}}
                       </h4>
@@ -191,6 +194,9 @@
                   </div>
                   <div class="col-md-5">
                     <div class="panel-body track2Event" id="{{sessions.1.id}}">
+                      <a href="http://geekscat.com" class="pull-right editSession">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
                       <h4 class="text-center">
                         {{sessions.1.session_title}}
                       </h4>
@@ -224,6 +230,9 @@
                 {{else}}
          	        <div class="col-md-10">
                     <div class="panel-body mutualEvent" id="{{sessions.0.id}}">
+                      <a href="http://geekscat.com" class="pull-right editSession">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
                       <h4>
                         {{sessions.0.session_title}}
                       </h4>
