@@ -1,13 +1,13 @@
 // TODO: add notification for when browser is too small using media breakpoint
 
 
-// create progData, used to store info relevant parsed JSON files for use by the Handlebars template to create program and list of talks
-var progData = null;
-var progTemplate = null;
-var talksTemplate = null;
-var lastTalkIndex = null;
+// create global variables: to store parsed JSON files for use in templates (progData), the template for the program (progTemplate), the template for the unassigned talks listed at left (talksTemplate), and for keeping track of the indeces of talks (lastTalkIndex)
+var progData;
+var progTemplate;
+var talksTemplate;
+var lastTalkIndex;
 
-// creating a new program template from available templates
+// create new program template from available templates
 function createNew() {
   $('#templateSelector').show(500);
 }
@@ -33,7 +33,7 @@ function createDatePicker(numDays) {
   });
 }
 
-// parses JSON file to create initial program structure
+// parse JSON file to create initial program structure
 function getConfig(name) {
   $.getJSON('./json/' + name, function(data) {
     var idCounter = 0;
@@ -61,7 +61,7 @@ function getConfig(name) {
   });
 }
 
-// set dates in progData
+// set start/end dates in progData
 function setDates(startdate) {
   var day = moment(startdate);
   for (var i = 0; i < progData.days.length; i++) {
@@ -71,21 +71,21 @@ function setDates(startdate) {
   $('#uploadTalks').show(500);
 }
 
-// draws talks template
+// draw talks template
 function drawTalks() {
   var theCompiledHtml = talksTemplate(progData.config);
   var renderedTalks = document.getElementById('talksList');
   renderedTalks.innerHTML = theCompiledHtml;
 }
 
-// draws program template
+// draw program template
 function drawProgram() {
   var theCompiledHtml = progTemplate(progData);
   var renderedProgram = document.getElementById('renderedProgram');
   renderedProgram.innerHTML = theCompiledHtml;
 }
 
-// file upload
+// upload JSON file of talks and parse
 function uploadTalks(evt) {
   var files = evt.target.files;
 
@@ -128,7 +128,7 @@ function uploadTalks(evt) {
   reader.readAsText(file, 'UTF-8');
 }
 
-// makes authors an array of strings
+// make authors an array of strings
 function splitAuthors(val) {
   var re = /\s+and\s+|\s*;\s*/;
   return val.split(re);
@@ -189,7 +189,7 @@ function validatePapers(data) {
   return data;
 }
 
-// styles warnings and error message appropriately/in a way that is immediately evident to the user
+// style warnings and error message for better visibility to user
 function warningBox(text) {
   $('#modal-message').text(text);
   $('#errorBox').modal();
@@ -202,7 +202,7 @@ Handlebars.registerHelper('empty', function(data, options) {
   }
 });
 
-// adds dragula functionality
+// add dragula functionality
 function addDrag() {
   var talks = Array.prototype.slice.call(document.querySelectorAll(".category"));
   var sessions = Array.prototype.slice.call(document.querySelectorAll(".session-talks"));
@@ -214,7 +214,7 @@ function addDrag() {
       target.firstChild.data = '';
       target.style.border = '';
 
-      // TODO: only an example of how to calculate length; will need to be changed
+      // TODO: only an example of how to calculate length; will need to be changed for production
       if (target.childNodes.length == 5) {
         var start = moment("10:55", "HH:MM");
         var end = moment("11:35", "HH:MM");
@@ -223,7 +223,7 @@ function addDrag() {
       }
     }
     if (source.classList.contains('session-talks')) {
-      // Restore the drag & drop hint.
+      // restore drag & drop hint
       if (source.childNodes.length == 1) {
         source.firstChild.data = 'Drag talks here';
       }
@@ -295,13 +295,6 @@ function updateProgData(el, target, source, sibling) {
   // relevant ids of the target, source, and talk, then use findObj
   // to find the appropriate node in progdata, and update the relevant
   // arrays.
-  // console.log('updating progData');
-  // console.log('el follows');
-  // console.dir(el);
-  // console.log('target follows');
-  // console.dir(target);
-  // console.log('source follows');
-  // console.dir(source);
   console.dir(sibling);
   var talkObj = findObj(el.id, progData);
   if (talkObj === false) {
@@ -323,7 +316,7 @@ function updateProgData(el, target, source, sibling) {
     return false;
   }
 
-  // remove from sourceTalks and add to targetTalks.
+  // remove from sourceTalks and add to targetTalks
   var sourceIndex = sourceTalks.findIndex(function(t) {
     if (t.id == el.id) {
       return true;
@@ -339,8 +332,8 @@ function updateProgData(el, target, source, sibling) {
 
   var targetTalks = targetObj.talks;
 
-  // if sibling is null then put at end of targetTalks.
-  // if sibling is not null, insert before that.
+  // if sibling is null then put at end of targetTalks
+  // if sibling is not null, insert before that
   if (sibling === null) {
     targetTalks.push(talkObj);
   } else {
@@ -361,7 +354,7 @@ function updateProgData(el, target, source, sibling) {
   return true;
 }
 
-// to save a new talk after talk data has already been used to generate the template
+// save new talk after talk data has already been used to generate template
 function addNewTalk() {
   var talk = {};
   talk.id = "talk-" + lastTalkIndex;
@@ -379,7 +372,7 @@ function addNewTalk() {
   addDrag();
 }
 
-// populate categories in modal to add talk from current config
+// populate categories from current config in add talk modal
 function addCategories() {
   // remove all categories in case loop has already been triggered, so you don't get duplicate categories
   $('#newTalkCategory').find('option').remove().end()
@@ -391,7 +384,7 @@ function addCategories() {
   }
 }
 
-// to download new JSON program
+// download edited JSON program
 function downloadJSON() {
   var atag = document.createElement('a');
   atag.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(progData, null, 2)));
