@@ -420,7 +420,7 @@ $(document).ready(function() {
   // NOTE: for debug purposes only, remove in production
   debugStart();
 
-  // compile templates once document is ready
+  // compile templates to html
   var theTemplateScript = $("#program-template").html();
   progTemplate = Handlebars.compile(theTemplateScript);
   theTemplateScript = $("#talks-template").html();
