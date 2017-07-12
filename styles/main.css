@@ -1,3 +1,6 @@
+/* Color scheme created by Kay McKelly: http://www.colourlovers.com/palette/4500426/teal_we_meet_again */
+
+
 /*** General Styling ***/
 body {
   font-family: 'Raleway', sans-serif;
@@ -178,7 +181,7 @@ span.authorName:last-of-type:after {
 /* edit button for each session */
 /* TODO: appear only on mouseover on session; less bright green; changes color on hover/click; triggers edit session modal (does NOT edit individual talks) */
 .editSession {
-  
+
 }
 
 

@@ -329,7 +329,7 @@
                   Talk Author(s)
                 </label>
                 <span id="newAuthorHelp" class="help-block">
-                  When entering author names, make sure to use BibTeX formatting (i.e. names are separated by and).
+                  Use BibTeX formatting (i.e. names are separated by and).
                 </span>
                 <input type="text" name="newTalkAuthor" placeholder="Enter author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
               </div>
@@ -338,7 +338,7 @@
                   Affiliation
                 </label>
                 <span id="newAffiliationHelp" class="help-block">
-                  Enter affiliations for authors, separated by comma. If two or more authors share an affiliation, there is no need to enter the same institution twice.
+                  Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
                 </span>
                 <input type="text" name="newTalkAffiliation" placeholder="Enter author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
               </div>
@@ -387,7 +387,6 @@
                 <!-- NOTE: this input type is incompatabile with basically anything except chrome -_- -->
                 <!-- alternative contenders are:
                   - https://github.com/jonthornton/jquery-timepicker
-                  - https://github.com/amsul/pickadate.js
                   - https://github.com/wvega/timepicker -->
                 <input type="time" name="startTime" class="form-control" id="startTime" />
                 <div class="form-group">
@@ -406,7 +405,7 @@
                   <label for="sessionModerator">
                     Moderator
                   </label>
-                  <input type="text" name="sessionModerator" placeholder="Enter session moderator if applicable" class="form-control" id="sessionModerator" />
+                  <input type="text" name="sessionModerator" placeholder="e.g. 'Chair: Alan Turing'" class="form-control" id="sessionModerator" />
                 </div>
               </div>
             </form>
