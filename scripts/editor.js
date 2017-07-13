@@ -390,14 +390,24 @@ function editSession(sessionId) {
   console.dir(sessionObj);
   $('#currentSessionId').val(sessionId);
   $('#currentSessionTitle').val(sessionObj.session_title);
-  // if statements for moderator and location
+
+// TODO: shouldn't add this field if it doesn't exist
+  if (sessionObj.moderator) {
+    $('#currentSessionModerator').val(sessionObj.moderator);
+  }
+
+  if (sessionObj.location.name) {
+    $('#currentSessionLocation').val(sessionObj.location.name);
+  }
 }
 
-// TODO: submit button for edit session
+// submit button for edit session
 function saveSession() {
   var sessionId = $('#currentSessionId').val();
   var sessionObj = findObj(sessionId, progData);
   sessionObj.session_title = $('#currentSessionTitle').val();
+  sessionObj.location.name = $('#currentSessionLocation').val();
+  sessionObj.moderator = $('#currentSessionModerator').val();
   drawProgram();
 }
 
