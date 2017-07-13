@@ -384,6 +384,23 @@ function addCategories() {
   }
 }
 
+// prepopulate edit session modal with relevant fields from parent div of clicked edit button
+function editSession(sessionId) {
+  var sessionObj = findObj(sessionId, progData);
+  console.dir(sessionObj);
+  $('#currentSessionId').val(sessionId);
+  $('#currentSessionTitle').val(sessionObj.session_title);
+  // if statements for moderator and location
+}
+
+// TODO: submit button for edit session
+function saveSession() {
+  var sessionId = $('#currentSessionId').val();
+  var sessionObj = findObj(sessionId, progData);
+  sessionObj.session_title = $('#currentSessionTitle').val();
+  drawProgram();
+}
+
 // download edited JSON program
 function downloadJSON() {
   var atag = document.createElement('a');
