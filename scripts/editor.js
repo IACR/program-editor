@@ -392,7 +392,6 @@ function editSession(sessionId) {
   $('#currentSessionTitle').val(sessionObj.session_title);
 
 // TODO: shouldn't display input with a value if it doesn't currently exist for this sessionId. known bug: on a session.0 with no location title, it appears to inherit the location from the session above with a location
-// TODO/NOTE: PRIORITY! ways to test: if sessionObj hasOwnProperty moderator, or sessionObj.moderator !== null/undefined. probably both. how to test JS objects if they're null/empty and whether field is present
   if (sessionObj.moderator) {
     $('#currentSessionModerator').val(sessionObj.moderator);
   } else {
