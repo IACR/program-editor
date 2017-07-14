@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- jQuery daterangepicker, and Dragula -->
+    <!-- jQuery daterangepicker, jQuery timepicker, & Dragula -->
     <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css"rel="stylesheet" />
+    <link href="./dependencies/jquery-timepicker/jquery.timepicker.css" rel="stylesheet" />
     <link href="./dependencies/dragula/dragula.css" rel="stylesheet" />
 
     <!-- Styling: Custom -->
@@ -36,11 +37,6 @@
           </p>
         </section>
       </div>
-      <!-- <div class="row">
-        <aside class="testing col-md-3 col-md-offset-1">
-
-        </aside>
-      </div> -->
       <div class="row">
         <section id="newOrExisting" class="col-md-8 col-md-offset-2 setupStep">
           <p>
@@ -140,7 +136,7 @@
       </article>
 
       <article id="renderedProgram" class="col-md-9">
-        <!-- Handlebars script that will render the editable program based on the user-selected program template -->
+        <!-- Handlebars script, renders editable program based on the user-selected program template -->
           <script id="program-template" type="text/x-handlebars-template">
             {{#each days}}
               <div class="row">
@@ -161,12 +157,15 @@
                 {{#if twosessions}}
                   <div class="col-md-5">
                     <div class="track1Event panel-body" id="{{sessions.0.id}}">
+                      <a data-toggle="modal" href="#editSessionBox" class="pull-right editSession" onclick="editSession(this.parentNode.id)">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
                       <h4 class="text-center">
                         {{sessions.0.session_title}}
                       </h4>
-                      {{#if sessions.0.location.name.name}}
+                      {{#if sessions.0.location.name}}
                         <p class="dualTrackDescr">
-                          {{sessions.0.location.name.name}}
+                          {{sessions.0.location.name}}
                         </p>
                       {{/if}}
                       {{#if sessions.0.moderator}}
@@ -177,20 +176,25 @@
                       {{#empty sessions.0.talks}}
                         Drag talks to this session.
                       {{#each sessions.0.talks}}
-                        <p class="talkTitle">
-                          {{title}}
-                        </p>
-                        <p class="dualTrackDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{this}}</span>
-                          {{/each}}
-                        </p>
+                        <div class="talk" id="{{id}}">
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{this}}</span>
+                            {{/each}}
+                          </p>
+                        </div>
                       {{/each}}
                       {{/empty}}
                     </div>
                   </div>
                   <div class="col-md-5">
                     <div class="panel-body track2Event" id="{{sessions.1.id}}">
+                      <a data-toggle="modal" href="#editSessionBox" class="pull-right editSession" onclick="editSession(this.parentNode.id)">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
                       <h4 class="text-center">
                         {{sessions.1.session_title}}
                       </h4>
@@ -207,15 +211,15 @@
                       {{#empty sessions.1.talks}}
                         Drag talks to this session.
                       {{#each sessions.1.talks}}
-                        <div class="talk">
-                        <p class="talkTitle">
-                          {{title}}
-                        </p>
-                        <p class="dualTrackDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{this}}</span>
-                          {{/each}}
-                        </p>
+                        <div class="talk" id="{{id}}">
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{this}}</span>
+                            {{/each}}
+                          </p>
                         </div>
                       {{/each}}
                       {{/empty}}
@@ -224,6 +228,9 @@
                 {{else}}
          	        <div class="col-md-10">
                     <div class="panel-body mutualEvent" id="{{sessions.0.id}}">
+                      <a data-toggle="modal" href="#editSessionBox" class="pull-right editSession" onclick="editSession(this.parentNode.id)">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
                       <h4>
                         {{sessions.0.session_title}}
                       </h4>
@@ -240,14 +247,16 @@
                         {{#empty sessions.0.talks}}
                           Drag talks to this session.
                         {{#each sessions.0.talks}}
-                          <p class="mutualEventTalkTitle">
-                            {{title}}
-                          </p>
-                          <p class="eventDescr">
-                            {{#each authors}}
-                              <span class="authorName">{{this}}</span>
-                            {{/each}}
-                          </p>
+                          <div class="talk" id="{{id}}">
+                            <p class="mutualEventTalkTitle">
+                              {{title}}
+                            </p>
+                            <p class="eventDescr">
+                              {{#each authors}}
+                                <span class="authorName">{{this}}</span>
+                              {{/each}}
+                            </p>
+                          </div>
                         {{/each}}
                        {{/empty}}
                     </div>
@@ -268,30 +277,31 @@
     <!-- Handlebars templates -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js" type="text/javascript"></script>
 
-    <!-- Dependencies (dragula & momentJS) -->
+    <!-- Dependencies (dragula, momentJS, jQuery daterangepicker, & jQuery timepicker) -->
     <script src="./dependencies/dragula/dragula.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="./dependencies/jquery-daterange-picker/jquery.daterangepicker.min.js"></script>
+    <script src="./dependencies/jquery-timepicker/jquery.timepicker.min.js"></script>
 
     <!-- Additional scripts -->
     <script src="./scripts/editor.js"></script>
 
     <!-- Modal for warnings and errors -->
-    <aside class="modal fade" id="errorBox" role="dialog" aria-labelledby="modalTitle">
+    <aside class="modal fade" id="errorBox" role="dialog" aria-labelledby="warningTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="warnBoxTitle">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h2 class="modal-title">
+            <h2 class="modal-title" id="warningTitle">
               Warning
             </h2>
           </div>
           <div class="modal-body">
-              <p id="modal-message">
-                Something's not quite right here.
-              </p>
+            <p id="modal-message">
+              Something's not quite right here.
+            </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Close</button>
@@ -301,14 +311,14 @@
     </aside>
 
     <!-- Modal for adding a new talk -->
-    <aside class="modal fade" id="addTalkBox" role="dialog" aria-labelledby="modalTitle">
+    <aside class="modal fade" id="addTalkBox" role="dialog" aria-labelledby="addTalkTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="addTalkTitle">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h2 class="modal-title">
+            <h2 class="modal-title" id="addTalkTitle">
               Add a New Talk
             </h2>
           </div>
@@ -318,25 +328,25 @@
                 <label for="newTalkTitle">
                   Talk Title
                 </label>
-                <input type="text" name="newTalkTitle" placeholder="Enter new talk title" class="form-control" id="newTalkTitle" />
+                <input type="text" name="newTalkTitle" placeholder="New talk title" class="form-control" id="newTalkTitle" />
               </div>
               <div class="form-group">
                 <label for="newTalkAuthors">
                   Talk Author(s)
                 </label>
                 <span id="newAuthorHelp" class="help-block">
-                  When entering author names, make sure to use BibTeX formatting (i.e. names are separated by and).
+                  Use BibTeX formatting (i.e. names are separated by and).
                 </span>
-                <input type="text" name="newTalkAuthor" placeholder="Enter author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
+                <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
               </div>
               <div class="form-group">
                 <label for="newTalkAffiliation">
                   Affiliation
                 </label>
                 <span id="newAffiliationHelp" class="help-block">
-                  Enter affiliations for authors, separated by comma. If two or more authors share an affiliation, there is no need to enter the same institution twice.
+                  Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
                 </span>
-                <input type="text" name="newTalkAffiliation" placeholder="Enter author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
+                <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
               </div>
               <div class="form-group">
                 <label for="newTalkCategory">
@@ -351,6 +361,64 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addNewTalk()">Add talk</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Modal for editing a session -->
+    <aside class="modal fade" id="editSessionBox" role="dialog" aria-labelledby="editSessionTitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" id="editSessionTitle">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="modal-title" id="editSessionTitle">
+              Edit Session
+            </h2>
+          </div>
+          <div class="modal-body">
+            <form>
+              <!-- used only for saving edited session to progData -->
+              <input type="hidden" id="currentSessionId" value="" />
+              <div class="form-group">
+                <label for="sessionTitle">
+                  Session Title
+                </label>
+                <!-- TODO: you should not be able to save this field without a value upon change. making input required doesn't solve the issue -->
+                <input type="text" name="sessionTitle" placeholder="Session title" class="form-control" id="currentSessionTitle" />
+              </div>
+              <div class="form-group">
+                <label for="startTime">
+                  Start Time
+                </label>
+                <!-- TODO/NOTE: this input type is incompatabile with basically anything except chrome -_- -->
+                <input type="time" name="startTime" class="form-control" id="startTime" />
+                <div class="form-group">
+                  <!-- TODO: end time picker -->
+                </div>
+                <div class="form-group">
+                  <!-- NOTE/TODO: track picker dropdown...though is this necessary for MVP launch? -->
+                </div>
+                <div class="form-group">
+                  <label for="currentSessionLocation">
+                    Location
+                  </label>
+                  <input type="text" name="currentSessionLocation" placeholder="Optional session location" class="form-control" id="currentSessionLocation" />
+                </div>
+                <div class="form-group">
+                  <label for="currentSessionModerator">
+                    Moderator
+                  </label>
+                  <input type="text" name="currentSessionModerator" placeholder="Optional session moderator (e.g. 'Chair: Alan Turing')" class="form-control" id="currentSessionModerator" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveSession()">Save Session</button>
           </div>
         </div>
       </div>

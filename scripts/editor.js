@@ -20,10 +20,11 @@ function createDatePicker(numDays) {
     minDays: numDays,
     maxDays: numDays,
     getValue: function() {
-      if ($('#startdate').val() && $('#enddate').val() )
-      return $('#startdate').val() + ' to ' + $('#enddate').val();
-      else
-      return '';
+      if ($('#startdate').val() && $('#enddate').val()) {
+        return $('#startdate').val() + ' to ' + $('#enddate').val();
+      } else {
+        return '';
+      }
     },
     setValue: function(s,s1,s2) {
       $('#startdate').val(s1);
@@ -382,6 +383,36 @@ function addCategories() {
       value:i, text:progData.config.unassigned_talks[i].name
     }));
   }
+}
+
+// prepopulate edit session modal with relevant fields from parent div of clicked edit button
+function editSession(sessionId) {
+  var sessionObj = findObj(sessionId, progData);
+  $('#currentSessionId').val(sessionId);
+  $('#currentSessionTitle').val(sessionObj.session_title);
+
+  if (sessionObj.moderator) {
+    $('#currentSessionModerator').val(sessionObj.moderator);
+  }
+
+  // BUG/TODO: if session does not have location, inherits from last edited/poss. nearest sibling. not sure why.
+  if (sessionObj.location.name) {
+    $('#currentSessionLocation').val(sessionObj.location.name);
+  }
+}
+
+// submit button for edit session
+function saveSession() {
+  var sessionId = $('#currentSessionId').val();
+  var sessionObj = findObj(sessionId, progData);
+  sessionObj.session_title = $('#currentSessionTitle').val();
+  sessionObj.location.name = $('#currentSessionLocation').val();
+  sessionObj.moderator = $('#currentSessionModerator').val();
+  // TODO: after drag/drop and edit session, 'drag talks' placeholder reappears
+
+  drawProgram();
+  drawTalks();
+  addDrag();
 }
 
 // download edited JSON program
