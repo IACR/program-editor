@@ -163,9 +163,9 @@
                       <h4 class="text-center">
                         {{sessions.0.session_title}}
                       </h4>
-                      {{#if sessions.0.location.name.name}}
+                      {{#if sessions.0.location.name}}
                         <p class="dualTrackDescr">
-                          {{sessions.0.location.name.name}}
+                          {{sessions.0.location.name}}
                         </p>
                       {{/if}}
                       {{#if sessions.0.moderator}}
@@ -176,14 +176,17 @@
                       {{#empty sessions.0.talks}}
                         Drag talks to this session.
                       {{#each sessions.0.talks}}
-                        <p class="talkTitle">
-                          {{title}}
-                        </p>
-                        <p class="dualTrackDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{this}}</span>
-                          {{/each}}
-                        </p>
+                      <!-- TODO: update rest of template so talk divs always remain styled same  -->
+                        <div class="talk" id="{{id}}">
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{this}}</span>
+                            {{/each}}
+                          </p>
+                        </div>
                       {{/each}}
                       {{/empty}}
                     </div>
@@ -209,15 +212,15 @@
                       {{#empty sessions.1.talks}}
                         Drag talks to this session.
                       {{#each sessions.1.talks}}
-                        <div class="talk">
-                        <p class="talkTitle">
-                          {{title}}
-                        </p>
-                        <p class="dualTrackDescr">
-                          {{#each authors}}
-                            <span class="authorName">{{this}}</span>
-                          {{/each}}
-                        </p>
+                        <div class="talk" id="{{id}}">
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{this}}</span>
+                            {{/each}}
+                          </p>
                         </div>
                       {{/each}}
                       {{/empty}}
@@ -245,14 +248,16 @@
                         {{#empty sessions.0.talks}}
                           Drag talks to this session.
                         {{#each sessions.0.talks}}
-                          <p class="mutualEventTalkTitle">
-                            {{title}}
-                          </p>
-                          <p class="eventDescr">
-                            {{#each authors}}
-                              <span class="authorName">{{this}}</span>
-                            {{/each}}
-                          </p>
+                          <div class="talk" id="{{id}}">
+                            <p class="mutualEventTalkTitle">
+                              {{title}}
+                            </p>
+                            <p class="eventDescr">
+                              {{#each authors}}
+                                <span class="authorName">{{this}}</span>
+                              {{/each}}
+                            </p>
+                          </div>
                         {{/each}}
                        {{/empty}}
                     </div>
@@ -382,6 +387,7 @@
                 <label for="sessionTitle">
                   Session Title
                 </label>
+                <!-- TODO: you should not be able to save this field without a value upon change. making input required doesn't solve the issue -->
                 <input type="text" name="sessionTitle" placeholder="Session title" class="form-control" id="currentSessionTitle" />
               </div>
               <div class="form-group">
