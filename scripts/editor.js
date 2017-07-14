@@ -394,17 +394,13 @@ function editSession(sessionId) {
 // TODO: shouldn't display input with a value if it doesn't currently exist for this sessionId. known bug: on a session.0 with no location title, it appears to inherit the location from the session above with a location
   if (sessionObj.moderator) {
     $('#currentSessionModerator').val(sessionObj.moderator);
-  } else {
-    // TODO: display input with placeholder but do not set value unless edited
-    $('#currentSessionModerator').val('Session moderator');
-
-    // NOTE/TODO: potential fix
-    // check if variable undefined
-    // if (typeof variable === 'undefined') {
-      // display input with placeholder
-      // do not save to progData unless input field has changed, specifically if it has had a value entered (block save change on simple mouse click or if blank)
-    // }
   }
+  // NOTE/TODO: potential fix
+  // check if variable undefined
+  // if (typeof variable === 'undefined') {
+    // display input with placeholder
+    // do not save to progData unless input field has changed, specifically if it has had a value entered (block save change on simple mouse click or if blank)
+  // }
 
   // TODO: display input with placeholder but do not set value unless edited
   // TODO: this also triggers an error if session does not have a location (e.g. track switch break). can edit (i.e. modal comes up appropriately) but typeerror persists
