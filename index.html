@@ -324,7 +324,7 @@
                 <label for="newTalkTitle">
                   Talk Title
                 </label>
-                <input type="text" name="newTalkTitle" placeholder="Enter new talk title" class="form-control" id="newTalkTitle" />
+                <input type="text" name="newTalkTitle" placeholder="New talk title" class="form-control" id="newTalkTitle" />
               </div>
               <div class="form-group">
                 <label for="newTalkAuthors">
@@ -333,7 +333,7 @@
                 <span id="newAuthorHelp" class="help-block">
                   Use BibTeX formatting (i.e. names are separated by and).
                 </span>
-                <input type="text" name="newTalkAuthor" placeholder="Enter author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
+                <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
               </div>
               <div class="form-group">
                 <label for="newTalkAffiliation">
@@ -342,7 +342,7 @@
                 <span id="newAffiliationHelp" class="help-block">
                   Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
                 </span>
-                <input type="text" name="newTalkAffiliation" placeholder="Enter author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
+                <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
               </div>
               <div class="form-group">
                 <label for="newTalkCategory">
@@ -376,12 +376,13 @@
           </div>
           <div class="modal-body">
             <form>
+              <!-- used only for saving edited session to progData -->
               <input type="hidden" id="currentSessionId" value="" />
               <div class="form-group">
                 <label for="sessionTitle">
                   Session Title
                 </label>
-                <input type="text" name="sessionTitle" placeholder="Enter session title" class="form-control" id="currentSessionTitle" />
+                <input type="text" name="sessionTitle" placeholder="Session title" class="form-control" id="currentSessionTitle" />
               </div>
               <div class="form-group">
                 <label for="startTime">
