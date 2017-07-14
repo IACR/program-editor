@@ -407,6 +407,7 @@ function editSession(sessionId) {
   }
 
   // TODO: display input with placeholder but do not set value unless edited
+  // TODO: this also triggers an error if session does not have a location (e.g. track switch break). can edit (i.e. modal comes up appropriately) but typeerror persists
   if (sessionObj.location.name) {
     $('#currentSessionLocation').val(sessionObj.location.name);
   }
