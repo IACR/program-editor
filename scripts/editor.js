@@ -20,10 +20,11 @@ function createDatePicker(numDays) {
     minDays: numDays,
     maxDays: numDays,
     getValue: function() {
-      if ($('#startdate').val() && $('#enddate').val() )
-      return $('#startdate').val() + ' to ' + $('#enddate').val();
-      else
-      return '';
+      if ($('#startdate').val() && $('#enddate').val()) {
+        return $('#startdate').val() + ' to ' + $('#enddate').val();
+      } else {
+        return '';
+      }
     },
     setValue: function(s,s1,s2) {
       $('#startdate').val(s1);
@@ -387,13 +388,15 @@ function addCategories() {
 // prepopulate edit session modal with relevant fields from parent div of clicked edit button
 function editSession(sessionId) {
   var sessionObj = findObj(sessionId, progData);
-  console.dir(sessionObj);
   $('#currentSessionId').val(sessionId);
   $('#currentSessionTitle').val(sessionObj.session_title);
 
-// TODO: shouldn't add this field if it doesn't exist
+// TODO: shouldn't display input with a value if it doesn't currently exist for this sessionId. known bug: on a session.0 with no location title, it appears to inherit the location from the session above with a location
   if (sessionObj.moderator) {
     $('#currentSessionModerator').val(sessionObj.moderator);
+  } else {
+    // TODO: display input with placeholder but do not set value unless edited
+    $('#currentSessionModerator').val('Session moderator');
   }
 
   if (sessionObj.location.name) {
@@ -408,7 +411,11 @@ function saveSession() {
   sessionObj.session_title = $('#currentSessionTitle').val();
   sessionObj.location.name = $('#currentSessionLocation').val();
   sessionObj.moderator = $('#currentSessionModerator').val();
+  // TODO: some values appear to be outdated once inherited/edited
+
   drawProgram();
+  drawTalks();
+  addDrag();
 }
 
 // download edited JSON program

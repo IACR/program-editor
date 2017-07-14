@@ -1060,16 +1060,16 @@
                     "starttime": "9:00",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
 			    "talks": [],
                             "location": {
                                 "name": "Corwin Pavillion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
 			    "talks": [],
 			    "location": {
 				"name": "Lotte Lehman Hall"
@@ -1091,16 +1091,16 @@
                     "starttime": "9:55",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
 			    "talks": [],
                             "location": {
                                 "name": "Corwin Pavillion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
 			    "talks": [],
                             "location": {
                                 "name": "Lotte lehmann Hall"
@@ -1125,8 +1125,8 @@
                     "starttime": "11:40",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
@@ -1151,16 +1151,16 @@
                     "starttime": "14:00",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavillion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehmann Hall"
@@ -1182,16 +1182,16 @@
                     "starttime": "14:55",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavillion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehmann Hall"
@@ -1216,16 +1216,16 @@
                     "starttime": "16:15",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavillion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehmann Hall"
@@ -1267,16 +1267,16 @@
                     "starttime": "9:10",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehman Hall"
@@ -1301,13 +1301,13 @@
                     "starttime": "10:55",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": []
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": []
                         }
                     ]
@@ -1326,8 +1326,8 @@
                     "starttime": "11:50",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
@@ -1385,7 +1385,7 @@
                     "starttime": "19:30",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
+                            "moderator": "Session moderator",
                             "session_title": "Rump Session",
                             "location": {
                                 "name": "University Center Corwin Pavilion"
@@ -1415,16 +1415,16 @@
                     "starttime": "8:50",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehmann Hall"
@@ -1446,16 +1446,16 @@
                     "starttime": "9:45",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehmann Hall"
@@ -1480,8 +1480,8 @@
                     "starttime": "11:30",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Campbell Hall"
@@ -1506,16 +1506,16 @@
                     "starttime": "14:00",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": []
                         }
                     ]
@@ -1537,16 +1537,16 @@
                     "starttime": "15:45",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehmann Hall"
@@ -1613,16 +1613,16 @@
                     "starttime": "8:50",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehmann Hall"
@@ -1647,16 +1647,16 @@
                     "starttime": "10:30",
                     "sessions": [
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Corwin Pavilion"
                             }
                         },
                         {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
+                            "moderator": "Session moderator",
+                            "session_title": "Session title",
                             "talks": [],
                             "location": {
                                 "name": "Lotte Lehmann Hall"
