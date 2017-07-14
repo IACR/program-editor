@@ -406,6 +406,13 @@ function saveSession() {
   var sessionId = $('#currentSessionId').val();
   var sessionObj = findObj(sessionId, progData);
   sessionObj.session_title = $('#currentSessionTitle').val();
+
+  // TODO: need some sort of check that required fields are in fact filled out. if not, insert helper text or change title to red or something
+  // if ($('#currentSessionTitle').val() === undefined || null) {
+  //   return true;
+  //   console.log('whoops, gotta fill in session title');
+  // }
+
   sessionObj.location.name = $('#currentSessionLocation').val();
   sessionObj.moderator = $('#currentSessionModerator').val();
   // TODO: after drag/drop and edit session, 'drag talks' placeholder reappears
