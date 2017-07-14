@@ -397,8 +397,16 @@ function editSession(sessionId) {
   } else {
     // TODO: display input with placeholder but do not set value unless edited
     $('#currentSessionModerator').val('Session moderator');
+
+    // NOTE/TODO: potential fix
+    // check if variable undefined
+    // if (typeof variable === 'undefined') {
+      // display input with placeholder
+      // do not save to progData unless input field has changed, specifically if it has had a value entered (block save change on simple mouse click or if blank)
+    // }
   }
 
+  // TODO: display input with placeholder but do not set value unless edited
   if (sessionObj.location.name) {
     $('#currentSessionLocation').val(sessionObj.location.name);
   }
@@ -411,7 +419,8 @@ function saveSession() {
   sessionObj.session_title = $('#currentSessionTitle').val();
   sessionObj.location.name = $('#currentSessionLocation').val();
   sessionObj.moderator = $('#currentSessionModerator').val();
-  // TODO: some values appear to be outdated once inherited/edited
+  // TODO: after drag/drop and edit session, 'drag talks' placeholder reappears
+  // TODO: after drag/drop and edit session, any talk that has been added to that session ceases to be a coherent object and is draggable in individual fields (i.e. can drag title and authors do not follow)
 
   drawProgram();
   drawTalks();
