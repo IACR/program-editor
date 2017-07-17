@@ -408,10 +408,12 @@ function saveSession() {
   sessionObj.session_title = $('#currentSessionTitle').val();
 
   // TODO: need some sort of check that required fields are in fact filled out. if not, insert helper text or change title to red or something
-  // if ($('#currentSessionTitle').val() === undefined || null) {
-  //   return true;
-  //   console.log('whoops, gotta fill in session title');
-  // }
+  // below if statement is currently NONFUNCTIONAL
+  if ($('#currentSessionTitle').val() === "") {
+    alert('gimme a title!');
+    // event.preventDefault();
+    // $('#currentSessionTitle').addClass('has-error');
+  }
 
   sessionObj.location.name = $('#currentSessionLocation').val();
   sessionObj.moderator = $('#currentSessionModerator').val();

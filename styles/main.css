@@ -119,6 +119,14 @@ div.session-talks {
   padding: 5px;
 }
 
+.panel-body a {
+  visibility: hidden;
+  }
+
+.panel-body:hover a {
+  visibility: visible;
+}
+
 a.iconLink {
   font-size: 1.3em;
 }
