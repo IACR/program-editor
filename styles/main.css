@@ -9,6 +9,11 @@ body {
   font-size: 1.7em;
 }
 
+/*TODO: move to appropriate section*/
+span.editTime:hover {
+    background-color: #ffc0c0;
+}
+
 h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
 }
@@ -61,7 +66,7 @@ h1, h2, h3, h4, h5 {
   margin: 5px;
 }
 
-#categoryTitle {
+.categoryTitle {
   font-size: 1.5em;
 }
 
@@ -92,6 +97,7 @@ div.talk:hover {
   background: #14A6B5;
 }
 
+/*TODO: make this match/remove .talkTitle; potentially combine?? also edit line 136 in index.html to match*/
 .toAddTalkTitle {
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: left;

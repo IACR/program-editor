@@ -35,8 +35,8 @@ function createDatePicker(numDays) {
 }
 
 // parse JSON file to create initial program structure
-function getConfig(name) {
-  $.getJSON('./json/' + name, function(data) {
+function getConfig(name, existing) {
+  $.getJSON(name, function(data) {
     var idCounter = 0;
     var days = data['days'];
 
@@ -54,6 +54,14 @@ function getConfig(name) {
       }
     }
     progData = data;
+    if (existing) {
+      $('#setupPrompts').hide();
+      drawProgram();
+      drawTalks();
+      addDrag();
+      $('#parent').show(500);
+      return;
+    }
     createDatePicker(progData.days.length);
     $('#datePicker').show(500);
   })
@@ -442,7 +450,7 @@ function downloadJSON() {
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
 function debugStart() {
   createNew();
-  getConfig('crypto_config.json');
+  getConfig('./json/crypto_config.json');
   $('#uploadTalks').show(500);
 }
 
