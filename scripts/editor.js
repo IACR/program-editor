@@ -7,9 +7,48 @@ var progTemplate;
 var talksTemplate;
 var lastTalkIndex;
 
+// TODO: move to more appropriate spot
+// Show a list of all existing versions to edit.
+function editExisting() {
+  $('#templateSelector').hide();
+  $('#datePicker').hide();
+  $('#versionPicker').show(500);
+  $.getJSON('ajax.php', function(data) {
+    // remove the rows other than the first.
+    $('#versionList').find("tr:gt(0)").remove();
+    $('#versionList').show();
+    for (var i = 0; i < data.programs.length; i++) {
+      var row = data.programs[i];
+      $('#versionList').append('<tr><td><a href=javascript:getConfig("ajax.php?id=' + row.id + '",true);>' + row.name + '</a></td><td>' + row.user + '</td><td>' + row.ts + '</td></tr>');
+    }
+  });
+}
+
+// TODO: move to more appropriate spot
+// saves program
+function saveProgram() {
+  $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: {'json': JSON.stringify(progData)},
+    beforeSend: function(jqXHR, settings) {
+      $('#save_status').html('saving');
+    },
+    dataType: "json",
+    success: function(data, textStatus, jqxhr) {
+      $('#save_status').html('done');
+    },
+    error: function(jqxhr, textStatus, error) {
+      $('#save_status').html(textStatus);
+      console.dir(jqxhr);
+      console.dir(error);
+    }});
+}
+
 // create new program template from available templates
 function createNew() {
   $('#templateSelector').show(500);
+  $('#versionPicker').hide();
 }
 
 // jQuery date picker
@@ -194,8 +233,12 @@ function validatePapers(data) {
     return 0;
   });
 
-  return data.acceptedPapers = categoryList;
-  return data;
+  // make sure it has an empty uncategorized category.
+  if (categoryList.length == 0) {
+    categoryList.push({'name': 'Uncategorized', 'talks':[], 'id': 'category-0'});
+  }
+
+  return categoryList;
 }
 
 // style warnings and error message for better visibility to user
@@ -404,8 +447,45 @@ function editSession(sessionId) {
   }
 
   // BUG/TODO: if session does not have location, inherits from last edited/poss. nearest sibling. not sure why.
-  if (sessionObj.location.name) {
+  if (sessionObj.location && sessionObj.location.name) {
     $('#currentSessionLocation').val(sessionObj.location.name);
+  }
+}
+
+// dayIndex is the index in the days array, and slotIndex is the index in
+// the timeslots array under the day. This makes it easy to refer to the
+// corresponding timeslot.
+function editTimeslot(dayIndex, slotIndex) {
+  console.log('index=' + dayIndex + ':' + slotIndex);
+  var timeslot = progData.days[dayIndex].timeslots[slotIndex];
+  console.dir(timeslot);
+  $('#currentStartTime').val(timeslot.starttime);
+
+  // TODO: if starttime is updated, endtime doesn't change accordingly. if starttime is earlier, endtime should also be allowed to be earlier than what it used to be
+  $('#currentStartTime').timepicker({
+    disableTimeInput: true,
+    step: 5,
+    timeFormat: 'H:i',
+    minTime: timeslot.starttime,
+    maxTime: timeslot.endtime
+  });
+  $('#currentEndTime').val(timeslot.endtime);
+  $('#currentEndTime').timepicker({
+    disableTimeInput: true,
+    step: 5,
+    timeFormat: 'H:i',
+    minTime: timeslot.starttime,
+    maxTime: timeslot.endtime
+  });
+}
+
+// deletes session
+// TODO: UNFINISHED/IN PROGRESS. this could use some work, maybe slot into warningBox. also doesn't officially delete, just warns about it. will need to be updated with splice or similar
+function deleteSession() {
+  if (!window.confirm("Are you sure you want to delete the session?")) {
+    var sessionId = $('#currentSessionId').val();
+    var sessionObj = findObj(sessionId, progData);
+    console.dir(sessionObj);
   }
 }
 
