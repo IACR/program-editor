@@ -140,7 +140,7 @@ function doGetRow($pdo, $id) {
 function doSave($pdo, $json) {
   $name = 'unknown';
   $data = json_decode($json, true);
-  echo gettype($data);
+
   if ($data != null && isset($data['name'])) {
     $name = $data['name'];
   }
@@ -154,10 +154,9 @@ function doSave($pdo, $json) {
   $stmt->bindParam(':user', $user);
   $stmt->bindParam(':json', $json);
   if ($stmt->execute()) {
-    sendError("no error");
-//    echo '{"error": "No error"}';
+    echo '{}';
   } else {
-    echo '{"error": "unable to save"}';
+    sendError('unable to save');
   }
   $stmt->closeCursor();
   $stmt = null;
