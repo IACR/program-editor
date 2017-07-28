@@ -68,6 +68,12 @@ section.category {
   /*background-color: purple;*/
 }
 
+div.talk {
+  cursor: -webkit-grab;
+	cursor: -moz-grab;
+	cursor: grab;
+}
+
 #talksList {
   max-height: 700px;
   overflow-y: auto;
@@ -88,7 +94,7 @@ div.talk:hover {
   background: #14A6B5;
 }
 
-/*TODO: make this match/remove .talkTitle; potentially combine?? also edit line 136 in index.html to match*/
+/*TODO: make this match/remove .talkTitle; potentially combine??*/
 .toAddTalkTitle {
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: left;
@@ -202,7 +208,7 @@ span.authorName:last-of-type:after {
 }
 
 #addTalkTitle {
-  background-color: rgba(24, 188, 156, 0.9);
+  background-color: rgba(24, 188, 156, 1);
   color: #EDF6F7;
 }
 
