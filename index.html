@@ -42,20 +42,29 @@
           <p>
             If you've been here before, you can edit an existing program. Otherwise, start from a new one.
           </p>
-          <button type="button" name="newProg" onclick="createNew()" class="btn btn-success btn-sm">New</button>
-          <button type="button" name="existingProg" onclick="editExisting()" class="btn btn-success btn-sm" disabled="true">Existing</button>
+          <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">New</button>
+          <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">Existing</button>
+        </section>
+      </div>
+      <!-- TODO: this will need to be hidden with CSS -->
+      <div class="row">
+        <section id="versionPicker" class="col-md-8 col-md-offset-2 setupStep">
+          <table class="table table-bordered" id="versionList">
+            <tr>
+              <th>Name</th>
+              <th>Owner</th>
+              <th>Last modified</th>
+            </tr>
+          </table>
         </section>
       </div>
       <div class="row">
         <section id="templateSelector" class="col-md-8 col-md-offset-2 setupStep">
-          <p>
-            Select a template to start from.
-          </p>
-          <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value)">
-            <option value=""></option>
-            <option value="crypto_config.json">Crypto</option>
-            <option value="broken.json">Broken</option>
-            <option value="test.json">Test</option>
+          <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
+            <option value="" disabled selected>Select a template</option>
+            <option value="./json/crypto_config.json">Crypto</option>
+            <option value="./json/broken.json">Broken</option>
+            <option value="./json/test.json">Test</option>
           </select>
         </section>
       </div>
@@ -94,6 +103,7 @@
         </section>
         <aside class="col-md-2">
           <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">Download JSON</button>
+          <button type="button" name="saveProgram" onclick="saveProgram()" id="saveProgramBtn" class="btn btn-block btn-success">Save</button>
         </aside>
       </div>
       <div class="col-md-3">
@@ -115,7 +125,7 @@
           </button>
           {{#each unassigned_talks}}
             <div id="{{id}}">
-              <h3 id="categoryTitle">
+              <h3 class="categoryTitle">
                 {{name}}
               </h3>
               <section class="category">
@@ -151,7 +161,9 @@
                 <div class="row">
                   <div class="col-md-2">
                     <p class="timeSlot">
-                      {{starttime}}-{{endtime}}
+                      <span class="editTime spmodal" data-target="#editTimeslot" data-toggle="modal" onclick="editTimeslot({{@../index}}, {{@index}})">
+                        {{starttime}}-{{endtime}}
+                      </span>
                     </p>
                   </div>
                 {{#if twosessions}}
@@ -366,6 +378,49 @@
       </div>
     </aside>
 
+    <!-- Modal for editing a timeslot -->
+    <aside class="modal fade" id="editTimeslot" role="dialog" aria-labelledby="editTimeslot">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" id="editTimeslot">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="modal-title">
+              Edit Time Slot
+            </h2>
+                Note that you may only change the times subject to the times
+                before and after the timeslot you are trying to edit.
+          </div>
+          <div class="modal-body">
+            <form>
+              <!-- used only for saving edited session to progData -->
+              <input type="hidden" id="timeslotIndex" value="" />
+              <div class="form-inline">
+                <div class="form-group">
+                  <label for="startTime">
+                    Time range
+                  </label>
+                  <input type="text" name="startTime" class="form-control" id="currentStartTime" />
+                </div>
+                <div class="form-group">
+                  <input type="text" name="endTime" class="form-control" id="currentEndTime" />
+                </div>
+                <!-- TODO: text to "split this session into two sessions" -->
+                <label for="numsessions">Add a track to this timeslot?</label>
+                <input type="checkbox" name="dualtracks"></input>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" onclick="deleteTimeslot()">Delete time slot</button>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTimeslot()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
     <!-- Modal for editing a session -->
     <aside class="modal fade" id="editSessionBox" role="dialog" aria-labelledby="editSessionTitle">
       <div class="modal-dialog" role="document">
@@ -380,24 +435,16 @@
           </div>
           <div class="modal-body">
             <form>
-              <!-- used only for saving edited session to progData -->
+              <!-- input type hidden with currentSessionId used only for saving edited session to progData -->
               <input type="hidden" id="currentSessionId" value="" />
               <div class="form-group">
                 <label for="sessionTitle">
                   Session Title
                 </label>
-                <!-- TODO: you should not be able to save this field without a value upon change. making input required doesn't solve the issue -->
                 <input type="text" name="sessionTitle" placeholder="Session title" class="form-control" id="currentSessionTitle" />
               </div>
+              <!-- TODO: y so many form groups?!?! -->
               <div class="form-group">
-                <label for="startTime">
-                  Start Time
-                </label>
-                <!-- TODO/NOTE: this input type is incompatabile with basically anything except chrome -_- -->
-                <input type="time" name="startTime" class="form-control" id="startTime" />
-                <div class="form-group">
-                  <!-- TODO: end time picker -->
-                </div>
                 <div class="form-group">
                   <!-- NOTE/TODO: track picker dropdown...though is this necessary for MVP launch? -->
                 </div>
@@ -417,6 +464,7 @@
             </form>
           </div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" onclick="deleteSession()">Delete session</button>
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveSession()">Save Session</button>
           </div>

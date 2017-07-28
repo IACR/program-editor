@@ -7,9 +7,49 @@ var progTemplate;
 var talksTemplate;
 var lastTalkIndex;
 
+// TODO: move to more appropriate spot
+// Show a list of all existing versions to edit.
+function editExisting() {
+  $('#templateSelector').hide();
+  $('#datePicker').hide();
+  $('#versionPicker').show(500);
+  $.getJSON('ajax.php', function(data) {
+    // remove the rows other than the first.
+    $('#versionList').find("tr:gt(0)").remove();
+    $('#versionList').show();
+    for (var i = 0; i < data.programs.length; i++) {
+      var row = data.programs[i];
+      $('#versionList').append('<tr><td><a href=javascript:getConfig("ajax.php?id=' + row.id + '",true);>' + row.name + '</a></td><td>' + row.user + '</td><td>' + row.ts + '</td></tr>');
+    }
+  });
+}
+
+// TODO: move to more appropriate spot
+// NOTE/BUG: currently does not work as of branch v2.1, likely to be an error in ajax.php
+// saves program
+function saveProgram() {
+  $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: {'json': JSON.stringify(progData)},
+    beforeSend: function(jqXHR, settings) {
+      $('#save_status').html('saving');
+    },
+    dataType: "json",
+    success: function(data, textStatus, jqxhr) {
+      $('#save_status').html('done');
+    },
+    error: function(jqxhr, textStatus, error) {
+      $('#save_status').html(textStatus);
+      console.dir(jqxhr);
+      console.dir(error);
+    }});
+}
+
 // create new program template from available templates
 function createNew() {
   $('#templateSelector').show(500);
+  $('#versionPicker').hide();
 }
 
 // jQuery date picker
@@ -35,8 +75,8 @@ function createDatePicker(numDays) {
 }
 
 // parse JSON file to create initial program structure
-function getConfig(name) {
-  $.getJSON('./json/' + name, function(data) {
+function getConfig(name, existing) {
+  $.getJSON(name, function(data) {
     var idCounter = 0;
     var days = data['days'];
 
@@ -54,6 +94,14 @@ function getConfig(name) {
       }
     }
     progData = data;
+    if (existing) {
+      $('#setupPrompts').hide();
+      drawProgram();
+      drawTalks();
+      addDrag();
+      $('#parent').show(500);
+      return;
+    }
     createDatePicker(progData.days.length);
     $('#datePicker').show(500);
   })
@@ -186,8 +234,12 @@ function validatePapers(data) {
     return 0;
   });
 
-  return data.acceptedPapers = categoryList;
-  return data;
+  // make sure it has an empty uncategorized category.
+  if (categoryList.length == 0) {
+    categoryList.push({'name': 'Uncategorized', 'talks':[], 'id': 'category-0'});
+  }
+
+  return categoryList;
 }
 
 // style warnings and error message for better visibility to user
@@ -396,8 +448,45 @@ function editSession(sessionId) {
   }
 
   // BUG/TODO: if session does not have location, inherits from last edited/poss. nearest sibling. not sure why.
-  if (sessionObj.location.name) {
+  if (sessionObj.location && sessionObj.location.name) {
     $('#currentSessionLocation').val(sessionObj.location.name);
+  }
+}
+
+// dayIndex is the index in the days array, and slotIndex is the index in
+// the timeslots array under the day. This makes it easy to refer to the
+// corresponding timeslot.
+function editTimeslot(dayIndex, slotIndex) {
+  console.log('index=' + dayIndex + ':' + slotIndex);
+  var timeslot = progData.days[dayIndex].timeslots[slotIndex];
+  console.dir(timeslot);
+  $('#currentStartTime').val(timeslot.starttime);
+
+  // TODO: if starttime is updated, endtime doesn't change accordingly. if starttime is earlier, endtime should also be allowed to be earlier than what it used to be
+  $('#currentStartTime').timepicker({
+    disableTimeInput: true,
+    step: 5,
+    timeFormat: 'H:i',
+    minTime: timeslot.starttime,
+    maxTime: timeslot.endtime
+  });
+  $('#currentEndTime').val(timeslot.endtime);
+  $('#currentEndTime').timepicker({
+    disableTimeInput: true,
+    step: 5,
+    timeFormat: 'H:i',
+    minTime: timeslot.starttime,
+    maxTime: timeslot.endtime
+  });
+}
+
+// deletes session
+// TODO: UNFINISHED/IN PROGRESS. this could use some work, maybe slot into warningBox. also doesn't officially delete, just warns about it. will need to be updated with splice or similar
+function deleteSession() {
+  if (!window.confirm("Are you sure you want to delete the session?")) {
+    var sessionId = $('#currentSessionId').val();
+    var sessionObj = findObj(sessionId, progData);
+    console.dir(sessionObj);
   }
 }
 
@@ -406,6 +495,15 @@ function saveSession() {
   var sessionId = $('#currentSessionId').val();
   var sessionObj = findObj(sessionId, progData);
   sessionObj.session_title = $('#currentSessionTitle').val();
+
+  // TODO: need some sort of check that required fields are in fact filled out. if not, insert helper text or change title to red or something
+  // below if statement is currently NONFUNCTIONAL
+  if ($('#currentSessionTitle').val() === "") {
+    alert('gimme a title!');
+    // event.preventDefault();
+    // $('#currentSessionTitle').addClass('has-error');
+  }
+
   sessionObj.location.name = $('#currentSessionLocation').val();
   sessionObj.moderator = $('#currentSessionModerator').val();
   // TODO: after drag/drop and edit session, 'drag talks' placeholder reappears
@@ -433,7 +531,7 @@ function downloadJSON() {
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
 function debugStart() {
   createNew();
-  getConfig('crypto_config.json');
+  getConfig('./json/crypto_config.json');
   $('#uploadTalks').show(500);
 }
 
@@ -442,7 +540,7 @@ $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
 
   // NOTE: for debug purposes only, remove in production
-  debugStart();
+  // debugStart();
 
   // compile templates to html
   var theTemplateScript = $("#program-template").html();

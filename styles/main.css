@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#templateSelector, #datePicker, #uploadTalks, #uploadTalksSelector {
+#templateSelector, #datePicker, #uploadTalks, #uploadTalksSelector, #versionPicker {
   display: none;
 }
 
@@ -46,10 +46,6 @@ h1, h2, h3, h4, h5 {
 /*** Talks Section ***/
 #parent {
   display: none;
-}
-
-#jsonDownloadBtn {
-  margin-top: 20%;
 }
 
 #addTalkBtn {
@@ -61,7 +57,7 @@ h1, h2, h3, h4, h5 {
   margin: 5px;
 }
 
-#categoryTitle {
+.categoryTitle {
   font-size: 1.5em;
 }
 
@@ -92,6 +88,7 @@ div.talk:hover {
   background: #14A6B5;
 }
 
+/*TODO: make this match/remove .talkTitle; potentially combine?? also edit line 136 in index.html to match*/
 .toAddTalkTitle {
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: left;
@@ -119,6 +116,14 @@ div.session-talks {
   padding: 5px;
 }
 
+.panel-body a {
+  visibility: hidden;
+  }
+
+.panel-body:hover a {
+  visibility: visible;
+}
+
 a.iconLink {
   font-size: 1.3em;
 }
@@ -127,6 +132,10 @@ p.timeSlot {
   font-size: 0.9em;
   text-align: right;
   margin-top: 25px;
+}
+
+span.editTime:hover {
+  background-color: #18BC9C;
 }
 
 .talkTitle {
@@ -179,7 +188,7 @@ span.authorName:last-of-type:after {
 }
 
 /* edit button for each session */
-/* TODO: appear only on mouseover on session; less bright green; changes color on hover/click; triggers edit session modal (does NOT edit individual talks) */
+/* TODO: less bright green; changes color on hover/click; triggers edit session modal (does NOT edit individual talks) */
 .editSession {
 
 }
