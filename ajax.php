@@ -1,5 +1,5 @@
 <?php
-include("db.php");
+include("cred.php");
 // The schema for the database table is as follows:
 // mysql> describe program;
 // +-------+--------------+------+-----+-------------------+----------------+
