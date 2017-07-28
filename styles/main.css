@@ -9,11 +9,6 @@ body {
   font-size: 1.7em;
 }
 
-/*TODO: move to appropriate section*/
-span.editTime:hover {
-    background-color: #ffc0c0;
-}
-
 h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
 }
@@ -143,6 +138,10 @@ p.timeSlot {
   margin-top: 25px;
 }
 
+span.editTime:hover {
+  border: #18BC9C;
+}
+
 .talkTitle {
   font-size: 1.1em;
   font-weight: bold;
@@ -193,7 +192,7 @@ span.authorName:last-of-type:after {
 }
 
 /* edit button for each session */
-/* TODO: appear only on mouseover on session; less bright green; changes color on hover/click; triggers edit session modal (does NOT edit individual talks) */
+/* TODO: less bright green; changes color on hover/click; triggers edit session modal (does NOT edit individual talks) */
 .editSession {
 
 }
