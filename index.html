@@ -60,11 +60,8 @@
       </div>
       <div class="row">
         <section id="templateSelector" class="col-md-8 col-md-offset-2 setupStep">
-          <p>
-            Select a template to start from.
-          </p>
           <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
-            <option value=""></option>
+            <option value="" disabled selected>Select a template</option>
             <option value="./json/crypto_config.json">Crypto</option>
             <option value="./json/broken.json">Broken</option>
             <option value="./json/test.json">Test</option>

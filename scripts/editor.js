@@ -539,7 +539,7 @@ $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
 
   // NOTE: for debug purposes only, remove in production
-  debugStart();
+  // debugStart();
 
   // compile templates to html
   var theTemplateScript = $("#program-template").html();
