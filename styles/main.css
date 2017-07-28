@@ -139,7 +139,7 @@ p.timeSlot {
 }
 
 span.editTime:hover {
-  border: #18BC9C;
+  background-color: #18BC9C;
 }
 
 .talkTitle {
