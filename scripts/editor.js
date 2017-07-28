@@ -25,7 +25,7 @@ function editExisting() {
 }
 
 // TODO: move to more appropriate spot
-// NOTE/BUG: currently does not work as of branch v2.1, likely to be an error in ajax.php
+// NOTE/BUG: response from ajax.php comes back as something browser can't parse but works fine on server-side. causes syntaxerror because encounters that weird "array" at beginning of JSON file
 // saves program
 function saveProgram() {
   $.ajax({
@@ -445,11 +445,14 @@ function editSession(sessionId) {
 
   if (sessionObj.moderator) {
     $('#currentSessionModerator').val(sessionObj.moderator);
+  } else {
+    $('#currentSessionModerator').val('');
   }
 
-  // BUG/TODO: if session does not have location, inherits from last edited/poss. nearest sibling. not sure why.
   if (sessionObj.location && sessionObj.location.name) {
     $('#currentSessionLocation').val(sessionObj.location.name);
+  } else {
+    $('#currentSessionLocation').val('');
   }
 }
 
