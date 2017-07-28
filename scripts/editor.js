@@ -25,6 +25,7 @@ function editExisting() {
 }
 
 // TODO: move to more appropriate spot
+// NOTE/BUG: currently does not work as of branch v2.1, likely to be an error in ajax.php
 // saves program
 function saveProgram() {
   $.ajax({
