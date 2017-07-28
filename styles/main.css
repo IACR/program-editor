@@ -68,6 +68,12 @@ section.category {
   /*background-color: purple;*/
 }
 
+div.talk {
+  cursor: -webkit-grab;
+	cursor: -moz-grab;
+	cursor: grab;
+}
+
 #talksList {
   max-height: 700px;
   overflow-y: auto;
