@@ -1,11 +1,40 @@
 // TODO: add notification for when browser is too small using media breakpoint
 
 
-// create global variables: to store parsed JSON files for use in templates (progData), the template for the program (progTemplate), the template for the unassigned talks listed at left (talksTemplate), and for keeping track of the indeces of talks (lastTalkIndex)
+// Create global variables: to store parsed JSON files for use in templates (progData), the template for the program (progTemplate), and the template for the unassigned talks listed at left (talksTemplate)
 var progData;
 var progTemplate;
 var talksTemplate;
-var lastTalkIndex;
+
+// Returns new integer for use as id on talks and sessions
+function createUniqueId() {
+  progData.config.uniqueIDIndex++;
+  return progData.config.uniqueIDIndex;
+}
+
+// Validates that data conforms to progData schema
+// TODO: use JSON schema validate, (e.g. ajv)
+function setProgData(data) {
+  if (!data.config.uniqueIDIndex) {
+    data.config.uniqueIDIndex = 0;
+  }
+  progData = data;
+  var days = progData.days;
+
+  for (var i = 0; i < days.length; i++) {
+    var timeslots = days[i]['timeslots'];
+    for (var j = 0; j < timeslots.length; j++) {
+      for (var k = 0; k < timeslots[j]['sessions'].length; k++) {
+        timeslots[j]['sessions'][k].id = 'session-' + createUniqueId();
+      }
+
+      if(timeslots[j]['sessions'].length > 1) {
+        timeslots[j]['twosessions'] = true;
+      }
+    }
+  }
+  return data;
+}
 
 // TODO: move to more appropriate spot
 // Show a list of all existing versions to edit.
@@ -77,23 +106,8 @@ function createDatePicker(numDays) {
 // parse JSON file to create initial program structure
 function getConfig(name, existing) {
   $.getJSON(name, function(data) {
-    var idCounter = 0;
-    var days = data['days'];
+    setProgData(data);
 
-    for (var i = 0; i < days.length; i++) {
-      var timeslots = days[i]['timeslots'];
-      for (var j = 0; j < timeslots.length; j++) {
-        for (var k = 0; k < timeslots[j]['sessions'].length; k++) {
-          timeslots[j]['sessions'][k].id = 'session-' + idCounter;
-          idCounter++;
-        }
-
-        if(timeslots[j]['sessions'].length > 1) {
-          timeslots[j]['twosessions'] = true;
-        }
-      }
-    }
-    progData = data;
     if (existing) {
       $('#setupPrompts').hide();
       drawProgram();
@@ -190,7 +204,6 @@ function validatePapers(data) {
     return null;
   }
   var acceptedPapers = data.acceptedPapers;
-  lastTalkIndex = acceptedPapers.length;
 
   for (var i = 0; i < acceptedPapers.length; i++) {
     var paper = acceptedPapers[i];
@@ -203,7 +216,7 @@ function validatePapers(data) {
     if (!paper.hasOwnProperty('category')) {
       paper.category = 'Uncategorized';
     }
-    paper.id = "talk-" + i;
+    paper.id = "talk-" + createUniqueId();
     paper.authors = splitAuthors(paper.authors);
   }
 
@@ -410,8 +423,7 @@ function updateProgData(el, target, source, sibling) {
 // save new talk after talk data has already been used to generate template
 function addNewTalk() {
   var talk = {};
-  talk.id = "talk-" + lastTalkIndex;
-  lastTalkIndex++;
+  talk.id = "talk-" + createUniqueId();
   talk.title = $('#newTalkTitle').val();
   talk.authors = splitAuthors($('#newTalkAuthor').val());
   // TODO: handle affiliations
