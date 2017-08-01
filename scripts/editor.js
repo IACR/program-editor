@@ -474,7 +474,10 @@ function editSession(sessionId) {
 function editTimeslot(dayIndex, slotIndex) {
   console.log('index=' + dayIndex + ':' + slotIndex);
   var timeslot = progData.days[dayIndex].timeslots[slotIndex];
-  console.dir(timeslot);
+  var timeDiv = document.getElementById('timeDiv');
+  var datepair = new Datepair(timeDiv);
+
+  // BUG/TODO: this is picking up the first starttime it finds rather than the specific one tied to what you clicked on -_-
   $('#currentStartTime').val(timeslot.starttime);
 
   $('#currentStartTime').timepicker({
@@ -487,6 +490,7 @@ function editTimeslot(dayIndex, slotIndex) {
     autoclose: true
   });
   $('#currentEndTime').val(timeslot.endtime);
+
   $('#currentEndTime').timepicker({
     disableTimeInput: true,
     step: 5,
