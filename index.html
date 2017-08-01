@@ -351,18 +351,18 @@
                 <label for="newTalkAuthors">
                   Talk Author(s)
                 </label>
-                <span id="newAuthorHelp" class="help-block">
+                <p id="newAuthorHelp" class="help-block">
                   Use BibTeX formatting (i.e. names are separated by and).
-                </span>
+                </p>
                 <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
               </div>
               <div class="form-group">
                 <label for="newTalkAffiliation">
                   Affiliation
                 </label>
-                <span id="newAffiliationHelp" class="help-block">
+                <p id="newAffiliationHelp" class="help-block">
                   Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
-                </span>
+                </p>
                 <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
               </div>
               <div class="form-group">
@@ -405,17 +405,19 @@
             </p>
             <br />
             <form>
-              <!-- used only for saving edited session to progData -->
+              <!-- NOTE: used only for saving edited time slot to progData -->
               <input type="hidden" id="timeslotIndex" value="" />
-
               <div class="form-inline">
                 <div class="form-group">
                   <label for="startTime">
-                    Time range
+                    Start time
                   </label>
                   <input type="text" name="startTime" class="form-control" id="currentStartTime" />
                 </div>
                 <div class="form-group">
+                  <label for="endTime">
+                    End time
+                  </label>
                   <input type="text" name="endTime" class="form-control" id="currentEndTime" />
                 </div>
                 <p class="help-block">
@@ -455,7 +457,7 @@
           </div>
           <div class="modal-body">
             <form>
-              <!-- input type hidden with currentSessionId used only for saving edited session to progData -->
+              <!-- NOTE: used only for saving edited session to progData -->
               <input type="hidden" id="currentSessionId" value="" />
               <div class="form-group">
                 <label for="sessionTitle">
