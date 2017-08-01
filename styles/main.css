@@ -193,12 +193,6 @@ span.authorName:last-of-type:after {
   content: '';
 }
 
-/* edit button for each session */
-/* TODO: less bright green; changes color on hover/click; triggers edit session modal (does NOT edit individual talks) */
-.editSession {
-
-}
-
 
 
 /*** Modals ***/
@@ -207,7 +201,7 @@ span.authorName:last-of-type:after {
   color: #EDF6F7;
 }
 
-#addTalkTitle {
+#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv {
   background-color: rgba(24, 188, 156, 1);
   color: #EDF6F7;
 }

@@ -84,7 +84,7 @@
           </label>
         </section>
       </div>
-      
+
       <div class="row">
         <section id="uploadTalks" class="col-md-8 col-md-offset-2 form-group">
           <p>
@@ -331,7 +331,7 @@
     <aside class="modal fade" id="addTalkBox" role="dialog" aria-labelledby="addTalkTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="addTalkTitle">
+          <div class="modal-header" id="addTalkTitleDiv">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -376,31 +376,38 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addNewTalk()">Add talk</button>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addNewTalk()">
+              Add Talk
+            </button>
           </div>
         </div>
       </div>
     </aside>
 
     <!-- Modal for editing a timeslot -->
-    <aside class="modal fade" id="editTimeslot" role="dialog" aria-labelledby="editTimeslot">
+    <aside class="modal fade" id="editTimeslot" role="dialog" aria-labelledby="timeEditTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="editTimeslot">
+          <div class="modal-header" id="timeEditTitleDiv">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h2 class="modal-title">
+            <h2 class="modal-title" id="timeEditTitle">
               Edit Time Slot
             </h2>
-                Note that you may only change the times subject to the times
-                before and after the timeslot you are trying to edit.
           </div>
           <div class="modal-body">
+            <p class="help-block">
+              Note that you may only change the times subject to the times before and after the time slot you are trying to edit.
+            </p>
+            <br />
             <form>
               <!-- used only for saving edited session to progData -->
               <input type="hidden" id="timeslotIndex" value="" />
+
               <div class="form-inline">
                 <div class="form-group">
                   <label for="startTime">
@@ -411,16 +418,24 @@
                 <div class="form-group">
                   <input type="text" name="endTime" class="form-control" id="currentEndTime" />
                 </div>
-                <!-- TODO: text to "split this session into two sessions" -->
+                <p class="help-block">
+                  To split this session into two tracks, please check the box below.
+                </p>
                 <label for="numsessions">Add a track to this timeslot?</label>
                 <input type="checkbox" name="dualtracks"></input>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" onclick="deleteTimeslot()">Delete time slot</button>
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTimeslot()">Save changes</button>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteTimeslot()">
+              Delete Time Slot
+            </button>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTimeslot()">
+              Save Changes
+            </button>
           </div>
         </div>
       </div>
@@ -430,7 +445,7 @@
     <aside class="modal fade" id="editSessionBox" role="dialog" aria-labelledby="editSessionTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="editSessionTitle">
+          <div class="modal-header" id="editSessionTitleDiv">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -467,11 +482,20 @@
                 </div>
               </div>
             </form>
+            <p class="help-block">
+              We currently do not have the capacity to allow for the editing of individual talks at this time.
+            </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" onclick="deleteSession()">Delete session</button>
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveSession()">Save Session</button>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteSession()">
+              Delete Session
+            </button>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveSession()">
+              Save Session
+            </button>
           </div>
         </div>
       </div>
