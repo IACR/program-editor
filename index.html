@@ -426,8 +426,9 @@
                 <p class="help-block">
                   To split this session into two tracks, please check the box below.
                 </p>
+                <!-- TODO: checkbox currently NONFUNCTIONAL -->
                 <label for="numsessions">Add a track to this timeslot?</label>
-                <input type="checkbox" name="dualtracks"></input>
+                <input type="checkbox" name="numsessions" id="makeDualSession"></input>
               </div>
             </form>
           </div>
@@ -435,9 +436,11 @@
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
+            <!-- TODO: delete button currently NONFUNCTIONAL -->
             <button type="button" class="btn btn-danger btn-sm" onclick="deleteTimeslot()">
               Delete Time Slot
             </button>
+            <!-- TODO: save button currently NONFUNCTIONAL -->
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTimeslot()">
               Save Changes
             </button>
@@ -470,7 +473,7 @@
               </div>
               <div class="form-group">
                 <div class="form-group">
-                  <!-- NOTE: track picker dropdown...ruled unnecssary for MVP launch -->
+                  <!-- NOTE: track picker dropdown would go here...ruled unnecssary for MVP launch -->
                 </div>
                 <div class="form-group">
                   <label for="currentSessionLocation">
@@ -487,13 +490,14 @@
               </div>
             </form>
             <p class="help-block">
-              We currently do not have the capacity to allow for the editing of individual talks at this time.
+              There is currently no way to edit individual talks at this time. This is a feature that is planned for inclusion in future versions.
             </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
+            <!-- TODO: delete button currently NONFUNCTIONAL -->
             <button type="button" class="btn btn-danger btn-sm" onclick="deleteSession()">
               Delete Session
             </button>
