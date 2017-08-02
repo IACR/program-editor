@@ -499,7 +499,7 @@ function editTimeslot(dayIndex, slotIndex) {
   });
 }
 
-// deletes session
+// delete session
 // TODO: UNFINISHED/IN PROGRESS. this could use some work, maybe slot into warningBox. also doesn't officially delete, just warns about it. will need to be updated with splice or similar
 function deleteSession() {
   if (!window.confirm("Are you sure you want to delete the session?")) {
