@@ -124,7 +124,7 @@
       <article id="talksList" class="col-md-3">
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
-          <!-- TODO: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
+          <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
           <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn" data-toggle="modal" data-target="#addTalkBox" onclick="addCategories()">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
           </button>
@@ -468,10 +468,9 @@
                 </label>
                 <input type="text" name="sessionTitle" placeholder="Session title" class="form-control" id="currentSessionTitle" />
               </div>
-              <!-- TODO: y so many form groups?!?! -->
               <div class="form-group">
                 <div class="form-group">
-                  <!-- NOTE/TODO: track picker dropdown...though is this necessary for MVP launch? -->
+                  <!-- NOTE: track picker dropdown...ruled unnecssary for MVP launch -->
                 </div>
                 <div class="form-group">
                   <label for="currentSessionLocation">

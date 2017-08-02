@@ -54,7 +54,6 @@ function editExisting() {
 }
 
 // TODO: move to more appropriate spot
-// NOTE/BUG: response from ajax.php comes back as something browser can't parse but works fine on server-side. causes syntaxerror because encounters that weird "array" at beginning of JSON file
 // saves program
 function saveProgram() {
   $.ajax({
@@ -280,7 +279,7 @@ function addDrag() {
       target.firstChild.data = '';
       target.style.border = '';
 
-      // TODO: only an example of how to calculate length; will need to be changed for production
+      // BUG/TODO: only an example of how to calculate length; will need to be changed for production
       if (target.childNodes.length == 5) {
         var start = moment("10:55", "HH:MM");
         var end = moment("11:35", "HH:MM");
@@ -549,11 +548,11 @@ function downloadJSON() {
 }
 
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
-function debugStart() {
-  createNew();
-  getConfig('./json/crypto_config.json');
-  $('#uploadTalks').show(500);
-}
+// function debugStart() {
+//   createNew();
+//   getConfig('./json/crypto_config.json');
+//   $('#uploadTalks').show(500);
+// }
 
 // executes functions once document is ready
 $(document).ready(function() {
