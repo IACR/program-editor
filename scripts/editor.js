@@ -477,23 +477,14 @@ function editTimeslot(dayIndex, slotIndex) {
   $('#currentEndTime').val(timeslot.endtime);
 
   $('#timeDiv .time').timepicker({
+    // BUG: disableTimeRanges currently NONFUNCTIONAL
+    'disableTimeRanges': ['1:00am', '7:00am'],
+    'forceRoundTime': true,
+    'show2400': true,
     'showDuration': true,
-    'timeFormat': 'g:ia',
-    'disableTextInput': true
+    'step': 5,
+    'timeFormat': 'H:i'
   });
-
-  // $('#currentStartTime').timepicker({
-  //   'disableTimeRanges': ['1:00am', '7:00am'],
-  //   'forceRoundTime': true,
-  //   'show2400': true,
-  //   'showDuration': true,
-  //   'step': 5,
-  //   'timeFormat': 'g:ia'
-  // });
-  //
-  // $('#currentEndTime').timepicker({
-  //
-  // });
 
   var getTimeDiv = document.getElementById('timeDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
