@@ -477,9 +477,9 @@ function editTimeslot(dayIndex, slotIndex) {
   $('#currentEndTime').val(timeslot.endtime);
 
   $('#timeDiv .time').timepicker({
-    // BUG: disableTimeRanges currently NONFUNCTIONAL
-    'disableTimeRanges': ['1:00am', '7:00am'],
     'forceRoundTime': true,
+    'minTime': '7:00',
+    'maxTime': '23:00',
     'show2400': true,
     'showDuration': true,
     'step': 5,
@@ -488,6 +488,18 @@ function editTimeslot(dayIndex, slotIndex) {
 
   var getTimeDiv = document.getElementById('timeDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
+}
+
+// save edited timeslot
+function saveTimeslot() {
+  // TODO: make sure it actually saves
+  console.log('You tried to save a time slot!');
+}
+
+// delete timeslot
+function deleteTimeslot() {
+  // TODO: make sure it actually deletes time slot, give confirm dialog before doing this b/c if somebody does this by accident...
+  console.log('You tried to delete a time slot!')
 }
 
 // delete session
