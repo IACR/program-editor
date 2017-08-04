@@ -130,18 +130,25 @@ div.session-talks {
   visibility: visible;
 }
 
+div.timeSlotDiv {
+  min-height: 5em;
+}
+
+div.timeSlotDiv a {
+  visibility: hidden;
+}
+
+div.timeSlotDiv:hover a {
+  visibility: visible;
+}
+
 a.iconLink {
   font-size: 1.3em;
 }
 
 p.timeSlot {
   font-size: 0.9em;
-  text-align: right;
-  margin-top: 25px;
-}
-
-span.editTime:hover {
-  background-color: #18BC9C;
+  margin-top: 5px;
 }
 
 .talkTitle {
