@@ -474,28 +474,29 @@ function editTimeslot(dayIndex, slotIndex) {
   console.log('index=' + dayIndex + ':' + slotIndex);
   var timeslot = progData.days[dayIndex].timeslots[slotIndex];
   $('#currentStartTime').val(timeslot.starttime);
-
-  $('#currentStartTime').timepicker({
-    disableTimeInput: true,
-    step: 5,
-    timeFormat: 'H:i',
-    // NOTE: for now we're restricting the min and max times to the current start and end times so as to prevent overlapping time slots. eventually there will be a feature that allows you to edit all time slots in any way user chooses. if overlap occurs, overlapping slots will be highlighted in red (as well as a modal possibly?)
-    minTime: timeslot.starttime,
-    maxTime: timeslot.endtime,
-    autoclose: true
-  });
   $('#currentEndTime').val(timeslot.endtime);
 
-  $('#currentEndTime').timepicker({
-    disableTimeInput: true,
-    step: 5,
-    timeFormat: 'H:i',
-    minTime: timeslot.starttime,
-    maxTime: timeslot.endtime
+  $('#timeDiv .time').timepicker({
+    'showDuration': true,
+    'timeFormat': 'g:ia',
+    'disableTextInput': true
   });
 
-  var timeDiv = document.getElementById('timeDiv');
-  var datepair = new Datepair(timeDiv);
+  // $('#currentStartTime').timepicker({
+  //   'disableTimeRanges': ['1:00am', '7:00am'],
+  //   'forceRoundTime': true,
+  //   'show2400': true,
+  //   'showDuration': true,
+  //   'step': 5,
+  //   'timeFormat': 'g:ia'
+  // });
+  //
+  // $('#currentEndTime').timepicker({
+  //
+  // });
+
+  var getTimeDiv = document.getElementById('timeDiv');
+  var timeSlotInputs = new Datepair(getTimeDiv);
 }
 
 // delete session
