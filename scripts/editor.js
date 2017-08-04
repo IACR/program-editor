@@ -54,7 +54,6 @@ function editExisting() {
 }
 
 // TODO: move to more appropriate spot
-// NOTE/BUG: response from ajax.php comes back as something browser can't parse but works fine on server-side. causes syntaxerror because encounters that weird "array" at beginning of JSON file
 // saves program
 function saveProgram() {
   $.ajax({
@@ -280,7 +279,7 @@ function addDrag() {
       target.firstChild.data = '';
       target.style.border = '';
 
-      // TODO: only an example of how to calculate length; will need to be changed for production
+      // BUG/TODO: only an example of how to calculate length; will need to be changed for production
       if (target.childNodes.length == 5) {
         var start = moment("10:55", "HH:MM");
         var end = moment("11:35", "HH:MM");
@@ -474,28 +473,36 @@ function editSession(sessionId) {
 function editTimeslot(dayIndex, slotIndex) {
   console.log('index=' + dayIndex + ':' + slotIndex);
   var timeslot = progData.days[dayIndex].timeslots[slotIndex];
-  console.dir(timeslot);
   $('#currentStartTime').val(timeslot.starttime);
-
-  // TODO: if starttime is updated, endtime doesn't change accordingly. if starttime is earlier, endtime should also be allowed to be earlier than what it used to be
-  $('#currentStartTime').timepicker({
-    disableTimeInput: true,
-    step: 5,
-    timeFormat: 'H:i',
-    minTime: timeslot.starttime,
-    maxTime: timeslot.endtime
-  });
   $('#currentEndTime').val(timeslot.endtime);
-  $('#currentEndTime').timepicker({
-    disableTimeInput: true,
-    step: 5,
-    timeFormat: 'H:i',
-    minTime: timeslot.starttime,
-    maxTime: timeslot.endtime
+
+  $('#timeDiv .time').timepicker({
+    'forceRoundTime': true,
+    'minTime': '7:00',
+    'maxTime': '23:00',
+    'show2400': true,
+    'showDuration': true,
+    'step': 5,
+    'timeFormat': 'H:i'
   });
+
+  var getTimeDiv = document.getElementById('timeDiv');
+  var timeSlotInputs = new Datepair(getTimeDiv);
 }
 
-// deletes session
+// save edited timeslot
+function saveTimeslot() {
+  // TODO: make sure it actually saves
+  console.log('You tried to save a time slot!');
+}
+
+// delete timeslot
+function deleteTimeslot() {
+  // TODO: make sure it actually deletes time slot, give confirm dialog before doing this b/c if somebody does this by accident...
+  console.log('You tried to delete a time slot!')
+}
+
+// delete session
 // TODO: UNFINISHED/IN PROGRESS. this could use some work, maybe slot into warningBox. also doesn't officially delete, just warns about it. will need to be updated with splice or similar
 function deleteSession() {
   if (!window.confirm("Are you sure you want to delete the session?")) {
@@ -544,11 +551,11 @@ function downloadJSON() {
 }
 
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
-function debugStart() {
-  createNew();
-  getConfig('./json/crypto_config.json');
-  $('#uploadTalks').show(500);
-}
+// function debugStart() {
+//   createNew();
+//   getConfig('./json/crypto_config.json');
+//   $('#uploadTalks').show(500);
+// }
 
 // executes functions once document is ready
 $(document).ready(function() {

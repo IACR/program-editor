@@ -130,18 +130,27 @@ div.session-talks {
   visibility: visible;
 }
 
-a.iconLink {
-  font-size: 1.3em;
+div.timeSlotDiv {
+  min-height: 5em;
 }
+
+div.timeSlotDiv a {
+  visibility: hidden;
+}
+
+div.timeSlotDiv:hover a {
+  visibility: visible;
+}
+
+/*TODO: would love to bump this down a bit, but for some reason this styling doesn't work*/
+/*.editTimeBtn {
+  margin-top: 5px;
+  margin-left: 10px;
+}*/
 
 p.timeSlot {
   font-size: 0.9em;
-  text-align: right;
-  margin-top: 25px;
-}
-
-span.editTime:hover {
-  background-color: #18BC9C;
+  margin-top: 5px;
 }
 
 .talkTitle {
@@ -193,12 +202,6 @@ span.authorName:last-of-type:after {
   content: '';
 }
 
-/* edit button for each session */
-/* TODO: less bright green; changes color on hover/click; triggers edit session modal (does NOT edit individual talks) */
-.editSession {
-
-}
-
 
 
 /*** Modals ***/
@@ -207,7 +210,7 @@ span.authorName:last-of-type:after {
   color: #EDF6F7;
 }
 
-#addTalkTitle {
+#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv {
   background-color: rgba(24, 188, 156, 1);
   color: #EDF6F7;
 }
