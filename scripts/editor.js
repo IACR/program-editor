@@ -479,7 +479,7 @@ function editTimeslot(dayIndex, slotIndex) {
     disableTimeInput: true,
     step: 5,
     timeFormat: 'H:i',
-    // NOTE: for now we're restricting the mix and max times to the current start and end times so as to prevent overlapping time slots. eventually there will be a feature that allows you to edit all time slots in any way user chooses. if overlap occurs, overlapping slots will be highlighted in red (as well as a modal possibly?)
+    // NOTE: for now we're restricting the min and max times to the current start and end times so as to prevent overlapping time slots. eventually there will be a feature that allows you to edit all time slots in any way user chooses. if overlap occurs, overlapping slots will be highlighted in red (as well as a modal possibly?)
     minTime: timeslot.starttime,
     maxTime: timeslot.endtime,
     autoclose: true
