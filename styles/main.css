@@ -142,9 +142,11 @@ div.timeSlotDiv:hover a {
   visibility: visible;
 }
 
-a.iconLink {
-  font-size: 1.3em;
-}
+/*TODO: would love to bump this down a bit, but for some reason this styling doesn't work*/
+/*.editTimeBtn {
+  margin-top: 5px;
+  margin-left: 10px;
+}*/
 
 p.timeSlot {
   font-size: 0.9em;
