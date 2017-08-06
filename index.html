@@ -110,24 +110,28 @@
           <button type="button" name="saveProgram" onclick="saveProgram()" id="saveProgramBtn" class="btn btn-block btn-success">Save</button>
         </aside>
       </div>
-      <div class="col-md-3">
-        <h3 class="text-center editorTitles">
-          Talks
-        </h3>
-      </div>
-      <div class="col-md-9">
-        <h3 class="text-center editorTitles">
-          Schedule
-        </h3>
+      <div class="row">
+        <div class="col-md-3">
+          <h3 class="text-center editorTitles">
+            Unscheduled Talks
+            <label data-toggle="tooltip" title="Add a talk" data-placement="top" data-trigger="hover">
+              <button type="button" name="addTalk" class="btn btn-success" id="addTalkBtn" data-toggle="modal" data-target="#addTalkBox" onclick="addCategories()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+            </label>
+          </h3>
+        </div>
+        <div class="col-md-9">
+          <h3 class="text-center editorTitles">
+            Schedule
+          </h3>
+        </div>
       </div>
 
       <article id="talksList" class="col-md-3">
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
           <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
-          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn" data-toggle="modal" data-target="#addTalkBox" onclick="addCategories()">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          </button>
           {{#each unassigned_talks}}
             <div id="{{id}}">
               <h3 class="categoryTitle">
@@ -154,141 +158,150 @@
         <!-- Handlebars script, renders editable program based on the user-selected program template -->
           <script id="program-template" type="text/x-handlebars-template">
             {{#each days}}
-              <div class="row">
-                <div class="col-md-5">
-                 <hr />
-                 <h3 class="pageSubtitle">
-                   {{date}}
-                 </h3>
-                </div>
+            <div class="row">
+              <div class="col-md-5">
+                <hr />
+                <h3 class="pageSubtitle">
+                  {{date}} <label data-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover">
+                    <button type="button" name="addTimeslot" class="addTimeslot btn btn-success" data-toggle="modal" data-target="#addTimeslot" onclick="prepareAddTimeslotToDay({{@index}})">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                  </label>
+                </h3>
               </div>
-              {{#each timeslots}}
-                <div class="row">
-                  <div class="col-md-2 timeSlotDiv">
-                    <a data-toggle="modal" href="#editTimeslot" class="pull-right editTimeBtn" onclick="editTimeslot({{@../index}}, {{@index}})">
+            </div>
+            {{#each timeslots}}
+            {{#if sessions}} <!-- only render slots that have sessions -->
+            <div class="row">
+              <div class="col-md-2 timeSlotDiv">
+                  <a data-toggle="modal" href="#editTimeslot" class="pull-right editTimeBtn" onclick="editTimeslot({{@../index}}, {{@index}})">
+                    <label data-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover">
                       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </a>
-                    <br />
-                    <p class="timeSlot text-center">
-                      <span class="editTime spmodal" data-target="#editTimeslot" data-toggle="modal" onclick="editTimeslot({{@../index}}, {{@index}})">
-                        {{starttime}}-{{endtime}}
-                      </span>
+                    </label>
+                  </a>
+                <br />
+                <p class="timeSlot text-center">{{starttime}}-{{endtime}}</p>
+              </div>
+              {{#if twosessions}}
+              <div class="col-md-5">
+                <div class="track1Event panel-body" id="{{sessions.0.id}}">
+                  <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession(this.parentNode.id)">
+                    <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </label>
+                  </a>
+                  <h4 class="text-center">
+                    {{sessions.0.session_title}}
+                  </h4>
+                  {{#if sessions.0.location.name}}
+                  <p class="dualTrackDescr">
+                    {{sessions.0.location.name}}
+                  </p>
+                  {{/if}}
+                  {{#if sessions.0.moderator}}
+                  <p class="dualTrackDescr">
+                    {{sessions.0.moderator}}
+                  </p>
+                  {{/if}}
+                  {{#empty sessions.0.talks}}
+                  Drag talks to this session.
+                  {{#each sessions.0.talks}}
+                  <div class="talk" id="{{id}}">
+                    <p class="talkTitle">
+                      {{title}}
+                    </p>
+                    <p class="dualTrackDescr">
+                      {{#each authors}}
+                      <span class="authorName">{{this}}</span>
+                      {{/each}}
                     </p>
                   </div>
-                {{#if twosessions}}
-                  <div class="col-md-5">
-                    <div class="track1Event panel-body" id="{{sessions.0.id}}">
-                      <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession(this.parentNode.id)">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                      </a>
-                      <h4 class="text-center">
-                        {{sessions.0.session_title}}
-                      </h4>
-                      {{#if sessions.0.location.name}}
-                        <p class="dualTrackDescr">
-                          {{sessions.0.location.name}}
-                        </p>
-                      {{/if}}
-                      {{#if sessions.0.moderator}}
-                        <p class="dualTrackDescr">
-                          {{sessions.0.moderator}}
-                        </p>
-                      {{/if}}
-                      {{#empty sessions.0.talks}}
-                        Drag talks to this session.
-                      {{#each sessions.0.talks}}
-                        <div class="talk" id="{{id}}">
-                          <p class="talkTitle">
-                            {{title}}
-                          </p>
-                          <p class="dualTrackDescr">
-                            {{#each authors}}
-                              <span class="authorName">{{this}}</span>
-                            {{/each}}
-                          </p>
-                        </div>
-                      {{/each}}
-                      {{/empty}}
-                    </div>
-                  </div>
-                  <div class="col-md-5">
-                    <div class="panel-body track2Event" id="{{sessions.1.id}}">
-                      <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession(this.parentNode.id)">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                      </a>
-                      <h4 class="text-center">
-                        {{sessions.1.session_title}}
-                      </h4>
-                      {{#if sessions.1.location.name}}
-                        <p class="dualTrackDescr">
-                          {{sessions.1.location.name}}
-                        </p>
-                      {{/if}}
-                      {{#if sessions.1.moderator}}
-                        <p class="dualTrackDescr">
-                          {{sessions.1.moderator}}
-                        </p>
-                      {{/if}}
-                      {{#empty sessions.1.talks}}
-                        Drag talks to this session.
-                      {{#each sessions.1.talks}}
-                        <div class="talk" id="{{id}}">
-                          <p class="talkTitle">
-                            {{title}}
-                          </p>
-                          <p class="dualTrackDescr">
-                            {{#each authors}}
-                              <span class="authorName">{{this}}</span>
-                            {{/each}}
-                          </p>
-                        </div>
-                      {{/each}}
-                      {{/empty}}
-                    </div>
-                  </div>
-                {{else}}
-         	        <div class="col-md-10">
-                    <div class="panel-body mutualEvent" id="{{sessions.0.id}}">
-                      <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession(this.parentNode.id)">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                      </a>
-                      <h4>
-                        {{sessions.0.session_title}}
-                      </h4>
-                      {{#if sessions.0.location.name}}
-                        <p class="eventDescr">
-                          {{sessions.0.location.name}}
-                        </p>
-                      {{/if}}
-                      {{#if sessions.0.moderator}}
-                        <p class="eventDescr">
-                          {{sessions.0.moderator}}
-                        </p>
-                      {{/if}}
-                        {{#empty sessions.0.talks}}
-                          Drag talks to this session.
-                        {{#each sessions.0.talks}}
-                          <div class="talk" id="{{id}}">
-                            <p class="mutualEventTalkTitle">
-                              {{title}}
-                            </p>
-                            <p class="eventDescr">
-                              {{#each authors}}
-                                <span class="authorName">{{this}}</span>
-                              {{/each}}
-                            </p>
-                          </div>
-                        {{/each}}
-                       {{/empty}}
-                    </div>
-                  </div>
-                {{/if}}
+                  {{/each}}
+                  {{/empty}}
                 </div>
-              {{/each}}
-            {{/each}}
+              </div>
+              <div class="col-md-5">
+                <div class="panel-body track2Event" id="{{sessions.1.id}}">
+                  <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession(this.parentNode.id)">
+                    <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </label>
+                  </a>
+                  <h4 class="text-center">
+                    {{sessions.1.session_title}}
+                  </h4>
+                  {{#if sessions.1.location.name}}
+                  <p class="dualTrackDescr">
+                    {{sessions.1.location.name}}
+                  </p>
+                  {{/if}}
+                  {{#if sessions.1.moderator}}
+                  <p class="dualTrackDescr">
+                    {{sessions.1.moderator}}
+                  </p>
+                  {{/if}}
+                  {{#empty sessions.1.talks}}
+                  Drag talks to this session.
+                  {{#each sessions.1.talks}}
+                  <div class="talk" id="{{id}}">
+                    <p class="talkTitle">
+                      {{title}}
+                    </p>
+                    <p class="dualTrackDescr">
+                      {{#each authors}}
+                      <span class="authorName">{{this}}</span>
+                      {{/each}}
+                    </p>
+                  </div>
+                  {{/each}}
+                  {{/empty}}
+                </div>
+              </div>
+              {{else}} <!-- One session -->
+              <div class="col-md-10">
+                <div class="panel-body mutualEvent" id="{{sessions.0.id}}">
+                  <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession(this.parentNode.id)">
+                    <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </label>
+                  </a>
+                  <h4>
+                    {{sessions.0.session_title}}
+                  </h4>
+                  {{#if sessions.0.location.name}}
+                  <p class="eventDescr">
+                    {{sessions.0.location.name}}
+                  </p>
+                  {{/if}}
+                  {{#if sessions.0.moderator}}
+                  <p class="eventDescr">
+                    {{sessions.0.moderator}}
+                  </p>
+                  {{/if}}
+                  {{#empty sessions.0.talks}}
+                  Drag talks to this session.
+                  {{#each sessions.0.talks}}
+                  <div class="talk" id="{{id}}">
+                    <p class="mutualEventTalkTitle">
+                      {{title}}
+                    </p>
+                    <p class="eventDescr">
+                      {{#each authors}}
+                      <span class="authorName">{{this}}</span>
+                      {{/each}}
+                    </p>
+                  </div>
+                  {{/each}}
+                  {{/empty}}
+                </div>
+              </div>
+              {{/if}} <!-- twosessions -->
+            </div>
+            {{/if}} <!-- sessions -->
+            {{/each}} <!-- timeslots -->
+            {{/each}} <!-- days -->
           </script>
       </article>
-
     </main>
 
     <!-- Bootstrap scripts -->
@@ -443,7 +456,7 @@
               Cancel
             </button>
             <!-- TODO: delete button currently NONFUNCTIONAL -->
-            <button type="button" class="btn btn-danger btn-sm" onclick="deleteTimeslot()">
+            <button type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteTimeslot()">
               Delete Time Slot
             </button>
             <!-- TODO: save button currently NONFUNCTIONAL -->
@@ -504,11 +517,70 @@
               Cancel
             </button>
             <!-- TODO: delete button currently NONFUNCTIONAL -->
-            <button type="button" class="btn btn-danger btn-sm" onclick="deleteSession()">
+            <button type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteSession()">
               Delete Session
             </button>
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveSession()">
               Save Session
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Modal for adding a timeslot -->
+    <aside class="modal fade" id="addTimeslot" role="dialog" aria-labelledby="addTimeslotTitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" id="addTimeslotDiv">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="modal-title" id="addTimeslotTitle">
+              Add a Time Slot
+            </h2>
+          </div>
+          <div class="modal-body">
+            <p class="help-block">
+              Timeslots are ordered by their start time but theoretically may overlap.
+            </p>
+            <br />
+            <form>
+              <input type="hidden" id="dayIndex" value="" />
+              <div class="form-inline">
+                <div class="form-group">
+                  <label for="startTime">
+                    Start time
+                  </label>
+                  to
+                  <label for="endTime">
+                    End time
+                  </label>
+                </div>
+                <div class="form-group" id="timeslotDiv">
+                  <input type="text" name="startTime" class="form-control time start" id="newStartTime" autocomplete="off" />
+                  to
+                  <input type="text" name="endTime" class="form-control time end" id="newEndTime" autocomplete="off" />
+                </div>
+                <br />
+                <br />
+                <label for="numtracks">Select the number of tracks.</label>
+                <select name="numtracks" id="selectSessionCount">
+                  <option value="1">One track</option>
+                  <option value="2">Two tracks</option>
+                </select><br/>
+                <label for="includeTalks">Allow talks in the timeslot:</label>
+                <input type="checkbox" name="includeTalks" id="includeTalks"></input>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+              Cancel
+            </button>
+            <!-- TODO: save button currently NONFUNCTIONAL -->
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addTimeslotToDay()">
+              Add time slot
             </button>
           </div>
         </div>

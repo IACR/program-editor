@@ -24,12 +24,13 @@ function setProgData(data) {
   for (var i = 0; i < days.length; i++) {
     var timeslots = days[i]['timeslots'];
     for (var j = 0; j < timeslots.length; j++) {
-      for (var k = 0; k < timeslots[j]['sessions'].length; k++) {
-        timeslots[j]['sessions'][k].id = 'session-' + createUniqueId();
-      }
-
-      if(timeslots[j]['sessions'].length > 1) {
-        timeslots[j]['twosessions'] = true;
+      if (timeslots[j].sessions) {
+        for (var k = 0; k < timeslots[j]['sessions'].length; k++) {
+          timeslots[j]['sessions'][k].id = 'session-' + createUniqueId();
+        }
+        if(timeslots[j]['sessions'].length > 1) {
+          timeslots[j]['twosessions'] = true;
+        }
       }
     }
   }
@@ -360,7 +361,6 @@ function updateProgData(el, target, source, sibling) {
   // relevant ids of the target, source, and talk, then use findObj
   // to find the appropriate node in progdata, and update the relevant
   // arrays.
-  console.dir(sibling);
   var talkObj = findObj(el.id, progData);
   if (talkObj === false) {
     console.log('unable to find talk in progData');
@@ -467,11 +467,82 @@ function editSession(sessionId) {
   }
 }
 
+// Function to add a timeslot to a day. This will be called to populate
+// the modal for adding a timeslot.
+function prepareAddTimeslotToDay(dayIndex) {
+  $('#dayIndex').val(dayIndex);
+  var lastSlot = progData.days[dayIndex].timeslots[progData.days[dayIndex].timeslots.length -1];
+//  $('#newStartTime').val(lastSlot.endtime);
+  $('#timeslotDiv .time').timepicker({
+    'forceRoundTime': true,
+    'show2400': true,
+    'minTime': '00:00',
+    'maxTime': '24:00',
+    'showDuration': false,
+    'step': 5,
+    'timeFormat': 'H:i'
+  });
+  var getTimeDiv = document.getElementById('timeslotDiv');
+  var timeSlotInputs = new Datepair(getTimeDiv);
+}
+
+// Simple utility function to convert HH:MM to just minutes. In other
+// words it returns HH * 60 + MM, so that times can be compared
+// easily.
+function hmToMinutes(val) {
+  var parts = val.split(':');
+  return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+}
+
+// Function to add a timeslot to a day. This will be called to populate
+// the modal for adding a timeslot.
+function addTimeslotToDay() {
+  var startTime = $("#newStartTime").val();
+  var endTime = $("#newEndTime").val();
+  var dayIndex = $("#dayIndex").val();
+  var numTracks = parseInt($("#selectSessionCount").val());
+  var timeslot = {"starttime": startTime,
+                  "endtime": endTime,
+                  "sessions": []};
+  var withTalks = $("#includeTalks").prop("checked");
+  for (var i = 0; i < numTracks; i++) {
+    var session = {"id": "session-" + createUniqueId(),
+                   "session_title": "Edit to change session title " + i};
+    if (withTalks) {
+      session.talks = [];
+    }
+    timeslot.sessions.push(session);
+  }
+  if (numTracks > 1) {
+    timeslot['twosessions'] = true;
+  }
+  // Timeslots are ordered by start time and may be overlapping.
+  var timeslots = progData.days[dayIndex].timeslots;
+  var startMinutes = hmToMinutes(startTime);
+  var position = -1;
+  for (var i = 0; i < timeslots.length; i++) {
+    // Check if timeslots[i] has a start time after the existing one.
+    // If so then insert before the current timeslot.
+    if (hmToMinutes(timeslots[i].starttime) > startMinutes) {
+      position = i;
+      timeslots.splice(i, 0, timeslot);
+      break;
+    }
+  }
+  if (position == -1) {
+    // Then it belongs at the end because it is after everything else.
+    timeslots.push(timeslot);
+  }
+  drawProgram();
+  drawTalks();
+  addDrag();
+  document.getElementById(timeslot.sessions[0].id).scrollIntoView();
+}
+
 // dayIndex is the index in the days array, and slotIndex is the index in
 // the timeslots array under the day. This makes it easy to refer to the
 // corresponding timeslot.
 function editTimeslot(dayIndex, slotIndex) {
-  console.log('index=' + dayIndex + ':' + slotIndex);
   var timeslot = progData.days[dayIndex].timeslots[slotIndex];
   $('#currentStartTime').val(timeslot.starttime);
   $('#currentEndTime').val(timeslot.endtime);
@@ -521,13 +592,20 @@ function saveSession() {
   // TODO: need some sort of check that required fields are in fact filled out. if not, insert helper text or change title to red or something
   // below if statement is currently NONFUNCTIONAL
   if ($('#currentSessionTitle').val() === "") {
-    alert('gimme a title!');
+    alert('Session title is required');
     // event.preventDefault();
     // $('#currentSessionTitle').addClass('has-error');
   }
 
-  sessionObj.location.name = $('#currentSessionLocation').val();
-  sessionObj.moderator = $('#currentSessionModerator').val();
+  var locationName = $('#currentSessionLocation').val();
+  if (locationName) {
+    sessionObj.location = {'name': locationName};
+  }
+  var sessionModerator = $('#currentSessionModerator').val();
+  if (sessionModerator) {
+    sessionObj.moderator = sessionModerator;
+  }
+  console.dir(sessionObj);
   // TODO: after drag/drop and edit session, 'drag talks' placeholder reappears
 
   drawProgram();
@@ -569,4 +647,5 @@ $(document).ready(function() {
   progTemplate = Handlebars.compile(theTemplateScript);
   theTemplateScript = $("#talks-template").html();
   talksTemplate = Handlebars.compile(theTemplateScript);
+  $('[data-toggle="tooltip"]').tooltip();
  });
