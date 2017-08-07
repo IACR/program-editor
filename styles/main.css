@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5 {
   display: none;
 }
 
-#addTalkBtn {
+#addTalkBtn, .addTimeslot {
   width: 35px;
   height: 35px;
   text-align: center;
@@ -210,7 +210,7 @@ span.authorName:last-of-type:after {
   color: #EDF6F7;
 }
 
-#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv {
+#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv, #addTimeslotTitleDiv {
   background-color: rgba(24, 188, 156, 1);
   color: #EDF6F7;
 }
