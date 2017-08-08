@@ -424,6 +424,7 @@
             <br />
             <form>
               <!-- NOTE: used only for saving edited time slot to progData -->
+              <input type="hidden" id="timeslotDayIndex" value="" />
               <input type="hidden" id="timeslotIndex" value="" />
               <div class="form-inline">
                 <div class="form-group">
@@ -440,14 +441,15 @@
                   to
                   <input type="text" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
                 </div>
-                <br />
-                <br />
-                <p class="help-block">
-                  To split this session into two tracks, please check the box below.
-                </p>
-                <!-- TODO: checkbox currently NONFUNCTIONAL -->
-                <label for="numsessions">Add a track to this timeslot?</label>
-                <input type="checkbox" name="numsessions" id="makeDualSession"></input>
+                <div id="addTrackToSession">
+                  <br />
+                  <br />
+                  <p class="help-block">
+                    To split this session into two tracks, please check the box below.
+                  </p>
+                  <label for="numsessions">Add a track to this timeslot?</label>
+                  <input type="checkbox" name="numsessions" id="makeDualSession"></input>
+                </div>
               </div>
             </form>
           </div>
@@ -455,11 +457,9 @@
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
-            <!-- TODO: delete button currently NONFUNCTIONAL -->
             <button type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteTimeslot()">
               Delete Time Slot
             </button>
-            <!-- TODO: save button currently NONFUNCTIONAL -->
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTimeslot()">
               Save Changes
             </button>

@@ -281,12 +281,12 @@ function addDrag() {
       target.style.border = '';
 
       // BUG/TODO: only an example of how to calculate length; will need to be changed for production
-      if (target.childNodes.length == 5) {
-        var start = moment("10:55", "HH:MM");
-        var end = moment("11:35", "HH:MM");
-        warningBox('diff is ' + end.diff(start));
-        warningBox('Are you sure you want more than 3 talks in a session?');
-      }
+//      if (target.childNodes.length == 5) {
+//        var start = moment("10:55", "HH:MM");
+//        var end = moment("11:35", "HH:MM");
+//        warningBox('diff is ' + end.diff(start));
+//        warningBox('Are you sure you want more than 3 talks in a session?');
+//      }
     }
     if (source.classList.contains('session-talks')) {
       // restore drag & drop hint
@@ -544,6 +544,15 @@ function addTimeslotToDay() {
 // corresponding timeslot.
 function editTimeslot(dayIndex, slotIndex) {
   var timeslot = progData.days[dayIndex].timeslots[slotIndex];
+  $('#timeslotDayIndex').val(dayIndex);
+  $('#timeslotIndex').val(slotIndex);
+  $('#makeDualSession').prop('checked', false);
+  if (timeslot.sessions.length === 1) {
+    // enable the checkbox to add a session.
+    $('#addTrackToSession').show();
+  } else {
+    $('#addTrackToSession').hide();
+  }
   $('#currentStartTime').val(timeslot.starttime);
   $('#currentEndTime').val(timeslot.endtime);
 
@@ -563,24 +572,77 @@ function editTimeslot(dayIndex, slotIndex) {
 
 // save edited timeslot
 function saveTimeslot() {
-  // TODO: make sure it actually saves
-  console.log('You tried to save a time slot!');
+  var dayIndex = $("#timeslotDayIndex").val();
+  var slotIndex = $("#timeslotIndex").val();
+  var timeSlot = progData.days[dayIndex].timeslots[slotIndex];
+  timeSlot.starttime = $("#currentStartTime").val();
+  timeSlot.endtime = $("#currentEndTime").val();
+  if ($('#makeDualSession').is(':checked') && timeSlot.sessions.length === 1) {
+    // Add a new (empty) session. If the existing session has talks,
+    // then the new one should too.
+    var newSession = {"session_title": "Edit session to change title",
+                      "id": "session-" + createUniqueId()};
+    if (timeSlot.sessions[0].hasOwnProperty('talks')) {
+      newSession.talks = [];
+    }
+    timeSlot.sessions.push(newSession);
+    timeSlot.twosessions = true;
+  }
+  drawProgram();
+  drawTalks();
+  addDrag();
 }
 
-// delete timeslot
+// If a session is about to be deleted (either by deleting the one session
+// or by deleting the timeslot), then return the talks to the unassigned_talks
+// area.
+function moveTalksToUnassigned(session) {
+  if (session.hasOwnProperty('talks')) {
+    for (var i = 0; i < session.talks.length; i++) {
+      var talk = session.talks[i];
+      // Find the category in unassigned_talks that matches this talk.
+      var category = progData.config.unassigned_talks.find(function(cat) {
+        return cat.name === talk.category;
+      });
+      if (category === null) {
+        category = progData.config.unassigned_talks[0];
+      }
+      category.talks.push(talk);
+    }
+  }
+}
+
 function deleteTimeslot() {
-  // TODO: make sure it actually deletes time slot, give confirm dialog before doing this b/c if somebody does this by accident...
-  console.log('You tried to delete a time slot!')
+  if (!window.confirm("Are you sure you want to delete this timeslot?")) {
+    $('#editTimeslot').modal('hide');
+    return;
+  }
+  $('#editTimeslot').modal('hide');
+  var dayIndex = $("#timeslotDayIndex").val();
+  var slotIndex = $("#timeslotIndex").val();
+  var timeSlot = progData.days[dayIndex].timeslots[slotIndex];
+  for (var i = 0; i < timeSlot.sessions.length; i++) {
+    // remove any talks in the sessions.
+    moveTalksToUnassigned(timeSlot.sessions[i]);
+  }
+  // Actually remove the timeslot.
+  progData.days[dayIndex].timeslots.splice(slotIndex, 1);
+  drawProgram();
+  drawTalks();
+  addDrag();
 }
 
 // delete session
 // TODO: UNFINISHED/IN PROGRESS. this could use some work, maybe slot into warningBox. also doesn't officially delete, just warns about it. will need to be updated with splice or similar
 function deleteSession() {
   if (!window.confirm("Are you sure you want to delete the session?")) {
-    var sessionId = $('#currentSessionId').val();
-    var sessionObj = findObj(sessionId, progData);
-    console.dir(sessionObj);
+    return;
   }
+  var sessionId = $('#currentSessionId').val();
+  var sessionObj = findObj(sessionId, progData);
+  console.dir(sessionObj);
+  // moveTalksToUnassigned(sessionObj);
+  // find the timeslot and remove the session from it.
 }
 
 // submit button for edit session
