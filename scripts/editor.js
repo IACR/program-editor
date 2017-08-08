@@ -449,9 +449,13 @@ function addCategories() {
 }
 
 // prepopulate edit session modal with relevant fields from parent div of clicked edit button
-function editSession(sessionId) {
-  var sessionObj = findObj(sessionId, progData);
-  $('#currentSessionId').val(sessionId);
+function editSession(dayIndex, slotIndex, sessionIndex) {
+  console.log('editing session='+dayIndex+':'+slotIndex+':'+sessionIndex);
+  var sessionObj = progData.days[dayIndex].timeslots[slotIndex].sessions[sessionIndex];
+  console.dir(sessionObj);
+  $('#currentDayIndex').val(dayIndex);
+  $('#currentSlotIndex').val(slotIndex);
+  $('#currentSessionIndex').val(sessionIndex);
   $('#currentSessionTitle').val(sessionObj.session_title);
 
   if (sessionObj.moderator) {
@@ -480,7 +484,7 @@ function prepareAddTimeslotToDay(dayIndex) {
     'maxTime': '24:00',
     'showDuration': false,
     'step': 5,
-    'timeFormat': 'H:i'
+    'timeFormat': 'G:i'
   });
   var getTimeDiv = document.getElementById('timeslotDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
@@ -558,16 +562,29 @@ function editTimeslot(dayIndex, slotIndex) {
 
   $('#timeDiv .time').timepicker({
     'forceRoundTime': true,
-    'minTime': '7:00',
-    'maxTime': '23:00',
+    'minTime': '6:00',
+    'maxTime': '24:00',
     'show2400': true,
-    'showDuration': true,
+    'showDuration': false,
     'step': 5,
-    'timeFormat': 'H:i'
+    'timeFormat': 'G:i'
   });
 
   var getTimeDiv = document.getElementById('timeDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
+}
+
+// Sort the timeslots by starttime. This is called when a new timeslot
+// is added or when a timeslot is edited.
+function sortTimeslots(dayIndex) {
+  var timeslots = progData.days[dayIndex].timeslots;
+  timeslots.sort(function(a, b) {
+    var aMinutes = hmToMinutes(a.starttime);
+    var bMinutes = hmToMinutes(b.starttime);
+    if (aMinutes < bMinutes) return -1;
+    if (aMinutes > bMinutes) return 1;
+    return 0;
+  });
 }
 
 // save edited timeslot
@@ -588,6 +605,9 @@ function saveTimeslot() {
     timeSlot.sessions.push(newSession);
     timeSlot.twosessions = true;
   }
+  // Sort the timeslots again, because they may be out of order
+  // if the startTime changed.
+  sortTimeslots(dayIndex);
   drawProgram();
   drawTalks();
   addDrag();
@@ -632,44 +652,62 @@ function deleteTimeslot() {
   addDrag();
 }
 
-// delete session
-// TODO: UNFINISHED/IN PROGRESS. this could use some work, maybe slot into warningBox. also doesn't officially delete, just warns about it. will need to be updated with splice or similar
+// Delete a session. If this is the only session for the timeslot, then defer
+// with a warning to delete the timeslot instead.
 function deleteSession() {
-  if (!window.confirm("Are you sure you want to delete the session?")) {
+  var dayIndex = $('#currentDayIndex').val();
+  var slotIndex = $('#currentSlotIndex').val();
+  var sessionIndex = $('#currentSessionIndex').val();
+  var timeSlot = progData.days[dayIndex].timeslots[slotIndex];
+  if (timeSlot.sessions.length === 1) {
+    warningBox('You should delete the timeslot instead.');
+    $('#editSessionBox').modal('hide');
     return;
   }
-  var sessionId = $('#currentSessionId').val();
-  var sessionObj = findObj(sessionId, progData);
+  if (!window.confirm("Are you sure you want to delete the session?")) {
+    $('#editSessionBox').modal('hide');
+    return;
+  }
+  $('#editSessionBox').modal('hide');
+  var sessionObj = timeSlot.sessions[sessionIndex];
   console.dir(sessionObj);
-  // moveTalksToUnassigned(sessionObj);
-  // find the timeslot and remove the session from it.
+  moveTalksToUnassigned(sessionObj);
+  timeSlot.sessions.splice(sessionIndex, 1);
+  timeSlot.twosessions = false;
+  drawProgram();
+  drawTalks();
+  addDrag();
 }
 
 // submit button for edit session
 function saveSession() {
-  var sessionId = $('#currentSessionId').val();
-  var sessionObj = findObj(sessionId, progData);
-  sessionObj.session_title = $('#currentSessionTitle').val();
-
-  // TODO: need some sort of check that required fields are in fact filled out. if not, insert helper text or change title to red or something
-  // below if statement is currently NONFUNCTIONAL
-  if ($('#currentSessionTitle').val() === "") {
-    alert('Session title is required');
-    // event.preventDefault();
-    // $('#currentSessionTitle').addClass('has-error');
+  var dayIndex = $('#currentDayIndex').val();
+  var slotIndex = $('#currentSlotIndex').val();
+  var sessionIndex = $('#currentSessionIndex').val();
+  var sessionObj = progData.days[dayIndex].timeslots[slotIndex].sessions[sessionIndex];
+  console.log('editing session');
+  console.dir(sessionObj);
+  var session_title = $('#currentSessionTitle').val();
+  // Session title is required.
+  if (session_title === "") {
+    warningBox('Session title is required.');
+    return;
   }
-
+  sessionObj.session_title = session_title;
   var locationName = $('#currentSessionLocation').val();
   if (locationName) {
     sessionObj.location = {'name': locationName};
+  } else {
+    delete sessionObj.location;
   }
   var sessionModerator = $('#currentSessionModerator').val();
   if (sessionModerator) {
     sessionObj.moderator = sessionModerator;
+  } else {
+    delete sessionObj.moderator;
   }
   console.dir(sessionObj);
   // TODO: after drag/drop and edit session, 'drag talks' placeholder reappears
-
   drawProgram();
   drawTalks();
   addDrag();
