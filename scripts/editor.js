@@ -77,7 +77,6 @@ function saveProgram() {
 
 // create new program template from available templates
 function createNew() {
-  console.log('createNew');
   $('#templateSelector').show(500);
   // The select depends on the onchange event to load a config, so we
   // need to reset it.
