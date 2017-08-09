@@ -747,5 +747,7 @@ $(document).ready(function() {
   progTemplate = Handlebars.compile(theTemplateScript);
   theTemplateScript = $("#talks-template").html();
   talksTemplate = Handlebars.compile(theTemplateScript);
-  $('[data-toggle="tooltip"]').tooltip();
+  $('body').tooltip({
+    selector: '[data-toggle="tooltip"]'
+  });
  });
