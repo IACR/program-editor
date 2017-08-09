@@ -151,6 +151,14 @@ function drawProgram() {
   renderedProgram.innerHTML = theCompiledHtml;
 }
 
+function startEditor() {
+  drawProgram();
+  drawTalks();
+  addDrag();
+  $('#setupPrompts').hide();
+  $('#parent').show(500);
+}
+
 // upload JSON file of talks and parse
 function uploadTalks(evt) {
   var files = evt.target.files;
@@ -179,12 +187,7 @@ function uploadTalks(evt) {
         evt.target.value = '';
         return;
       }
-
-      drawProgram();
-      drawTalks();
-      addDrag();
-      $('#setupPrompts').hide();
-      $('#parent').show(500);
+      startEditor();
     } catch (ee) {
       warningBox('Unable to parse file as JSON.');
       evt.target.value = '';
