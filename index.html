@@ -20,15 +20,36 @@
 
   </head>
   <body class="container-fluid">
-    <div class="row">
-      <header class="col-md-12">
+    <div class="row top-row-expanded">
+      <header class="col-md-8">
         <h1 class="mainTitle">
           Program Creator/Editor
         </h1>
-        <hr />
       </header>
+      <nav class="navbar navbar-right col-md-4" role="navigation">
+        <div class="collapse navbar-collapse menu-lowered" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="javascript:location.reload()">Edit another program</a></li>
+                <li><a href="#">Upload from websubrev</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a target="_help" href="docs/help.html">Help home</a></li>
+                <li><a target="_help" href="docs/help.html#websubrev">Websubrev input</a></li>
+                <li><a target="_help" href="docs/help.html#output">How to use the output</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a target="_help" href="https://github.com/kaymckelly/program-editor">About this editor</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
-
     <div id="setupPrompts">
       <div class="row">
         <section class="col-md-12 setupStep instructions">
@@ -65,8 +86,7 @@
           <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
             <option value="" disabled selected>Select a template</option>
             <option value="./json/crypto_config.json">Crypto</option>
-            <option value="./json/broken.json">Broken</option>
-            <option value="./json/test.json">Test</option>
+            <option value="./json/pkc_config.json">PKC/CHES/TCC (4 days, single track)</option>
           </select>
         </section>
       </div>
