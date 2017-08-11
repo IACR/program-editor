@@ -1,0 +1,212 @@
+{
+    "description": "Schema to describe the program of a multi-track conference. This was originally designed for IACR conferences, but may find other uses.",
+    "type": "object",
+    "id": "http://iacr.org/cryptodb/pc/program/program_schema.json",
+    "definitions": {
+        "location": {
+            "id": "#definitions/location",
+            "type": "object",
+            "required": ["name"],
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                   "type": "string"
+                },
+                "latitude": {
+                   "type": "number"
+                },
+                "longitude": {
+                   "type": "number"
+                }
+            }
+        },
+       "talks": {
+          "id": "#definitions/talks",
+          "type": "array",
+           "items": {
+               "type": "object",
+               "required": ["title", "authors", "id"],
+               "properties": {
+                  "id": {
+                      "type": "string",
+                      "pattern": "^talk-[0-9]+$"
+                  },
+                  "title": {
+                      "type": "string"
+                  },
+                  "starttime": {
+                      "type": "string",
+                      "pattern": "^[0-2]?[0-9]:[0-9]{2}$"
+                  },
+                  "endttime": {
+                     "type": "string",
+                     "pattern": "^[0-2]?[0-9]:[0-9]{2}$"
+                  },
+                  "links": {
+                     "type": "object",
+                     "additionalProperties": false,
+                     "properties": {
+                         "slidesUrl": {
+                            "type": "string"
+                         },
+                         "paperUrl": {
+                            "type": "string"
+                         },
+                         "videoUrl": {
+                            "type": "string"
+                         }
+                     }
+                  },
+                 "affiliations": {
+                   "oneOf": [
+                     {"type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                     },
+                     {"type": "string"}]
+                 },
+                 "authors": {
+                    "type": "array",
+                    "minItems": 1,
+                   "items": {
+                     "oneOf": [
+                       {"type": "string"},
+                       {"type": "object", "properties": {"name": {"type": "string"}}}
+                       ]
+                   }
+                 },
+                 "keywords": {
+                     "type": "string"
+                 },
+                 "category": {
+                     "type": "string"
+                 }
+              }
+           }
+       }
+    },
+  "additionalProperties": false,
+  "properties": {
+        "name": {
+          "type": "string"
+        },
+        "config": {
+            "type": "object",
+            "properties": {
+                "default_track_locations": {
+                   "type": "array",
+                   "items": {
+                        "$ref": "#definitions/location"
+                    },
+                    "minItems": 1,
+                    "maxItems": 2
+                },
+                "default_talk_minutes": {
+                    "description": "The default time assigned for a talk.",
+                    "type": "integer"
+                },
+                "uniqueIDIndex": {
+                  "description": "A number that is used to generate unique IDs.",
+                  "type": "integer"
+                },
+                "unassigned_talks": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["name", "talks"],
+                        "properties": {
+                            "name": {
+                               "type": "string"
+                            },
+                            "talks": {
+                               "$ref": "#definitions/talks"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "days": {
+            "items": {
+                "required": [
+                    "date",
+                    "timeslots"
+                ],
+                "additionalProperties": false,
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+                        "type": "string",
+                        "description": "Date in YYYY-MM-DD format."
+                    },
+                    "timeslots": {
+                        "items": {
+                            "required": [
+                                "sessions",
+                                "starttime"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "endtime": {
+                                    "pattern": "^[0-2]?[0-9]:[0-9]{2}$",
+                                    "type": "string"
+                                },
+                                "starttime": {
+                                    "pattern": "^[0-2]?[0-9]:[0-9]{2}$",
+                                    "type": "string"
+                                },
+                                "sessions": {
+                                    "minItems": 1,
+                                    "maxItems": 2,
+                                    "items": {
+                                        "required": [
+                                            "session_title"
+                                        ],
+                                        "additionalProperties": false,
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "moderator": {
+                                                "type": "string"
+                                            },
+                                            "location": {
+                                                "$ref": "#definitions/location"
+                                            },
+                                            "starttime": {
+                                                "pattern": "^[0-2]?[0-9]:[0-9]{2}$",
+                                                "type": "string"
+                                            },
+                                            "talks": {
+                                                "$ref": "#definitions/talks"
+                                            },
+                                            "session_title": {
+                                                "type": "string"
+                                            },
+                                            "endtime": {
+                                                "pattern": "^[0-2]?[0-9]:[0-9]{2}$",
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "array",
+                                    "maxItems": 2
+                                }
+                            }
+                        },
+                        "type": "array"
+                    }
+                },
+                "title": "Days"
+            },
+            "type": "array"
+        }
+    },
+    "title": "Program"
+}
