@@ -212,9 +212,8 @@
                 <br />
                 <p class="timeSlot text-center">{{starttime}}-{{endtime}}</p>
               </div>
-              {{#if twosessions}}
-              <div class="col-md-5">
-                <div class="track1Event panel-body" id="{{sessions.0.id}}">
+              <div class="{{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
+                <div class="{{#if twosessions}}mutualEvent{{else}}track1Event{{/if}} panel-body" id="{{sessions.0.id}}">
                   <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},0)">
                     <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover">
                       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -224,12 +223,12 @@
                     {{sessions.0.session_title}}
                   </h4>
                   {{#if sessions.0.location.name}}
-                  <p class="dualTrackDescr">
+                  <p class="{{#if twosessions}}dualTrackDescr{{else}}eventDesc{{/if}}">
                     {{sessions.0.location.name}}
                   </p>
                   {{/if}}
                   {{#if sessions.0.moderator}}
-                  <p class="dualTrackDescr">
+                  <p class="{{#if twosessions}}dualTrackDescr{{else}}eventDescr{{/if}}">
                     {{sessions.0.moderator}}
                   </p>
                   {{/if}}
@@ -241,6 +240,7 @@
                   {{/empty}}
                 </div>
               </div>
+              {{#if twosessions}}
               <div class="col-md-5">
                 <div class="panel-body track2Event" id="{{sessions.1.id}}">
                   <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},1)">
@@ -269,36 +269,7 @@
                   {{/empty}}
                 </div>
               </div>
-              {{else}} <!-- One session -->
-              <div class="col-md-10">
-                <div class="panel-body mutualEvent" id="{{sessions.0.id}}">
-                  <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},0)">
-                    <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover">
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </label>
-                  </a>
-                  <h4>
-                    {{sessions.0.session_title}}
-                  </h4>
-                  {{#if sessions.0.location.name}}
-                  <p class="eventDescr">
-                    {{sessions.0.location.name}}
-                  </p>
-                  {{/if}}
-                  {{#if sessions.0.moderator}}
-                  <p class="eventDescr">
-                    {{sessions.0.moderator}}
-                  </p>
-                  {{/if}}
-                  {{#empty sessions.0.talks}}
-                  Drag talks to this session.
-                  {{#each sessions.0.talks}}
-                  {{> talk}}
-                  {{/each}}
-                  {{/empty}}
-                </div>
-              </div>
-              {{/if}} <!-- twosessions -->
+              {{/if}} <!-- end of second session -->
             </div>
             {{/if}} <!-- sessions -->
             {{/each}} <!-- timeslots -->
