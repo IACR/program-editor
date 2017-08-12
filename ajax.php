@@ -66,8 +66,7 @@ function doGetLatest($pdo) {
   $stmt->closeCursor();
   $stmt = null;
   if (!$values) {
-    echo '{"error": "Nothing found for that id"}';
-    return;
+    $values = array();;
   }
   $values = array("programs" => $values);
   echo json_encode($values);
