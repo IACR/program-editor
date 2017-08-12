@@ -110,6 +110,8 @@ function createDatePicker(numDays) {
   });
 }
 
+// This is called when a change is made to unassigned_talks or
+// progData.
 function refresh() {
   drawProgram();
   drawTalks();
@@ -174,6 +176,7 @@ function drawProgram() {
 function startEditor() {
   refresh();
   $('#setupPrompts').hide();
+  $('#uploadmenu').show();
   $('#parent').show(500);
 }
 
