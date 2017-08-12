@@ -120,10 +120,7 @@
           <p>
             Next, upload a JSON file of accepted papers from websubrev.
           </p>
-          <label for="uploadTalksSelector" class="btn btn-sm btn-success">
-            <input type="file" accept=".json" id="uploadTalksSelector" />
-            Upload JSON file
-          </label>
+          <button type="button" name="showUpload" onclick="showWebsubrevUpload()" class="btn btn-sm btn-success">Upload websubrev acepted talks</button>
           <button type="button" name="skipUpload" onclick="startEditor()" class="btn btn-sm btn-success">Skip for now</button>
         </section>
       </div>
@@ -305,6 +302,30 @@
     <!-- Additional/custom scripts -->
     <script src="./scripts/editor.js"></script>
 
+    <!-- modal for upload from websubrev. -->
+    <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labeledby="uploadTitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" id="uploadTitle">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="modal-title" id="uploadTitle">
+              Upload accepted talks from websubrev
+            </h2>
+          </div>
+          <div class="modal-body">
+            <label for="uploadTalksSelector" class="btn btn-sm btn-success">
+              <input type="file" accept=".json" id="uploadTalksSelector" />
+              Upload JSON file
+            </label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </aside>
     <!-- Modal for warnings and errors -->
     <aside class="modal fade" id="errorBox" role="dialog" aria-labelledby="warningTitle">
       <div class="modal-dialog" role="document">
