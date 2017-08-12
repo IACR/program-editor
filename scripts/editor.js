@@ -806,6 +806,7 @@ $(document).ready(function() {
   progTemplate = Handlebars.compile(theTemplateScript);
   theTemplateScript = $("#talks-template").html();
   talksTemplate = Handlebars.compile(theTemplateScript);
+  Handlebars.registerPartial("talk", $('#talk-partial').html());
   $('body').tooltip({
     selector: '[data-toggle="tooltip"]'
   });
