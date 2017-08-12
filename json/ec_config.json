@@ -1,7 +1,7 @@
 {
-  "name": "Crypto template",
+  "name": "Eurocrypt/Asiacrypt (5 days, dual tracks, banquet)",
   "config": {
-    "default_track_locations": [{"name": "Lotte Lehman Hall"}, {"name": "Campbell Hall"}],
+    "default_track_locations": ["Location TBD", "Location TBD"],
     "default_talk_minutes": 25,
     "unassigned_talks": [{
       "name": "Uncategorized",
@@ -19,7 +19,7 @@
             {
               "session_title": "Registration",
               "location": {
-                "name": "Anacapa Formal Lounge"
+                "name": "Location TBD"
               }
             }
           ]
@@ -29,9 +29,9 @@
           "endtime": "21:30",
           "sessions": [
             {
-              "session_title": "Reception Dinner",
+              "session_title": "Reception",
               "location": {
-                "name": "Anacapa Lawn"
+                "name": "Location TBD"
               }
             }
           ]
@@ -42,26 +42,14 @@
       "date": "2016-08-15",
       "timeslots": [
         {
-          "endtime": "8:45",
-          "starttime": "7:30",
-          "sessions": [
-            {
-              "session_title": "Breakfast",
-              "location": {
-                "name": "De La Guerra Dining Commons"
-              }
-            }
-          ]
-        },
-        {
           "endtime": "8:55",
           "starttime": "8:45",
           "sessions": [
             {
-              "moderator": "Crypto General Chair, (add name)",
+              "moderator": "Conference General Chair (supply name)",
               "session_title": "Opening remarks",
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             }
           ]
@@ -74,14 +62,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavillion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehman Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -103,14 +91,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavillion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -122,7 +110,7 @@
             {
               "session_title": "Break",
               "location": {
-                "name": "University Center Lagoon Plaza"
+                "name": "Location TBD"
               }
             }
           ]
@@ -135,7 +123,7 @@
               "session_title": "Invited talk or award talks",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             }
           ]
@@ -147,7 +135,7 @@
             {
               "session_title": "Lunch",
               "location": {
-                "name": "De La Guerra Dining Commons"
+                "name": "Location TBD"
               }
             }
           ]
@@ -160,14 +148,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavillion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -189,14 +177,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavillion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -208,7 +196,7 @@
             {
               "session_title": "Break",
               "location": {
-                "name": "University Center Lagoon Plaza"
+                "name": "Location TBD"
               }
             }
           ]
@@ -221,14 +209,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavillion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -240,7 +228,7 @@
             {
               "session_title": "Dinner",
               "location": {
-                "name": "Anacapa Lawn"
+                "name": "Location TBD"
               }
             }
           ]
@@ -251,18 +239,6 @@
       "date": "2016-08-16",
       "timeslots": [
         {
-          "endtime": "9:00",
-          "starttime": "7:30",
-          "sessions": [
-            {
-              "session_title": "Breakfast",
-              "location": {
-                "name": "De La Guerra Dining Commons"
-              }
-            }
-          ]
-        },
-        {
           "endtime": "10:25",
           "starttime": "9:10",
           "sessions": [
@@ -270,14 +246,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehman Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -287,9 +263,9 @@
           "starttime": "10:25",
           "sessions": [
             {
-              "session_title": "Break",
+              "session_title": "Coffee Break",
               "location": {
-                "name": "University Center Lagoon Plaza"
+                "name": "Location TBD"
               }
             }
           ]
@@ -302,14 +278,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehman Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -331,7 +307,7 @@
               "session_title": "Invited talk or award talks",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             }
           ]
@@ -343,7 +319,7 @@
             {
               "session_title": "Lunch",
               "location": {
-                "name": "De La Guerra Dining Commons"
+                "name": "Location TBD"
               }
             }
           ]
@@ -364,7 +340,7 @@
             {
               "session_title": "Dinner Reception",
               "location": {
-                "name": "University Center Lagoon Plaza"
+                "name": "Location TBD"
               }
             }
           ]
@@ -376,7 +352,7 @@
             {
               "session_title": "IACR Award Ceremony",
               "location": {
-                "name": "University Center Corwin Pavilion"
+                "name": "Location TBD"
               }
             }
           ]
@@ -388,7 +364,7 @@
             {
               "session_title": "Rump Session",
               "location": {
-                "name": "University Center Corwin Pavilion"
+                "name": "Location TBD"
               }
             }
           ]
@@ -399,18 +375,6 @@
       "date": "2016-08-17",
       "timeslots": [
         {
-          "endtime": "8:50",
-          "starttime": "7:30",
-          "sessions": [
-            {
-              "session_title": "Breakfast",
-              "location": {
-                "name": "De La Guerra Dining Commons"
-              }
-            }
-          ]
-        },
-        {
           "endtime": "9:40",
           "starttime": "8:50",
           "sessions": [
@@ -418,14 +382,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -447,14 +411,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -466,7 +430,7 @@
             {
               "session_title": "Coffee Break",
               "location": {
-                "name": "Plaza outside Campbell Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -479,7 +443,7 @@
               "session_title": "Invited talk or award talks",
               "talks": [],
               "location": {
-                "name": "Campbell Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -491,7 +455,7 @@
             {
               "session_title": "Lunch",
               "location": {
-                "name": "De La Guerra Dining Commons"
+                "name": "Location TBD"
               }
             }
           ]
@@ -504,14 +468,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -523,7 +487,7 @@
             {
               "session_title": "Break",
               "location": {
-                "name": "University Center Lagoon Plaza"
+                "name": "Location TBD"
               }
             }
           ]
@@ -536,14 +500,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -555,7 +519,7 @@
             {
               "session_title": "IACR Membership Meeting",
               "location": {
-                "name": "University Center Corwin Pavilion"
+                "name": "Location TBD"
               }
             }
           ]
@@ -565,22 +529,9 @@
           "starttime": "18:00",
           "sessions": [
             {
-              "session_title": "Beach Barbeque",
+              "session_title": "Banquet",
               "location": {
-                "name": "Goleta Beach"
-              }
-            }
-          ]
-        },
-        {
-          "endtime": "22:30",
-          "starttime": "19:30",
-          "sessions": [
-            {
-              "starttime": "21:00",
-              "session_title": "Crypto Caf\u00e9",
-              "location": {
-                "name": "Anacapa Formal Lounge and Anacapa Front Lawn"
+                "name": "Location TBD"
               }
             }
           ]
@@ -591,18 +542,6 @@
       "date": "2016-08-18",
       "timeslots": [
         {
-          "endtime": "8:50",
-          "starttime": "7:30",
-          "sessions": [
-            {
-              "session_title": "Breakfast",
-              "location": {
-                "name": "De La Guerra Dining Commons"
-              }
-            }
-          ]
-        },
-        {
           "endtime": "10:05",
           "starttime": "8:50",
           "sessions": [
@@ -610,14 +549,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -629,7 +568,7 @@
             {
               "session_title": "Break",
               "location": {
-                "name": "University Center Lagoon Plaza"
+                "name": "Location TBD"
               }
             }
           ]
@@ -642,14 +581,14 @@
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Corwin Pavilion"
+                "name": "Location TBD"
               }
             },
             {
               "session_title": "Session title TBD",
               "talks": [],
               "location": {
-                "name": "Lotte Lehmann Hall"
+                "name": "Location TBD"
               }
             }
           ]
@@ -661,7 +600,7 @@
             {
               "session_title": "Lunch",
               "location": {
-                "name": "De La Guerra Dining Commons"
+                "name": "Location TBD"
               }
             }
           ]
