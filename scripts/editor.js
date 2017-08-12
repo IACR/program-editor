@@ -41,7 +41,9 @@ function setProgData(data) {
 // Show a list of all existing versions to edit.
 function editExisting() {
   $('#templateSelector').hide();
+  $('#nameEntry').hide();
   $('#datePicker').hide();
+  $('#uploadTalks').hide();
   $('#versionPicker').show(500);
   $.getJSON('ajax.php', function(data) {
     // remove the rows other than the first.
@@ -82,6 +84,8 @@ function createNew() {
   // need to reset it.
   $('#templateSelect').val('');
   $('#versionPicker').hide();
+  $('#nameEntry').hide();
+  $('#datePicker').hide();
 }
 
 // jQuery date picker
@@ -123,12 +127,24 @@ function getConfig(name, existing) {
       $('#parent').show(500);
       return;
     }
-    createDatePicker(progData.days.length);
-    $('#datePicker').show(500);
+    $('#templateSelector').hide();
+    $('#nameEntry').show(500);
   })
   .fail(function(jqxhr, textStatus, error) {
     warningBox('There was a problem with this conference template. Please try another.');
   });
+}
+
+// For new programs, add a name to progData
+function addName() {
+  if ($('#inputName').val() === "") {
+    warningBox('Please enter a name');
+    return;
+  }
+  progData.name = $('#inputName').val();
+  $('#nameEntry').hide();
+  $('#datePicker').show(500);
+  createDatePicker(progData.days.length);
 }
 
 // set start/end dates in progData
