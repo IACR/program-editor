@@ -208,6 +208,7 @@ function uploadTalks(evt) {
         evt.target.value = '';
         return;
       }
+      $('#uploadTalksModal').modal('hide');
       startEditor();
     } catch (ee) {
       warningBox('Unable to parse file as JSON.');
@@ -224,7 +225,7 @@ function splitAuthors(val) {
   return val.split(re);
 }
 
-// paper validation
+// Paper validation. This makes sure there are no duplicates.
 function validatePapers(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
     warningBox('JSON file is not websubrev format.');
@@ -280,6 +281,11 @@ function validatePapers(data) {
   }
 
   return categoryList;
+}
+
+// Show modal for uploading from websubrev.
+function showWebsubrevUpload() {
+  $('#uploadTalksModal').modal();
 }
 
 // style warnings and error message for better visibility to user
