@@ -106,6 +106,12 @@ function createDatePicker(numDays) {
   });
 }
 
+function refresh() {
+  drawProgram();
+  drawTalks();
+  addDrag();
+}
+
 // parse JSON file to create initial program structure
 function getConfig(name, existing) {
   $.getJSON(name, function(data) {
@@ -113,9 +119,7 @@ function getConfig(name, existing) {
 
     if (existing) {
       $('#setupPrompts').hide();
-      drawProgram();
-      drawTalks();
-      addDrag();
+      refresh();
       $('#parent').show(500);
       return;
     }
@@ -152,9 +156,7 @@ function drawProgram() {
 }
 
 function startEditor() {
-  drawProgram();
-  drawTalks();
-  addDrag();
+  refresh();
   $('#setupPrompts').hide();
   $('#parent').show(500);
 }
@@ -374,7 +376,6 @@ function updateProgData(el, target, source, sibling) {
   }
   // sourceArray and targetArray point to a talks array, either in a
   // category or a session.
-  console.log('source id is ' + source.parentNode.id);
   var sourceObj = findObj(source.parentNode.id, progData);
   if (sourceObj === false) {
     console.log('unable to update source');
@@ -398,7 +399,6 @@ function updateProgData(el, target, source, sibling) {
     console.log('unable to find talk in source talks.');
     return false;
   }
-  console.log('removing talk at index ' + sourceIndex);
   sourceTalks.splice(sourceIndex, 1);
 
   var targetTalks = targetObj.talks;
@@ -419,31 +419,79 @@ function updateProgData(el, target, source, sibling) {
       targetTalks.push(talkObj);
     } else {
       targetTalks.splice(siblingIndex, 0, talkObj);
-      console.log('inserting at position ' + siblingIndex);
     }
   }
   return true;
 }
 
-// save new talk after talk data has already been used to generate template
-function addNewTalk() {
-  var talk = {};
-  talk.id = "talk-" + createUniqueId();
+// Save a talk. This may come from an edit on an existing talk or a new
+// talk that was added. If the id is empty then it's a new talk.
+function saveTalk() {
+  var talkId = $('#talkId').val();
+  if (talkId === "") {
+    var talk = {};
+    talk.id = "talk-" + createUniqueId();
+  } else { // an existing talk.
+    var talk = findObj(talkId, progData);
+  }
   talk.title = $('#newTalkTitle').val();
   talk.authors = splitAuthors($('#newTalkAuthor').val());
   // TODO: handle affiliations
-  // talk.affiliation = $('#newTalkAffiliation').val();
-
+  talk.affiliations = $('#newTalkAffiliation').val();
   var category = $('#newTalkCategory').children(':selected');
   talk.category = category.text();
-  var categoryIndex = new Number(category.attr('value'));
-  progData.config.unassigned_talks[categoryIndex].talks.push(talk);
-  drawTalks();
-  addDrag();
+  if (talkId === "") {
+    var categoryIndex = new Number(category.attr('value'));
+    progData.config.unassigned_talks[categoryIndex].talks.unshift(talk);
+  }
+  refresh();
+}
+
+// Delete a talk from progData and redraw.
+function deleteTalk() {
+  if (!window.confirm("Are you sure you want to delete the talk?")) {
+    $('#editTalkBox').modal('hide');
+    return;
+  }
+  $('#editTalkBox').modal('hide');
+  var talkId = $('#talkId').val();
+  // This is tricky because we have to find the talk by id and delete
+  // it wherever we find it.
+  var unassigned_talks = progData.config.unassigned_talks;
+  for (var i = 0; i < unassigned_talks.length; i++) {
+    var talkIndex = unassigned_talks[i].talks.findIndex(function(el) {
+      return el.id === talkId;
+    });
+    if (talkIndex >= 0) {
+      unassigned_talks[i].talks.splice(talkIndex, 1);
+      refresh();
+      return;
+    }
+  }
+  // We didn't find it in unassigned_talks, so check the sessions.
+  for (var dayIndex = 0; dayIndex < progData.days.length; dayIndex++) {
+    var day = progData.days[dayIndex];
+    for (var slotIndex = 0; slotIndex < day.timeslots.length; slotIndex++) {
+      var timeSlot = day.timeslots[slotIndex];
+      for (var sessionIndex = 0; sessionIndex < timeSlot.sessions.length; sessionIndex++) {
+        var session = timeSlot.sessions[sessionIndex];
+        if (session.hasOwnProperty('talks')) {
+          var talkIndex = session.talks.findIndex(function(el) {
+            return el.id === talkId;
+          });
+          if (talkIndex >= 0) {
+            session.talks.splice(talkIndex, 1);
+            refresh();
+            return;
+          }
+        }
+      }
+    }
+  }
 }
 
 // populate categories from current config in add talk modal
-function addCategories() {
+function showTalkEditor(id) {
   // remove all categories in case loop has already been triggered, so you don't get duplicate categories
   $('#newTalkCategory').find('option').remove().end()
 
@@ -451,6 +499,21 @@ function addCategories() {
     $('#newTalkCategory').append($('<option>', {
       value:i, text:progData.config.unassigned_talks[i].name
     }));
+  }
+  $('#talkId').val(id);
+  if (id === "") { // then we're adding a new talk.
+    $('#talkDeleteButton').hide();
+    $('#newTalkTitle').val('');
+    $('#newTalkAuthor').val('');
+    $('#newTalkAffiliation').val('');
+    $('#addTalkTitle').text('Add a new talk');
+  } else {
+    $('#talkDeleteButton').show();
+    var talkObj = findObj(id, progData);
+    $('#newTalkTitle').val(talkObj.title);
+    $('#newTalkAuthor').val(talkObj.authors.join(' and '))
+    $('#newTalkAffiliation').val(talkObj.affiliations);
+    $('#addTalkTitle').text('Edit a talk');
   }
 }
 
@@ -543,9 +606,7 @@ function addTimeslotToDay() {
     // Then it belongs at the end because it is after everything else.
     timeslots.push(timeslot);
   }
-  drawProgram();
-  drawTalks();
-  addDrag();
+  refresh();
   document.getElementById(timeslot.sessions[0].id).scrollIntoView();
 }
 
@@ -614,9 +675,7 @@ function saveTimeslot() {
   // Sort the timeslots again, because they may be out of order
   // if the startTime changed.
   sortTimeslots(dayIndex);
-  drawProgram();
-  drawTalks();
-  addDrag();
+  refresh();
 }
 
 // If a session is about to be deleted (either by deleting the one session
@@ -653,9 +712,7 @@ function deleteTimeslot() {
   }
   // Actually remove the timeslot.
   progData.days[dayIndex].timeslots.splice(slotIndex, 1);
-  drawProgram();
-  drawTalks();
-  addDrag();
+  refresh();
 }
 
 // Delete a session. If this is the only session for the timeslot, then defer
@@ -680,9 +737,7 @@ function deleteSession() {
   moveTalksToUnassigned(sessionObj);
   timeSlot.sessions.splice(sessionIndex, 1);
   timeSlot.twosessions = false;
-  drawProgram();
-  drawTalks();
-  addDrag();
+  refresh();
 }
 
 // submit button for edit session
@@ -714,9 +769,7 @@ function saveSession() {
   }
   console.dir(sessionObj);
   // TODO: after drag/drop and edit session, 'drag talks' placeholder reappears
-  drawProgram();
-  drawTalks();
-  addDrag();
+  refresh();
 }
 
 // download edited JSON program
