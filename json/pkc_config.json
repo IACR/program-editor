@@ -1,316 +1,319 @@
 {
   "name": "pkc_2017_config",
   "config": {
-	"default_track_locations": [{"name": "Enter a location"}],
-	"default_talk_minutes": 25,
-	"unassigned_talks": []
+    "default_track_locations": [{"name": "Enter a location"}],
+    "default_talk_minutes": 25,
+    "unassigned_talks": [{
+      "name": "Uncategorized",
+      "talks": []
+    }]
+  },
+  "days": [
+    {
+      "date": "2017-03-28",
+      "timeslots": [
+        {
+          "starttime": "18:00",
+          "endtime": "20:00",
+          "sessions": [
+            {
+              "session_title": "Welcome Reception and Registration",
+              "location": {
+                "name": "Enter a location"
+              }
+            }
+          ]
+        }
+      ]
     },
-    "days": [
+    {
+      "date": "2017-03-29",
+      "timeslots": [
         {
-            "date": "2017-03-28",
-            "timeslots": [
-                {
-                    "starttime": "18:00",
-                    "endtime": "20:00",
-                    "sessions": [
-                        {
-                            "session_title": "Welcome Reception and Registration",
-                            "location": {
-                                "name": "Enter a location"
-                            }
-                        }
-                    ]
-                }
-            ]
+          "endtime": "9:00",
+          "starttime": "8:00",
+          "sessions": [
+            {
+              "session_title": "Registration"
+            }
+          ]
         },
         {
-            "date": "2017-03-29",
-            "timeslots": [
-                {
-                    "endtime": "9:00",
-                    "starttime": "8:00",
-                    "sessions": [
-                        {
-                            "session_title": "Registration"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "9:10",
-                    "starttime": "9:00",
-                    "sessions": [
-                        {
-                            "moderator": "Conference General Chair",
-                            "session_title": "Welcome"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "10:25",
-                    "starttime": "9:10",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-			    "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "10:55",
-                    "starttime": "10:25",
-                    "sessions": [
-                        {
-                            "session_title": "Coffee break"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "11:45",
-                    "starttime": "10:55",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-			    "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "12:45",
-                    "starttime": "11:45",
-                    "sessions": [
-                        {
-                            "session_title": "invited Talk I",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "14:00",
-                    "starttime": "12:45",
-                    "sessions": [
-                        {
-                            "session_title": "Lunch"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "15:15",
-                    "starttime": "14:00",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "15:45",
-                    "starttime": "15:15",
-                    "sessions": [
-                        {
-                            "session_title": "Coffee Break"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "17:00",
-                    "starttime": "15:45",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-                            "talks": []
-                        }
-                    ]
-                }
-            ]
+          "endtime": "9:10",
+          "starttime": "9:00",
+          "sessions": [
+            {
+              "moderator": "Conference General Chair",
+              "session_title": "Welcome"
+            }
+          ]
         },
         {
-            "date": "2017-03-30",
-            "timeslots": [
-                {
-                    "endtime": "10:15",
-                    "starttime": "9:00",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "10:45",
-                    "starttime": "10:15",
-                    "sessions": [
-                        {
-                            "session_title": "Coffee Break"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "12:25",
-                    "starttime": "10:45",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "13:45",
-                    "starttime": "12:25",
-                    "sessions": [
-                        {
-                            "session_title": "Lunch"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "15:25",
-                    "starttime": "13:45",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "15:55",
-                    "starttime": "15:25",
-                    "sessions": [
-                        {
-                            "session_title": "Lunch"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "17:10",
-                    "starttime": "15:55",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "22:00",
-                    "starttime": "19:00",
-                    "sessions": [
-                        {
-                            "session_title": "Conference Dinner",
-                            "location": {
-                                "name": "Click to edit location"
-                            }
-                        }
-                    ]
-                }
-            ]
+          "endtime": "10:25",
+          "starttime": "9:10",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+	      "talks": []
+            }
+          ]
         },
         {
-            "date": "2017-03-31",
-            "timeslots": [
-                {
-                    "endtime": "10:15",
-                    "starttime": "9:00",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "10:45",
-                    "starttime": "10:15",
-                    "sessions": [
-                        {
-                            "session_title": "Coffee Break"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "11:35",
-                    "starttime": "10:45",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "12:35",
-                    "starttime": "11:35",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Invited talk",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "14:00",
-                    "starttime": "12:35",
-                    "sessions": [
-                        {
-                            "session_title": "Lunch"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "15:15",
-                    "starttime": "14:00",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "15:45",
-                    "starttime": "15:15",
-                    "sessions": [
-                        {
-                            "session_title": "Coffee Break"
-                        }
-                    ]
-                },
-                {
-                    "endtime": "17:00",
-                    "starttime": "15:45",
-                    "sessions": [
-                        {
-                            "moderator": "Click to edit session moderator",
-                            "session_title": "Click to edit session title.",
-                            "talks": []
-                        }
-                    ]
-                },
-                {
-                    "endtime": "17:10",
-                    "starttime": "17:00",
-                    "sessions": [
-                        {
-                            "session_title": "Closing remarks"
-                        }
-                    ]
-                }
-            ]
-         }
-     ]
+          "endtime": "10:55",
+          "starttime": "10:25",
+          "sessions": [
+            {
+              "session_title": "Coffee break"
+            }
+          ]
+        },
+        {
+          "endtime": "11:45",
+          "starttime": "10:55",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "12:45",
+          "starttime": "11:45",
+          "sessions": [
+            {
+              "session_title": "invited Talk I",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:45",
+          "sessions": [
+            {
+              "session_title": "Lunch"
+            }
+          ]
+        },
+        {
+          "endtime": "15:15",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "15:45",
+          "starttime": "15:15",
+          "sessions": [
+            {
+              "session_title": "Coffee Break"
+            }
+          ]
+        },
+        {
+          "endtime": "17:00",
+          "starttime": "15:45",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+              "talks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2017-03-30",
+      "timeslots": [
+        {
+          "endtime": "10:15",
+          "starttime": "9:00",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "10:45",
+          "starttime": "10:15",
+          "sessions": [
+            {
+              "session_title": "Coffee Break"
+            }
+          ]
+        },
+        {
+          "endtime": "12:25",
+          "starttime": "10:45",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "13:45",
+          "starttime": "12:25",
+          "sessions": [
+            {
+              "session_title": "Lunch"
+            }
+          ]
+        },
+        {
+          "endtime": "15:25",
+          "starttime": "13:45",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "15:55",
+          "starttime": "15:25",
+          "sessions": [
+            {
+              "session_title": "Lunch"
+            }
+          ]
+        },
+        {
+          "endtime": "17:10",
+          "starttime": "15:55",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "22:00",
+          "starttime": "19:00",
+          "sessions": [
+            {
+              "session_title": "Conference Dinner",
+              "location": {
+                "name": "Click to edit location"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2017-03-31",
+      "timeslots": [
+        {
+          "endtime": "10:15",
+          "starttime": "9:00",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "10:45",
+          "starttime": "10:15",
+          "sessions": [
+            {
+              "session_title": "Coffee Break"
+            }
+          ]
+        },
+        {
+          "endtime": "11:35",
+          "starttime": "10:45",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "12:35",
+          "starttime": "11:35",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Invited talk",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:35",
+          "sessions": [
+            {
+              "session_title": "Lunch"
+            }
+          ]
+        },
+        {
+          "endtime": "15:15",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "15:45",
+          "starttime": "15:15",
+          "sessions": [
+            {
+              "session_title": "Coffee Break"
+            }
+          ]
+        },
+        {
+          "endtime": "17:00",
+          "starttime": "15:45",
+          "sessions": [
+            {
+              "moderator": "Click to edit session moderator",
+              "session_title": "Click to edit session title.",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "17:10",
+          "starttime": "17:00",
+          "sessions": [
+            {
+              "session_title": "Closing remarks"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
