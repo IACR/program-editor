@@ -126,7 +126,7 @@ div.session-talks {
   visibility: hidden;
   }
 
-.panel-body:hover a {
+.panel-body:hover > a {
     visibility: visible;
 }
 
@@ -138,7 +138,7 @@ div.timeSlotDiv a {
   visibility: hidden;
 }
 
-div.timeSlotDiv:hover a {
+div.timeSlotDiv:hover > a {
   visibility: visible;
 }
 
@@ -231,7 +231,7 @@ div.menu-lowered {
 .talk a {
     visibility: hidden;
 }
-.talk:hover a {
+.talk:hover > a {
   color:red;
   visibility: visible;
 }
