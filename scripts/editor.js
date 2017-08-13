@@ -124,6 +124,7 @@ function getConfig(name, existing) {
     setProgData(data);
 
     if (existing) {
+      $('#uploadmenu').show();
       $('#setupPrompts').hide();
       refresh();
       $('#parent').show(500);
@@ -180,7 +181,7 @@ function startEditor() {
   $('#parent').show(500);
 }
 
-// upload JSON file of talks and parse
+// Upload JSON file of talks and parse.
 function uploadTalks(evt) {
   var files = evt.target.files;
 
@@ -201,10 +202,8 @@ function uploadTalks(evt) {
       return;
     } try {
       var data = JSON.parse(textFile.result);
-      var acceptedPapers = validatePapers(data);
-      progData.config.unassigned_talks = acceptedPapers;
-
-      if (acceptedPapers == null) {
+      if (!mergeTalks(data)) {
+        console.log('failed to merge');
         evt.target.value = '';
         return;
       }
@@ -212,6 +211,7 @@ function uploadTalks(evt) {
       startEditor();
     } catch (ee) {
       warningBox('Unable to parse file as JSON.');
+      console.dir(ee);
       evt.target.value = '';
       return;
     }
@@ -225,11 +225,13 @@ function splitAuthors(val) {
   return val.split(re);
 }
 
-// Paper validation. This makes sure there are no duplicates.
-function validatePapers(data) {
+
+// Merge the data from websubrev into the unassigned_talks
+// data structure. There is no dup elimination.
+function mergeTalks(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
     warningBox('JSON file is not websubrev format.');
-    return null;
+    return false;
   }
   var acceptedPapers = data.acceptedPapers;
 
@@ -237,8 +239,9 @@ function validatePapers(data) {
     var paper = acceptedPapers[i];
 
     if (!paper.hasOwnProperty('title') || !paper.hasOwnProperty('authors')) {
+      console.log('JSON file has a paper with a missing title or authors');
       warningBox('JSON file has a paper with a missing title or authors');
-      return null;
+      return false;
     }
 
     if (!paper.hasOwnProperty('category')) {
@@ -250,9 +253,13 @@ function validatePapers(data) {
 
   // create map from category name to array of talks for that category
   var categoryMap = {};
+  // First start with the existing unassigned_talks array.
+  for (var i = 0; i < progData.config.unassigned_talks.length; i++) {
+    var category = progData.config.unassigned_talks[i];
+    categoryMap[category.name] = category.talks;
+  }
   for (var i = 0; i < acceptedPapers.length; i++) {
     var paper = acceptedPapers[i];
-
     if (paper.category in categoryMap) {
       categoryMap[paper.category].push(paper);
     } else {
@@ -274,13 +281,12 @@ function validatePapers(data) {
     }
     return 0;
   });
-
   // make sure it has an empty uncategorized category.
   if (categoryList.length == 0) {
     categoryList.push({'name': 'Uncategorized', 'talks':[], 'id': 'category-0'});
   }
-
-  return categoryList;
+  progData.config.unassigned_talks = categoryList;
+  return true;
 }
 
 // Show modal for uploading from websubrev.
@@ -832,6 +838,7 @@ $(document).ready(function() {
   theTemplateScript = $("#talks-template").html();
   talksTemplate = Handlebars.compile(theTemplateScript);
   Handlebars.registerPartial("talk", $('#talk-partial').html());
+  // Register tooltip plugin.
   $('body').tooltip({
     selector: '[data-toggle="tooltip"]'
   });
