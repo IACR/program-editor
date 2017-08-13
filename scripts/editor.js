@@ -80,6 +80,7 @@ function saveProgram() {
 // create new program template from available templates
 function createNew() {
   $('#templateSelector').show(500);
+  
   // The select depends on the onchange event to load a config, so we
   // need to reset it.
   $('#templateSelect').val('');
@@ -838,14 +839,15 @@ $(document).ready(function() {
   theTemplateScript = $("#talks-template").html();
   talksTemplate = Handlebars.compile(theTemplateScript);
   Handlebars.registerPartial("talk", $('#talk-partial').html());
+
   // Register tooltip plugin.
   $('body').tooltip({
     selector: '[data-toggle="tooltip"]'
   });
+
   // Make dropdown menus respond to hover.
   $('ul.nav li.dropdown').hover(function() {
-    $(this).find('.dropdown-menu').stop(true,
-                                       true).delay(100).fadeIn(100);
+    $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(100);
   }, function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(100);
   });
