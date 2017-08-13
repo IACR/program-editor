@@ -488,7 +488,7 @@ function saveTalk() {
 
 // Delete a talk from progData and redraw.
 function deleteTalk() {
-  // TODO: possibly add custom code to allow for confirm dialog to be shown in standard error box rather than window.confirm
+  // TODO: resolve window.confirm issue (see github issue #80)
   if (!window.confirm("Are you sure you want to delete the talk?")) {
     $('#editTalkBox').modal('hide');
     return;
