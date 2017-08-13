@@ -30,20 +30,50 @@
         <div class="collapse navbar-collapse menu-lowered" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
+              <!-- TODO: do caret with html5 standard -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Actions <b class="caret"></b>
+              </a>
               <ul class="dropdown-menu">
-                <li><a href="javascript:location.reload()">Edit another program</a></li>
-                <li id="uploadmenu"><a href="javascript:showWebsubrevUpload()">Upload from websubrev</a></li>
+                <li>
+                  <a href="javascript:location.reload()">
+                    Edit another program
+                  </a>
+                </li>
+                <li id="uploadmenu">
+                  <a href="javascript:showWebsubrevUpload()">
+                    Upload from websubrev
+                  </a>
+                </li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+              <!-- TODO: do caret with html5 standard -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Help <b class="caret"></b>
+              </a>
               <ul class="dropdown-menu">
-                <li><a target="_help" href="docs/help.html">Help home</a></li>
-                <li><a target="_help" href="docs/help.html#websubrev">Websubrev input</a></li>
-                <li><a target="_help" href="docs/help.html#output">How to use the output</a></li>
+                <li>
+                  <a target="_help" href="docs/help.html">
+                    Help home
+                  </a>
+                </li>
+                <li>
+                  <a target="_help" href="docs/help.html#websubrev">
+                    Websubrev input
+                  </a>
+                </li>
+                <li>
+                  <a target="_help" href="docs/help.html#output">
+                    How to use the output
+                  </a>
+                </li>
                 <li role="separator" class="divider"></li>
-                <li><a target="_help" href="https://github.com/kaymckelly/program-editor">About this editor</a></li>
+                <li>
+                  <a target="_help" href="https://github.com/kaymckelly/program-editor">
+                    About this editor
+                  </a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -64,8 +94,12 @@
           <p>
             If you've been here before, you can edit an existing program. Otherwise, start from a new one.
           </p>
-          <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">New</button>
-          <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">Existing</button>
+          <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">
+            New
+          </button>
+          <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">
+            Existing
+          </button>
         </section>
       </div>
 
@@ -84,10 +118,18 @@
       <div class="row">
         <section id="templateSelector" class="col-md-8 col-md-offset-2 setupStep">
           <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
-            <option value="" disabled selected>Select a template</option>
-            <option value="./json/crypto_config.json">Crypto (5 days, dual track, bbq)</option>
-            <option value="./json/ec_config.json">Eurocrypt/Asiacrypt (5 days, dual track, banquet)</option>
-            <option value="./json/pkc_config.json">CHES/FSE/PKC/TCC (4 days, single track)</option>
+            <option value="" disabled selected>
+              Select a template
+            </option>
+            <option value="./json/crypto_config.json">
+              Crypto (5 days, dual track, bbq)
+            </option>
+            <option value="./json/ec_config.json">
+              Eurocrypt/Asiacrypt (5 days, dual track, banquet)
+            </option>
+            <option value="./json/pkc_config.json">
+              CHES/FSE/PKC/TCC (4 days, single track)
+            </option>
           </select>
         </section>
       </div>
@@ -97,8 +139,10 @@
           <p>
             Enter a name for the conference program.
           </p>
-          <input type="text" name="inputName" id="inputName"/>
-          <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success">Next</button>
+          <input type="text" name="inputName" id="inputName" />
+          <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success">
+            Next
+          </button>
         </section>
       </div>
       <div class="row">
@@ -120,8 +164,12 @@
           <p>
             Next, upload a JSON file of accepted papers from websubrev.
           </p>
-          <button type="button" name="showUpload" onclick="showWebsubrevUpload()" class="btn btn-sm btn-success">Upload websubrev acepted talks</button>
-          <button type="button" name="skipUpload" onclick="startEditor()" class="btn btn-sm btn-success">Skip for now</button>
+          <button type="button" name="showUpload" onclick="showWebsubrevUpload()" class="btn btn-sm btn-success">
+            Upload websubrev acepted talks
+          </button>
+          <button type="button" name="skipUpload" onclick="startEditor()" class="btn btn-sm btn-success">
+            Skip for now
+          </button>
         </section>
       </div>
     </div>
@@ -134,8 +182,12 @@
           </p>
         </section>
         <aside class="col-md-2">
-          <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">Download JSON</button>
-          <button type="button" name="saveProgram" onclick="saveProgram()" id="saveProgramBtn" class="btn btn-block btn-success">Save</button>
+          <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">
+            Download JSON
+          </button>
+          <button type="button" name="saveProgram" onclick="saveProgram()" id="saveProgramBtn" class="btn btn-block btn-success">
+            Save
+          </button>
         </aside>
       </div>
       <div class="row">
@@ -168,7 +220,11 @@
             {{title}}
           </h4>
           <div class="authorList">
-            {{#each authors}}<span class="authorName">{{this}}</span>{{/each}}
+            {{#each authors}}
+              <span class="authorName">
+                {{this}}
+              </span>
+            {{/each}}
           </div>
         </div>
       </script>
@@ -183,7 +239,7 @@
               </h3>
               <section class="category">
                 {{#each talks}}
-                {{> talk}}
+                  {{> talk}}
                 {{/each}}
               </section>
             </div>
@@ -217,7 +273,9 @@
                     </label>
                   </a>
                 <br />
-                <p class="timeSlot text-center">{{starttime}}-{{endtime}}</p>
+                <p class="timeSlot text-center">
+                  {{starttime}}-{{endtime}}
+                </p>
               </div>
               <div class="{{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
                 <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} panel-body" id="{{sessions.0.id}}">
@@ -239,6 +297,7 @@
                     {{sessions.0.moderator}}
                   </p>
                   {{/if}}
+                  
                   {{#empty sessions.0.talks}}
                   Drag talks to this session.
                   {{#each sessions.0.talks}}

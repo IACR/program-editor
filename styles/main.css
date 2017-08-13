@@ -213,7 +213,7 @@ span.authorName:last-of-type:after {
   font-size: 0.8em;
 }
 
-/* Added for the top right menu. */
+/*** Top right menu ***/
 
 a.dropdown-toggle {
     color: #202020;
