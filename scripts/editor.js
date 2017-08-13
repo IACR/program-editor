@@ -80,6 +80,7 @@ function saveProgram() {
 // create new program template from available templates
 function createNew() {
   $('#templateSelector').show(500);
+
   // The select depends on the onchange event to load a config, so we
   // need to reset it.
   $('#templateSelect').val('');
@@ -110,8 +111,7 @@ function createDatePicker(numDays) {
   });
 }
 
-// This is called when a change is made to unassigned_talks or
-// progData.
+// called when a change is made to unassigned_talks or progData.
 function refresh() {
   drawProgram();
   drawTalks();
@@ -227,7 +227,7 @@ function splitAuthors(val) {
 
 
 // Merge the data from websubrev into the unassigned_talks
-// data structure. There is no dup elimination.
+// data structure. There is no duplicate elimination.
 function mergeTalks(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
     warningBox('JSON file is not websubrev format.');
@@ -253,6 +253,7 @@ function mergeTalks(data) {
 
   // create map from category name to array of talks for that category
   var categoryMap = {};
+
   // First start with the existing unassigned_talks array.
   for (var i = 0; i < progData.config.unassigned_talks.length; i++) {
     var category = progData.config.unassigned_talks[i];
@@ -266,12 +267,14 @@ function mergeTalks(data) {
       categoryMap[paper.category] = [paper];
     }
   }
+
   var categoryList = [];
   for (var name in categoryMap) {
     if (categoryMap.hasOwnProperty(name)) {
       categoryList.push({'name': name, 'talks': categoryMap[name], 'id': 'category-' + categoryList.length});
     }
   }
+
   categoryList.sort(function(c1, c2) {
     if (c1.name < c2.name) {
       return -1;
@@ -281,6 +284,7 @@ function mergeTalks(data) {
     }
     return 0;
   });
+
   // make sure it has an empty uncategorized category.
   if (categoryList.length == 0) {
     categoryList.push({'name': 'Uncategorized', 'talks':[], 'id': 'category-0'});
@@ -348,7 +352,7 @@ function findObj(id, currentNode) {
   if (typeof currentNode === "string" || typeof currentNode === "number") {
     return false;
   }
-  // console.dir(currentNode);
+
   var i, currentChild, result;
   if (Array.isArray(currentNode)) {
     for (i = 0; i < currentNode.length; i++) {
@@ -405,6 +409,7 @@ function updateProgData(el, target, source, sibling) {
     console.log('unable to find talk in progData');
     return false;
   }
+
   // sourceArray and targetArray point to a talks array, either in a
   // category or a session.
   var sourceObj = findObj(source.parentNode.id, progData);
@@ -465,10 +470,13 @@ function saveTalk() {
   } else { // an existing talk.
     var talk = findObj(talkId, progData);
   }
+
   talk.title = $('#newTalkTitle').val();
   talk.authors = splitAuthors($('#newTalkAuthor').val());
+
   // TODO: handle affiliations
   talk.affiliations = $('#newTalkAffiliation').val();
+
   var category = $('#newTalkCategory').children(':selected');
   talk.category = category.text();
   if (talkId === "") {
@@ -480,12 +488,14 @@ function saveTalk() {
 
 // Delete a talk from progData and redraw.
 function deleteTalk() {
+  // TODO: resolve window.confirm issue (see github issue #80)
   if (!window.confirm("Are you sure you want to delete the talk?")) {
     $('#editTalkBox').modal('hide');
     return;
   }
   $('#editTalkBox').modal('hide');
   var talkId = $('#talkId').val();
+
   // This is tricky because we have to find the talk by id and delete
   // it wherever we find it.
   var unassigned_talks = progData.config.unassigned_talks;
@@ -532,6 +542,7 @@ function showTalkEditor(id) {
     }));
   }
   $('#talkId').val(id);
+
   if (id === "") { // then we're adding a new talk.
     $('#talkDeleteButton').hide();
     $('#newTalkTitle').val('');
@@ -553,6 +564,7 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   console.log('editing session='+dayIndex+':'+slotIndex+':'+sessionIndex);
   var sessionObj = progData.days[dayIndex].timeslots[slotIndex].sessions[sessionIndex];
   console.dir(sessionObj);
+
   $('#currentDayIndex').val(dayIndex);
   $('#currentSlotIndex').val(slotIndex);
   $('#currentSessionIndex').val(sessionIndex);
@@ -577,6 +589,8 @@ function prepareAddTimeslotToDay(dayIndex) {
   $('#dayIndex').val(dayIndex);
   var lastSlot = progData.days[dayIndex].timeslots[progData.days[dayIndex].timeslots.length -1];
 //  $('#newStartTime').val(lastSlot.endtime);
+
+// TODO: restrict times based on times of prior/next time slot? would be ideal but may also not be compatible with timepicker - further research needed
   $('#timeslotDiv .time').timepicker({
     'forceRoundTime': true,
     'show2400': true,
@@ -598,28 +612,32 @@ function hmToMinutes(val) {
   return parseInt(parts[0]) * 60 + parseInt(parts[1]);
 }
 
-// Function to add a timeslot to a day. This will be called to populate
-// the modal for adding a timeslot.
+// Add a timeslot to a day, called to populate the modal for adding a timeslot.
 function addTimeslotToDay() {
   var startTime = $("#newStartTime").val();
   var endTime = $("#newEndTime").val();
   var dayIndex = $("#dayIndex").val();
   var numTracks = parseInt($("#selectSessionCount").val());
+
   var timeslot = {"starttime": startTime,
                   "endtime": endTime,
                   "sessions": []};
   var withTalks = $("#includeTalks").prop("checked");
+
   for (var i = 0; i < numTracks; i++) {
     var session = {"id": "session-" + createUniqueId(),
                    "session_title": "Edit to change session title " + i};
+
     if (withTalks) {
       session.talks = [];
     }
     timeslot.sessions.push(session);
   }
+
   if (numTracks > 1) {
     timeslot['twosessions'] = true;
   }
+
   // Timeslots are ordered by start time and may be overlapping.
   var timeslots = progData.days[dayIndex].timeslots;
   var startMinutes = hmToMinutes(startTime);
@@ -649,12 +667,14 @@ function editTimeslot(dayIndex, slotIndex) {
   $('#timeslotDayIndex').val(dayIndex);
   $('#timeslotIndex').val(slotIndex);
   $('#makeDualSession').prop('checked', false);
+
   if (timeslot.sessions.length === 1) {
     // enable the checkbox to add a session.
     $('#addTrackToSession').show();
   } else {
     $('#addTrackToSession').hide();
   }
+
   $('#currentStartTime').val(timeslot.starttime);
   $('#currentEndTime').val(timeslot.endtime);
 
@@ -692,6 +712,7 @@ function saveTimeslot() {
   var timeSlot = progData.days[dayIndex].timeslots[slotIndex];
   timeSlot.starttime = $("#currentStartTime").val();
   timeSlot.endtime = $("#currentEndTime").val();
+
   if ($('#makeDualSession').is(':checked') && timeSlot.sessions.length === 1) {
     // Add a new (empty) session. If the existing session has talks,
     // then the new one should too.
@@ -703,8 +724,8 @@ function saveTimeslot() {
     timeSlot.sessions.push(newSession);
     timeSlot.twosessions = true;
   }
-  // Sort the timeslots again, because they may be out of order
-  // if the startTime changed.
+
+  // Sort the timeslots again, because they may be out of order if startTime changed.
   sortTimeslots(dayIndex);
   refresh();
 }
@@ -733,14 +754,17 @@ function deleteTimeslot() {
     $('#editTimeslot').modal('hide');
     return;
   }
+
   $('#editTimeslot').modal('hide');
   var dayIndex = $("#timeslotDayIndex").val();
   var slotIndex = $("#timeslotIndex").val();
   var timeSlot = progData.days[dayIndex].timeslots[slotIndex];
+
   for (var i = 0; i < timeSlot.sessions.length; i++) {
     // remove any talks in the sessions.
     moveTalksToUnassigned(timeSlot.sessions[i]);
   }
+
   // Actually remove the timeslot.
   progData.days[dayIndex].timeslots.splice(slotIndex, 1);
   refresh();
@@ -753,15 +777,18 @@ function deleteSession() {
   var slotIndex = $('#currentSlotIndex').val();
   var sessionIndex = $('#currentSessionIndex').val();
   var timeSlot = progData.days[dayIndex].timeslots[slotIndex];
+
   if (timeSlot.sessions.length === 1) {
     warningBox('You should delete the timeslot instead.');
     $('#editSessionBox').modal('hide');
     return;
   }
+
   if (!window.confirm("Are you sure you want to delete the session?")) {
     $('#editSessionBox').modal('hide');
     return;
   }
+
   $('#editSessionBox').modal('hide');
   var sessionObj = timeSlot.sessions[sessionIndex];
   console.dir(sessionObj);
@@ -780,6 +807,7 @@ function saveSession() {
   console.log('editing session');
   console.dir(sessionObj);
   var session_title = $('#currentSessionTitle').val();
+
   // Session title is required.
   if (session_title === "") {
     warningBox('Session title is required.');
@@ -787,12 +815,14 @@ function saveSession() {
   }
   sessionObj.session_title = session_title;
   var locationName = $('#currentSessionLocation').val();
+
   if (locationName) {
     sessionObj.location = {'name': locationName};
   } else {
     delete sessionObj.location;
   }
   var sessionModerator = $('#currentSessionModerator').val();
+
   if (sessionModerator) {
     sessionObj.moderator = sessionModerator;
   } else {
@@ -838,14 +868,15 @@ $(document).ready(function() {
   theTemplateScript = $("#talks-template").html();
   talksTemplate = Handlebars.compile(theTemplateScript);
   Handlebars.registerPartial("talk", $('#talk-partial').html());
+
   // Register tooltip plugin.
   $('body').tooltip({
     selector: '[data-toggle="tooltip"]'
   });
+
   // Make dropdown menus respond to hover.
   $('ul.nav li.dropdown').hover(function() {
-    $(this).find('.dropdown-menu').stop(true,
-                                       true).delay(100).fadeIn(100);
+    $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(100);
   }, function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(100);
   });
