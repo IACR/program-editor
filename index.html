@@ -302,11 +302,11 @@
     <!-- Additional/custom scripts -->
     <script src="./scripts/editor.js"></script>
 
-    <!-- modal for upload from websubrev. -->
+    <!-- Modal for upload from websubrev -->
     <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labeledby="uploadTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="uploadTitle">
+          <div class="modal-header" id="uploadTitleDiv">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -326,6 +326,7 @@
         </div>
       </div>
     </aside>
+
     <!-- Modal for warnings and errors -->
     <aside class="modal fade" id="errorBox" role="dialog" aria-labelledby="warningTitle">
       <div class="modal-dialog" role="document">
@@ -503,9 +504,6 @@
                 <input type="text" name="sessionTitle" placeholder="Session title" class="form-control" id="currentSessionTitle" />
               </div>
               <div class="form-group">
-                <div class="form-group">
-                  <!-- NOTE: track picker dropdown would go here...ruled unnecssary for MVP launch -->
-                </div>
                 <div class="form-group">
                   <label for="currentSessionLocation">
                     Location

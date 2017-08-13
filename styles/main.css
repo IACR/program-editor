@@ -204,7 +204,7 @@ span.authorName:last-of-type:after {
   color: #EDF6F7;
 }
 
-#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv, #addTimeslotTitleDiv {
+#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv, #addTimeslotDiv, #uploadTitleDiv {
   background-color: rgba(24, 188, 156, 1);
   color: #EDF6F7;
 }
@@ -217,7 +217,7 @@ span.authorName:last-of-type:after {
 
 a.dropdown-toggle {
     color: #202020;
-    background: rgba(24, 188, 156, 0.4);                                                     
+    background: rgba(24, 188, 156, 0.4);
     margin-right: 10px;
 }
 
