@@ -105,6 +105,7 @@ div.talk:hover {
 .authorList, .authorName {
   font-family: 'Raleway', sans-serif;
   text-align: left;
+  font-size: 0.9em;
 }
 
 
