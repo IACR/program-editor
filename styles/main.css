@@ -1,5 +1,15 @@
 /* Color scheme created by Kay McKelly: http://www.colourlovers.com/palette/4500426/teal_we_meet_again */
+/* These are designed to show a placeholder in an empty draggable area.
+   TODO(kevin): the one for section.category doesn't work. */
+section.category:empty:before {
+    color:#12324C;
+    content: attr(data-placeholder)
+}
 
+div.session-talks:empty:before {
+    color:#12323C;
+    content:attr(data-placeholder)
+}
 
 /*** General Styling ***/
 body {
@@ -62,10 +72,9 @@ h1, h2, h3, h4, h5 {
 }
 
 section.category {
-  padding: 5px;
-  min-height: 20px;
-  /*TODO: needs bg color to match bg color of draggable areas*/
-  /*background-color: purple;*/
+  padding: 3px;
+  min-height: 3em;
+  background-color:#c9c2ce;
 }
 
 div.talk {
