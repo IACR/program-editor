@@ -105,6 +105,7 @@ div.talk:hover {
 .authorList, .authorName {
   font-family: 'Raleway', sans-serif;
   text-align: left;
+  font-size: 0.9em;
 }
 
 
@@ -165,10 +166,6 @@ p.trackSwitch {
   text-align: center;
 }
 
-p.eventDescr {
-  text-align: center;
-}
-
 p.mutualEventTalkTitle {
   font-size: 1.1em;
   font-weight: bold;
@@ -183,10 +180,6 @@ p.mutualEventTalkTitle {
 .track2Event {
   background-color: rgba(164, 244, 199, 0.3);
   margin-bottom: 10px;
-}
-
-p.dualTrackDescr {
-  text-align: left;
 }
 
 span.authorName:after {

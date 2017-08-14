@@ -288,16 +288,16 @@
                     {{sessions.0.session_title}}
                   </h3>
                   {{#if sessions.0.location.name}}
-                  <p class="{{#if twosessions}}dualTrackDescr{{else}}eventDescr{{/if}}">
+                  <p class="text-center">
                     {{sessions.0.location.name}}
                   </p>
                   {{/if}}
                   {{#if sessions.0.moderator}}
-                  <p class="{{#if twosessions}}dualTrackDescr{{else}}eventDescr{{/if}}">
+                  <p class="text-center">
                     {{sessions.0.moderator}}
                   </p>
                   {{/if}}
-                  
+
                   {{#empty sessions.0.talks}}
                   Drag talks to this session.
                   {{#each sessions.0.talks}}
@@ -318,12 +318,12 @@
                     {{sessions.1.session_title}}
                   </h3>
                   {{#if sessions.1.location.name}}
-                  <p class="dualTrackDescr">
+                  <p class="text-center">
                     {{sessions.1.location.name}}
                   </p>
                   {{/if}}
                   {{#if sessions.1.moderator}}
-                  <p class="dualTrackDescr">
+                  <p class="text-center">
                     {{sessions.1.moderator}}
                   </p>
                   {{/if}}
@@ -491,10 +491,6 @@
             </h2>
           </div>
           <div class="modal-body">
-            <p class="help-block">
-              Note that you may only change the times subject to the times before and after the time slot you are trying to edit.
-            </p>
-            <br />
             <form>
               <!-- NOTE: used only for saving edited time slot to progData -->
               <input type="hidden" id="timeslotDayIndex" value="" />
@@ -580,9 +576,6 @@
                 </div>
               </div>
             </form>
-            <p class="help-block">
-              There is currently no way to edit individual talks at this time. This is a feature that is planned for inclusion in future versions.
-            </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
