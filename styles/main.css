@@ -83,7 +83,8 @@ div.talk {
 
 div.talk {
   border-radius: 8px;
-  background: #86BFCB;
+  background: #78C2CF;
+  /*#86BFCB;*/
   border: 1px solid #1D707A;
   margin: 5px;
   padding: 8px;
@@ -91,7 +92,8 @@ div.talk {
 
 div.talk:hover {
   border: 1px solid #1D707A;
-  background: #14A6B5;
+  background: rgba(120, 194, 207, 0.3);
+  /*#14A6B5;*/
 }
 
 /*TODO: make this match/remove .talkTitle; potentially combine??*/
@@ -190,8 +192,9 @@ span.authorName:last-of-type:after {
   content: '';
 }
 
-/*** Modals ***/
 
+
+/*** Modals ***/
 #warnBoxTitle {
   background-color: rgba(186, 0, 26, 0.7);
   color: #EDF6F7;
@@ -206,8 +209,9 @@ span.authorName:last-of-type:after {
   font-size: 0.8em;
 }
 
-/*** Top right menu ***/
 
+
+/*** Top right menu ***/
 a.dropdown-toggle {
     color: #202020;
     background: rgba(24, 188, 156, 0.4);
@@ -225,6 +229,5 @@ div.menu-lowered {
     visibility: hidden;
 }
 .talk:hover > a {
-  color:red;
   visibility: visible;
 }
