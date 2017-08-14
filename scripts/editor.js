@@ -1,6 +1,5 @@
 // TODO: add notification for when browser is too small using media breakpoint
 
-
 // Create global variables: to store parsed JSON files for use in templates (progData), the template for the program (progTemplate), and the template for the unassigned talks listed at left (talksTemplate)
 var progData;
 var progTemplate;
@@ -307,7 +306,7 @@ function warningBox(text) {
 // custom helper for generating droppable div (i.e. distinguishing between sessions that can accept talks and those that can't)
 Handlebars.registerHelper('empty', function(data, options) {
   if (data && data.length >= 0) {
-    return new Handlebars.SafeString('<div class="session-talks">' + options.fn(this) + '</div>');
+    return new Handlebars.SafeString('<div class="session-talks" data-placeholder="Drag talks to this session">' + options.fn(this) + '</div>');
   }
 });
 

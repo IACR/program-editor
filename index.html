@@ -7,7 +7,6 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" />
 
     <!-- jQuery daterangepicker, jQuery timepicker, & Dragula -->
     <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css" rel="stylesheet" />
@@ -237,7 +236,7 @@
               <h3 class="categoryTitle">
                 {{name}}
               </h3>
-              <section class="category">
+              <section class="category" data-placeholder="Drag talks here to unschedule">
                 {{#each talks}}
                   {{> talk}}
                 {{/each}}
@@ -299,7 +298,6 @@
                   {{/if}}
 
                   {{#empty sessions.0.talks}}
-                  Drag talks to this session.
                   {{#each sessions.0.talks}}
                   {{> talk}}
                   {{/each}}
@@ -328,7 +326,6 @@
                   </p>
                   {{/if}}
                   {{#empty sessions.1.talks}}
-                  Drag talks to this session.
                   {{#each sessions.1.talks}}
                   {{> talk}}
                   {{/each}}
