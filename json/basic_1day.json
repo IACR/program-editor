@@ -1,0 +1,121 @@
+{
+  "name": "basic_1day_config",
+  "config": {
+    "default_track_locations": [{"name": "Enter a location"}],
+    "default_talk_minutes": 25,
+    "unassigned_talks": [{
+      "name": "Uncategorized",
+      "talks": []
+    }]
+  },
+  "days": [
+    {
+      "date": "2017-03-29",
+      "timeslots": [
+        {
+          "endtime": "9:00",
+          "starttime": "8:00",
+          "sessions": [
+            {
+              "session_title": "Registration",
+              "location": {
+                "name": "Location TBD"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:10",
+          "starttime": "9:00",
+          "sessions": [
+            {
+              "moderator": "Workshop General Chair",
+              "session_title": "Welcome"
+            }
+          ]
+        },
+        {
+          "endtime": "10:25",
+          "starttime": "9:10",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "10:55",
+          "starttime": "10:25",
+          "sessions": [
+            {
+              "session_title": "Coffee break"
+            }
+          ]
+        },
+        {
+          "endtime": "11:45",
+          "starttime": "10:55",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "12:45",
+          "starttime": "11:45",
+          "sessions": [
+            {
+              "session_title": "Invited Talk I",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:45",
+          "sessions": [
+            {
+              "session_title": "Lunch"
+            }
+          ]
+        },
+        {
+          "endtime": "15:15",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+              "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "15:45",
+          "starttime": "15:15",
+          "sessions": [
+            {
+              "session_title": "Coffee Break"
+            }
+          ]
+        },
+        {
+          "endtime": "17:00",
+          "starttime": "15:45",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+              "talks": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

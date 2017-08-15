@@ -1,5 +1,5 @@
 {
-  "name": "pkc_2017_config",
+  "name": "basic_2day_config",
   "config": {
     "default_track_locations": [{"name": "Enter a location"}],
     "default_talk_minutes": 25,
@@ -9,23 +9,6 @@
     }]
   },
   "days": [
-    {
-      "date": "2017-03-28",
-      "timeslots": [
-        {
-          "starttime": "18:00",
-          "endtime": "20:00",
-          "sessions": [
-            {
-              "session_title": "Welcome Reception and Registration",
-              "location": {
-                "name": "Enter a location"
-              }
-            }
-          ]
-        }
-      ]
-    },
     {
       "date": "2017-03-29",
       "timeslots": [
@@ -140,7 +123,7 @@
           "sessions": [
             {
               "moderator": "Chair: TBD",
-              "session_title": "Click to edit session title",
+              "session_title": "Session title TBD",
               "talks": []
             }
           ]
@@ -160,7 +143,7 @@
           "sessions": [
             {
               "moderator": "Chair: TBD",
-              "session_title": "Click to edit session title",
+              "session_title": "Session title TBD",
               "talks": []
             }
           ]
@@ -212,104 +195,8 @@
             {
               "session_title": "Conference Dinner",
               "location": {
-                "name": "Click to edit location"
+                "name": "Location TBD"
               }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "date": "2017-03-31",
-      "timeslots": [
-        {
-          "endtime": "10:15",
-          "starttime": "9:00",
-          "sessions": [
-            {
-              "moderator": "Chair: TBD",
-              "session_title": "Session title TBD",
-              "talks": []
-            }
-          ]
-        },
-        {
-          "endtime": "10:45",
-          "starttime": "10:15",
-          "sessions": [
-            {
-              "session_title": "Coffee Break"
-            }
-          ]
-        },
-        {
-          "endtime": "11:35",
-          "starttime": "10:45",
-          "sessions": [
-            {
-              "moderator": "Chair: TBD",
-              "session_title": "Session title TBD",
-              "talks": []
-            }
-          ]
-        },
-        {
-          "endtime": "12:35",
-          "starttime": "11:35",
-          "sessions": [
-            {
-              "moderator": "Chair: TBD",
-              "session_title": "Invited talk II",
-              "talks": []
-            }
-          ]
-        },
-        {
-          "endtime": "14:00",
-          "starttime": "12:35",
-          "sessions": [
-            {
-              "session_title": "Lunch"
-            }
-          ]
-        },
-        {
-          "endtime": "15:15",
-          "starttime": "14:00",
-          "sessions": [
-            {
-              "moderator": "Chair: TBD",
-              "session_title": "Session title TBD",
-              "talks": []
-            }
-          ]
-        },
-        {
-          "endtime": "15:45",
-          "starttime": "15:15",
-          "sessions": [
-            {
-              "session_title": "Coffee Break"
-            }
-          ]
-        },
-        {
-          "endtime": "17:00",
-          "starttime": "15:45",
-          "sessions": [
-            {
-              "moderator": "Chair: TBD",
-              "session_title": "Session title TBD",
-              "talks": []
-            }
-          ]
-        },
-        {
-          "endtime": "17:10",
-          "starttime": "17:00",
-          "sessions": [
-            {
-              "session_title": "Closing remarks"
             }
           ]
         }
