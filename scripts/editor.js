@@ -560,10 +560,15 @@ function showTalkEditor(id) {
 
 // prepopulate edit session modal with relevant fields from parent div of clicked edit button
 function editSession(dayIndex, slotIndex, sessionIndex) {
-  console.log('editing session='+dayIndex+':'+slotIndex+':'+sessionIndex);
+  $('#deleteSessionWarning').hide();
+  $('#deleteSessionButton').text('Delete session');
   var sessionObj = progData.days[dayIndex].timeslots[slotIndex].sessions[sessionIndex];
-  console.dir(sessionObj);
-
+  if (progData.days[dayIndex].timeslots[slotIndex].sessions.length < 2) {
+    // Can't delete the only session in a timeslot.
+    $('#deleteSessionButton').hide();
+  } else {
+    $('#deleteSessionButton').show();
+  }
   $('#currentDayIndex').val(dayIndex);
   $('#currentSlotIndex').val(slotIndex);
   $('#currentSessionIndex').val(sessionIndex);
@@ -662,6 +667,8 @@ function addTimeslotToDay() {
 // the timeslots array under the day. This makes it easy to refer to the
 // corresponding timeslot.
 function editTimeslot(dayIndex, slotIndex) {
+  $('#deleteTimeslotWarning').hide();
+  $('#deleteTimeslotButton').text('Delete time slot');
   var timeslot = progData.days[dayIndex].timeslots[slotIndex];
   $('#timeslotDayIndex').val(dayIndex);
   $('#timeslotIndex').val(slotIndex);
@@ -749,8 +756,9 @@ function moveTalksToUnassigned(session) {
 }
 
 function deleteTimeslot() {
-  if (!window.confirm("Are you sure you want to delete this timeslot?")) {
-    $('#editTimeslot').modal('hide');
+  if (!$('#deleteTimeslotWarning').is(':visible')) {
+    $('#deleteTimeslotWarning').show();
+    $('#deleteTimeslotButton').text('Really delete time slot');
     return;
   }
 
@@ -772,6 +780,11 @@ function deleteTimeslot() {
 // Delete a session. If this is the only session for the timeslot, then defer
 // with a warning to delete the timeslot instead.
 function deleteSession() {
+  if (!$('#deleteSessionWarning').is(':visible')) {
+    $('#deleteSessionWarning').show();
+    $('#deleteSessionButton').text('Really delete session');
+    return;
+  }
   var dayIndex = $('#currentDayIndex').val();
   var slotIndex = $('#currentSlotIndex').val();
   var sessionIndex = $('#currentSessionIndex').val();
@@ -783,14 +796,8 @@ function deleteSession() {
     return;
   }
 
-  if (!window.confirm("Are you sure you want to delete the session?")) {
-    $('#editSessionBox').modal('hide');
-    return;
-  }
-
   $('#editSessionBox').modal('hide');
   var sessionObj = timeSlot.sessions[sessionIndex];
-  console.dir(sessionObj);
   moveTalksToUnassigned(sessionObj);
   timeSlot.sessions.splice(sessionIndex, 1);
   timeSlot.twosessions = false;
@@ -803,8 +810,6 @@ function saveSession() {
   var slotIndex = $('#currentSlotIndex').val();
   var sessionIndex = $('#currentSessionIndex').val();
   var sessionObj = progData.days[dayIndex].timeslots[slotIndex].sessions[sessionIndex];
-  console.log('editing session');
-  console.dir(sessionObj);
   var session_title = $('#currentSessionTitle').val();
 
   // Session title is required.
@@ -827,8 +832,6 @@ function saveSession() {
   } else {
     delete sessionObj.moderator;
   }
-  console.dir(sessionObj);
-  // TODO: after drag/drop and edit session, 'drag talks' placeholder reappears
   refresh();
 }
 

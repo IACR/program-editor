@@ -519,11 +519,14 @@
               </div>
             </form>
           </div>
+          <div class="modal-body" id="deleteTimeslotWarning">
+            <div class="alert alert-danger">If you delete this timeslot, then any talks in the session will become unscheduled.</div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
-            <button type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteTimeslot()">
+            <button id="deleteTimeslotButton" type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteTimeslot()">
               Delete Time Slot
             </button>
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTimeslot()">
@@ -574,12 +577,15 @@
               </div>
             </form>
           </div>
+          <div class="modal-body" id="deleteSessionWarning">
+            <div class="alert alert-danger">If you delete this session, then any talks in the session will become unscheduled.</div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
             <!-- TODO: delete button currently NONFUNCTIONAL -->
-            <button type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteSession()">
+            <button id="deleteSessionButton" type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteSession()">
               Delete Session
             </button>
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveSession()">
@@ -604,7 +610,7 @@
           </div>
           <div class="modal-body">
             <p class="help-block">
-              Timeslots are ordered by their start time but theoretically may overlap.
+              Timeslots are ordered by their start time but may overlap.
             </p>
             <br />
             <form>
