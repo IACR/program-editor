@@ -487,9 +487,9 @@ function saveTalk() {
 
 // Delete a talk from progData and redraw.
 function deleteTalk() {
-  // TODO: resolve window.confirm issue (see github issue #80)
-  if (!window.confirm("Are you sure you want to delete the talk?")) {
-    $('#editTalkBox').modal('hide');
+  if (!$('#deleteTalkWarning').is(':visible')) {
+    $('#deleteTalkWarning').show();
+    $('#talkDeleteButton').text('Really delete the paper');
     return;
   }
   $('#editTalkBox').modal('hide');
@@ -533,6 +533,8 @@ function deleteTalk() {
 // populate categories from current config in add talk modal
 function showTalkEditor(id) {
   // remove all categories in case loop has already been triggered, so you don't get duplicate categories
+  $('#deleteTalkWarning').hide();
+  $('#talkDeleteButton').text('Delete talk');
   $('#newTalkCategory').find('option').remove().end()
 
   for (var i = 0; i < progData.config.unassigned_talks.length; i++) {
