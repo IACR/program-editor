@@ -180,6 +180,21 @@ function startEditor() {
   $('#parent').show(500);
 }
 
+// Function to fetch json/accepted_demo.json and use that as
+// accepted talks. This is for demo only.
+function useDemoTalks() {
+  $.getJSON('json/accepted_demo.json', function(data) {
+    if (!mergeTalks(data)) {
+      alert('there was a problem using this file');
+      return;
+    }
+    startEditor();
+  })
+  .fail(function(jqxhr, textStatus, error) {
+    warningBox('There was a problem with this demo. Unable to recover.');
+  });
+}
+
 // Upload JSON file of talks and parse.
 function uploadTalks(evt) {
   var files = evt.target.files;
