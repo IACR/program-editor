@@ -8,8 +8,9 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" />
+
     <!-- jQuery daterangepicker, jQuery timepicker, & Dragula -->
-    <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css" rel="stylesheet" />
+    <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css"rel="stylesheet" />
     <link href="./dependencies/jquery-timepicker/jquery.timepicker.css" rel="stylesheet" />
     <link href="./dependencies/dragula/dragula.css" rel="stylesheet" />
 
@@ -19,66 +20,15 @@
 
   </head>
   <body class="container-fluid">
-    <div class="row top-row-expanded">
-      <header class="col-md-8">
+    <div class="row">
+      <header class="col-md-12">
         <h1 class="mainTitle">
           Program Creator/Editor
         </h1>
+        <hr />
       </header>
-      <nav class="navbar navbar-right col-md-4" role="navigation">
-        <div class="collapse navbar-collapse menu-lowered" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <!-- TODO: do caret with html5 standard -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Actions <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="javascript:location.reload()">
-                    Edit another program
-                  </a>
-                </li>
-                <li id="uploadmenu">
-                  <a href="javascript:showWebsubrevUpload()">
-                    Upload from websubrev
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <!-- TODO: do caret with html5 standard -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Help <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a target="_help" href="docs/help.html">
-                    Help home
-                  </a>
-                </li>
-                <li>
-                  <a target="_help" href="docs/help.html#websubrev">
-                    Websubrev input
-                  </a>
-                </li>
-                <li>
-                  <a target="_help" href="docs/help.html#output">
-                    How to use the output
-                  </a>
-                </li>
-                <li role="separator" class="divider"></li>
-                <li>
-                  <a target="_help" href="https://github.com/kaymckelly/program-editor">
-                    About this editor
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
     </div>
+
     <div id="setupPrompts">
       <div class="row">
         <section class="col-md-12 setupStep instructions">
@@ -93,12 +43,8 @@
           <p>
             If you've been here before, you can edit an existing program. Otherwise, start from a new one.
           </p>
-          <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">
-            New
-          </button>
-          <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">
-            Existing
-          </button>
+          <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">New</button>
+          <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">Existing</button>
         </section>
       </div>
 
@@ -117,42 +63,14 @@
       <div class="row">
         <section id="templateSelector" class="col-md-8 col-md-offset-2 setupStep">
           <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
-            <option value="" disabled selected>
-              Select a template
-            </option>
-            <option value="./json/crypto_config.json">
-              Crypto (5 days, dual track, bbq)
-            </option>
-            <option value="./json/ec_config.json">
-              Eurocrypt/Asiacrypt (5 days, dual track, banquet)
-            </option>
-            <option value="./json/pkc_config.json">
-              CHES/FSE/PKC/TCC (4 days, single track)
-            </option>
-            <option value="./json/basic_1day.json">
-              Basic one-day workshop
-            </option>
-            <option value="./json/basic_2day.json">
-              Basic two-day workshop
-            </option>
-            <option value="./json/basic_3day.json">
-              Basic three-day conference
-            </option>
+            <option value="" disabled selected>Select a template</option>
+            <option value="./json/crypto_config.json">Crypto</option>
+            <option value="./json/broken.json">Broken</option>
+            <option value="./json/test.json">Test</option>
           </select>
         </section>
       </div>
 
-      <div class="row" id="nameEntry">
-        <section class="col-md-8 col-md-offset-2 setupStep">
-          <p>
-            Enter a name for the conference program.
-          </p>
-          <input type="text" name="inputName" id="inputName" />
-          <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success">
-            Next
-          </button>
-        </section>
-      </div>
       <div class="row">
         <section id="datePicker" class="col-md-8 col-md-offset-2 setupStep">
           <p>
@@ -172,15 +90,10 @@
           <p>
             Next, upload a JSON file of accepted papers from websubrev.
           </p>
-          <button type="button" name="showUpload" onclick="showWebsubrevUpload()" class="btn btn-sm btn-success">
-            Upload websubrev accepted talks
-          </button>
-          <button type="button" name="skipUpload" onclick="startEditor()" class="btn btn-sm btn-success">
-            Skip for now
-          </button>
-          <button type="button" name="useDemoTalks" onclick="useDemoTalks()" class="btn btn-sm btn-success">
-            Use demo data
-          </button>
+          <label for="uploadTalksSelector" class="btn btn-sm btn-success">
+            <input type="file" accept=".json" id="uploadTalksSelector" />
+            Upload JSON file
+          </label>
         </section>
       </div>
     </div>
@@ -193,64 +106,43 @@
           </p>
         </section>
         <aside class="col-md-2">
-          <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">
-            Download JSON
-          </button>
-          <button type="button" name="saveProgram" onclick="saveProgram()" id="saveProgramBtn" class="btn btn-block btn-success">
-            Save
-          </button>
+          <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">Download JSON</button>
+          <button type="button" name="saveProgram" onclick="saveProgram()" id="saveProgramBtn" class="btn btn-block btn-success">Save</button>
         </aside>
       </div>
-      <div class="row">
-        <div class="col-md-3">
-          <h3 class="text-center editorTitles">
-            Unscheduled Talks
-            <label data-toggle="tooltip" title="Add a talk" data-placement="top" data-trigger="hover" tabindex="0">
-              <button type="button" name="addTalk" class="btn btn-success" id="addTalkBtn" data-toggle="modal" data-target="#editTalkBox" onclick="showTalkEditor('')">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </button>
-            </label>
-          </h3>
-        </div>
-        <div class="col-md-9">
-          <h3 class="text-center editorTitles">
-            Schedule
-          </h3>
-        </div>
+      <div class="col-md-3">
+        <h3 class="text-center editorTitles">
+          Talks
+        </h3>
+      </div>
+      <div class="col-md-9">
+        <h3 class="text-center editorTitles">
+          Schedule
+        </h3>
       </div>
 
-      <!-- This is a handlebars partial that can be used in two places to display a talk. -->
-      <script id="talk-partial" type="text/x-handlebars-template">
-        <div class="talk" id="{{id}}">
-          <a data-toggle="modal" data-target="#editTalkBox" href="#editTalk" class="pull-right" onclick="showTalkEditor('{{id}}');">
-            <label data-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
-              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            </label>
-          </a>
-          <h4 class="toAddTalkTitle">
-            {{title}}
-          </h4>
-          <div class="authorList">
-            {{#each authors}}
-              <span class="authorName">
-                {{this}}
-              </span>
-            {{/each}}
-          </div>
-        </div>
-      </script>
       <article id="talksList" class="col-md-3">
         <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
         <script id="talks-template" type="text/x-handlebars-template">
-          <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
+          <!-- TODO: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
+          <button type="button" name="addTalk" class="btn btn-success pull-right" id="addTalkBtn" data-toggle="modal" data-target="#addTalkBox" onclick="addCategories()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
           {{#each unassigned_talks}}
             <div id="{{id}}">
               <h3 class="categoryTitle">
                 {{name}}
               </h3>
-              <section class="category" data-placeholder="Drag talks here to unschedule">
+              <section class="category">
                 {{#each talks}}
-                  {{> talk}}
+                <div class="talk" id="{{id}}">
+                  <h4 class="toAddTalkTitle">
+                    {{title}}
+                  </h4>
+                  <div class="authorList">
+                    {{#each authors}}<span class="authorName">{{this}}</span>{{/each}}
+                  </div>
+                </div>
                 {{/each}}
               </section>
             </div>
@@ -262,95 +154,137 @@
         <!-- Handlebars script, renders editable program based on the user-selected program template -->
           <script id="program-template" type="text/x-handlebars-template">
             {{#each days}}
-            <div class="row">
-              <div class="col-md-5">
-                <hr />
-                <h3 class="pageSubtitle">
-                  {{date}} <label data-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover" tabindex="0">
-                    <button type="button" name="addTimeslot" class="addTimeslot btn btn-success" data-toggle="modal" data-target="#addTimeslot" onclick="prepareAddTimeslotToDay({{@index}})">
-                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
-                  </label>
-                </h3>
-              </div>
-            </div>
-            {{#each timeslots}}
-            {{#if sessions}} <!-- only render slots that have sessions -->
-            <div class="row">
-              <div class="col-md-2 timeSlotDiv">
-                  <a data-toggle="modal" href="#editTimeslot" class="pull-right" onclick="editTimeslot({{@../index}}, {{@index}})">
-                    <label data-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </label>
-                  </a>
-                <br />
-                <p class="timeSlot text-center">
-                  {{starttime}}-{{endtime}}
-                </p>
-              </div>
-              <div class="{{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
-                <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} panel-body" id="{{sessions.0.id}}">
-                  <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},0)">
-                    <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </label>
-                  </a>
-                  <h3 class="text-center">
-                    {{sessions.0.session_title}}
-                  </h3>
-                  {{#if sessions.0.location.name}}
-                  <p class="text-center">
-                    {{sessions.0.location.name}}
-                  </p>
-                  {{/if}}
-                  {{#if sessions.0.moderator}}
-                  <p class="text-center">
-                    {{sessions.0.moderator}}
-                  </p>
-                  {{/if}}
-
-                  {{#empty sessions.0.talks}}
-                  {{#each sessions.0.talks}}
-                  {{> talk}}
-                  {{/each}}
-                  {{/empty}}
+              <div class="row">
+                <div class="col-md-5">
+                 <hr />
+                 <h3 class="pageSubtitle">
+                   {{date}}
+                 </h3>
                 </div>
               </div>
-              {{#if twosessions}}
-              <div class="col-md-5">
-                <div class="panel-body track2Event" id="{{sessions.1.id}}">
-                  <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},1)">
-                    <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </label>
-                  </a>
-                  <h3 class="text-center">
-                    {{sessions.1.session_title}}
-                  </h3>
-                  {{#if sessions.1.location.name}}
-                  <p class="text-center">
-                    {{sessions.1.location.name}}
-                  </p>
-                  {{/if}}
-                  {{#if sessions.1.moderator}}
-                  <p class="text-center">
-                    {{sessions.1.moderator}}
-                  </p>
-                  {{/if}}
-                  {{#empty sessions.1.talks}}
-                  {{#each sessions.1.talks}}
-                  {{> talk}}
-                  {{/each}}
-                  {{/empty}}
+              {{#each timeslots}}
+                <div class="row">
+                  <div class="col-md-2">
+                    <p class="timeSlot">
+                      <span class="editTime spmodal" data-target="#editTimeslot" data-toggle="modal" onclick="editTimeslot({{@../index}}, {{@index}})">
+                        {{starttime}}-{{endtime}}
+                      </span>
+                    </p>
+                  </div>
+                {{#if twosessions}}
+                  <div class="col-md-5">
+                    <div class="track1Event panel-body" id="{{sessions.0.id}}">
+                      <a data-toggle="modal" href="#editSessionBox" class="pull-right editSession" onclick="editSession(this.parentNode.id)">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
+                      <h4 class="text-center">
+                        {{sessions.0.session_title}}
+                      </h4>
+                      {{#if sessions.0.location.name}}
+                        <p class="dualTrackDescr">
+                          {{sessions.0.location.name}}
+                        </p>
+                      {{/if}}
+                      {{#if sessions.0.moderator}}
+                        <p class="dualTrackDescr">
+                          {{sessions.0.moderator}}
+                        </p>
+                      {{/if}}
+                      {{#empty sessions.0.talks}}
+                        Drag talks to this session.
+                      {{#each sessions.0.talks}}
+                        <div class="talk" id="{{id}}">
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{this}}</span>
+                            {{/each}}
+                          </p>
+                        </div>
+                      {{/each}}
+                      {{/empty}}
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="panel-body track2Event" id="{{sessions.1.id}}">
+                      <a data-toggle="modal" href="#editSessionBox" class="pull-right editSession" onclick="editSession(this.parentNode.id)">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
+                      <h4 class="text-center">
+                        {{sessions.1.session_title}}
+                      </h4>
+                      {{#if sessions.1.location.name}}
+                        <p class="dualTrackDescr">
+                          {{sessions.1.location.name}}
+                        </p>
+                      {{/if}}
+                      {{#if sessions.1.moderator}}
+                        <p class="dualTrackDescr">
+                          {{sessions.1.moderator}}
+                        </p>
+                      {{/if}}
+                      {{#empty sessions.1.talks}}
+                        Drag talks to this session.
+                      {{#each sessions.1.talks}}
+                        <div class="talk" id="{{id}}">
+                          <p class="talkTitle">
+                            {{title}}
+                          </p>
+                          <p class="dualTrackDescr">
+                            {{#each authors}}
+                              <span class="authorName">{{this}}</span>
+                            {{/each}}
+                          </p>
+                        </div>
+                      {{/each}}
+                      {{/empty}}
+                    </div>
+                  </div>
+                {{else}}
+         	        <div class="col-md-10">
+                    <div class="panel-body mutualEvent" id="{{sessions.0.id}}">
+                      <a data-toggle="modal" href="#editSessionBox" class="pull-right editSession" onclick="editSession(this.parentNode.id)">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
+                      <h4>
+                        {{sessions.0.session_title}}
+                      </h4>
+                      {{#if sessions.0.location.name}}
+                        <p class="eventDescr">
+                          {{sessions.0.location.name}}
+                        </p>
+                      {{/if}}
+                      {{#if sessions.0.moderator}}
+                        <p class="eventDescr">
+                          {{sessions.0.moderator}}
+                        </p>
+                      {{/if}}
+                        {{#empty sessions.0.talks}}
+                          Drag talks to this session.
+                        {{#each sessions.0.talks}}
+                          <div class="talk" id="{{id}}">
+                            <p class="mutualEventTalkTitle">
+                              {{title}}
+                            </p>
+                            <p class="eventDescr">
+                              {{#each authors}}
+                                <span class="authorName">{{this}}</span>
+                              {{/each}}
+                            </p>
+                          </div>
+                        {{/each}}
+                       {{/empty}}
+                    </div>
+                  </div>
+                {{/if}}
                 </div>
-              </div>
-              {{/if}} <!-- end of second session -->
-            </div>
-            {{/if}} <!-- sessions -->
-            {{/each}} <!-- timeslots -->
-            {{/each}} <!-- days -->
+              {{/each}}
+            {{/each}}
           </script>
       </article>
+
     </main>
 
     <!-- Bootstrap scripts -->
@@ -360,43 +294,14 @@
     <!-- Handlebars templates -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js" type="text/javascript"></script>
 
-    <!-- Dependencies (dragula, momentJS, jQuery daterangepicker, jQuery timepicker, & datepair) -->
+    <!-- Dependencies (dragula, momentJS, jQuery daterangepicker, & jQuery timepicker) -->
     <script src="./dependencies/dragula/dragula.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="./dependencies/jquery-daterange-picker/jquery.daterangepicker.min.js"></script>
     <script src="./dependencies/jquery-timepicker/jquery.timepicker.min.js"></script>
-    <script src="./dependencies/datepair/jquery.datepair.min.js"></script>
 
     <!-- Additional/custom scripts -->
     <script src="./scripts/editor.js"></script>
-
-    <!-- Modal for upload from websubrev -->
-    <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labeledby="uploadTitle">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header" id="uploadTitleDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h2 class="modal-title" id="uploadTitle">
-              Upload accepted talks from websubrev
-            </h2>
-          </div>
-          <div class="modal-body">
-            <p class="help-block">
-              Websubrev now allows program chairs to export a list of accepted talks. The format is described <a target="_help" href="./docs/help.html">here</a>.
-            </p>
-            <label for="uploadTalksSelector" class="btn btn-sm btn-success">
-              <input type="file" accept=".json" id="uploadTalksSelector" />
-              Upload JSON file
-            </label>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </aside>
 
     <!-- Modal for warnings and errors -->
     <aside class="modal fade" id="errorBox" role="dialog" aria-labelledby="warningTitle">
@@ -422,9 +327,8 @@
       </div>
     </aside>
 
-    <!-- Modal for adding, editing, or deleting a new talk. In case you are adding a talk,
-         the delete button is not shown and the talkId field is empty.  -->
-    <aside class="modal fade" id="editTalkBox" role="dialog" aria-labelledby="addTalkTitle">
+    <!-- Modal for adding a new talk -->
+    <aside class="modal fade" id="addTalkBox" role="dialog" aria-labelledby="addTalkTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="addTalkTitleDiv">
@@ -432,12 +336,11 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <h2 class="modal-title" id="addTalkTitle">
-              Add a new talk
+              Add a New Talk
             </h2>
           </div>
           <div class="modal-body">
             <form>
-              <input id="talkId" type="hidden" value=""/>
               <div class="form-group">
                 <label for="newTalkTitle">
                   Talk Title
@@ -448,18 +351,18 @@
                 <label for="newTalkAuthors">
                   Talk Author(s)
                 </label>
-                <p id="newAuthorHelp" class="help-block">
+                <span id="newAuthorHelp" class="help-block">
                   Use BibTeX formatting (i.e. names are separated by and).
-                </p>
+                </span>
                 <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
               </div>
               <div class="form-group">
                 <label for="newTalkAffiliation">
                   Affiliation
                 </label>
-                <p id="newAffiliationHelp" class="help-block">
+                <span id="newAffiliationHelp" class="help-block">
                   Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
-                </p>
+                </span>
                 <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
               </div>
               <div class="form-group">
@@ -472,18 +375,12 @@
               </div>
             </form>
           </div>
-          <div id="deleteTalkWarning" class="modal-body">
-            <div class="alert alert-danger">If you delete this talk, then you cannot recover the data. It will be permanently removed from the app.</div>
-          </div>
           <div class="modal-footer">
-            <button id="talkDeleteButton" type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteTalk()">
-              Delete talk completely
-            </button>
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTalk()">
-              Save Talk
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addNewTalk()">
+              Add Talk
             </button>
           </div>
         </div>
@@ -503,45 +400,37 @@
             </h2>
           </div>
           <div class="modal-body">
+            <p class="help-block">
+              Note that you may only change the times subject to the times before and after the time slot you are trying to edit.
+            </p>
+            <br />
             <form>
-              <!-- NOTE: used only for saving edited time slot to progData -->
-              <input type="hidden" id="timeslotDayIndex" value="" />
+              <!-- used only for saving edited session to progData -->
               <input type="hidden" id="timeslotIndex" value="" />
+
               <div class="form-inline">
                 <div class="form-group">
                   <label for="startTime">
-                    Start time
+                    Time range
                   </label>
-                  to
-                  <label for="endTime">
-                    End time
-                  </label>
+                  <input type="text" name="startTime" class="form-control" id="currentStartTime" />
                 </div>
-                <div class="form-group" id="timeDiv">
-                  <input type="text" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
-                  to
-                  <input type="text" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
+                <div class="form-group">
+                  <input type="text" name="endTime" class="form-control" id="currentEndTime" />
                 </div>
-                <div id="addTrackToSession">
-                  <br />
-                  <br />
-                  <p class="help-block">
-                    To split this session into two tracks, please check the box below.
-                  </p>
-                  <label for="numsessions">Add a track to this timeslot?</label>
-                  <input type="checkbox" name="numsessions" id="makeDualSession"></input>
-                </div>
+                <p class="help-block">
+                  To split this session into two tracks, please check the box below.
+                </p>
+                <label for="numsessions">Add a track to this timeslot?</label>
+                <input type="checkbox" name="dualtracks"></input>
               </div>
             </form>
-          </div>
-          <div class="modal-body" id="deleteTimeslotWarning">
-            <div class="alert alert-danger">If you delete this timeslot, then any talks in the session will become unscheduled.</div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
-            <button id="deleteTimeslotButton" type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteTimeslot()">
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteTimeslot()">
               Delete Time Slot
             </button>
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTimeslot()">
@@ -566,16 +455,15 @@
           </div>
           <div class="modal-body">
             <form>
-              <!-- NOTE: These are used to look up the session that is being edited. -->
-              <input type="hidden" id="currentDayIndex" value="" />
-              <input type="hidden" id="currentSlotIndex" value="" />
-              <input type="hidden" id="currentSessionIndex" value="" />
+              <!-- input type hidden with currentSessionId used only for saving edited session to progData -->
+              <input type="hidden" id="currentSessionId" value="" />
               <div class="form-group">
                 <label for="sessionTitle">
                   Session Title
                 </label>
                 <input type="text" name="sessionTitle" placeholder="Session title" class="form-control" id="currentSessionTitle" />
               </div>
+              <!-- TODO: y so many form groups?!?! -->
               <div class="form-group">
                 <div class="form-group">
                   <label for="currentSessionLocation">
@@ -591,79 +479,19 @@
                 </div>
               </div>
             </form>
-          </div>
-          <div class="modal-body" id="deleteSessionWarning">
-            <div class="alert alert-danger">If you delete this session, then any talks in the session will become unscheduled.</div>
+            <p class="help-block">
+              If you would like to edit individual talks, you first need to move them back into the talks list at left.
+            </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
-            <!-- TODO: delete button currently NONFUNCTIONAL -->
-            <button id="deleteSessionButton" type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteSession()">
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteSession()">
               Delete Session
             </button>
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveSession()">
               Save Session
-            </button>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Modal for adding a timeslot -->
-    <aside class="modal fade" id="addTimeslot" role="dialog" aria-labelledby="addTimeslotTitle">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header" id="addTimeslotDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h2 class="modal-title" id="addTimeslotTitle">
-              Add a Time Slot
-            </h2>
-          </div>
-          <div class="modal-body">
-            <p class="help-block">
-              Timeslots are ordered by their start time but may overlap.
-            </p>
-            <br />
-            <form>
-              <input type="hidden" id="dayIndex" value="" />
-              <div class="form-inline">
-                <div class="form-group">
-                  <label for="startTime">
-                    Start time
-                  </label>
-                  to
-                  <label for="endTime">
-                    End time
-                  </label>
-                </div>
-                <div class="form-group" id="timeslotDiv">
-                  <input type="text" name="startTime" class="form-control time start" id="newStartTime" autocomplete="off" />
-                  to
-                  <input type="text" name="endTime" class="form-control time end" id="newEndTime" autocomplete="off" />
-                </div>
-                <br />
-                <br />
-                <label for="numtracks">Select the number of tracks.</label>
-                <select name="numtracks" id="selectSessionCount">
-                  <option value="1">One track</option>
-                  <option value="2">Two tracks</option>
-                </select><br/>
-                <label for="includeTalks">Allow talks in the timeslot:</label>
-                <input type="checkbox" name="includeTalks" id="includeTalks"></input>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
-              Cancel
-            </button>
-            <!-- TODO: save button currently NONFUNCTIONAL -->
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addTimeslotToDay()">
-              Add time slot
             </button>
           </div>
         </div>
