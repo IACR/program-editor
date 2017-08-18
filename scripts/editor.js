@@ -233,7 +233,7 @@ function uploadTalks(evt) {
   reader.readAsText(file, 'UTF-8');
 }
 
-// make authors an array of strings
+// Make authors an array of strings
 function splitAuthors(val) {
   var re = /\s+and\s+|\s*;\s*/;
   return val.split(re);
@@ -299,7 +299,7 @@ function mergeTalks(data) {
     return 0;
   });
 
-  // make sure it has an empty uncategorized category.
+  // Make sure it has an empty uncategorized category.
   if (categoryList.length == 0) {
     categoryList.push({'name': 'Uncategorized', 'talks':[], 'id': 'category-0'});
   }
@@ -312,20 +312,20 @@ function showWebsubrevUpload() {
   $('#uploadTalksModal').modal();
 }
 
-// style warnings and error message for better visibility to user
+// Style warnings and error message for better visibility to user
 function warningBox(text) {
   $('#modal-message').text(text);
   $('#errorBox').modal();
 }
 
-// custom helper for generating droppable div (i.e. distinguishing between sessions that can accept talks and those that can't)
+// Custom helper for generating droppable div (i.e. distinguishing between sessions that can accept talks and those that can't)
 Handlebars.registerHelper('empty', function(data, options) {
   if (data && data.length >= 0) {
     return new Handlebars.SafeString('<div class="session-talks" data-placeholder="Drag talks to this session">' + options.fn(this) + '</div>');
   }
 });
 
-// add dragula functionality
+// Add dragula functionality
 function addDrag() {
   var talks = Array.prototype.slice.call(document.querySelectorAll(".category"));
   var sessions = Array.prototype.slice.call(document.querySelectorAll(".session-talks"));
@@ -453,8 +453,8 @@ function updateProgData(el, target, source, sibling) {
 
   var targetTalks = targetObj.talks;
 
-  // if sibling is null then put at end of targetTalks
-  // if sibling is not null, insert before that
+  // If sibling is null then put at end of targetTalks
+  // If sibling is not null, insert before that
   if (sibling === null) {
     targetTalks.push(talkObj);
   } else {
@@ -545,9 +545,9 @@ function deleteTalk() {
   }
 }
 
-// populate categories from current config in add talk modal
+// Populate categories from current config in add talk modal
 function showTalkEditor(id) {
-  // remove all categories in case loop has already been triggered, so you don't get duplicate categories
+  // Remove all categories in case loop has already been triggered, so you don't get duplicate categories
   $('#deleteTalkWarning').hide();
   $('#talkDeleteButton').text('Delete talk');
   $('#newTalkCategory').find('option').remove().end()
@@ -575,7 +575,7 @@ function showTalkEditor(id) {
   }
 }
 
-// prepopulate edit session modal with relevant fields from parent div of clicked edit button
+// Prepopulate edit session modal with relevant fields from parent div of clicked edit button
 function editSession(dayIndex, slotIndex, sessionIndex) {
   $('#deleteSessionWarning').hide();
   $('#deleteSessionButton').text('Delete session');
@@ -728,7 +728,7 @@ function sortTimeslots(dayIndex) {
   });
 }
 
-// save edited timeslot
+// Save edited timeslot
 function saveTimeslot() {
   var dayIndex = $("#timeslotDayIndex").val();
   var slotIndex = $("#timeslotIndex").val();
@@ -785,7 +785,7 @@ function deleteTimeslot() {
   var timeSlot = progData.days[dayIndex].timeslots[slotIndex];
 
   for (var i = 0; i < timeSlot.sessions.length; i++) {
-    // remove any talks in the sessions.
+    // Remove any talks in the sessions.
     moveTalksToUnassigned(timeSlot.sessions[i]);
   }
 
@@ -821,7 +821,7 @@ function deleteSession() {
   refresh();
 }
 
-// submit button for edit session
+// Submit button for edit session
 function saveSession() {
   var dayIndex = $('#currentDayIndex').val();
   var slotIndex = $('#currentSlotIndex').val();
@@ -852,7 +852,7 @@ function saveSession() {
   refresh();
 }
 
-// download edited JSON program
+// Download edited JSON program
 function downloadJSON() {
   var atag = document.createElement('a');
   atag.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(progData, null, 2)));
