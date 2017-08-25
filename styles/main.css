@@ -1,5 +1,15 @@
 /* Color scheme created by Kay McKelly: http://www.colourlovers.com/palette/4500426/teal_we_meet_again */
+/* These are designed to show a placeholder in an empty draggable area.
+   TODO(kevin): the one for section.category doesn't work. */
+section.category:empty:before {
+    color:#12324C;
+    content: attr(data-placeholder)
+}
 
+div.session-talks:empty:before {
+    color:#12323C;
+    content:attr(data-placeholder)
+}
 
 /*** General Styling ***/
 body {
@@ -37,7 +47,7 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#templateSelector, #datePicker, #uploadTalks, #uploadTalksSelector, #versionPicker {
+#uploadmenu, #templateSelector, #datePicker, #uploadTalks, #uploadTalksSelector, #versionPicker, #nameEntry {
   display: none;
 }
 
@@ -48,7 +58,7 @@ h1, h2, h3, h4, h5 {
   display: none;
 }
 
-#addTalkBtn {
+#addTalkBtn, .addTimeslot {
   width: 35px;
   height: 35px;
   text-align: center;
@@ -62,10 +72,9 @@ h1, h2, h3, h4, h5 {
 }
 
 section.category {
-  padding: 5px;
-  min-height: 20px;
-  /*TODO: needs bg color to match bg color of draggable areas*/
-  /*background-color: purple;*/
+  padding: 3px;
+  min-height: 3em;
+  background-color:#c9c2ce;
 }
 
 div.talk {
@@ -83,7 +92,8 @@ div.talk {
 
 div.talk {
   border-radius: 8px;
-  background: #86BFCB;
+  background: #78C2CF;
+  /*#86BFCB;*/
   border: 1px solid #1D707A;
   margin: 5px;
   padding: 8px;
@@ -91,7 +101,8 @@ div.talk {
 
 div.talk:hover {
   border: 1px solid #1D707A;
-  background: #14A6B5;
+  background: rgba(120, 194, 207, 0.3);
+  /*#14A6B5;*/
 }
 
 /*TODO: make this match/remove .talkTitle; potentially combine??*/
@@ -105,6 +116,7 @@ div.talk:hover {
 .authorList, .authorName {
   font-family: 'Raleway', sans-serif;
   text-align: left;
+  font-size: 0.9em;
 }
 
 
@@ -120,28 +132,32 @@ div.session-talks {
   min-height: 3em;
   background: #c9c2ce;
   padding: 5px;
+  text-align: left;
 }
 
 .panel-body a {
   visibility: hidden;
-  }
-
-.panel-body:hover a {
-  visibility: visible;
 }
 
-a.iconLink {
-  font-size: 1.3em;
+.panel-body:hover > a {
+    visibility: visible;
+}
+
+div.timeSlotDiv {
+  min-height: 5em;
+}
+
+div.timeSlotDiv a {
+  visibility: hidden;
+}
+
+div.timeSlotDiv:hover > a {
+  visibility: visible;
 }
 
 p.timeSlot {
   font-size: 0.9em;
-  text-align: right;
-  margin-top: 25px;
-}
-
-span.editTime:hover {
-  background-color: #18BC9C;
+  margin-top: 5px;
 }
 
 .talkTitle {
@@ -161,10 +177,6 @@ p.trackSwitch {
   text-align: center;
 }
 
-p.eventDescr {
-  text-align: center;
-}
-
 p.mutualEventTalkTitle {
   font-size: 1.1em;
   font-weight: bold;
@@ -179,10 +191,6 @@ p.mutualEventTalkTitle {
 .track2Event {
   background-color: rgba(164, 244, 199, 0.3);
   margin-bottom: 10px;
-}
-
-p.dualTrackDescr {
-  text-align: left;
 }
 
 span.authorName:after {
@@ -201,11 +209,34 @@ span.authorName:last-of-type:after {
   color: #EDF6F7;
 }
 
-#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv {
+#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv, #addTimeslotDiv, #uploadTitleDiv {
   background-color: rgba(24, 188, 156, 1);
   color: #EDF6F7;
 }
 
 #newAuthorHelp, #newAffiliationHelp {
   font-size: 0.8em;
+}
+
+
+
+/*** Top right menu ***/
+a.dropdown-toggle {
+    color: #202020;
+    background: rgba(24, 188, 156, 0.4);
+    margin-right: 10px;
+}
+
+div.top-row-expanded {
+    margin-bottom: 20px;
+}
+
+div.menu-lowered {
+    margin-top: 40px;
+}
+.talk a {
+    visibility: hidden;
+}
+.talk:hover > a {
+  visibility: visible;
 }
