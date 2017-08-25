@@ -240,3 +240,8 @@ div.menu-lowered {
 .talk:hover > a {
   visibility: visible;
 }
+
+#paperUrl:invalid {
+    border-color: rgba(203, 0, 2, 0.8);
+    box-shadow: inset 0 0.0625em 0.125em rgba(0,0,0,.2), 0 0 0.125em rgba(203,0,2,.8);
+}

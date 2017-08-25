@@ -476,7 +476,13 @@ function updateProgData(el, target, source, sibling) {
 
 // Save a talk. This may come from an edit on an existing talk or a new
 // talk that was added. If the id is empty then it's a new talk.
+// TODO: validate the authors, title, and urls.
 function saveTalk() {
+  var newTitle = $('#newTalkTitle').val();
+  if (!newTitle) {
+    alert('Title is required');
+    return;
+  }
   var talkId = $('#talkId').val();
   if (talkId === "") {
     var talk = {};
@@ -484,8 +490,8 @@ function saveTalk() {
   } else { // an existing talk.
     var talk = findObj(talkId, progData);
   }
-
-  talk.title = $('#newTalkTitle').val();
+  talk.title = newTitle;
+  $('#editTalkBox').modal('hide');
   talk.authors = splitAuthors($('#newTalkAuthor').val());
 
   // TODO: handle affiliations
@@ -493,6 +499,9 @@ function saveTalk() {
 
   var category = $('#newTalkCategory').children(':selected');
   talk.category = category.text();
+  if ($('#paperUrl').val()) {
+    talk.paperUrl = $('#paperUrl').val();
+  }
   if (talkId === "") {
     var categoryIndex = new Number(category.attr('value'));
     progData.config.unassigned_talks[categoryIndex].talks.unshift(talk);
