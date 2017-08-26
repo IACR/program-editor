@@ -83,7 +83,10 @@
       <div class="row">
         <section class="col-md-12 setupStep instructions">
           <p class="text-justify">
-            Welcome to the program creator and editor for the International Association for Cryptologic Research (IACR). This tool is designed to make creating a program for your conference easier. We'll guide you through a series of questions to create the right program for you, the first of which is below.
+            This app allows you to create a program for a conference. The things you need to
+            get started are the dates of your conference and the list of accepted papers
+            from websubrev (you could type those in again, but why bother?). The list of
+            accepted papers is accessible as a JSON file from the program chair interface.
           </p>
         </section>
       </div>
@@ -443,7 +446,7 @@
                 <label for="newTalkTitle">
                   Talk Title
                 </label>
-                <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control" id="newTalkTitle" required="true" />
+                <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control required" id="newTalkTitle" required="true" />
               </div>
               <div class="form-group">
                 <label for="newTalkAuthors">
@@ -584,7 +587,7 @@
                 <label for="sessionTitle">
                   Session Title
                 </label>
-                <input type="text" name="sessionTitle" placeholder="Session title" class="form-control" id="currentSessionTitle" />
+                <input type="text" name="sessionTitle" placeholder="Session title" class="form-control required" id="currentSessionTitle" required="true"/>
               </div>
               <div class="form-group">
                 <div class="form-group">
@@ -650,11 +653,14 @@
                   </label>
                 </div>
                 <div class="form-group" id="timeslotDiv">
-                  <input type="text" name="startTime" class="form-control time start" id="newStartTime" autocomplete="off" />
+                  <input type="text" name="startTime" class="form-control time start" id="newStartTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required="true"/>
                   to
-                  <input type="text" name="endTime" class="form-control time end" id="newEndTime" autocomplete="off" />
+                  <input type="text" name="endTime" class="form-control time end" id="newEndTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required="true"/>
                 </div>
                 <br />
+                <div class="form-group" id="timeSlotWarning">
+                  <br/><div class="alert alert-warning">Start and end time are required.</div>
+                </div>
                 <br />
                 <label for="numtracks">Select the number of tracks.</label>
                 <select name="numtracks" id="selectSessionCount">
@@ -670,8 +676,7 @@
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
               Cancel
             </button>
-            <!-- TODO: save button currently NONFUNCTIONAL -->
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="addTimeslotToDay()">
+            <button type="button" class="btn btn-success btn-sm" onclick="addTimeslotToDay()">
               Add time slot
             </button>
           </div>

@@ -574,6 +574,7 @@ function showTalkEditor(id) {
     $('#newTalkAuthor').val('');
     $('#newTalkAffiliation').val('');
     $('#addTalkTitle').text('Add a new talk');
+    $('#paperUrl').val('');
   } else {
     $('#talkDeleteButton').show();
     var talkObj = findObj(id, progData);
@@ -581,6 +582,7 @@ function showTalkEditor(id) {
     $('#newTalkAuthor').val(talkObj.authors.join(' and '))
     $('#newTalkAffiliation').val(talkObj.affiliations);
     $('#addTalkTitle').text('Edit a talk');
+    $('#paperUrl').val(talkObj.paperUrl);
   }
 }
 
@@ -616,9 +618,11 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
 // Function to add a timeslot to a day. This will be called to populate
 // the modal for adding a timeslot.
 function prepareAddTimeslotToDay(dayIndex) {
+  $('#timeSlotWarning').hide();
   $('#dayIndex').val(dayIndex);
   var lastSlot = progData.days[dayIndex].timeslots[progData.days[dayIndex].timeslots.length -1];
-//  $('#newStartTime').val(lastSlot.endtime);
+  $('#newStartTime').val('');
+  $('#newEndTime').val('');
 
 // TODO: restrict times based on times of prior/next time slot? would be ideal but may also not be compatible with timepicker - further research needed
   $('#timeslotDiv .time').timepicker({
@@ -646,6 +650,11 @@ function hmToMinutes(val) {
 function addTimeslotToDay() {
   var startTime = $("#newStartTime").val();
   var endTime = $("#newEndTime").val();
+  if (!startTime || !endTime) {
+    $('#timeSlotWarning').show();
+    return;
+  }
+  $('#addTimeslot').modal('hide');
   var dayIndex = $("#dayIndex").val();
   var numTracks = parseInt($("#selectSessionCount").val());
 
@@ -899,6 +908,7 @@ $(document).ready(function() {
 
   // Register tooltip plugin.
   $('body').tooltip({
+    trigger: 'hover',
     selector: '[data-toggle="tooltip"]'
   });
 
@@ -907,5 +917,8 @@ $(document).ready(function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(100);
   }, function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(100);
+  });
+  $('#editTalkBox').on('shown.bs.modal', function () {
+    $('#newTalkTitle').focus();
   });
 });
