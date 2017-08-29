@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" />
+
     <!-- jQuery daterangepicker, jQuery timepicker, & Dragula -->
     <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css" rel="stylesheet" />
     <link href="./dependencies/jquery-timepicker/jquery.timepicker.css" rel="stylesheet" />
@@ -19,7 +20,61 @@
 
   </head>
   <body class="container-fluid">
-    <div class="row top-row-expanded">
+
+    <nav class="navbar" role="navigation">
+      <div class="navbar-header">
+        <a href="./">pro.creator</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active">
+          <a href="#">
+            Link <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            Help
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Dropdown <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#">
+                Action
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Another action
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Something else here
+              </a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">
+                Separated link
+              </a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">
+                One more separated link
+              </a>
+            </li>
+          </ul>
+        </li>
+        <button type="button" class="btn btn-success navbar-btn">Download JSON</button>
+      </ul>
+    </nav>
+
+    <!-- <div class="row top-row-expanded">
       <header class="col-md-8">
         <h1 class="mainTitle">
           Program Creator/Editor
@@ -28,9 +83,9 @@
       <nav class="navbar navbar-right col-md-4" role="navigation">
         <div class="collapse navbar-collapse menu-lowered" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+            <li class="dropdown"> -->
               <!-- TODO: do caret with html5 standard -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Actions <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
@@ -46,9 +101,9 @@
                 </li>
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown"> -->
               <!-- TODO: do caret with html5 standard -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Help <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
@@ -78,7 +133,8 @@
           </ul>
         </div>
       </nav>
-    </div>
+    </div> -->
+
     <div id="setupPrompts">
       <div class="row">
         <section class="col-md-12 setupStep instructions">
