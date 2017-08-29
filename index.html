@@ -21,24 +21,14 @@
   </head>
   <body class="container-fluid">
 
-    <nav class="navbar" role="navigation">
+    <nav class="navbar" id="topNav" role="navigation">
       <div class="navbar-header">
-        <a href="./">pro.creator</a>
+        <a href="./" class="navbar-brand">pro.creator</a>
       </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="active">
-          <a href="#">
-            Link <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Help
-          </a>
-        </li>
+      <ul class="nav nav-tabs navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Dropdown <span class="caret"></span>
+            Actions <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
             <li>
@@ -70,7 +60,12 @@
             </li>
           </ul>
         </li>
-        <button type="button" class="btn btn-success navbar-btn">Download JSON</button>
+        <li>
+          <a href="#">
+            Help
+          </a>
+        </li>
+        <button type="button" class="btn btn-sm btn-success navbar-btn">Download JSON</button>
       </ul>
     </nav>
 
