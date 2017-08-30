@@ -2,13 +2,13 @@
 /* These are designed to show a placeholder in an empty draggable area.
    TODO(kevin): the one for section.category doesn't work. */
 section.category:empty:before {
-    color:#12324C;
-    content: attr(data-placeholder)
+    color: #12323C;
+    content: attr(data-placeholder);
 }
 
 div.session-talks:empty:before {
-    color:#12323C;
-    content:attr(data-placeholder)
+    color: #12323C;
+    content: attr(data-placeholder);
 }
 
 /*** General Styling ***/
