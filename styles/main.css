@@ -32,8 +32,11 @@ h1, h2, h3, h4, h5 {
   font-size: 1.7em;
   font-weight: bold;
 }
-/*TODO(kay): style brand and links for nav menu*/
-
+/*TODO(kay): style brand and links for nav menu. make brand same font as titles, remove text decoration*/
+nav {
+  padding-right: 20px;
+  background-color: #12323C !important;
+}
 
 
 /*** Setup Section ***/
