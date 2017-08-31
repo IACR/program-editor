@@ -8,12 +8,15 @@ body {
 
 h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
+  color: #1D707A;
 }
 
 .mainTitle {
   font-size: 4.7em;
+  margin-bottom: 60px;
 }
 
+/*NOTE: necessary for left-side nav to behave correctly*/
 @media (min-width: 767px) {
   nav#leftNav {
     position: fixed;
