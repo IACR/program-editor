@@ -1,0 +1,15 @@
+/*** General Styling ***/
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: rgba(134, 191, 203, 0.1);
+  color: #12323C;
+  font-size: 1.7em;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.mainTitle {
+  font-size: 4.7em;
+}
