@@ -34,8 +34,45 @@ h1, h2, h3, h4, h5 {
 }
 /*TODO(kay): style brand and links for nav menu. make brand same font as titles, remove text decoration*/
 nav {
-  padding-right: 20px;
-  background-color: #12323C !important;
+  padding-right: 14px;
+  background-color: #1D707A !important;
+}
+
+nav a#navBrand {
+  color: #F2F8F9;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1.4em;
+  margin-bottom: 3px;
+  margin-top: -1px;
+}
+
+ul#topNavList {
+  padding-top: 8px;
+}
+
+a#navDropdown {
+  color: #F2F8F9;
+  background-color: inherit;
+}
+
+a#navDropdown:hover {
+  background-color: rgba(24, 188, 156, 0.6);
+}
+
+ul.dropdown-menu {
+  background-color: #1D707A;
+}
+
+ul.dropdown-menu li a.topNavItem {
+  color: #F2F8F9;
+}
+
+a.topNavItem {
+  color: #F2F8F9;
+}
+
+a.topNavItem:hover {
+  background-color: rgba(24, 188, 156, 0.6) !important;
 }
 
 
@@ -78,7 +115,7 @@ nav {
 section.category {
   padding: 3px;
   min-height: 3em;
-  background-color:#c9c2ce;
+  background-color: rgba(29, 112, 122, 0.4);
 }
 
 div.talk {
@@ -96,8 +133,7 @@ div.talk {
 
 div.talk {
   border-radius: 8px;
-  background: #78C2CF;
-  /*#86BFCB;*/
+  background-color: #78C2CF;
   border: 1px solid #1D707A;
   margin: 5px;
   padding: 8px;
@@ -105,7 +141,7 @@ div.talk {
 
 div.talk:hover {
   border: 1px solid #1D707A;
-  background: rgba(120, 194, 207, 0.3);
+  background-color: rgba(120, 194, 207, 0.3);
   /*#14A6B5;*/
 }
 
@@ -134,7 +170,7 @@ div.talk:hover {
 
 div.session-talks {
   min-height: 3em;
-  background: #c9c2ce;
+  background-color: rgba(29, 112, 122, 0.4);
   padding: 5px;
   text-align: left;
 }
@@ -227,7 +263,7 @@ span.authorName:last-of-type:after {
 /*** Top right menu ***/
 a.dropdown-toggle {
     color: #202020;
-    background: rgba(24, 188, 156, 0.4);
+    background-color: rgba(24, 188, 156, 0.4);
     margin-right: 10px;
 }
 

@@ -22,39 +22,50 @@
   <body>
     <nav class="navbar navbar-default" id="topNav" role="navigation">
       <div class="navbar-header">
-        <a href="./" class="navbar-brand">pro.creator</a>
+        <a href="./" class="navbar-brand" id="navBrand">Program Creator</a>
       </div>
-      <ul class="nav nav-tabs navbar-right">
+      <ul class="nav nav-pills navbar-right" id="topNavList">
         <!-- file > open..., save, save as..., download -->
         <!-- import > upload talks, import paper urls -->
-        <!-- NOTE: switch to pills -->
-        <li>
-          <a href="#">
-            Edit new
+        <li role="presentation" class="dropdown">
+          <a href="#" class="dropdown-toggle" id="navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            File <span class="caret"></span>
           </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="topNavItem">
+                Save
+              </a>
+            </li>
+            <li>
+              <a href="#" class="topNavItem">
+                Save as...
+              </a>
+            </li>
+            <li>
+              <a href="#" class="topNavItem">
+                Download
+              </a>
+            </li>
+            <li>
+              <a href="#" class="topNavItem">
+                Edit new
+              </a>
+            </li>
+            <li>
+              <a href="#" class="topNavItem">
+                Upload talks
+              </a>
+            </li>
+          </ul>
         </li>
         <li>
-          <a href="#">
-            Save
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Download
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Upload talks
-          </a>
-        </li>
-        <li>
-          <a href="#">
+          <a href="#" class="topNavItem">
             Help
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="#" class="topNavItem">
             About
           </a>
         </li>
