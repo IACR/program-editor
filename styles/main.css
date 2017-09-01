@@ -1,6 +1,7 @@
 /* Color scheme created by Kay McKelly: http://www.colourlovers.com/palette/4500426/teal_we_meet_again */
 /* These are designed to show a placeholder in an empty draggable area.
    TODO(kevin): the one for section.category doesn't work. */
+   /*NOTE(from kay): if possible, do move these to the correct section of this stylesheet (or I can do that, whichever) */
 section.category:empty:before {
     color: #12323C;
     content: attr(data-placeholder);
@@ -10,6 +11,8 @@ div.session-talks:empty:before {
     color: #12323C;
     content: attr(data-placeholder);
 }
+
+
 
 /*** General Styling ***/
 body {
@@ -23,16 +26,14 @@ h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
-.mainTitle {
-  font-size: 4.7em;
-}
-
 .editorTitles {
   margin-top: 0px;
   font-size: 1.7em;
   font-weight: bold;
 }
-/*TODO(kay): style brand and links for nav menu. make brand same font as titles, remove text decoration*/
+
+
+/*** Nav Styling ***/
 nav {
   padding-right: 14px;
   background-color: #1D707A !important;
@@ -146,12 +147,12 @@ div.talk:hover {
 }
 
 /*TODO: make this match/remove .talkTitle; potentially combine??*/
-.toAddTalkTitle {
+/*.toAddTalkTitle {
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: left;
   font-size: 1.2em;
   font-weight: bold;
-}
+}*/
 
 .authorList, .authorName {
   font-family: 'Raleway', sans-serif;
@@ -201,7 +202,8 @@ p.timeSlot {
 }
 
 .talkTitle {
-  font-size: 1.1em;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1.2em;
   font-weight: bold;
   text-align: left;
 }
