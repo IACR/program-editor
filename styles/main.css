@@ -146,14 +146,6 @@ div.talk:hover {
   /*#14A6B5;*/
 }
 
-/*TODO: make this match/remove .talkTitle; potentially combine??*/
-/*.toAddTalkTitle {
-  font-family: 'Open Sans Condensed', sans-serif;
-  text-align: left;
-  font-size: 1.2em;
-  font-weight: bold;
-}*/
-
 .authorList, .authorName {
   font-family: 'Raleway', sans-serif;
   text-align: left;
