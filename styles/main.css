@@ -300,3 +300,8 @@ input:invalid {
     from { -webkit-transform: rotate(0deg); }
     to { -webkit-transform: rotate(360deg); }
 }
+
+a.paperUrl {
+    color: #0f0f0f !important;
+    visibility:visible;
+}

@@ -995,6 +995,9 @@ function findDOIs() {
     });
   });
   console.dir(talks);
+  // This was constructed after reading
+  // https://stackoverflow.com/questions/24705401/jquery-ajax-with-array-of-urls
+  // TODO: make it report progress as soon as each ajax call finishes.
   $.when.apply($, talks.map(function(talk) {
     var talkUrl = getTalkUrl(talk);
     // We save the talk in the jqXHR so we can update
@@ -1019,6 +1022,10 @@ function findDOIs() {
       for (var i = 0; i < result.items.length; i++) {
         var distance = levenshtein_distance(result.talk.title.toLowerCase(),
                                             result.items[i].title[0].toLowerCase());
+        // We searched on the title and first author, so if the title
+        // is pretty close and the number of authors is correct, we
+        // take it as a match. The number 4 was pulled out of the
+        // backside of a mule.
         if (distance < 4 && result.talk.authors.length == result.items[i].author.length) {
           result.talk.paperUrl = result.items[i].URL;
           matches++;
@@ -1034,6 +1041,7 @@ function findDOIs() {
       }
     });
     console.log('matches:' + matches);
+    refresh();
   });
 }
 
