@@ -31,23 +31,23 @@
           </a>
           <ul class="dropdown-menu">
             <!-- NOTE: FIX -->
-            <li class="hide">
-              <a href="#" class="topNavItem">
+            <li id="openMenu">
+              <a href="javascript:location.reload()" class="topNavItem">
                 Open
               </a>
             </li>
-            <li>
-              <a href="#" class="topNavItem">
+            <li id="saveMenu">
+              <a href="javascript:saveProgram()" class="topNavItem">
                 Save
               </a>
             </li>
-            <li>
+            <li id="saveAsMenu">
               <a href="#" class="topNavItem">
                 Save as...
               </a>
             </li>
-            <li>
-              <a href="#" class="topNavItem">
+            <li id="downloadMenu">
+              <a href="javascript:downloadJSON()" class="topNavItem">
                 Download JSON
               </a>
             </li>
@@ -58,12 +58,12 @@
             Import <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li>
-              <a href="#" class="topNavItem">
+            <li id="uploadTalksMenu">
+              <a href="javascript:showWebsubrevUpload()" class="topNavItem">
                 Upload talks
               </a>
             </li>
-            <li>
+            <li id="importDOIMenu">
               <a href="#" class="topNavItem">
                 Import paper URLs
               </a>
@@ -71,12 +71,12 @@
           </ul>
         </li>
         <li>
-          <a href="#" class="topNavItem">
+          <a target="_help" href="docs/help.html" class="topNavItem">
             Help
           </a>
         </li>
         <li>
-          <a href="#" class="topNavItem">
+          <a target="_help" href="https://github.com/kaymckelly/program-editor" class="topNavItem">
             About
           </a>
         </li>

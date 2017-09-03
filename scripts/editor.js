@@ -5,6 +5,24 @@ var progData;
 var progTemplate;
 var talksTemplate;
 
+// This is called when the app is opened, and disables menu items that only make
+// sense if a program is being edited.
+function disableMenus() {
+  $('#saveMenu').addClass('disabled');
+  $('#saveAsMenu').addClass('disabled');
+  $('#downloadMenu').addClass('disabled');
+  $('#uploadTalksMenu').addClass('disabled');
+  $('#importDOIMenu').addClass('disabled');
+}
+
+// This is called when a program is loaded to edit.
+function enableMenus() {
+  $('#saveMenu').removeClass('disabled');
+  $('#saveAsMenu').removeClass('disabled');
+  $('#downloadMenu').removeClass('disabled');
+  $('#uploadTalksMenu').removeClass('disabled');
+  $('#importDOIMenu').removeClass('disabled');
+}
 // Returns new integer for use as id on talks and sessions
 function createUniqueId() {
   progData.config.uniqueIDIndex++;
@@ -127,6 +145,7 @@ function getConfig(name, existing) {
       $('#setupPrompts').hide();
       refresh();
       $('#parent').show(500);
+      enableMenus();
       return;
     }
     $('#templateSelector').hide();
@@ -178,6 +197,7 @@ function startEditor() {
   $('#setupPrompts').hide();
   $('#uploadmenu').show();
   $('#parent').show(500);
+  enableMenus();
 }
 
 // Function to fetch json/accepted_demo.json and use that as
@@ -905,7 +925,7 @@ $(document).ready(function() {
   theTemplateScript = $("#talks-template").html();
   talksTemplate = Handlebars.compile(theTemplateScript);
   Handlebars.registerPartial("talk", $('#talk-partial').html());
-
+  disableMenus();
   // Register tooltip plugin.
   $('body').tooltip({
     trigger: 'hover',
