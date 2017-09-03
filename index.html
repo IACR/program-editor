@@ -63,7 +63,7 @@
               </a>
             </li>
             <li id="importDOIMenu">
-              <a href="#" class="topNavItem">
+              <a href="javascript:findDOIs()" class="topNavItem">
                 Import paper URLs
               </a>
             </li>
@@ -368,6 +368,64 @@
 
     <!-- Additional/custom scripts -->
     <script src="./scripts/editor.js"></script>
+
+    <!-- Modal for import from crossref.org -->
+    <aside class="modal fade" id="importDOISelection" role="dialog" aria-labeledby="importDOITitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" id="importDOIDiv">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="modal-title" id="importDOITitle">
+              Import DOIs from crossref.org
+            </h2>
+          </div>
+          <div class="modal-body">
+            <p class="help-block">
+              This will attempt to import DOIs for the papers directly. This
+              is a slow and error-prone process because Springer does not
+              provide a suitable API for it. As an alternative you can enter
+              DOIs by hand, but this is very time-consuming.
+            </p>
+            <div class="form-group">
+              <label for="importDOIConference">
+                Select a conference
+              </label>
+              <div class="row">
+                <div class="col-md-4">
+                  <select class="form-control my-inline" id="importDOIConference" name="importDOIConference">
+                    <option value="Advances in Cryptology - ASIACRYPT YYYY">Asiacrypt</option>
+                    <option value="CHES" disabled>CHES (unavailable)</option>
+                    <option value="Advances in Cryptology CRYPTO YYYY" selected>Crypto</option>
+                    <option value="Advances in Cryptology - EUROCRYPT YYYY">Eurocrypt</option>
+                    <option value="FSE" disabled>FSE (unavailable)</option>
+                    <option value="Public Key Cryptography - PKC YYYY">PKC</option>
+                    <option value="RWC" disabled>RWC (unavailable)</option>
+                    <option value="Theory of Cryptography">TCC</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select class="form-control my-inline" id="importDOIYear">
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <button id="doiSearchBtn" type="button" onclick="searchDOIs()" class="my-inline btn btn-success btn-sm">Search</button>
+                  <span id="doi-spinner" class="glyphicon glyphicon-refresh spinning"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Close</button>
+            <button id="importDOIsBtn" type="button" onclick="importDOIs()" class="my-inline btn btn-success btn-sm">Import DOIs</button>
+          </div>
+          <div class="form-group importResults" id="importResults">
+            <ol id="resultList"></ol>
+          </div>
+        </div>
+      </div>
+    </aside>
 
     <!-- Modal for upload from websubrev -->
     <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labeledby="uploadTitle">
