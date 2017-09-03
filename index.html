@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" />
+
     <!-- jQuery daterangepicker, jQuery timepicker, & Dragula -->
     <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css" rel="stylesheet" />
     <link href="./dependencies/jquery-timepicker/jquery.timepicker.css" rel="stylesheet" />
@@ -18,343 +19,347 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet" />
 
   </head>
-  <body class="container-fluid">
-    <div class="row top-row-expanded">
-      <header class="col-md-8">
-        <h1 class="mainTitle">
-          Program Creator/Editor
-        </h1>
-      </header>
-      <nav class="navbar navbar-right col-md-4" role="navigation">
-        <div class="collapse navbar-collapse menu-lowered" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <!-- TODO: do caret with html5 standard -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Actions <b class="caret"></b>
+  <body>
+    <nav class="navbar navbar-default" id="topNav" role="navigation">
+      <div class="navbar-header">
+        <a href="./" class="navbar-brand" id="navBrand">Program Creator</a>
+      </div>
+      <ul class="nav nav-pills navbar-right" id="topNavList">
+        <li role="presentation" class="dropdown">
+          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            File <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- NOTE: FIX -->
+            <li class="hide">
+              <a href="#" class="topNavItem">
+                Open
               </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="javascript:location.reload()">
-                    Edit another program
-                  </a>
-                </li>
-                <li id="uploadmenu">
-                  <a href="javascript:showWebsubrevUpload()">
-                    Upload from websubrev
-                  </a>
-                </li>
-              </ul>
             </li>
-            <li class="dropdown">
-              <!-- TODO: do caret with html5 standard -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Help <b class="caret"></b>
+            <li>
+              <a href="#" class="topNavItem">
+                Save
               </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a target="_help" href="docs/help.html">
-                    Help home
-                  </a>
-                </li>
-                <li>
-                  <a target="_help" href="docs/help.html#websubrev">
-                    Websubrev input
-                  </a>
-                </li>
-                <li>
-                  <a target="_help" href="docs/help.html#output">
-                    How to use the output
-                  </a>
-                </li>
-                <li role="separator" class="divider"></li>
-                <li>
-                  <a target="_help" href="https://github.com/kaymckelly/program-editor">
-                    About this editor
-                  </a>
-                </li>
-              </ul>
+            </li>
+            <li>
+              <a href="#" class="topNavItem">
+                Save as...
+              </a>
+            </li>
+            <li>
+              <a href="#" class="topNavItem">
+                Download JSON
+              </a>
             </li>
           </ul>
-        </div>
-      </nav>
-    </div>
-    <div id="setupPrompts">
-      <div class="row">
-        <section class="col-md-12 setupStep instructions">
-          <p class="text-justify">
-            This app allows you to create a program for a conference. The things you need to
-            get started are the dates of your conference and the list of accepted papers
-            from websubrev (you could type those in again, but why bother?). The list of
-            accepted papers is accessible as a JSON file from the program chair interface.
-          </p>
-        </section>
-      </div>
-
-      <div class="row">
-        <section id="newOrExisting" class="col-md-8 col-md-offset-2 setupStep">
-          <p>
-            If you've been here before, you can edit an existing program. Otherwise, start from a new one.
-          </p>
-          <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">
-            New
-          </button>
-          <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">
-            Existing
-          </button>
-        </section>
-      </div>
-
-      <div class="row">
-        <section id="versionPicker" class="col-md-8 col-md-offset-2 setupStep">
-          <table class="table table-bordered" id="versionList">
-            <tr>
-              <th>Name</th>
-              <th>Owner</th>
-              <th>Last modified</th>
-            </tr>
-          </table>
-        </section>
-      </div>
-
-      <div class="row">
-        <section id="templateSelector" class="col-md-8 col-md-offset-2 setupStep">
-          <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
-            <option value="" disabled selected>
-              Select a template
-            </option>
-            <option value="./json/crypto_config.json">
-              Crypto (5 days, dual track, bbq)
-            </option>
-            <option value="./json/ec_config.json">
-              Eurocrypt/Asiacrypt (5 days, dual track, banquet)
-            </option>
-            <option value="./json/pkc_config.json">
-              CHES/FSE/PKC/TCC (4 days, single track)
-            </option>
-            <option value="./json/basic_1day.json">
-              Basic one-day workshop
-            </option>
-            <option value="./json/basic_2day.json">
-              Basic two-day workshop
-            </option>
-            <option value="./json/basic_3day.json">
-              Basic three-day conference
-            </option>
-          </select>
-        </section>
-      </div>
-
-      <div class="row" id="nameEntry">
-        <section class="col-md-8 col-md-offset-2 setupStep">
-          <p>
-            Enter a name for the conference program.
-          </p>
-          <input type="text" name="inputName" id="inputName" />
-          <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success">
-            Next
-          </button>
-        </section>
-      </div>
-      <div class="row">
-        <section id="datePicker" class="col-md-8 col-md-offset-2 setupStep">
-          <p>
-            Choose the start and end date for your conference.
-          </p>
-          <label for="startdate">From
-            <input type="text" id="startdate" name="startdate" />
-          </label>
-          <label for="enddate">to
-            <input type="text" id="enddate" name="enddate" />
-          </label>
-        </section>
-      </div>
-
-      <div class="row">
-        <section id="uploadTalks" class="col-md-8 col-md-offset-2 form-group">
-          <p>
-            Next, upload a JSON file of accepted papers from websubrev.
-          </p>
-          <button type="button" name="showUpload" onclick="showWebsubrevUpload()" class="btn btn-sm btn-success">
-            Upload websubrev accepted talks
-          </button>
-          <button type="button" name="skipUpload" onclick="startEditor()" class="btn btn-sm btn-success">
-            Skip for now
-          </button>
-          <button type="button" name="useDemoTalks" onclick="useDemoTalks()" class="btn btn-sm btn-success">
-            Use demo data
-          </button>
-        </section>
-      </div>
-    </div>
-
-    <main id="parent">
-      <div class="row">
-        <section class="col-md-10 instructions">
-          <p>
-            Instructions: Drag talks from the left column to the sessions on the right. Once you have placed all of the talks into sessions, you can export the JSON or html and edit that to suit any other requirements.
-          </p>
-        </section>
-        <aside class="col-md-2">
-          <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">
-            Download JSON
-          </button>
-          <button type="button" name="saveProgram" onclick="saveProgram()" id="saveProgramBtn" class="btn btn-block btn-success">
-            Save
-          </button>
-        </aside>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <h3 class="text-center editorTitles">
-            Unscheduled Talks
-            <label data-toggle="tooltip" title="Add a talk" data-placement="top" data-trigger="hover" tabindex="0">
-              <button type="button" name="addTalk" class="btn btn-success" id="addTalkBtn" data-toggle="modal" data-target="#editTalkBox" onclick="showTalkEditor('')">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </button>
-            </label>
-          </h3>
-        </div>
-        <div class="col-md-9">
-          <h3 class="text-center editorTitles">
-            Schedule
-          </h3>
-        </div>
-      </div>
-
-      <!-- This is a handlebars partial that can be used in two places to display a talk. -->
-      <script id="talk-partial" type="text/x-handlebars-template">
-        <div class="talk" id="{{id}}">
-          <a data-toggle="modal" data-target="#editTalkBox" href="#editTalk" class="pull-right" onclick="showTalkEditor('{{id}}');">
-            <label data-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
-              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            </label>
+        </li>
+        <li role="presentation" class="dropdown">
+          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Import <span class="caret"></span>
           </a>
-          <h4 class="toAddTalkTitle">
-            {{title}}
-          </h4>
-          <div class="authorList">
-            {{#each authors}}
-              <span class="authorName">
-                {{this}}
-              </span>
-            {{/each}}
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="topNavItem">
+                Upload talks
+              </a>
+            </li>
+            <li>
+              <a href="#" class="topNavItem">
+                Import paper URLs
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="topNavItem">
+            Help
+          </a>
+        </li>
+        <li>
+          <a href="#" class="topNavItem">
+            About
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div id="setupPrompts">
+        <div class="row">
+          <section class="col-md-12 setupStep instructions">
+            <p class="text-justify">
+              This app allows you to create a program for a conference. The things you need to
+              get started are the dates of your conference and the list of accepted papers
+              from websubrev (you could type those in again, but why bother?). The list of
+              accepted papers is accessible as a JSON file from the program chair interface.
+            </p>
+          </section>
+        </div>
+
+        <div class="row">
+          <section id="newOrExisting" class="col-md-8 col-md-offset-2 setupStep">
+            <p>
+              If you've been here before, you can edit an existing program. Otherwise, start from a new one.
+            </p>
+            <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">
+              New
+            </button>
+            <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">
+              Existing
+            </button>
+          </section>
+        </div>
+
+        <div class="row">
+          <section id="versionPicker" class="col-md-8 col-md-offset-2 setupStep">
+            <table class="table table-bordered" id="versionList">
+              <tr>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Last modified</th>
+              </tr>
+            </table>
+          </section>
+        </div>
+
+        <div class="row">
+          <section id="templateSelector" class="col-md-8 col-md-offset-2 setupStep">
+            <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
+              <option value="" disabled selected>
+                Select a template
+              </option>
+              <option value="./json/crypto_config.json">
+                Crypto (5 days, dual track, bbq)
+              </option>
+              <option value="./json/ec_config.json">
+                Eurocrypt/Asiacrypt (5 days, dual track, banquet)
+              </option>
+              <option value="./json/pkc_config.json">
+                CHES/FSE/PKC/TCC (4 days, single track)
+              </option>
+              <option value="./json/basic_1day.json">
+                Basic one-day workshop
+              </option>
+              <option value="./json/basic_2day.json">
+                Basic two-day workshop
+              </option>
+              <option value="./json/basic_3day.json">
+                Basic three-day conference
+              </option>
+            </select>
+          </section>
+        </div>
+
+        <div class="row" id="nameEntry">
+          <section class="col-md-8 col-md-offset-2 setupStep">
+            <p>
+              Enter a name for the conference program.
+            </p>
+            <input type="text" name="inputName" id="inputName" />
+            <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success">
+              Next
+            </button>
+          </section>
+        </div>
+        <div class="row">
+          <section id="datePicker" class="col-md-8 col-md-offset-2 setupStep">
+            <p>
+              Choose the start and end date for your conference.
+            </p>
+            <label for="startdate">From
+              <input type="text" id="startdate" name="startdate" />
+            </label>
+            <label for="enddate">to
+              <input type="text" id="enddate" name="enddate" />
+            </label>
+          </section>
+        </div>
+
+        <div class="row">
+          <section id="uploadTalks" class="col-md-8 col-md-offset-2 form-group">
+            <p>
+              Next, upload a JSON file of accepted papers from websubrev.
+            </p>
+            <button type="button" name="showUpload" onclick="showWebsubrevUpload()" class="btn btn-sm btn-success">
+              Upload websubrev accepted talks
+            </button>
+            <button type="button" name="skipUpload" onclick="startEditor()" class="btn btn-sm btn-success">
+              Skip for now
+            </button>
+            <button type="button" name="useDemoTalks" onclick="useDemoTalks()" class="btn btn-sm btn-success">
+              Use demo data
+            </button>
+          </section>
+        </div>
+      </div>
+
+      <main id="parent">
+        <div class="row">
+          <section class="col-md-12 instructions">
+            <p>
+              Instructions: Drag talks from the left column to the sessions on the right. Once you have placed all of the talks into sessions, you can export the JSON or html and edit that to suit any other requirements.
+            </p>
+          </section>
+          <!-- TODO: this entire aside needs to be removed. before the aside is removed however, must shift the functionality of these buttons to the corresponding menu items on the top nav -->
+          <!-- <aside class="col-md-2">
+            <button type="button" name="jsonDownload" onclick="downloadJSON()" id="jsonDownloadBtn" class="btn btn-block btn-success">
+              Download JSON
+            </button>
+            <button type="button" name="saveProgram" onclick="saveProgram()" id="saveProgramBtn" class="btn btn-block btn-success">
+              Save
+            </button>
+          </aside> -->
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <h3 class="text-center editorTitles">
+              Unscheduled Talks
+              <label data-toggle="tooltip" title="Add a talk" data-placement="top" data-trigger="hover" tabindex="0">
+                <button type="button" name="addTalk" class="btn btn-success" id="addTalkBtn" data-toggle="modal" data-target="#editTalkBox" onclick="showTalkEditor('')">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+              </label>
+            </h3>
+          </div>
+          <div class="col-md-9">
+            <h3 class="text-center editorTitles">
+              Schedule
+            </h3>
           </div>
         </div>
-      </script>
-      <article id="talksList" class="col-md-3">
-        <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
-        <script id="talks-template" type="text/x-handlebars-template">
-          <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
-          {{#each unassigned_talks}}
-            <div id="{{id}}">
-              <h3 class="categoryTitle">
-                {{name}}
-              </h3>
-              <section class="category" data-placeholder="Drag talks here to unschedule">
-                {{#each talks}}
-                  {{> talk}}
-                {{/each}}
-              </section>
+
+        <!-- This is a handlebars partial that can be used in two places to display a talk. -->
+        <script id="talk-partial" type="text/x-handlebars-template">
+          <div class="talk" id="{{id}}">
+            <a data-toggle="modal" data-target="#editTalkBox" href="#editTalk" class="pull-right" onclick="showTalkEditor('{{id}}');">
+              <label data-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+              </label>
+            </a>
+            <h4 class="talkTitle">
+              {{title}}
+            </h4>
+            <div class="authorList">
+              {{#each authors}}
+                <span class="authorName">{{this}}</span>
+              {{/each}}
             </div>
-          {{/each}}
+          </div>
         </script>
-      </article>
-
-      <article id="renderedProgram" class="col-md-9">
-        <!-- Handlebars script, renders editable program based on the user-selected program template -->
-          <script id="program-template" type="text/x-handlebars-template">
-            {{#each days}}
-            <div class="row">
-              <div class="col-md-5">
-                <hr />
-                <h3 class="pageSubtitle">
-                  {{date}} <label data-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover" tabindex="0">
-                    <button type="button" name="addTimeslot" class="addTimeslot btn btn-success" data-toggle="modal" data-target="#addTimeslot" onclick="prepareAddTimeslotToDay({{@index}})">
-                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
-                  </label>
+        <article id="talksList" class="col-md-3">
+          <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
+          <script id="talks-template" type="text/x-handlebars-template">
+            <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
+            {{#each unassigned_talks}}
+              <div id="{{id}}">
+                <h3 class="categoryTitle">
+                  {{name}}
                 </h3>
-              </div>
-            </div>
-            {{#each timeslots}}
-            {{#if sessions}} <!-- only render slots that have sessions -->
-            <div class="row">
-              <div class="col-md-2 timeSlotDiv">
-                  <a data-toggle="modal" href="#editTimeslot" class="pull-right" onclick="editTimeslot({{@../index}}, {{@index}})">
-                    <label data-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </label>
-                  </a>
-                <br />
-                <p class="timeSlot text-center">
-                  {{starttime}}-{{endtime}}
-                </p>
-              </div>
-              <div class="{{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
-                <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} panel-body" id="{{sessions.0.id}}">
-                  <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},0)">
-                    <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </label>
-                  </a>
-                  <h3 class="text-center">
-                    {{sessions.0.session_title}}
-                  </h3>
-                  {{#if sessions.0.location.name}}
-                  <p class="text-center">
-                    {{sessions.0.location.name}}
-                  </p>
-                  {{/if}}
-                  {{#if sessions.0.moderator}}
-                  <p class="text-center">
-                    {{sessions.0.moderator}}
-                  </p>
-                  {{/if}}
-
-                  {{#empty sessions.0.talks}}
-                  {{#each sessions.0.talks}}
-                  {{> talk}}
+                <section class="category" data-placeholder="Drag talks here to unschedule">
+                  {{#each talks}}
+                    {{> talk}}
                   {{/each}}
-                  {{/empty}}
-                </div>
+                </section>
               </div>
-              {{#if twosessions}}
-              <div class="col-md-5">
-                <div class="panel-body track2Event" id="{{sessions.1.id}}">
-                  <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},1)">
-                    <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </label>
-                  </a>
-                  <h3 class="text-center">
-                    {{sessions.1.session_title}}
-                  </h3>
-                  {{#if sessions.1.location.name}}
-                  <p class="text-center">
-                    {{sessions.1.location.name}}
-                  </p>
-                  {{/if}}
-                  {{#if sessions.1.moderator}}
-                  <p class="text-center">
-                    {{sessions.1.moderator}}
-                  </p>
-                  {{/if}}
-                  {{#empty sessions.1.talks}}
-                  {{#each sessions.1.talks}}
-                  {{> talk}}
-                  {{/each}}
-                  {{/empty}}
-                </div>
-              </div>
-              {{/if}} <!-- end of second session -->
-            </div>
-            {{/if}} <!-- sessions -->
-            {{/each}} <!-- timeslots -->
-            {{/each}} <!-- days -->
+            {{/each}}
           </script>
-      </article>
-    </main>
+        </article>
+
+        <article id="renderedProgram" class="col-md-9">
+          <!-- Handlebars script, renders editable program based on the user-selected program template -->
+            <script id="program-template" type="text/x-handlebars-template">
+              {{#each days}}
+              <div class="row">
+                <div class="col-md-5">
+                  <hr />
+                  <h3 class="pageSubtitle">
+                    {{date}} <label data-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover" tabindex="0">
+                      <button type="button" name="addTimeslot" class="addTimeslot btn btn-success" data-toggle="modal" data-target="#addTimeslot" onclick="prepareAddTimeslotToDay({{@index}})">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      </button>
+                    </label>
+                  </h3>
+                </div>
+              </div>
+              {{#each timeslots}}
+              {{#if sessions}} <!-- only render slots that have sessions -->
+              <div class="row">
+                <div class="col-md-2 timeSlotDiv">
+                    <a data-toggle="modal" href="#editTimeslot" class="pull-right" onclick="editTimeslot({{@../index}}, {{@index}})">
+                      <label data-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </label>
+                    </a>
+                  <br />
+                  <p class="timeSlot text-center">
+                    {{starttime}}-{{endtime}}
+                  </p>
+                </div>
+                <div class="{{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
+                  <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} panel-body" id="{{sessions.0.id}}">
+                    <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},0)">
+                      <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </label>
+                    </a>
+                    <h3 class="text-center">
+                      {{sessions.0.session_title}}
+                    </h3>
+                    {{#if sessions.0.location.name}}
+                    <p class="text-center">
+                      {{sessions.0.location.name}}
+                    </p>
+                    {{/if}}
+                    {{#if sessions.0.moderator}}
+                    <p class="text-center">
+                      {{sessions.0.moderator}}
+                    </p>
+                    {{/if}}
+
+                    {{#empty sessions.0.talks}}
+                    {{#each sessions.0.talks}}
+                    {{> talk}}
+                    {{/each}}
+                    {{/empty}}
+                  </div>
+                </div>
+                {{#if twosessions}}
+                <div class="col-md-5">
+                  <div class="panel-body track2Event" id="{{sessions.1.id}}">
+                    <a data-toggle="modal" href="#editSessionBox" class="pull-right" onclick="editSession({{@../index}},{{@index}},1)">
+                      <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </label>
+                    </a>
+                    <h3 class="text-center">
+                      {{sessions.1.session_title}}
+                    </h3>
+                    {{#if sessions.1.location.name}}
+                    <p class="text-center">
+                      {{sessions.1.location.name}}
+                    </p>
+                    {{/if}}
+                    {{#if sessions.1.moderator}}
+                    <p class="text-center">
+                      {{sessions.1.moderator}}
+                    </p>
+                    {{/if}}
+                    {{#empty sessions.1.talks}}
+                    {{#each sessions.1.talks}}
+                    {{> talk}}
+                    {{/each}}
+                    {{/empty}}
+                  </div>
+                </div>
+                {{/if}} <!-- end of second session -->
+              </div>
+              {{/if}} <!-- sessions -->
+              {{/each}} <!-- timeslots -->
+              {{/each}} <!-- days -->
+            </script>
+        </article>
+      </main>
+    </div>
 
     <!-- Bootstrap scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
