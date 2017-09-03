@@ -6,65 +6,88 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Styling: Custom -->
-    <link href="../styles/main.css" rel="stylesheet" />
+    <link href="./helpStyle.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway" rel="stylesheet" />
 
   </head>
-<body>
-  <div class="container">
-    <div class="row top-row-expanded">
-    <header class="col-md-8">
-      <h1 class="mainTitle">
-        Help for the Program Creator/Editor
-      </h1>
-    </header>
+  <body class="container-fluid">
+    <div class="row">
+      <header class="col-xs-12">
+        <h1 class="mainTitle">Help for Pro.creator</h1>
+      </header>
     </div>
-    <p>
-      The purpose of this application is to turn a JSON file with
-      accepted papers into a mobile-friendly web page for the program
-      of the conference. This is intended to be used for IACR conference
-      based on the <a href="https://github.com/kaymckelly/freelance-iacr">template</a>
-      for conference web sites.
-    </p>
-    <p>
-      The format for the imported JSON file of accepted papers
-      is produced by <a href="https://sourceforge.net/p/websubrev/code/HEAD/tree/trunk/">websubrev</a>,
-      and is <a href="#input_format">described below</a>.
-    </p>
-    <p>
-      The output from this application is a JSON file that conforms
-      to <a href="program_schema.json">this schema</a> and will be
-      rendered properly by the template in the IACR conference template.
-    </p>
-    <a name="input_format"><h2>Input file</h2></a>
-    <p>
-      The input format for this app is a JSON file that is exported from websubrev. An example is:
-        <pre>
-          {"acceptedPapers": [
-             {
-               "title": "Title of first paper",
-               "authors": "Alan Turing and Aaron Aardvark",
-               "affiliations": "Princeton University; Harvard University",
-               "category": "Theory"
-             },
-             {
-               "title": "New Directions in Cryptography",
-               "authors": "Whitfield Diffie and Martin E. Hellman",
-               "affiliations": "Stanford University"
-               "category": "Public Key Cryptography"
-             }
-           ]
-         }
-        </pre>
-        This consists simply of a list of papers specified by a title, authors (written as BibTeX, separated by "and"),
-        a list of affiliations (separated by ;), and a category for each paper (categories are optional).
-      </p>
-      
-    
-  </div>
-</body>
-</html>
 
-  
+    <div class="row">
+      <nav class="col-xs-3 navbar navbar-fixed-left" id="leftNav" role="navigation">
+        <!-- NOTE: col-xs-3 ish, left align, vertical, jumps to page section -->
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation">
+            <a href="#">Help home</a>
+          </li>
+          <li role="presentation">
+            <a href="#inputFile">Input File</a>
+          </li>
+          <li role="presentation">
+            <a href="#">Output</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="col-xs-3">
+        <!-- NOTE: necessary placeholder div. don't ask why it doesn't work with col-xs-offset-3, but it doesn't -->
+      </div>
+
+      <article class="col-xs-9">
+        <section id="intro">
+          <p>
+            The purpose of this application is to turn a JSON file with accepted papers into a mobile-friendly web page for the program of the conference. This is intended to be used for IACR conference based on the <a href="https://github.com/kaymckelly/freelance-iacr">template</a> for conference web sites.
+          </p>
+          <p>
+            The format for the imported JSON file of accepted papers is produced by <a href="https://sourceforge.net/p/websubrev/code/HEAD/tree/trunk/">websubrev</a>, and is <a href="#input_format">described below</a>.
+          </p>
+          <p>
+            The output from this application is a JSON file that conforms to <a href="program_schema.json">this schema</a> and will be rendered properly by the template in the IACR conference template.
+          </p>
+        </section>
+
+        <hr />
+
+        <section id="inputFile">
+          <h3>Input File</h3>
+          <p>
+            The input format for this app is a JSON file that is exported from websubrev. An example is:
+            <!-- NOTE: the indentation on this looks like crap but is necessary for <pre> to work correctly -->
+            <pre>{"acceptedPapers": [
+  {
+    "title": "Title of first paper",
+    "authors": "Alan Turing and Aaron Aardvark",
+    "affiliations": "Princeton University; Harvard University",
+    "category": "Theory"
+  },
+  {
+    "title": "New Directions in Cryptography",
+    "authors": "Whitfield Diffie and Martin E.Hellman",
+    "affiliations": "Stanford University"
+    "category": "Public Key Cryptography"
+  }
+]}</pre>
+            This consists simply of a list of papers specified by a title, authors (written as BibTeX, separated by "and"), a list of affiliations (separated by ;), and a category for each paper (categories are optional).
+          </p>
+        </section>
+      </article>
+    </div>
+
+    <div class="row">
+      <footer>
+        <!-- NOTE: if at all, very slim, link to creator -->
+      </footer>
+    </div>
+
+    <!-- Bootstrap scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
