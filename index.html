@@ -25,13 +25,17 @@
         <a href="./" class="navbar-brand" id="navBrand">Program Creator</a>
       </div>
       <ul class="nav nav-pills navbar-right" id="topNavList">
-        <!-- file > open..., save, save as..., download -->
-        <!-- import > upload talks, import paper urls -->
         <li role="presentation" class="dropdown">
-          <a href="#" class="dropdown-toggle" id="navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             File <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
+            <!-- NOTE: FIX -->
+            <li class="hide">
+              <a href="#" class="topNavItem">
+                Open
+              </a>
+            </li>
             <li>
               <a href="#" class="topNavItem">
                 Save
@@ -44,17 +48,24 @@
             </li>
             <li>
               <a href="#" class="topNavItem">
-                Download
+                Download JSON
               </a>
             </li>
-            <li>
-              <a href="#" class="topNavItem">
-                Edit new
-              </a>
-            </li>
+          </ul>
+        </li>
+        <li role="presentation" class="dropdown">
+          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Import <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
             <li>
               <a href="#" class="topNavItem">
                 Upload talks
+              </a>
+            </li>
+            <li>
+              <a href="#" class="topNavItem">
+                Import paper URLs
               </a>
             </li>
           </ul>
@@ -230,9 +241,7 @@
             </h4>
             <div class="authorList">
               {{#each authors}}
-                <span class="authorName">
-                  {{this}}
-                </span>
+                <span class="authorName">{{this}}</span>
               {{/each}}
             </div>
           </div>
