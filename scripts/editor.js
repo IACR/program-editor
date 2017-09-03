@@ -905,6 +905,174 @@ function downloadJSON() {
   }
 }
 
+// From https://gist.github.com/andrei-m/982927
+function levenshtein_distance (a, b) {
+  if(a.length == 0) return b.length;
+  if(b.length == 0) return a.length;
+
+  var matrix = [];
+
+  // increment along the first column of each row
+  var i;
+  for(i = 0; i <= b.length; i++){
+    matrix[i] = [i];
+  }
+
+  // increment each column in the first row
+  var j;
+  for(j = 0; j <= a.length; j++){
+    matrix[0][j] = j;
+  }
+
+  // Fill in the rest of the matrix
+  for(i = 1; i <= b.length; i++){
+    for(j = 1; j <= a.length; j++){
+      if(b.charAt(i-1) == a.charAt(j-1)){
+        matrix[i][j] = matrix[i-1][j-1];
+      } else {
+        matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
+                                Math.min(matrix[i][j-1] + 1, // insertion
+                                         matrix[i-1][j] + 1)); // deletion
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
+// Start the import process for DOIs from crossref.org. The user
+// is prompted to enter from a list, and that causes a well-formed query
+// to be sent to api.crossref.org. Note that you can't simply query for
+// Crypto 2017 but you need the full name with "Advances in cryptology".
+function startImportDOIs() {
+  $('#resultList').find('li').remove().end()
+  $('#searchDOIsBtn').prop("disabled", false);
+  $('#importDOIsBtn').prop("disabled", true);
+  $('#doi-spinner').hide();
+  $('#importDOISelection').modal();
+  var thisYear = new Date().getFullYear();
+  var nextYear = thisYear + 1;
+  var prevYear = thisYear - 1;
+  var selectYear = $('#importDOIYear');
+  selectYear.append($("<option/>").val(prevYear).text(prevYear));
+  selectYear.append($("<option/>").val(thisYear).text(thisYear));
+  selectYear.append($("<option/>").val(nextYear).text(nextYear));
+}
+
+// Construct the URL to look up a talk in crossref.
+function getTalkUrl(talk) {
+  var url = "https://api.crossref.org/works?rows=20&query.title=";
+  url += talk.title.replace(' ', '+');
+  url += '&query.author=' + talk.authors[0].replace(' ', '+');
+  return url;
+}
+
+// Fire an ajax request for every talk that doesn't already have
+// a paperUrl field. This includes unassigned talks as well as
+// already scheduled talks.
+function findDOIs() {
+  var talks = [];
+  progData.config.unassigned_talks.forEach(function(category) {
+    category.talks.forEach(function(talk) {
+      if (!talk.hasOwnProperty('paperUrl')) {
+        talks.push(talk);
+      }
+    });
+  });
+  progData.days.forEach(function(day) {
+    day.timeslots.forEach(function(timeslot) {
+      if (timeslot.hasOwnProperty('sessions')) {
+        timeslot.sessions.forEach(function(session) {
+          if (session.hasOwnProperty('talks')) {
+            session.talks.forEach(function(talk) {
+              if (!talk.hasOwnProperty('paperUrl')) {
+                talks.push(talk);
+              }
+            });
+          }
+        });
+      }
+    });
+  });
+  console.dir(talks);
+  $.when.apply($, talks.map(function(talk) {
+    var talkUrl = getTalkUrl(talk);
+    // We save the talk in the jqXHR so we can update
+    // the paperUrl if it finds a good enough match for the metadata.
+    return $.ajax({
+      url: talkUrl,
+      beforeSend: function(jqXHR, settings) {
+        jqXHR.talk = talk;
+      }});
+  })).done(function() {
+    var results = [];
+    // there will be one argument passed to this callback for each ajax call
+    // each argument is of this form [data, statusText, jqXHR]
+    for (var i = 0; i < arguments.length; i++) {
+      results.push({'talk': arguments[i][2].talk, 'items': arguments[i][0].message.items});
+    }
+    // Now results is a map from talk id to the result, so we can match
+    // them up together.
+    console.dir(results);
+    var matches = 0;
+    results.forEach(function(result) {
+      for (var i = 0; i < result.items.length; i++) {
+        var distance = levenshtein_distance(result.talk.title.toLowerCase(),
+                                            result.items[i].title[0].toLowerCase());
+        if (distance < 4 && result.talk.authors.length == result.items[i].author.length) {
+          result.talk.paperUrl = result.items[i].URL;
+          matches++;
+          break;
+        } else {
+          console.log(i + ':' + distance + ':' + result.items[i].title[0]);
+          console.log(result);
+        }
+      }
+      if (!result.talk.hasOwnProperty('paperUrl')) {
+        console.log('no match');
+        console.dir(result);
+      }
+    });
+    console.log('matches:' + matches);
+  });
+}
+
+// Searching for DOIs is carried out using the crossref api, described
+// at https://github.com/CrossRef/rest-api-doc
+function searchDOIs() {
+  $('#resultList').find('li').remove().end()
+  $('#doi-spinner').show();
+  $('#importDOIsBtn').prop("disabled", true);
+  $('#searchDOIsBtn').prop("disabled", true);
+  var year = $('#importDOIYear').val();
+  var query = $('#importDOIConference').val().replace(/YYYY/g, year);
+  $.getJSON('https://api.crossref.org/works?rows=50&query.title=' + query.replace(' ', '+'), function(data) {
+    $('#doi-spinner').hide();
+    $('#searchDOIsBtn').prop("disabled", false);
+    console.dir(data.message.items);
+    var bookURLs = []
+    data.message.items.forEach (function(item) {
+      if (String(item.issued['date-parts'][0][0]) === year &&
+          item.type === 'book' &&
+          levenshtein_distance(item.title[0], query) < 4) {
+        bookURLs.push(item);
+      }
+    });
+    console.dir(bookURLs);
+    var results = $('#resultList');
+    bookURLs.forEach(function(item) {
+      results.append("<li><a target=_foo href='" + item.URL + "'>" + item.title + "</a></li>");
+    });
+    $('#importDOIsBtn').prop("disabled", false);
+    $('#importDOIsBtn').prop("disabled", false);
+  })
+  .fail(function(jqxhr, textStatus, error) {
+    $('#doi-spinner').hide();
+    $('#earchDOIsBtn').prop("disabled", false);
+    warningBox('Unable to import data.');
+  });
+}
+
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
 // function debugStart() {
 //   createNew();
