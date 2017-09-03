@@ -227,7 +227,8 @@
               </label>
             </a>
             <h4 class="talkTitle">
-              {{title}}
+              {{title}}{{#if paperUrl}}&nbsp;&nbsp;<a class="paperUrl" target="_paper" href="{{paperUrl}}"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>{{/if}}
+
             </h4>
             <div class="authorList">
               {{#each authors}}
