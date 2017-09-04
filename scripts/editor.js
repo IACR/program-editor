@@ -948,7 +948,11 @@ function startImportDOIs() {
   $('#doiStatus').text('');
   $('#resultList').find('li').remove().end()
   $('.progress').hide();
+  $('#doiCloseBtn').removeClass('btn-success');
+  $('#doiCloseBtn').addClass('btn-default');
   $('#doiSearchBtn').removeClass('disabled');
+  $('#doiSearchBtn').addClass('btn-success');
+  $('#doiSearchBtn').removeClass('btn-default');
   $('#importDOISelection').modal();
 }
 
@@ -1021,6 +1025,8 @@ function ProgressMonitor(totalCount) {
 // already scheduled talks.
 function findDOIs() {
   $('#doiSearchBtn').addClass('disabled');
+  $('#doiSearchBtn').removeClass('btn-success');
+  $('#doiSearchBtn').addClass('btn-default');
   var talks = [];
   progData.config.unassigned_talks.forEach(function(category) {
     category.talks.forEach(function(talk) {
@@ -1068,6 +1074,8 @@ function findDOIs() {
       }
     });
   })).always(function() {
+    $('#doiCloseBtn').addClass('btn-success');
+    $('#doiCloseBtn').removeClass('btn-default');
     console.log('finished all lookups');
     refresh();
   });;
