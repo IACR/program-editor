@@ -68,13 +68,24 @@ function editExisting() {
     $('#versionList').show();
     for (var i = 0; i < data.programs.length; i++) {
       var row = data.programs[i];
-      $('#versionList').append('<tr><td><a href=javascript:getConfig("ajax.php?id=' + row.id + '",true);>' + row.name + '</a></td><td>' + row.user + '</td><td>' + row.ts + '</td></tr>');
+      $('#versionList').append('<tr><td><a class="progName" href=javascript:getConfig("ajax.php?id=' + row.id + '",true);>' + row.name + '</a></td><td>' + row.user + '</td><td>' + row.ts + '</td></tr>');
     }
   });
 }
 
-// TODO: move to more appropriate spot
-// saves program
+function saveAs() {
+  var name = prompt('Enter a name:', progData.name);
+  if (name == null) {
+    return;
+  }
+  if (name) {
+    progData.name = name;
+    saveProgram();
+  } else {
+    warningBox('Please enter a name');
+  }
+}
+
 function saveProgram() {
   $.ajax({
     type: "POST",
@@ -948,7 +959,11 @@ function startImportDOIs() {
   $('#doiStatus').text('');
   $('#resultList').find('li').remove().end()
   $('.progress').hide();
+  $('#doiCloseBtn').removeClass('btn-success');
+  $('#doiCloseBtn').addClass('btn-default');
   $('#doiSearchBtn').removeClass('disabled');
+  $('#doiSearchBtn').addClass('btn-success');
+  $('#doiSearchBtn').removeClass('btn-default');
   $('#importDOISelection').modal();
 }
 
@@ -1000,11 +1015,15 @@ function ProgressMonitor(totalCount) {
   this.failureCount = 0;
   this.successCount = 0;
   this.updateWidget = function() {
+    var msg = this.successCount + ' found out of ' + this.totalCount;
     var val = Math.floor(100 * (this.successCount + this.failureCount) / this.totalCount);
     $('#doiProgress').prop('aria-valuenow', val);
     $('#doiProgress').css('width', String(val) + '%');
     $('#doiProgress').html(val + '%');
-    $('#doiStatus').text(this.successCount + ' found out of ' + this.totalCount);
+    if (this.totalCount == this.failureCount + this.successCount) {
+      msg = 'Finished! ' + msg;
+    }
+    $('#doiStatus').text(msg);
   }
   this.reportSuccess = function() {
     this.successCount++;
@@ -1021,6 +1040,8 @@ function ProgressMonitor(totalCount) {
 // already scheduled talks.
 function findDOIs() {
   $('#doiSearchBtn').addClass('disabled');
+  $('#doiSearchBtn').removeClass('btn-success');
+  $('#doiSearchBtn').addClass('btn-default');
   var talks = [];
   progData.config.unassigned_talks.forEach(function(category) {
     category.talks.forEach(function(talk) {
@@ -1068,6 +1089,8 @@ function findDOIs() {
       }
     });
   })).always(function() {
+    $('#doiCloseBtn').addClass('btn-success');
+    $('#doiCloseBtn').removeClass('btn-default');
     console.log('finished all lookups');
     refresh();
   });;
@@ -1105,8 +1128,5 @@ $(document).ready(function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(100);
   }, function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(100);
-  });
-  $('#editTalkBox').on('shown.bs.modal', function () {
-    $('#newTalkTitle').focus();
   });
 });
