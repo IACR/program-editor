@@ -945,21 +945,15 @@ function levenshtein_distance (a, b) {
 // to be sent to api.crossref.org. Note that you can't simply query for
 // Crypto 2017 but you need the full name with "Advances in cryptology".
 function startImportDOIs() {
+  $('#doiStatus').text('');
   $('#resultList').find('li').remove().end()
-  $('#searchDOIsBtn').prop("disabled", false);
-  $('#importDOIsBtn').prop("disabled", true);
-  $('#doi-spinner').hide();
+  $('.progress').hide();
+  $('#doiSearchBtn').removeClass('disabled');
   $('#importDOISelection').modal();
-  var thisYear = new Date().getFullYear();
-  var nextYear = thisYear + 1;
-  var prevYear = thisYear - 1;
-  var selectYear = $('#importDOIYear');
-  selectYear.append($("<option/>").val(prevYear).text(prevYear));
-  selectYear.append($("<option/>").val(thisYear).text(thisYear));
-  selectYear.append($("<option/>").val(nextYear).text(nextYear));
 }
 
-// Construct the URL to look up a talk in crossref.
+// Construct the URL to look up a talk in crossref. We use only the
+// first author.
 function getTalkUrl(talk) {
   var url = "https://api.crossref.org/works?rows=20&query.title=";
   url += talk.title.replace(' ', '+');
@@ -967,10 +961,66 @@ function getTalkUrl(talk) {
   return url;
 }
 
+// callback in the success function of a DOI lookup.
+// the talk is found in jqXHR because it will be set in
+// the beforeSend function.
+function matchDOI(data, textStatus, jqXHR) {
+  for (var i = 0; i < data.message.items.length; i++) {
+    var item = data.message.items[i];
+    var distance = levenshtein_distance(jqXHR.talk.title.toLowerCase(),
+                                        item.title[0].toLowerCase());
+    // We searched on the title and first author, so if the title
+    // is pretty close and the number of authors is correct, we
+    // take it as a match. The number 4 was pulled out of the
+    // backside of a mule.
+    if (distance < 4 && item.author &&
+        jqXHR.talk.authors.length == item.author.length) {
+      jqXHR.talk.paperUrl = item.URL;
+      return true;
+    } else {
+      console.log(i + ':' + distance + ':' + item.title[0]);
+    }
+  }
+  return false;
+}
+
+// This class updates a boostrap progress bar with a given id.
+function ProgressMonitor(totalCount) {
+  if (totalCount == 0) {
+    $('#doiStatus').text('No talks to look up');
+  } else {
+    $('#doiStatus').text('');
+  }
+  $('.progress').show();
+  $('#doiProgress').show();
+  $('#doiProgress').css('width', '0%');
+  $('#doiProgress').prop('aria-valuenow', 0);
+  $('#doiProgress').prop('aria-valuemax', 100);
+  this.totalCount = totalCount;
+  this.failureCount = 0;
+  this.successCount = 0;
+  this.updateWidget = function() {
+    var val = Math.floor(100 * (this.successCount + this.failureCount) / this.totalCount);
+    $('#doiProgress').prop('aria-valuenow', val);
+    $('#doiProgress').css('width', String(val) + '%');
+    $('#doiProgress').html(val + '%');
+    $('#doiStatus').text(this.successCount + ' found out of ' + this.totalCount);
+  }
+  this.reportSuccess = function() {
+    this.successCount++;
+    this.updateWidget();
+  }
+  this.reportFailure = function() {
+    this.failureCount++;
+    this.updateWidget();
+  }
+}
+
 // Fire an ajax request for every talk that doesn't already have
 // a paperUrl field. This includes unassigned talks as well as
 // already scheduled talks.
 function findDOIs() {
+  $('#doiSearchBtn').addClass('disabled');
   var talks = [];
   progData.config.unassigned_talks.forEach(function(category) {
     category.talks.forEach(function(talk) {
@@ -994,10 +1044,9 @@ function findDOIs() {
       }
     });
   });
-  console.dir(talks);
+  var progressMonitor = new ProgressMonitor(talks.length);
   // This was constructed after reading
   // https://stackoverflow.com/questions/24705401/jquery-ajax-with-array-of-urls
-  // TODO: make it report progress as soon as each ajax call finishes.
   $.when.apply($, talks.map(function(talk) {
     var talkUrl = getTalkUrl(talk);
     // We save the talk in the jqXHR so we can update
@@ -1006,79 +1055,22 @@ function findDOIs() {
       url: talkUrl,
       beforeSend: function(jqXHR, settings) {
         jqXHR.talk = talk;
-      }});
-  })).done(function() {
-    var results = [];
-    // there will be one argument passed to this callback for each ajax call
-    // each argument is of this form [data, statusText, jqXHR]
-    for (var i = 0; i < arguments.length; i++) {
-      results.push({'talk': arguments[i][2].talk, 'items': arguments[i][0].message.items});
-    }
-    // Now results is a map from talk id to the result, so we can match
-    // them up together.
-    console.dir(results);
-    var matches = 0;
-    results.forEach(function(result) {
-      for (var i = 0; i < result.items.length; i++) {
-        var distance = levenshtein_distance(result.talk.title.toLowerCase(),
-                                            result.items[i].title[0].toLowerCase());
-        // We searched on the title and first author, so if the title
-        // is pretty close and the number of authors is correct, we
-        // take it as a match. The number 4 was pulled out of the
-        // backside of a mule.
-        if (distance < 4 && result.talk.authors.length == result.items[i].author.length) {
-          result.talk.paperUrl = result.items[i].URL;
-          matches++;
-          break;
+      },
+      success: function(data, textStatus, jqXHR) {
+        if (matchDOI(data, textStatus, jqXHR)) {
+          progressMonitor.reportSuccess();
         } else {
-          console.log(i + ':' + distance + ':' + result.items[i].title[0]);
-          console.log(result);
+          progressMonitor.reportFailure();
         }
-      }
-      if (!result.talk.hasOwnProperty('paperUrl')) {
-        console.log('no match');
-        console.dir(result);
+      },
+      fail: function(jqXHR, textStatus, errorThrown) {
+        progressMonitor.reportFailure();
       }
     });
-    console.log('matches:' + matches);
+  })).always(function() {
+    console.log('finished all lookups');
     refresh();
-  });
-}
-
-// Searching for DOIs is carried out using the crossref api, described
-// at https://github.com/CrossRef/rest-api-doc
-function searchDOIs() {
-  $('#resultList').find('li').remove().end()
-  $('#doi-spinner').show();
-  $('#importDOIsBtn').prop("disabled", true);
-  $('#searchDOIsBtn').prop("disabled", true);
-  var year = $('#importDOIYear').val();
-  var query = $('#importDOIConference').val().replace(/YYYY/g, year);
-  $.getJSON('https://api.crossref.org/works?rows=50&query.title=' + query.replace(' ', '+'), function(data) {
-    $('#doi-spinner').hide();
-    $('#searchDOIsBtn').prop("disabled", false);
-    console.dir(data.message.items);
-    var bookURLs = []
-    data.message.items.forEach (function(item) {
-      if (String(item.issued['date-parts'][0][0]) === year &&
-          item.type === 'book' &&
-          levenshtein_distance(item.title[0], query) < 4) {
-        bookURLs.push(item);
-      }
-    });
-    console.dir(bookURLs);
-    var results = $('#resultList');
-    bookURLs.forEach(function(item) {
-      results.append("<li><a target=_foo href='" + item.URL + "'>" + item.title + "</a></li>");
-    });
-    $('#importDOIsBtn').prop("disabled", false);
-    $('#importDOIsBtn').prop("disabled", false);
-  })
-  .fail(function(jqxhr, textStatus, error) {
-    $('#doi-spinner').hide();
-    $('#earchDOIsBtn').prop("disabled", false);
-    warningBox('Unable to import data.');
-  });
+  });;
 }
 
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
