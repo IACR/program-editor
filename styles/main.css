@@ -52,6 +52,7 @@ ul#topNavList {
   padding-top: 8px;
 }
 
+
 a.navDropdown {
   color: #F2F8F9 !important;
   background-color: inherit !important;
@@ -304,4 +305,12 @@ input:invalid {
 a.paperUrl {
     color: #0f0f0f !important;
     visibility:visible;
+}
+
+a.progName {
+  color: #1D404A;
+}
+
+div.talk a {
+  color: #1D707A;
 }
