@@ -1020,7 +1020,6 @@ function ProgressMonitor(totalCount) {
 // a paperUrl field. This includes unassigned talks as well as
 // already scheduled talks.
 function findDOIs() {
-  $('#searchDOIsBtn').removeClass("disabled");
   $('#doiSearchBtn').addClass('disabled');
   var talks = [];
   progData.config.unassigned_talks.forEach(function(category) {
