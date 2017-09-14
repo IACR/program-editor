@@ -530,9 +530,7 @@ function saveTalk() {
 
   var category = $('#newTalkCategory').children(':selected');
   talk.category = category.text();
-  if ($('#paperUrl').val()) {
-    talk.paperUrl = $('#paperUrl').val();
-  }
+  talk.paperUrl = $('#paperUrl').val();
   if (talkId === "") {
     var categoryIndex = new Number(category.attr('value'));
     progData.config.unassigned_talks[categoryIndex].talks.unshift(talk);
