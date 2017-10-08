@@ -125,10 +125,6 @@ function doGetRow($pdo, $id) {
     return;
   }
   $json = $row['json'];
-  // The process of storing them seems to escape single and double quotes.
-  // We need to understand this better.
-  $json = str_replace('\"', '"', $json);
-  $json = str_replace("\\'", "'", $json);
   echo $json;
 }
 
