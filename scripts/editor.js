@@ -162,8 +162,9 @@ function getConfig(name, existing) {
     $('#templateSelector').hide();
     $('#nameEntry').show(500);
   })
-  .fail(function(jqxhr, textStatus, error) {
-    warningBox('There was a problem with this conference template. Please try another.');
+    .fail(function(jqxhr, textStatus, error) {
+      console.dir(jqxhr);
+      warningBox('There was a problem with this conference template. Please try another.');
   });
 }
 
