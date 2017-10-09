@@ -17,6 +17,7 @@ function disableMenus() {
 
 // This is called when a program is loaded to edit.
 function enableMenus() {
+  $('#save_status').text(progData.name);
   $('#saveMenu').removeClass('disabled');
   $('#saveAsMenu').removeClass('disabled');
   $('#downloadMenu').removeClass('disabled');
@@ -86,17 +87,22 @@ function saveAs() {
   }
 }
 
+function currentTime() {
+  var now = new Date();
+  return now.toLocaleTimeString() + ' ' + now.toLocaleDateString();
+}
+
 function saveProgram() {
   $.ajax({
     type: "POST",
     url: "ajax.php",
     data: {'json': JSON.stringify(progData)},
     beforeSend: function(jqXHR, settings) {
-      $('#save_status').html('saving');
+      $('#save_status').html('Saving...');
     },
     dataType: "json",
     success: function(data, textStatus, jqxhr) {
-      $('#save_status').html('done');
+      $('#save_status').html(progData.name + ' saved at ' + currentTime());
     },
     error: function(jqxhr, textStatus, error) {
       $('#save_status').html(textStatus);
@@ -1127,5 +1133,8 @@ $(document).ready(function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(100);
   }, function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(100);
+  });
+  $('#topNavList a').on('click', function() {
+    $('.dropdown-menu').fadeOut(100);
   });
 });
