@@ -70,6 +70,12 @@ ul.dropdown-menu li a.topNavItem, span.topNavItem {
   color: #F2F8F9;
 }
 
+span.dropdownText {
+    color: #F2F8F9;
+    padding: 3px 20px;
+    white-space: nowrap;
+}
+
 span.topNavItem {
     position: relative;
     top: 10px;
@@ -86,6 +92,15 @@ a.topNavItem:hover {
 
 
 /*** Setup Section ***/
+
+#auth-button {
+    display:none;
+}
+
+#newOrExisting {
+    display:none;
+}
+
 .setupStep {
   margin-bottom: 20px;
 }
@@ -251,7 +266,7 @@ span.authorName:last-of-type:after {
   color: #EDF6F7;
 }
 
-#addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv, #addTimeslotDiv, #uploadTitleDiv {
+.modal-header, #addTalkTitleDiv, #timeEditTitleDiv, #editSessionTitleDiv, #addTimeslotDiv, #uploadTitleDiv {
   background-color: rgba(24, 188, 156, 1);
   color: #EDF6F7;
 }
@@ -320,3 +335,6 @@ a.progName {
 div.talk a {
   color: #1D707A;
 }
+
+
+

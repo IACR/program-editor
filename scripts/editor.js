@@ -69,7 +69,8 @@ function editExisting() {
     $('#versionList').show();
     for (var i = 0; i < data.programs.length; i++) {
       var row = data.programs[i];
-      $('#versionList').append('<tr><td><a class="progName" href=javascript:getConfig("ajax.php?id=' + row.id + '",true);>' + row.name + '</a></td><td>' + row.user + '</td><td>' + row.ts + '</td></tr>');
+      $('#versionList').append('<tr><td><a class="progName" href=javascript:getConfig("ajax.php?id=' + row.id + '",true);>' + row.name + '</a></td><td>' + row.username + '</td><td>' + row.ts + '</td></tr>');
+      // <td><input type="checkbox" disabled class="form-check-input" id="delete-' + row.id + '"></td></tr>');
     }
   });
 }
@@ -1101,6 +1102,110 @@ function findDOIs() {
   });;
 }
 
+function doLogin() {
+  // This send an AJAX POST and receives userid and userName in response
+  // if it works.
+  var iacrref = $('#iacrref').val();
+  var password = $('#password').val();
+  $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: {'iacrref': iacrref, 'password': password},
+    beforeSend: function(jqXHR, settings) {
+      console.log('before send');
+      $('#login_progress').text('Checking...');
+      return true;
+    },
+    dataType: "json",
+    success: function(data, textStatus, jqxhr) {
+      console.dir(data);
+      if (data.hasOwnProperty('username')) {
+        $('#login_status').text('Logged in as ' + data['username']);
+        $('#login_progress').text('');
+        $('#authModal').modal('hide');
+        $('#logoutMenu').show();
+        $('#loginMenu').hide();
+        if ($('#auth-button').is(':visible')) {
+          console.log('showing newOrExisting');
+          $('#auth-button').hide(500);
+          $('#newOrExisting').show(500);
+        }
+      } else {
+        $('#login_progress').text(data['error']);
+      }
+    },
+    error: function(jqxhr, textStatus, error) {
+      //$('#login_status').text(textStatus);
+      $('#login_status').text('An error occurred:' + textStatus);
+      console.dir(jqxhr);
+      console.dir(error);
+    }});
+}
+
+function doLogout() {
+  // This send an AJAX POST and receives a response containing
+  // 'message' but no username.
+  $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: {'logout': true},
+    beforeSend: function(jqXHR, settings) {
+      console.log('before send');
+      $('#login_status').text('Logging out...');
+      return true;
+    },
+    dataType: "json",
+    success: function(data, textStatus, jqxhr) {
+      console.dir(data);
+      if (data.hasOwnProperty('username')) {
+        alert('Log out failed!');
+        $('#login_status').text('Logout failed for ' + data['username']);
+        return;
+      }
+      if (data.hasOwnProperty('message')) {
+        $('#login_status').text('Logged out');
+        $('#logoutMenu').hide();
+        $('#loginMenu').show();
+        $('#authModal').modal();
+      }
+    },
+    error: function(jqxhr, textStatus, error) {
+      //$('#login_status').text(textStatus);
+      $('#login_status').text('An error occurred:' + textStatus);
+      console.dir(jqxhr);
+      console.dir(error);
+    }});
+}
+
+function checkLogin() {
+  $.ajax({
+    type: "GET",
+    url: "ajax.php",
+    success: function(data, textStatus, jqxhr) {
+      if (data.hasOwnProperty('username')) {
+        $('#login_status').text('Logged in as ' + data['username']);
+        $('#authModal').modal('hide');
+        $('#loginMenu').hide();
+        $('#logoutMenu').show();
+        if (progData === undefined) {
+          $('#newOrExisting').show(500);
+        }
+      } else {
+        $('#login_status').text(data['error']);
+        $('#logoutMenu').hide();
+        $('#loginMenu').show();
+        $('#auth-button').show(500);
+        $('#authModal').modal();
+      }
+    },
+    error: function(jqxhr, textStatus, error) {
+      $('#login_status').html(textStatus);
+      console.dir(jqxhr);
+      console.dir(error);
+    }});
+    
+}
+
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
 // function debugStart() {
 //   createNew();
@@ -1127,7 +1232,7 @@ $(document).ready(function() {
     trigger: 'hover',
     selector: '[data-toggle="tooltip"]'
   });
-
+  checkLogin();
   // Make dropdown menus respond to hover.
   $('ul.nav li.dropdown').hover(function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(100);
