@@ -2,7 +2,7 @@
 include("../common/auth.php");
 include("cred.php");
 // The schema for the database table is as follows:
-// mysql> describe program;
+// mysql> describe programs;
 // +----------+--------------+------+-----+-------------------+----------------+
 // | Field    | Type         | Null | Key | Default           | Extra          |
 // +----------+--------------+------+-----+-------------------+----------------+
@@ -16,7 +16,7 @@ include("cred.php");
 //
 // The command to create this table is:
 //
-// CREATE TABLE program (id integer NOT NULL AUTO_INCREMENT,
+// CREATE TABLE programs (id integer NOT NULL AUTO_INCREMENT,
 //   name varchar(255) NOT NULL,
 //   userid varchar(255) NOT NULL,
 //   username varchar(255) NOT NULL,
