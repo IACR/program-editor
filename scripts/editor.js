@@ -1127,7 +1127,6 @@ function doLogin() {
         $('#logoutMenu').show();
         $('#loginMenu').hide();
         if ($('#auth-button').is(':visible')) {
-          console.log('showing newOrExisting');
           $('#auth-button').hide(500);
           $('#newOrExisting').show(500);
         }
@@ -1137,7 +1136,6 @@ function doLogin() {
       }
     },
     error: function(jqxhr, textStatus, error) {
-      //$('#login_status').text(textStatus);
       $('#login_status').text('An error occurred:' + textStatus);
       console.dir(jqxhr);
       console.dir(error);
@@ -1152,13 +1150,11 @@ function doLogout() {
     url: "ajax.php",
     data: {'logout': true},
     beforeSend: function(jqXHR, settings) {
-      console.log('before send');
       $('#login_status').text('Logging out...');
       return true;
     },
     dataType: "json",
     success: function(data, textStatus, jqxhr) {
-      console.dir(data);
       if (data.hasOwnProperty('username')) {
         alert('Log out failed!');
         $('#login_status').text('Logout failed for ' + data['username']);
