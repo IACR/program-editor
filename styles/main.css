@@ -96,6 +96,10 @@ a.topNavItem:hover {
 #auth-button {
     display:none;
 }
+.login-alert {
+    color: #ff0000;
+    font-weight: bold;
+}
 
 #newOrExisting {
     display:none;

@@ -1113,6 +1113,7 @@ function doLogin() {
     data: {'iacrref': iacrref, 'password': password},
     beforeSend: function(jqXHR, settings) {
       console.log('before send');
+      $('#login_progress').removeClass('login-alert');
       $('#login_progress').text('Checking...');
       return true;
     },
@@ -1131,6 +1132,7 @@ function doLogin() {
           $('#newOrExisting').show(500);
         }
       } else {
+        $('#login_progress').addClass('login-alert');
         $('#login_progress').text(data['error']);
       }
     },
