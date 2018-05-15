@@ -82,6 +82,23 @@
             About
           </a>
         </li>
+        <li role="presentation" class="dropdown">
+          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><span class="dropdownText" id="login_status">Login status unknown</span></li>
+            <li id="loginMenu">
+              <a href="#" onClick="$('#authModal').modal();this.blur()" class="topNavItem">
+                Log in
+              </a>
+            </li>
+            <li id="logoutMenu">
+              <a href="javascript:doLogout()" class="topNavItem">Log out</a>
+            </li>
+          </ul>
+        </li>
       </ul>
     </nav>
 
@@ -97,18 +114,32 @@
             </p>
           </section>
         </div>
-
+        <!-- Button to trigger login modal -->
+        <div class="row" id="auth-button">
+          <div class="col-md-8">
+            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#authModal">
+              Log in for this app.
+            </button>
+          </div>
+        </div>
         <div class="row">
           <section id="newOrExisting" class="col-md-8 col-md-offset-2 setupStep">
             <p>
               If you've been here before, you can edit an existing program. Otherwise, start from a new one.
             </p>
-            <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">
-              New
-            </button>
-            <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">
-              Existing
-            </button>
+            <div class="row">
+              <div class="col-md-6">
+                <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">
+                  New
+                </button>
+                <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">
+                  Existing
+                </button>
+              </div>
+              <div class="col-md-6">
+                <input class="form-control input-sm" type="text" placeholder="Search for a program (not yet working)">
+              </div>
+            </div>
           </section>
         </div>
 
@@ -119,6 +150,7 @@
                 <th>Name</th>
                 <th>Owner</th>
                 <th>Last modified</th>
+<!--                <th><button type="button" class="btn btn-sm btn-disabled">Delete selected</button></th>-->
               </tr>
             </table>
           </section>
@@ -373,6 +405,45 @@
     <!-- Additional/custom scripts -->
     <script src="./scripts/editor.js"></script>
 
+    <!-- Auth Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h2 class="modal-title" id="authModalLabel">Log in for IACR Program Creator</h2>
+          </div>
+          <div class="modal-body">
+            <p>This app requires you to log in with your IACR reference number
+              and password.
+            </p>
+            <form class="form-horizontal" onsubmit="return false;">
+              <div class="form-group">
+                <label for="iacrref" class="col-sm-3 control-label">IACR ref #</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="iacrref">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" id="password">
+                </div>
+              </div>
+            </form>
+            <p>
+              If you have forgotten your IACR reference number or password,
+              <a target="_blank" href="https://secure.iacr.org/membership/members/update.html">click here to recover it</a>.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <p id="login_progress"></p>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" onClick="doLogin();this.blur()"class="btn btn-success">Log in</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Modal for import from crossref.org -->
     <aside class="modal fade" id="importDOISelection" role="dialog" aria-labeledby="importDOITitle">
       <div class="modal-dialog" role="document">
