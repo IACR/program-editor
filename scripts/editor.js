@@ -234,6 +234,11 @@ function useDemoTalks() {
   });
 }
 
+function useEmptyTalks() {
+  progData.config.unassigned_talks = [{'name': 'Uncategorized', 'talks':[], 'id': 'category-0'}];
+  startEditor();
+}
+
 // Upload JSON file of talks and parse.
 function uploadTalks(evt) {
   var files = evt.target.files;
