@@ -543,7 +543,9 @@ function saveTalk() {
 
   var category = $('#newTalkCategory').children(':selected');
   talk.category = category.text();
-  talk.paperUrl = $('#paperUrl').val();
+  if ($('#paperUrl').val()) {
+    talk.paperUrl = $('#paperUrl').val();
+  }
   if (talkId === "") {
     var categoryIndex = new Number(category.attr('value'));
     progData.config.unassigned_talks[categoryIndex].talks.unshift(talk);
@@ -1056,7 +1058,7 @@ function findDOIs() {
   var talks = [];
   progData.config.unassigned_talks.forEach(function(category) {
     category.talks.forEach(function(talk) {
-      if (!talk.hasOwnProperty('paperUrl')) {
+      if (!talk.hasOwnProperty('paperUrl') || talk['paperUrl'] === '') {
         talks.push(talk);
       }
     });
@@ -1067,7 +1069,7 @@ function findDOIs() {
         timeslot.sessions.forEach(function(session) {
           if (session.hasOwnProperty('talks')) {
             session.talks.forEach(function(talk) {
-              if (!talk.hasOwnProperty('paperUrl')) {
+              if (!talk.hasOwnProperty('paperUrl') || talk['paperUrl'] === '') {
                 talks.push(talk);
               }
             });
