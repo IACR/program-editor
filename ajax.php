@@ -74,7 +74,7 @@ function sendError($message) {
 // }
 function doGetLatest($pdo) {
   // This selects the latest id, name for each name.
-  $sql = "SELECT id,userid,username,name,ts from programs";
+  $sql = "SELECT id,userid,username,name,ts from programs ORDER BY ts DESC";
   $pdo->query('SET NAMES UTF8');
   $stmt = $pdo->prepare($sql);
   if (!$stmt->execute()) {
