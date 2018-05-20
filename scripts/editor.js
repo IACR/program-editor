@@ -10,6 +10,7 @@ var talksTemplate;
 function disableMenus() {
   $('#saveMenu').addClass('disabled');
   $('#saveAsMenu').addClass('disabled');
+  $('#deleteMenu').addClass('disabled');
   $('#downloadMenu').addClass('disabled');
   $('#uploadTalksMenu').addClass('disabled');
   $('#importDOIMenu').addClass('disabled');
@@ -20,6 +21,7 @@ function enableMenus() {
   $('#save_status').text(progData.name);
   $('#saveMenu').removeClass('disabled');
   $('#saveAsMenu').removeClass('disabled');
+  $('#deleteMenu').removeClass('disabled');
   $('#downloadMenu').removeClass('disabled');
   $('#uploadTalksMenu').removeClass('disabled');
   $('#importDOIMenu').removeClass('disabled');
@@ -75,13 +77,53 @@ function editExisting() {
   });
 }
 
+function showDeleteProgram() {
+  $('#deleteProgramModal').modal();
+}
+
+function reallyDeleteProgram() {
+  if (!progData.hasOwnProperty('database_id')) {
+    $('#delete_status').text('Program was never saved.');
+    return;
+  }
+  $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: {'delete': progData.database_id},
+    beforeSend: function(jqXHR, settings) {
+      $('#delete_status').text('Deleting...');
+    },
+    dataType: "json",
+    success: function(data, textStatus, jqxhr) {
+      console.dir(data);
+      if (data['error']) {
+        $('#delete_status').text(data['error']);
+      } else {
+        $('#delete_status').text(progData.name + ' deleted');
+        location.reload();
+      }
+    },
+    error: function(jqxhr, textStatus, error) {
+      $('#delete_status').text(textStatus);
+      console.dir(jqxhr);
+      console.dir(error);
+    }});
+}
+
+
 function saveAs() {
   var name = prompt('Enter a name:', progData.name);
   if (name == null) {
     return;
   }
   if (name) {
-    progData.name = name;
+    if (progData.name !== name) {
+      progData.name = name;
+      // We're changing the name, so make a new row.
+      if (progData.hasOwnProperty('database_id')) {
+        delete progData.database_id;
+      }
+    }
     saveProgram();
   } else {
     warningBox('Please enter a name');
@@ -103,7 +145,12 @@ function saveProgram() {
     },
     dataType: "json",
     success: function(data, textStatus, jqxhr) {
-      $('#save_status').html(progData.name + ' saved at ' + currentTime());
+      if (data['error']) {
+        $('#save_status').html('Unable to save: ' + data['error']);
+      } else {
+        progData['database_id'] = data['database_id'];
+        $('#save_status').html(progData.name + ' saved at ' + currentTime());
+      }
     },
     error: function(jqxhr, textStatus, error) {
       $('#save_status').html(textStatus);

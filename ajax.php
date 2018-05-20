@@ -22,13 +22,18 @@ include("cred.php");
 //   username varchar(255) NOT NULL,
 //   json text NOT NULL,
 //   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-//   UNIQUE INDEX version(name,userid),
 //   PRIMARY KEY (`id`));
 //
-// The "name" is something like "Crypto 2017", and the userid is the iacrref of
-// the logged in user who created it, and the username is the real name of the user.
-// There is no version history stored for a given value of "name", but different
-// users may have their own version for a given name.
+// The "name" is something like "Crypto 2017", and need not be unique.
+// the userid is the iacrref of the logged in user who created it, and
+// the username is the real name of the user. Once a row is created, only
+// a user logged in with a given userid can modify the data in the row,
+// but other users can read the row and save a copy of it. A user may create
+// multiple versions with the same name. When the json is fetched from
+// the database, there is an extra field of "database_id" that is populated using
+// the id from the row in the database.
+//
+// Note that this depends on mysql because it used PDO:lastInsertId.
 //
 // The ajax protocol supports four kinds of requests, returning a JSON object
 // in each case. If an error occurs, it returns an "error" field in the JSON.
@@ -41,14 +46,17 @@ include("cred.php");
 //
 // 1. Login to the app. This is a POST request with two parameters,
 //    namely iacrref and password.
-// 2. get the list of the latest version for each name. This is a GET with
+// 2. Get the list of stored programs. This is a GET with
 //    no parameters.
-// 3. get the list of all versions for a given name. This is a GET with a single
-//    parameter of "name".
-// 4. get a specific row. This is a GET with an id parameter.
-// 5. save a program. This is a POST with one parameter called json.
-//    The name is extracted from the json, and at most four versions of
-//    each name are kept in the database.
+// 3. Get a specific row. This is a GET with an id parameter. The server
+//    makes sure that "database_id" is set from id in the database.
+// 4. Save a program. This is a POST with one parameter called json.
+//    The name is extracted from the json, and if database_id is present
+//    in the json, then this is used to decide which row to update. Note
+//    however that if the userid in the database does not match the userid
+//    of the person sending the save, then a copy of the saved program will
+//    be made. This prevents a user from overwriting the work of another
+//    user.
 //
 // Each of these methods has a function to implement them, and in each
 // case they receive a pdo object for a php database connection.
@@ -58,6 +66,7 @@ function sendError($message) {
   $data = array("error" => $message);
   echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }
+
 // Return the list of the latest version for each name. The returned value is JSON of
 // the form:
 // {"programs":
@@ -73,7 +82,6 @@ function sendError($message) {
 //     "ts": "2017-05-22 22:19:01"}]
 // }
 function doGetLatest($pdo) {
-  // This selects the latest id, name for each name.
   $sql = "SELECT id,userid,username,name,ts from programs ORDER BY ts DESC";
   $pdo->query('SET NAMES UTF8');
   $stmt = $pdo->prepare($sql);
@@ -89,37 +97,11 @@ function doGetLatest($pdo) {
     $values = array();;
   }
   $values = array("programs" => $values, "username" => $_SESSION["username"]);
-  echo json_encode($values);
+  echo json_encode($values, JSON_UNESCAPED_UNICODE);
 }
 
-// Return the list of all versions for a given name. The return
-// value is the same as the doGetLatest() function.
-function doGetVersions($pdo, $name) {
-  $sql = "SELECT id,username,name,ts FROM programs where name = :name";
-  $stmt = $pdo->prepare($sql);
-  if (!$stmt) {
-    echo '{"error": "unable to prepare statement"}';
-    return;
-  }
-  $stmt->bindParam(':name', $name);
-  if (!$stmt->execute()) {
-    echo '{"error": "Unable to fetch values"}';
-    $stmt->closeCursor();
-    $stmt = null;
-    return;
-  }
-  $values = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  $stmt->closeCursor();
-  $stmt = null;
-  if ($values) {
-    $values = array("programs" => $values, "username" => $_SESSION["username"]);
-    echo json_encode($values);
-  } else {
-    echo '{"error": "Nothing found by that name"}';
-  }
-}
-
-// Return the JSON for a given row.
+// Return the JSON for a given row. The json stored in the
+// database is augmented with the database_id.
 function doGetRow($pdo, $id) {
   $pdo->query('SET NAMES UTF8');
   $sql = "SELECT userid,json FROM programs where id = :id";
@@ -145,8 +127,13 @@ function doGetRow($pdo, $id) {
     echo '{"error": "no json in database"}';
     return;
   }
-  $json = $row['json'];
-  echo $json;
+  $data = json_decode($row['json'], true);
+  if ($data == null) {
+    sendError('Unable to retrieve json');
+    return;
+  }
+  $data['database_id'] = $id;
+  echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }
 
 function doLogin($userid, $password) {
@@ -165,7 +152,7 @@ function doLogin($userid, $password) {
     $_SESSION['username'] = $userName;
     session_write_close();
     $data = array('userid' => $userid, 'username' => $userName);
-    echo json_encode($data);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
   } else {
     $_SESSION['logged_in'] = False;
     sendError('Incorrect username or password');
@@ -173,14 +160,31 @@ function doLogin($userid, $password) {
 }
 
 
-// Save a version. The "name" field is within the json. The return value
-// is an empty JSON.
-// TODO: restrict it to only store at most n rows for a given value of name.
+// Save a version. This looks for the database_id field in the json,
+// as well as the userid of the request. If there is no database_id
+// in the json that is sent, then a new row is created and the response
+// contains the id of the new row. If there is a database_id in the
+// sent json, then there are three cases:
+// 1. the database contains no row with this id, in which case
+//    a new row is created.
+// 2. the database contains a row with this id and the same userid
+//    as sent the request. In this case the row is updated with the
+//    json value.
+// 3. the database contains a row with this id, but the userid in
+//    the database is different. In this case the database will create
+//    a new row containing the json and the new userid (with a new id).
+// In all three cases, the response is {"database_id": database_id}.
+// The "name" field is within the json, and is extracted at the time
+// of save and stored in the database. This allows the user to change
+// the name of the row.
 function doSave($pdo, $json) {
   $name = 'unknown';
   $data = json_decode($json, true);
-
-  if ($data != null && isset($data['name'])) {
+  if ($data == null) {
+    sendError('JSON could not be decoded.');
+    return;
+  }
+  if (isset($data['name'])) {
     $name = $data['name'];
   }
   $userid = 'Unknown';
@@ -194,15 +198,80 @@ function doSave($pdo, $json) {
   }
   $pdo->query('SET NAMES UTF8');
   //  $json = $pdo->quote($json);
-  $stmt = $pdo->prepare("REPLACE INTO programs (name,userid,username,json) values (:name, :userid, :username, :json)");
-  $stmt->bindParam(':name', $name);
-  $stmt->bindParam(':userid', $userid);
-  $stmt->bindParam(':username', $username);
-  $stmt->bindParam(':json', $json);
+  $database_id = null;
+  if (!isset($data['database_id'])) {
+    $stmt = $pdo->prepare("INSERT INTO programs (name,userid,username,json) values (:name, :userid, :username, :json)");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':userid', $userid);
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':json', $json);
+    if ($stmt->execute()) {
+      $response = array("userid" => $userid, "database_id" => $pdo->lastInsertId());
+      echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    } else {
+      sendError('Server error: unable to save');
+    }
+  } else { // Check that the userid in the database is the same as the authenticated one.
+    $database_id = $data['database_id'];
+    $sql = "SELECT userid FROM programs where id = :id";
+    $stmt2 = $pdo->prepare($sql);
+    $stmt2->bindParam(":id", $database_id);
+    if (!$stmt2->execute()) {
+      $stmt2->closeCursor();
+      $stmt2 = null;
+      // We should perhaps just do an insert in this case.
+      sendError("Server error: unable to locate database row");
+      return;
+    }
+    $row = $stmt2->fetch(PDO::FETCH_ASSOC);
+    $stmt2->closeCursor();
+    $stmt2 = null;
+    if ($row != null && $row['userid'] == $userid) {
+      // Then the user already owns the row, so do a replace.
+      $stmt = $pdo->prepare("REPLACE INTO programs (id,name,userid,username,json) values (:database_id, :name, :userid, :username, :json)");
+      $stmt->bindParam(':database_id', $database_id);
+    } else {
+      // The user doesn't own the row, so we create a copy with the new userid, and
+      // we will get $database_id from the insert.
+      $database_id = null;
+      $stmt = $pdo->prepare("INSERT INTO programs (name, userid, username, json) values (:name, :userid, :username, :json)");
+    }
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':userid', $userid);
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':json', $json);
+    if ($stmt->execute()) {
+      if ($database_id == null) {
+         $database_id = $pdo->lastInsertId();
+      }
+      $response = array("userid" => $userid, "database_id" => $database_id);
+      echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    } else {
+      sendError("Server error: unable to save data");
+    }
+  }
+  $stmt->closeCursor();
+  $stmt = null;
+}
+
+// Delete a program. The user must be authenticated in order to perform this.
+function doDelete($pdo, $database_id) {
+  if (!isset($_SESSION['userid'])) {
+    sendError('Unable to delete - user not logged in.');
+    return;
+  }
+  $pdo->query('SET NAMES UTF8');
+  $stmt = $pdo->prepare("DELETE FROM programs WHERE id=:database_id AND userid=:userid");
+  $stmt->bindParam(':database_id', $database_id);
+  $stmt->bindParam(':userid', $_SESSION['userid']);
   if ($stmt->execute()) {
-    echo '{}';
+    if ($stmt->rowCount() == 1) {
+      echo '{"response": "row was deleted"}';
+    } else {
+      sendError('You do not have permission to delete this program.');
+    }
   } else {
-    sendError('unable to save');
+    sendError('Server error: unable to delete');
   }
   $stmt->closeCursor();
   $stmt = null;
@@ -241,14 +310,14 @@ try {
   if ($_POST) {
    if (isset($_POST['json'])) {
      doSave($pdo, $_POST['json']);
+   } elseif(isset($_POST['delete'])) {
+     doDelete($pdo, $_POST['delete']);
    } else {
      echo '{"error": "missing arguments"}';
    }
  } else { // A GET
    if (isset($_GET['id'])) {
      doGetRow($pdo, $_GET['id']);
-   } else if (isset($_GET['name'])) {
-     doGetVersions($pdo, $_GET['name']);
    } else {     
      doGetLatest($pdo);
    }
