@@ -172,8 +172,8 @@ function doLogin($userid, $password) {
 //    json value.
 // 3. the database contains a row with this id, but the userid in
 //    the database is different. In this case the database will create
-//    a new row containing the data.
-// In all three cases, the response is {"id": database_id}.
+//    a new row containing the json and the new userid (with a new id).
+// In all three cases, the response is {"database_id": database_id}.
 // The "name" field is within the json, and is extracted at the time
 // of save and stored in the database. This allows the user to change
 // the name of the row.
@@ -219,6 +219,7 @@ function doSave($pdo, $json) {
     if (!$stmt2->execute()) {
       $stmt2->closeCursor();
       $stmt2 = null;
+      // We should perhaps just do an insert in this case.
       sendError("Server error: unable to locate database row");
       return;
     }
@@ -260,7 +261,6 @@ function doDelete($pdo, $database_id) {
     return;
   }
   $pdo->query('SET NAMES UTF8');
-  //  $json = $pdo->quote($json);
   $stmt = $pdo->prepare("DELETE FROM programs WHERE id=:database_id AND userid=:userid");
   $stmt->bindParam(':database_id', $database_id);
   $stmt->bindParam(':userid', $_SESSION['userid']);
