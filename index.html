@@ -48,6 +48,11 @@
                 Save as...
               </a>
             </li>
+            <li id="deleteMenu">
+              <a href="javascript:showDeleteProgram();" class="topNavItem">
+                Delete from server
+              </a>
+            </li>
             <li id="downloadMenu">
               <a href="javascript:downloadJSON()" class="topNavItem">
                 Download JSON
@@ -404,6 +409,27 @@
 
     <!-- Additional/custom scripts -->
     <script src="./scripts/editor.js"></script>
+
+    <!-- delete program modal -->
+    <div class="modal fade" id="deleteProgramModal" tabindex="-1" role="dialog" aria-labelledby="deleteProgramLable">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+          </div>
+          <div class="modal-body">
+            <p>You are about to delete this program from the server. This action cannot be reversed.</p>
+            <p>Are you sure you want to delete it?</p>
+          </div>
+          <div class="modal-footer">
+            <p id="delete_status"></p>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-danger btn-ok" onclick="reallyDeleteProgram();">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Auth Modal -->
     <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel">
