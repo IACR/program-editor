@@ -72,12 +72,14 @@ function editExisting() {
     for (var i = 0; i < data.programs.length; i++) {
       var row = data.programs[i];
       $('#versionList').append('<tr><td><a class="progName" href=javascript:getConfig("ajax.php?id=' + row.id + '",true);>' + row.name + '</a></td><td>' + row.username + '</td><td>' + row.ts + '</td></tr>');
-      // <td><input type="checkbox" disabled class="form-check-input" id="delete-' + row.id + '"></td></tr>');
     }
   });
 }
 
 function showDeleteProgram() {
+  if ($('#deleteMenu').hasClass('disabled')) {
+    return false;
+  }
   $('#deleteProgramModal').modal();
 }
 
@@ -112,6 +114,9 @@ function reallyDeleteProgram() {
 
 
 function saveAs() {
+  if ($('#saveAsMenu').hasClass('disabled')) {
+    return false;
+  }
   var name = prompt('Enter a name:', progData.name);
   if (name == null) {
     return;
@@ -136,6 +141,10 @@ function currentTime() {
 }
 
 function saveProgram() {
+  if ($('#saveMenu').hasClass('disabled')) {
+    console.log('disabled');
+    return false;
+  }
   $.ajax({
     type: "POST",
     url: "ajax.php",
@@ -400,6 +409,9 @@ function mergeTalks(data) {
 
 // Show modal for uploading from websubrev.
 function showWebsubrevUpload() {
+  if ($('#uploadTalksMenu').hasClass('disabled')) {
+    return false;
+  }
   $('#uploadTalksModal').modal();
 }
 
@@ -963,6 +975,9 @@ function saveSession() {
 
 // Download edited JSON program
 function downloadJSON() {
+  if ($('#downloadMenu').hasClass('disabled')) {
+    return false;
+  }
   var atag = document.createElement('a');
   atag.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(progData, null, 2)));
   atag.setAttribute('download', 'program.json');
@@ -1016,6 +1031,9 @@ function levenshtein_distance (a, b) {
 // to be sent to api.crossref.org. Note that you can't simply query for
 // Crypto 2017 but you need the full name with "Advances in cryptology".
 function startImportDOIs() {
+  if ($('#importDOIMenu').hasClass('disabled')) {
+    return false;
+  }
   $('#doiStatus').text('');
   $('#resultList').find('li').remove().end()
   $('.progress').hide();
