@@ -58,6 +58,11 @@
                 Download JSON
               </a>
             </li>
+            <li id="downloadPDFMenu">
+              <a href="javascript:showPDFDownload()" class="topNavItem">
+                Download PDF for printing
+              </a>
+            </li>
           </ul>
         </li>
         <li role="presentation" class="dropdown">
@@ -817,6 +822,54 @@
         </div>
       </div>
     </aside>
+
+    <!-- modal to download PDF -->
+    <div class="modal fade" id="downloadPDFModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h2 class="modal-title">Download PDF</h2>
+          </div>
+          <div class="modal-body">
+            <p>The PDF file will be opened in a separate tab.</p>
+            <p>Note that formatting on paper is a work in progress, and may not be very usable
+              at this time.</p>
+            <form id="pdfform" method="POST" action="pdf/program.php" target="_programpdf" class="form-inline">
+              <input type="hidden" name="json" value="">
+              <div class="form-group">
+                <label for="page_format">
+                  Page format:
+                </label>
+                <select name="page_format" id="page_format" class="form-control">
+                  <option value="Letter">US Letter</option>
+                  <option value="Letter-L">US Letter landscape</option>
+                  <option value="A4">A4</option>
+                  <option value="A4-L">A4 landscape</option>
+                  <option value="A0">A0 for posters (841mm x 1189mm)</option>
+                  <option value="A1">A1 for posters (594mm x 841mm)</option>
+                  <option value="A2">A2 for posters (594mm x 841mm)</option>
+                  <option value="A3">A3 for posters (297mm x 420mm)</option>
+                  <option value="Legal">US Legal</option>
+                  <option value="Tabloid">US Tabloid for posters (11.0 x 17.0 in)</option>
+                  <option value="HTML">Crude HTML for printing (not for web use)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="two_column">
+                  Two column format:
+                </label>
+                <input name="two_column" id="two_column" type="checkbox" class="form-control">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-success btn-ok" onclick="downloadPDF();">Download PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>

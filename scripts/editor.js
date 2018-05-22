@@ -12,6 +12,7 @@ function disableMenus() {
   $('#saveAsMenu').addClass('disabled');
   $('#deleteMenu').addClass('disabled');
   $('#downloadMenu').addClass('disabled');
+  $('#downloadPDFMenu').addClass('disabled');
   $('#uploadTalksMenu').addClass('disabled');
   $('#importDOIMenu').addClass('disabled');
 }
@@ -23,6 +24,7 @@ function enableMenus() {
   $('#saveAsMenu').removeClass('disabled');
   $('#deleteMenu').removeClass('disabled');
   $('#downloadMenu').removeClass('disabled');
+  $('#downloadPDFMenu').removeClass('disabled');
   $('#uploadTalksMenu').removeClass('disabled');
   $('#importDOIMenu').removeClass('disabled');
 }
@@ -989,6 +991,22 @@ function downloadJSON() {
   } else {
     atag.click();
   }
+}
+
+function showPDFDownload() {
+  if ($('#downloadPDFMenu').hasClass('disabled')) {
+    return false;
+  }
+  $('#downloadPDFModal').modal();
+}
+
+function downloadPDF() {
+  // This populates the form and submits it. The form targets a new tab.
+  var f = document.getElementById('pdfform');
+  f.json.value = JSON.stringify(progData);
+  window.open('', '_programpdf');
+  f.submit();
+  $('#downloadPDFModal').modal('hide');
 }
 
 // From https://gist.github.com/andrei-m/982927
