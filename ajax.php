@@ -10,7 +10,7 @@ include("cred.php");
 // | name     | varchar(255) | NO   |     | NULL              |                |
 // | userid   | varchar(255) | NO   |     | NULL              |                |
 // | username | varchar(255) | NO   |     | NULL              |                |
-// | json     | text         | NO   |     | NULL              |                |
+// | json     | mediumtext   | NO   |     | NULL              |                |
 // | ts       | timestamp    | NO   |     | CURRENT_TIMESTAMP |                |
 // +----------+--------------+------+-----+-------------------+----------------+
 //
@@ -20,7 +20,7 @@ include("cred.php");
 //   name varchar(255) NOT NULL,
 //   userid varchar(255) NOT NULL,
 //   username varchar(255) NOT NULL,
-//   json text NOT NULL,
+//   json mediumtext NOT NULL,
 //   ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 //   PRIMARY KEY (`id`));
 //
