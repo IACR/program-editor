@@ -75,7 +75,7 @@ if (isset($_POST['page_format']) && $_POST['page_format']=='HTML') {
   $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8',
     'format' => $page_format]);
   $mpdf->SetFooter('{PAGENO}');
-  if (isset($_POST['two_column']) && ($maxSessions < 2 || substr($page_format, -1) == 'S')) {
+  if (isset($_POST['two_column']) && ($maxSessions < 2 || substr($page_format, -1) == 'L')) {
     $mpdf->SetColumns(2);
     $mpdf->shrink_tables_to_fit = 2.0;
   }

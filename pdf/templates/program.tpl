@@ -65,9 +65,6 @@ td.twosessions {
 td.time {
   text-align: center;
 }
-td.onesession, td.twosessions {
-  background: linear-gradient(top, #c7cdde, #f0f2ff);
-}
 </style>
 </head>
 <body>
