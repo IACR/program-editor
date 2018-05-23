@@ -83,7 +83,6 @@ function sendError($message) {
 // }
 function doGetLatest($pdo) {
   $sql = "SELECT id,userid,username,name,ts from programs ORDER BY ts DESC";
-  $pdo->query('SET NAMES UTF8');
   $stmt = $pdo->prepare($sql);
   if (!$stmt->execute()) {
     echo '{"error": "Unable to execute sql"}';
@@ -103,7 +102,6 @@ function doGetLatest($pdo) {
 // Return the JSON for a given row. The json stored in the
 // database is augmented with the database_id.
 function doGetRow($pdo, $id) {
-  $pdo->query('SET NAMES UTF8');
   $sql = "SELECT userid,json FROM programs where id = :id";
   $stmt = $pdo->prepare($sql);
   if (!$stmt) {
@@ -196,8 +194,6 @@ function doSave($pdo, $json) {
     $userid = $_SERVER['PHP_AUTH_USER'];
     $username = $_SERVER['PHP_AUTH_USER'];
   }
-  $pdo->query('SET NAMES UTF8');
-  //  $json = $pdo->quote($json);
   $database_id = null;
   if (!isset($data['database_id'])) {
     $stmt = $pdo->prepare("INSERT INTO programs (name,userid,username,json) values (:name, :userid, :username, :json)");
@@ -260,7 +256,6 @@ function doDelete($pdo, $database_id) {
     sendError('Unable to delete - user not logged in.');
     return;
   }
-  $pdo->query('SET NAMES UTF8');
   $stmt = $pdo->prepare("DELETE FROM programs WHERE id=:database_id AND userid=:userid");
   $stmt->bindParam(':database_id', $database_id);
   $stmt->bindParam(':userid', $_SESSION['userid']);
@@ -306,7 +301,7 @@ if (!isLoggedIn()) {
 } 
 
 try {
-  $pdo = new PDO('mysql:host=localhost;dbname=programs', 'program_editor', $dbpassword);
+  $pdo = new PDO('mysql:host=localhost;dbname=programs;charset=utf8', 'program_editor', $dbpassword);
   if ($_POST) {
    if (isset($_POST['json'])) {
      doSave($pdo, $_POST['json']);
