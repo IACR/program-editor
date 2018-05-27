@@ -1,7 +1,7 @@
 {
   "description": "Schema to describe the program of a multi-track conference. This was originally designed for IACR conferences, but may find other uses.",
   "type": "object",
-  "id": "http://iacr.org/toolscryptodb/pc/program/program_schema.json",
+  "id": "https://www.iacr.org/tools/program/docs/program_schema.json",
   "definitions": {
     "location": {
       "id": "#definitions/location",
