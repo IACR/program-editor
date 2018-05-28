@@ -7,6 +7,17 @@ section.category:empty:before {
     content: attr(data-placeholder);
 }
 
+#talksList > div:last-child {
+    margin-bottom: 50px;
+}
+
+label#newCategoryButton {
+    position: absolute;
+    bottom: 5px;
+    right: 40px;
+}
+
+
 div.session-talks:empty:before {
     color: #12323C;
     content: attr(data-placeholder);

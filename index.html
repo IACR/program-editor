@@ -313,7 +313,6 @@
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
           </label>
-
         </article>
         <article id="renderedProgram" class="col-md-9">
           <!-- Handlebars script, renders editable program based on the user-selected program template -->
@@ -681,7 +680,7 @@
             </form>
           </div>
           <div id="deleteCategoryWarning" class="modal-body">
-            <div class="alert alert-warning">If you delete this category, then the talks in this category become uncategorized.</div>
+            <div class="alert alert-danger">If you delete this category, then the talks in this category become uncategorized.</div>
           </div>
           <div class="modal-footer">
             <button id="deleteCategoryButton" type="button" class="btn btn-danger btn-sm pull-left" onclick="deleteCategory()">
@@ -691,7 +690,7 @@
               Cancel
             </button>
             <button type="button" class="btn btn-success btn-sm" onclick="saveCategory()">
-              Save category
+              Update category
             </button>
           </div>
         </div>
