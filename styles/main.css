@@ -169,7 +169,7 @@ div.talk {
     visibility: visible;
 }
 /* You may not delete or edit the Uncategorized category. */
-#category-0 a {
+#category-0 > .categoryDiv > a {
     visibility: hidden;
 }
 

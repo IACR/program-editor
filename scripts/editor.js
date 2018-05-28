@@ -725,9 +725,11 @@ function showCategoryEditor(id) {
   $('#deleteCategoryWarning').hide();
   $('#categoryId').val(id);
   if (id === "") { // then we're adding a new category
+    $('#deleteCategoryButton').hide();
     $('#categoryEditorTitle').text('Add a new category');
     $('#newCategoryName').val('');
   } else {
+    $('#deleteCategoryButton').show();
     $('#categoryEditorTitle').text('Edit a category');
     var categoryObj = findObj(id, progData);
     $('#newCategoryName').val(categoryObj.name);
@@ -740,7 +742,6 @@ function deleteCategory() {
     $('#deleteCategoryButton').text('Really delete the category');
     return;
   }
-  console.log('ok really delete the category');
   $('#editCategoryBox').modal('hide');
   var categoryId = $('#categoryId').val();
   var categoryIndex = progData.config.unassigned_talks.findIndex(function(el) {
