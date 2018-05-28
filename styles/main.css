@@ -127,7 +127,11 @@ a.topNavItem:hover {
   display: none;
 }
 
-#addTalkBtn, .addTimeslot {
+#newCategoryButton {
+    float: right; !important;
+}
+
+#addTalkBtn, .addTimeslot, #addCategoryBtn {
   width: 35px;
   height: 35px;
   text-align: center;
@@ -157,6 +161,16 @@ div.talk {
   overflow-y: auto;
   padding: 5px;
   border: 1px solid lightgrey;
+}
+.categoryDiv a {
+    visibility: hidden;
+}
+.categoryDiv:hover a {
+    visibility: visible;
+}
+/* You may not delete or edit the Uncategorized category. */
+#category-0 a {
+    visibility: hidden;
 }
 
 div.talk {

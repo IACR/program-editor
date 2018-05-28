@@ -691,6 +691,79 @@ function showTalkEditor(id) {
   }
 }
 
+// Save a category. This may come from an edit on an existing category or a new
+// category that was added. If the id is empty then it's a new category.
+function saveCategory() {
+  var newName = $('#newCategoryName').val();
+  if (!newName) {
+    alert('Name is required');
+    return;
+  }
+  var category = {};
+  var categoryId = $('#categoryId').val();
+  if (categoryId === "") {
+    category = {"id": "category-" + createUniqueId(),
+                "name": newName,
+                "talks": []};
+    progData.config.unassigned_talks.push(category);
+  } else { // an existing category.
+    category = findObj(categoryId, progData);
+    if (category === null) {
+      console.log('Cannot find that category');
+    } else {
+      category.name = newName;
+    }
+  }
+  $('#editCategoryBox').modal('hide');
+  refresh();
+}
+
+// Populate modal for adding or editing a category. If id is empty, then
+// it's for adding a new category. Otherwise it is to edit an existing
+// category.
+function showCategoryEditor(id) {
+  $('#deleteCategoryWarning').hide();
+  $('#categoryId').val(id);
+  if (id === "") { // then we're adding a new category
+    $('#categoryEditorTitle').text('Add a new category');
+    $('#newCategoryName').val('');
+  } else {
+    $('#categoryEditorTitle').text('Edit a category');
+    var categoryObj = findObj(id, progData);
+    $('#newCategoryName').val(categoryObj.name);
+  }
+}
+
+function deleteCategory() {
+  if (!$('#deleteCategoryWarning').is(':visible')) {
+    $('#deleteCategoryWarning').show();
+    $('#deleteCategoryButton').text('Really delete the category');
+    return;
+  }
+  console.log('ok really delete the category');
+  $('#editCategoryBox').modal('hide');
+  var categoryId = $('#categoryId').val();
+  var categoryIndex = progData.config.unassigned_talks.findIndex(function(el) {
+    return el.id === categoryId;
+  });
+  if (categoryIndex < 0) {
+    console.log('unable to find category');
+    return;
+  }
+  var targetCategory = progData.config.unassigned_talks[categoryIndex];
+  var uncategorized = findObj('category-0', progData);
+  if (uncategorized === null) {
+    console.log('unable to find uncategorized');
+    return;
+  }
+  for (var i = 0; i < targetCategory.talks.length; i++) {
+    uncategorized.talks.push(targetCategory.talks[i]);
+  }
+  progData.config.unassigned_talks.splice(categoryIndex, 1);
+  refresh();
+}
+
+
 // Prepopulate edit session modal with relevant fields from parent div of clicked edit button
 function editSession(dayIndex, slotIndex, sessionIndex) {
   $('#deleteSessionWarning').hide();
