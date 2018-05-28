@@ -429,12 +429,12 @@
     <script src="./scripts/editor.js"></script>
 
     <!-- delete program modal -->
-    <div class="modal fade" id="deleteProgramModal" tabindex="-1" role="dialog" aria-labelledby="deleteProgramLable">
+    <div class="modal fade" id="deleteProgramModal" tabindex="-1" role="dialog" aria-labelledby="deleteProgramLabel">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h2 class="modal-title">Confirm Delete</h2>
+            <h2 id="deleteProgramLabel" class="modal-title">Confirm Delete</h2>
           </div>
           <div class="modal-body">
             <p>You are about to delete this program from the server. This action cannot be reversed.</p>
@@ -489,7 +489,7 @@
       </div>
     </div>
     <!-- Modal for import from crossref.org -->
-    <aside class="modal fade" id="importDOISelection" role="dialog" aria-labeledby="importDOITitle">
+    <aside class="modal fade" id="importDOISelection" role="dialog" aria-labelledby="importDOITitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="importDOIDiv">
@@ -527,7 +527,7 @@
     </aside>
 
     <!-- Modal for upload from websubrev -->
-    <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labeledby="uploadTitle">
+    <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labelledby="uploadTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="uploadTitleDiv">
@@ -657,7 +657,7 @@
 
     <!-- Modal for adding or editing a category. In case you are adding a category,
          the delete button is not shown and the categoryId field is empty.  -->
-    <aside class="modal fade" id="editCategoryBox" role="dialog" aria-labelledby="addCategoryTitle">
+    <aside class="modal fade" id="editCategoryBox" role="dialog" aria-labelledby="categoryEditorTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="addCategoryTitleDiv">

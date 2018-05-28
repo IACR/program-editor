@@ -7,10 +7,12 @@ section.category:empty:before {
     content: attr(data-placeholder);
 }
 
+/* Leave space so the floating action button doesn't cover the last pencil. */
 #talksList > div:last-child {
     margin-bottom: 50px;
 }
 
+/* Floating action button */
 label#newCategoryButton {
     position: absolute;
     bottom: 5px;

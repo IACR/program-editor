@@ -724,6 +724,7 @@ function saveCategory() {
 function showCategoryEditor(id) {
   $('#deleteCategoryWarning').hide();
   $('#categoryId').val(id);
+  $('#deleteCategoryButton').text('Delete the category');
   if (id === "") { // then we're adding a new category
     $('#deleteCategoryButton').hide();
     $('#categoryEditorTitle').text('Add a new category');
@@ -758,6 +759,8 @@ function deleteCategory() {
     return;
   }
   for (var i = 0; i < targetCategory.talks.length; i++) {
+    console.log('moving talk ');
+    console.dir(targetCategory.talks[i]);
     uncategorized.talks.push(targetCategory.talks[i]);
   }
   progData.config.unassigned_talks.splice(categoryIndex, 1);
