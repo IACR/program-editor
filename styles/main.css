@@ -127,10 +127,6 @@ a.topNavItem:hover {
   display: none;
 }
 
-#newCategoryButton {
-    float: right; !important;
-}
-
 #addTalkBtn, .addTimeslot, #addCategoryBtn {
   width: 35px;
   height: 35px;
@@ -138,6 +134,10 @@ a.topNavItem:hover {
   padding: 2px 1px;
   border-radius: 30px;
   margin: 5px;
+}
+
+#newCategoryButton {
+    float: right; !important;
 }
 
 .categoryTitle {
