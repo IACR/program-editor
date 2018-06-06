@@ -367,5 +367,7 @@ div.talk a {
   color: #1D707A;
 }
 
-
+input#shiftDates {
+    text-align: center;
+}
 

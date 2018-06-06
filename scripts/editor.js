@@ -8,6 +8,7 @@ var talksTemplate;
 // This is called when the app is opened, and disables menu items that only make
 // sense if a program is being edited.
 function disableMenus() {
+  $('#editMetadataMenu').addClass('disabled');
   $('#saveMenu').addClass('disabled');
   $('#saveAsMenu').addClass('disabled');
   $('#deleteMenu').addClass('disabled');
@@ -20,6 +21,7 @@ function disableMenus() {
 // This is called when a program is loaded to edit.
 function enableMenus() {
   $('#save_status').text(progData.name);
+  $('#editMetadataMenu').removeClass('disabled');
   $('#saveMenu').removeClass('disabled');
   $('#saveAsMenu').removeClass('disabled');
   $('#deleteMenu').removeClass('disabled');
@@ -83,6 +85,20 @@ function showDeleteProgram() {
     return false;
   }
   $('#deleteProgramModal').modal();
+}
+
+function showEditMetadata() {
+  if ($('#showMetadataMenu').hasClass('disabled')) {
+    return false;
+  }
+  $('#newName').val(progData.name);
+  document.getElementById('dateChange').selectedIndex = 0;
+  document.getElementById('shiftDates').value = 0;
+  document.getElementById('addDayOption').selectedIndex = 0;
+  document.getElementById('deleteDayOption').selectedIndex = 0;
+  document.getElementById('dateChange').selectedIndex = 0;
+  $('#editMetadataModal').modal();
+  updateNewDates();
 }
 
 function reallyDeleteProgram() {
@@ -253,6 +269,108 @@ function setDates(startdate) {
     day.add(1, 'days');
   }
   $('#uploadTalks').show(500);
+}
+
+// Called from the editMetadataModal to update new dates. This is
+// triggered by onChange or onInput on the form elements.
+function updateNewDates() {
+  var startDate = moment(progData.days[0].date);
+  var endDate = moment(progData.days[progData.days.length-1].date);
+  $('#originalStartdate').text(startDate.format('YYYY-MM-DD (dddd)'));
+  $('#originalEnddate').text(endDate.format('YYYY-MM-DD (dddd)'));
+  var select = document.getElementById('dateChange');
+  var changeType = select.options[select.selectedIndex].value;
+  $('#shiftDateControl').hide();
+  $('#addDayOption').hide();
+  $('#deleteDayOption').hide();
+  $('#deleteWarning').hide();
+  if (changeType === '') {
+    $('#newDates').hide();
+  } else if (changeType === 'shift') {
+    $('#newDates').show();
+    $('#shiftDateControl').show();
+    startDate.add($('#shiftDates').val(), 'd');
+    endDate.add($('#shiftDates').val(), 'd');
+  } else if (changeType === 'add') {
+    $('#newDates').show();
+    $('#addDayOption').show();
+    var addChoice = $('#addDayOption').val();
+    if (addChoice === 'before') {
+      startDate.subtract(1, 'd');
+    } else if (addChoice === 'after') {
+      endDate.add(1, 'd');
+    }
+  } else if (changeType === 'delete') {
+    $('#newDates').show();
+    $('#deleteWarning').show();
+    $('#deleteDayOption').show();
+    var deleteChoice = $('#deleteDayOption').val();
+    if (deleteChoice === 'first') {
+      startDate.add(1, 'd');
+    } else if (deleteChoice === 'last') {
+      endDate.subtract(1, 'd');
+    }
+  }
+  $('#newStartdate').val(startDate.format('YYYY-MM-DD'));
+  $('#newEnddate').val(endDate.format('YYYY-MM-DD'));
+  $('#newDisplayStartdate').text(startDate.format('YYYY-MM-DD (dddd)'));
+  $('#newDisplayEnddate').text(endDate.format('YYYY-MM-DD (dddd)'));
+}
+
+// Called from the modal to edit metadata.
+function saveMetadata() {
+  var newName = $('#newName').val();
+  if (newName === '') {
+    alert('Name is required');
+    return;
+  }
+  if (newName !== progData.name) {
+    progData.name = newName;
+    $('#save_status').text(progData.name);
+  }
+  // Updating dates is easy when it's a shift or add, but harder
+  // when it is a delete because talks have to be sent to the
+  // unassigned_list.
+  var select = document.getElementById('dateChange');
+  var changeType = select.options[select.selectedIndex].value;
+  if (changeType === 'shift') {
+    var theDate = moment($('#newStartdate').val());
+    for (var i = 0; i < progData.days.length; i++) {
+      progData.days[i].date = theDate.format('YYYY-MM-DD');
+      theDate.add(1, 'd');
+    }
+  } else if (changeType === 'add') {
+    if ($('#newStartDate').val() === progData.days[0].date) {
+      // then we added a day at the end.
+      progData.days.push({'date': $('#newEndDate').val(), 'timeslots': []});
+    } else {
+      progData.unshift({'date': $('#newStartDate').val(), 'timeslots': []});
+    }
+    return;
+  } else if (changeType === 'delete') {
+    // If there are any talks in sessions on that day, then we put
+    // them back into unassigned_talks.
+    var dayToDeleteIndex = -1;
+    var dateToDelete = $('#deleteDayOption').val();
+    if (dateToDelete === 'first') {
+      dayToDeleteIndex = 0;
+    } else if (dateToDelete === 'last') {
+      dayToDeleteIndex = progData.days.length - 1;
+    }
+    if (dayToDeleteIndex >= 0) {
+      var day = progData.days[dayToDeleteIndex];
+      for (var i = 0; i < day.timeslots.length; i++) {
+        if (day.timeslots[i].hasOwnProperty('sessions')) {
+          for (var j = 0; j < day.timeslots[i].sessions.length; j++) {
+            moveTalksToUnassigned(day.timeslots[i].sessions[j]);
+          }
+        }
+      }
+      progData.days.splice(dayToDeleteIndex, 1);
+    }
+  }
+  $('#editMetadataModal').modal('hide');
+  refresh();
 }
 
 // draw talks template
