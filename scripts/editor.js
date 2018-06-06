@@ -96,7 +96,6 @@ function showEditMetadata() {
   document.getElementById('shiftDates').value = 0;
   document.getElementById('addDayOption').selectedIndex = 0;
   document.getElementById('deleteDayOption').selectedIndex = 0;
-  document.getElementById('dateChange').selectedIndex = 0;
   $('#editMetadataModal').modal();
   updateNewDates();
 }
@@ -337,7 +336,6 @@ function saveMetadata() {
     } else {
       progData.unshift({'date': $('#newStartDate').val(), 'timeslots': []});
     }
-    return;
   } else if (changeType === 'delete') {
     // If there are any talks in sessions on that day, then we put
     // them back into unassigned_talks.
