@@ -450,12 +450,12 @@
               <span aria-hidden="true">&times;</span>
             </button>
             <h2 class="modal-title" id="editMetadataTitle">
-              Edit name and dates
+              Edit conference name and dates
             </h2>
           </div>
           <div class="modal-body">
             <p class="help-block">
-              You can change the name and dates of the conference below.
+              You can change the conference name and dates of the conference below.
             </p>
             <form class="form-inline">
               <div class="form-group">
@@ -464,14 +464,20 @@
                 </label>
                 <input type="text" name="newName" placeholder="Program name (required)" class="form-control required" id="newName" required="true" />
               </div>
+              <hr/>
               <div id="changeDatesDiv" class="form-group">
                 <label for="newDates">
                   Dates for the conference
                 </label><br/>
-                <label class="alert alert-info" id="originalDates" for="originalStartDate originalEndDate">
-                  Original dates: <span id="originalStartdate"></span> to
-                  <span id="originalEnddate"></span>
-                </label>
+                <div class="panel panel-custom">
+                  <div class="panel-heading panel-heading-custom">
+                    Current dates
+                  </div>
+                  <div class="panel-body">
+                    <span id="originalStartdate"></span> to
+                    <span id="originalEnddate"></span>
+                  </div>
+                </div>
                 <select id="dateChange" name="dateChange" class="form-control" onchange="updateNewDates()">
                   <option value="">No date change</option>
                   <option value="shift">Shift dates</option>
@@ -495,13 +501,16 @@
                 <p class="alert alert-danger" id="deleteWarning">
                   If you delete a day, then all talks currently scheduled on that day will become unscheduled and any sessions will be lost.
                 </p>
-              </div>
-              <label class="alert alert-info" id="newDates" for="newStartdate newEnddate">New dates:
                 <input id="newStartdate" name="newStartdate" type="hidden"/>
                 <input id="newEnddate" name="newEnddate" type="hidden"/>
-                <span id="newDisplayStartdate"></span> to 
-                <span id="newDisplayEnddate"></span>
-              </label>
+                <div class="panel panel-custom" id="newDates">
+                  <div class="panel-heading panel-heading-custom">New dates:</div>
+                  <div class="panel-body">
+                    <span id="newDisplayStartdate"></span> to 
+                    <span id="newDisplayEnddate"></span>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
