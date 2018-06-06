@@ -38,6 +38,11 @@
                 Open
               </a>
             </li>
+            <li id="editMetadataMenu">
+              <a href="javascript:showEditMetadata();" class="topNavItem">
+                Edit
+              </a>
+            </li>
             <li id="saveMenu">
               <a href="javascript:saveProgram();" class="topNavItem">
                 Save
@@ -45,7 +50,7 @@
             </li>
             <li id="saveAsMenu">
               <a href="javascript:saveAs();" class="topNavItem">
-                Save as...
+                Save a copy...
               </a>
             </li>
             <li id="deleteMenu">
@@ -53,6 +58,13 @@
                 Delete from server
               </a>
             </li>
+          </ul>
+        </li>
+        <li role="presentation" class="dropdown">
+          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Download <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
             <li id="downloadMenu">
               <a href="javascript:downloadJSON()" class="topNavItem">
                 Download JSON
@@ -135,7 +147,8 @@
         <div class="row">
           <section id="newOrExisting" class="col-md-8 col-md-offset-2 setupStep">
             <p>
-              If you've been here before, you can edit an existing program. Otherwise, start from a new one.
+              If you've been here before, you can edit an existing program. Otherwise, start from a new one. If you open one that is owned by
+              someone else, then you may not overwrite their work but you can save your own copy.
             </p>
             <div class="row">
               <div class="col-md-6">
@@ -427,6 +440,90 @@
 
     <!-- Additional/custom scripts -->
     <script src="./scripts/editor.js"></script>
+
+    <!-- modal to edit config metadata -->
+    <aside class="modal fade" id="editMetadataModal" role="dialog" aria-labelledby="editMetadataTitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" id="editMetadataDiv">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="modal-title" id="editMetadataTitle">
+              Edit conference name and dates
+            </h2>
+          </div>
+          <div class="modal-body">
+            <p class="help-block">
+              You can change the conference name and dates of the conference below.
+            </p>
+            <form class="form-inline">
+              <div class="form-group">
+                <label for="newName">
+                  Program name
+                </label>
+                <input type="text" name="newName" placeholder="Program name (required)" class="form-control required" id="newName" required="true" />
+              </div>
+              <hr/>
+              <div id="changeDatesDiv" class="form-group">
+                <label for="newDates">
+                  Dates for the conference
+                </label><br/>
+                <div class="panel panel-custom">
+                  <div class="panel-heading panel-heading-custom">
+                    Current dates
+                  </div>
+                  <div class="panel-body">
+                    <span id="originalStartdate"></span> to
+                    <span id="originalEnddate"></span>
+                  </div>
+                </div>
+                <select id="dateChange" name="dateChange" class="form-control" onchange="updateNewDates()">
+                  <option value="">No date change</option>
+                  <option value="shift">Shift dates</option>
+                  <option value="add">Add a day</option>
+                  <option value="delete">Delete a day</option>
+                </select>
+                <label id="shiftDateControl" for="shiftDates">
+                  Shift dates by <input size="4" type="number" id="shiftDates" value="0" onchange="updateNewDates()" oninput="updateNewDates()"> day(s)<br/>
+                </label>
+                <select id="addDayOption" name="addDayOption" class="required form-control" onchange="updateNewDates()">
+                  <option value="" disabled>Choose before or after to add a day</option>
+                  <option value="before">Before</option>
+                  <option value="after">After</option>
+                </select>
+                <select id="deleteDayOption" name="deleteDayOption" class="required form-control" onchange="updateNewDates()">
+                  <option value="" disabled>Choose first or last to delete</option>
+                  <option value="first">Delete first day</option>
+                  <option value="last">Delete last day</option>
+                </select>
+                  <br/><br/>
+                <p class="alert alert-danger" id="deleteWarning">
+                  If you delete a day, then all talks currently scheduled on that day will become unscheduled and any sessions will be lost.
+                </p>
+                <input id="newStartdate" name="newStartdate" type="hidden"/>
+                <input id="newEnddate" name="newEnddate" type="hidden"/>
+                <div class="panel panel-custom" id="newDates">
+                  <div class="panel-heading panel-heading-custom">New dates:</div>
+                  <div class="panel-body">
+                    <span id="newDisplayStartdate"></span> to 
+                    <span id="newDisplayEnddate"></span>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-success btn-sm" onclick="saveMetadata()">
+              Save program
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
 
     <!-- delete program modal -->
     <div class="modal fade" id="deleteProgramModal" tabindex="-1" role="dialog" aria-labelledby="deleteProgramLabel">

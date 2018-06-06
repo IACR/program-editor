@@ -367,5 +367,15 @@ div.talk a {
   color: #1D707A;
 }
 
+input#shiftDates {
+    text-align: center;
+}
 
+.panel-custom {
+    border-color: #1D707A !important;
+}
 
+.panel-heading-custom {
+    background-color: #1D707A !important;
+    color: #EDF6F7 !important;
+}
