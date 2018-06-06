@@ -135,22 +135,13 @@ function saveAs() {
   if ($('#saveAsMenu').hasClass('disabled')) {
     return false;
   }
-  var name = prompt('Enter a name:', progData.name);
-  if (name == null) {
-    return;
+
+  
+  if (progData.hasOwnProperty('database_id')) {
+    delete progData.database_id;
   }
-  if (name) {
-    if (progData.name !== name) {
-      progData.name = name;
-      // We're changing the name, so make a new row.
-      if (progData.hasOwnProperty('database_id')) {
-        delete progData.database_id;
-      }
-    }
-    saveProgram();
-  } else {
-    warningBox('Please enter a name');
-  }
+  progData.name = 'Copy of ' + progData.name;
+  saveProgram();
 }
 
 function currentTime() {
@@ -370,6 +361,7 @@ function saveMetadata() {
     }
   }
   $('#editMetadataModal').modal('hide');
+  saveProgram();
   refresh();
 }
 
