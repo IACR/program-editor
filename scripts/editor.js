@@ -538,6 +538,10 @@ Handlebars.registerHelper('empty', function(data, options) {
   }
 });
 
+Handlebars.registerHelper('formatDate', function(isodate) {
+  return moment(isodate).format('YYYY-MM-DD (dddd)');
+});
+
 // Add dragula functionality
 function addDrag() {
   var talks = Array.prototype.slice.call(document.querySelectorAll(".category"));
