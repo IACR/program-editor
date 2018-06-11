@@ -135,7 +135,7 @@ function saveAs() {
     return false;
   }
 
-  
+
   if (progData.hasOwnProperty('database_id')) {
     delete progData.database_id;
   }
@@ -907,6 +907,8 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   } else {
     $('#currentSessionLocation').val('');
   }
+
+  $('#allowTalks').prop('checked', sessionObj.hasOwnProperty('talks'));
 }
 
 // Function to add a timeslot to a day. This will be called to populate
@@ -1161,6 +1163,26 @@ function saveSession() {
   } else {
     delete sessionObj.moderator;
   }
+
+  var talksAllowed = $('#allowTalks').val()==='on';
+
+// DEBUG: I think it's to do with that it's not sensing when the checkbox is unchecked, so we need to put in something that recognizes when that occurs.
+  if (talksAllowed) {
+    if (!sessionObj.hasOwnProperty('talks')) {
+      // DEBUG: confirmed that the talks array is added here as expected
+      sessionObj.talks = [];
+    }
+  } else {
+    if (sessionObj.hasOwnProperty('talks')) {
+      // move these talks to uncategorized & delete talks array
+      console.log('moving');
+      moveTalksToUnassigned(sessionObj);
+      console.dir(sessionObj.talks);
+      delete sessionObj.talks;
+      console.dir(sessionObj.talks);
+    }
+  }
+
   refresh();
 }
 
@@ -1480,7 +1502,7 @@ function checkLogin() {
       console.dir(jqxhr);
       console.dir(error);
     }});
-    
+
 }
 
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
