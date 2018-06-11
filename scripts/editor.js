@@ -1136,6 +1136,7 @@ function deleteSession() {
 }
 
 // Submit button for edit session
+// BUG/TODO: currently when save is clicked, talks are added regardless of if button is checked or not
 function saveSession() {
   var dayIndex = $('#currentDayIndex').val();
   var slotIndex = $('#currentSlotIndex').val();
@@ -1180,6 +1181,8 @@ function saveSession() {
       console.dir(sessionObj.talks);
       delete sessionObj.talks;
       console.dir(sessionObj.talks);
+    } else {
+      console.dir('no talks array found');
     }
   }
 
