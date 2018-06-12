@@ -908,6 +908,7 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
     $('#currentSessionLocation').val('');
   }
 
+  // BUG: not here, because if this line is commented out, the bug of adding talks box even if box is not ticked still occurs
   $('#allowTalks').prop('checked', sessionObj.hasOwnProperty('talks'));
 }
 
@@ -1150,37 +1151,32 @@ function saveSession() {
     return;
   }
   sessionObj.session_title = session_title;
-  var locationName = $('#currentSessionLocation').val();
 
+  var locationName = $('#currentSessionLocation').val();
   if (locationName) {
     sessionObj.location = {'name': locationName};
   } else {
     delete sessionObj.location;
   }
-  var sessionModerator = $('#currentSessionModerator').val();
 
+  var sessionModerator = $('#currentSessionModerator').val();
   if (sessionModerator) {
     sessionObj.moderator = sessionModerator;
   } else {
     delete sessionObj.moderator;
   }
 
-  var talksAllowed = $('#allowTalks').val()==='on';
-
-// DEBUG: I think it's to do with that it's not sensing when the checkbox is unchecked, so we need to put in something that recognizes when that occurs.
+  var talksAllowed = $('#allowTalks').prop('checked');
   if (talksAllowed) {
     if (!sessionObj.hasOwnProperty('talks')) {
-      // DEBUG: confirmed that the talks array is added here as expected
       sessionObj.talks = [];
     }
   } else {
     if (sessionObj.hasOwnProperty('talks')) {
-      // move these talks to uncategorized & delete talks array
-      console.log('moving');
+      // move any talks in session to uncategorized & delete talks array
+      // NOTE/TODO: when talks are moved out, they are removed to their assigned categories rather than to uncategorized
       moveTalksToUnassigned(sessionObj);
-      console.dir(sessionObj.talks);
       delete sessionObj.talks;
-      console.dir(sessionObj.talks);
     } else {
       console.dir('no talks array found');
     }
