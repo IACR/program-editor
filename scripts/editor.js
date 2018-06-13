@@ -554,7 +554,7 @@ function addDrag() {
       target.firstChild.data = '';
       target.style.border = '';
 
-      // BUG/TODO: only an example of how to calculate length; will need to be changed for production
+      // TODO: make sure there's enough time in the session for these talks
 //      if (target.childNodes.length == 5) {
 //        var start = moment("10:55", "HH:MM");
 //        var end = moment("11:35", "HH:MM");
@@ -908,7 +908,6 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
     $('#currentSessionLocation').val('');
   }
 
-  // BUG: not here, because if this line is commented out, the bug of adding talks box even if box is not ticked still occurs
   $('#allowTalks').prop('checked', sessionObj.hasOwnProperty('talks'));
 }
 
@@ -1071,6 +1070,9 @@ function saveTimeslot() {
 // If a session is about to be deleted (either by deleting the one session
 // or by deleting the timeslot), then return the talks to the unassigned_talks
 // area.
+// TODO: this function may need to be rewritten because we really should
+// move talks to the category they're assigned to, rather than lumping them
+// all into unassigned. See issue #135.
 function moveTalksToUnassigned(session) {
   if (session.hasOwnProperty('talks')) {
     for (var i = 0; i < session.talks.length; i++) {
@@ -1137,7 +1139,6 @@ function deleteSession() {
 }
 
 // Submit button for edit session
-// BUG/TODO: currently when save is clicked, talks are added regardless of if button is checked or not
 function saveSession() {
   var dayIndex = $('#currentDayIndex').val();
   var slotIndex = $('#currentSlotIndex').val();
@@ -1173,8 +1174,7 @@ function saveSession() {
     }
   } else {
     if (sessionObj.hasOwnProperty('talks')) {
-      // move any talks in session to uncategorized & delete talks array
-      // NOTE/TODO: when talks are moved out, they are removed to their assigned categories rather than to uncategorized
+      // move any talks in session to unscheduled & delete talks array
       moveTalksToUnassigned(sessionObj);
       delete sessionObj.talks;
     } else {
