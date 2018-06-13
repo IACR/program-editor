@@ -135,7 +135,7 @@ function saveAs() {
     return false;
   }
 
-  
+
   if (progData.hasOwnProperty('database_id')) {
     delete progData.database_id;
   }
@@ -554,7 +554,7 @@ function addDrag() {
       target.firstChild.data = '';
       target.style.border = '';
 
-      // BUG/TODO: only an example of how to calculate length; will need to be changed for production
+      // TODO: make sure there's enough time in the session for these talks
 //      if (target.childNodes.length == 5) {
 //        var start = moment("10:55", "HH:MM");
 //        var end = moment("11:35", "HH:MM");
@@ -907,6 +907,8 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   } else {
     $('#currentSessionLocation').val('');
   }
+
+  $('#allowTalks').prop('checked', sessionObj.hasOwnProperty('talks'));
 }
 
 // Function to add a timeslot to a day. This will be called to populate
@@ -1068,6 +1070,9 @@ function saveTimeslot() {
 // If a session is about to be deleted (either by deleting the one session
 // or by deleting the timeslot), then return the talks to the unassigned_talks
 // area.
+// TODO: this function may need to be rewritten because we really should
+// move talks to the category they're assigned to, rather than lumping them
+// all into unassigned. See issue #135.
 function moveTalksToUnassigned(session) {
   if (session.hasOwnProperty('talks')) {
     for (var i = 0; i < session.talks.length; i++) {
@@ -1147,20 +1152,36 @@ function saveSession() {
     return;
   }
   sessionObj.session_title = session_title;
-  var locationName = $('#currentSessionLocation').val();
 
+  var locationName = $('#currentSessionLocation').val();
   if (locationName) {
     sessionObj.location = {'name': locationName};
   } else {
     delete sessionObj.location;
   }
-  var sessionModerator = $('#currentSessionModerator').val();
 
+  var sessionModerator = $('#currentSessionModerator').val();
   if (sessionModerator) {
     sessionObj.moderator = sessionModerator;
   } else {
     delete sessionObj.moderator;
   }
+
+  var talksAllowed = $('#allowTalks').prop('checked');
+  if (talksAllowed) {
+    if (!sessionObj.hasOwnProperty('talks')) {
+      sessionObj.talks = [];
+    }
+  } else {
+    if (sessionObj.hasOwnProperty('talks')) {
+      // move any talks in session to unscheduled & delete talks array
+      moveTalksToUnassigned(sessionObj);
+      delete sessionObj.talks;
+    } else {
+      console.dir('no talks array found');
+    }
+  }
+
   refresh();
 }
 
@@ -1480,7 +1501,7 @@ function checkLogin() {
       console.dir(jqxhr);
       console.dir(error);
     }});
-    
+
 }
 
 // NOTE: DEBUG ONLY, remove in production. bypasses other steps so all you have to do is upload talks
