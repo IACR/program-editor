@@ -696,11 +696,27 @@ function updateProgData(el, target, source, sibling) {
 // TODO: validate the authors.
 function saveTalk() {
   var newTitle = $('#newTalkTitle').val();
+  var paperUrl = $('#paperUrl').val();
+  var slidesUrl = $('#slidesUrl').val();
+
+  // validating talk title, paper url, and slides url
   if (!newTitle) {
     $('#talkTitleWarning').show();
     return;
   } else {
     $('#talkTitleWarning').hide();
+  }
+  if (paperUrl && !paperUrl.startsWith("http")) {
+    $('#paperUrlWarning').show();
+    return false;
+  } else {
+    $('#paperUrlWarning').hide();
+  }
+  if (slidesUrl && !slidesUrl.startsWith("http")) {
+    $('#slidesUrlWarning').show();
+    return false;
+  } else {
+    $('#slidesUrlWarning').hide();
   }
 
   var talkId = $('#talkId').val();
@@ -719,29 +735,17 @@ function saveTalk() {
   var category = $('#newTalkCategory').children(':selected');
   talk.category = category.text();
 
-  var paperUrl = $('#paperUrl').val();
   if (paperUrl) {
-    if (!paperUrl.startsWith("http")) {
-      $('#paperUrlWarning').show();
-      return false;
-    }
     talk.paperUrl = paperUrl;
   } else {
-    $('#paperUrlWarning').hide();
     if (talk.paperUrl) {
       delete talk.paperUrl;
     }
   }
 
-  var slidesUrl = $('#slidesUrl').val();
   if (slidesUrl) {
-    if (!slidesUrl.startsWith("http")) {
-      $('#slidesUrlWarning').show();
-      return false;
-    }
     talk.slidesUrl = slidesUrl;
   } else {
-    $('#slidesUrlWarning').hide();
     if (talk.slidesUrl) {
       delete talk.slidesUrl;
     }
