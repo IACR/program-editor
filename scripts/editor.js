@@ -695,6 +695,8 @@ function updateProgData(el, target, source, sibling) {
 // talk that was added. If the id is empty then it's a new talk.
 // TODO: validate the authors.
 function saveTalk() {
+  var isValidated = true;
+
   var newTitle = $('#newTalkTitle').val();
   var paperUrl = $('#paperUrl').val();
   var slidesUrl = $('#slidesUrl').val();
@@ -702,21 +704,26 @@ function saveTalk() {
   // validating talk title, paper url, and slides url
   if (!newTitle) {
     $('#talkTitleWarning').show();
-    return;
+    isValidated = false;
   } else {
     $('#talkTitleWarning').hide();
   }
   if (paperUrl && !paperUrl.startsWith("http")) {
     $('#paperUrlWarning').show();
-    return false;
+    isValidated = false;
   } else {
     $('#paperUrlWarning').hide();
   }
   if (slidesUrl && !slidesUrl.startsWith("http")) {
     $('#slidesUrlWarning').show();
-    return false;
+    isValidated = false;
   } else {
     $('#slidesUrlWarning').hide();
+  }
+
+  // verifies that no validation warnings are showing
+  if (!isValidated) {
+    return;
   }
 
   var talkId = $('#talkId').val();
