@@ -718,6 +718,11 @@ function saveTalk() {
   talk.category = category.text();
   if ($('#paperUrl').val()) {
     talk.paperUrl = $('#paperUrl').val();
+  } else {
+    if (talk.paperUrl) {
+      console.log('deleting paperUrl');
+      delete talk.paperUrl;
+    }
   }
   if (talkId === "") {
     var categoryIndex = new Number(category.attr('value'));
