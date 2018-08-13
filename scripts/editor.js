@@ -693,13 +693,16 @@ function updateProgData(el, target, source, sibling) {
 
 // Save a talk. This may come from an edit on an existing talk or a new
 // talk that was added. If the id is empty then it's a new talk.
-// TODO: validate the authors, title, and urls.
+// TODO: validate the authors.
 function saveTalk() {
   var newTitle = $('#newTalkTitle').val();
   if (!newTitle) {
-    alert('Title is required');
+    $('#talkTitleWarning').show();
     return;
+  } else {
+    $('#talkTitleWarning').hide();
   }
+
   var talkId = $('#talkId').val();
   if (talkId === "") {
     var talk = {};
@@ -708,7 +711,6 @@ function saveTalk() {
     var talk = findObj(talkId, progData);
   }
   talk.title = newTitle;
-  $('#editTalkBox').modal('hide');
   talk.authors = splitAuthors($('#newTalkAuthor').val());
 
   // TODO: handle affiliations
@@ -716,17 +718,40 @@ function saveTalk() {
 
   var category = $('#newTalkCategory').children(':selected');
   talk.category = category.text();
-  if ($('#paperUrl').val()) {
-    talk.paperUrl = $('#paperUrl').val();
+
+  var paperUrl = $('#paperUrl').val();
+  if (paperUrl) {
+    if (!paperUrl.startsWith("http")) {
+      $('#paperUrlWarning').show();
+      return false;
+    }
+    talk.paperUrl = paperUrl;
   } else {
+    $('#paperUrlWarning').hide();
     if (talk.paperUrl) {
       delete talk.paperUrl;
     }
   }
+
+  var slidesUrl = $('#slidesUrl').val();
+  if (slidesUrl) {
+    if (!slidesUrl.startsWith("http")) {
+      $('#slidesUrlWarning').show();
+      return false;
+    }
+    talk.slidesUrl = slidesUrl;
+  } else {
+    $('#slidesUrlWarning').hide();
+    if (talk.slidesUrl) {
+      delete talk.slidesUrl;
+    }
+  }
+
   if (talkId === "") {
     var categoryIndex = new Number(category.attr('value'));
     progData.config.unassigned_talks[categoryIndex].talks.unshift(talk);
   }
+  $('#editTalkBox').modal('hide');
   refresh();
 }
 
@@ -778,6 +803,9 @@ function deleteTalk() {
 // Populate categories from current config in add talk modal
 function showTalkEditor(id) {
   // Remove all categories in case loop has already been triggered, so you don't get duplicate categories
+  $('#talkTitleWarning').hide();
+  $('#paperUrlWarning').hide();
+  $('#slidesUrlWarning').hide();
   $('#deleteTalkWarning').hide();
   $('#talkDeleteButton').text('Delete talk');
   $('#newTalkCategory').find('option').remove().end()
