@@ -720,7 +720,6 @@ function saveTalk() {
     talk.paperUrl = $('#paperUrl').val();
   } else {
     if (talk.paperUrl) {
-      console.log('deleting paperUrl');
       delete talk.paperUrl;
     }
   }
