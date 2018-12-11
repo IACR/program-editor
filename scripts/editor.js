@@ -700,7 +700,8 @@ function saveTalk() {
   var newTitle = $('#newTalkTitle').val();
   var paperUrl = $('#paperUrl').val();
   var slidesUrl = $('#slidesUrl').val();
-
+  var startTime = $('#currentTalkStartTime').val();
+  var endTime = $('#currentTalkEndTime').val();
   // validating talk title, paper url, and slides url
   if (!newTitle) {
     $('#talkTitleWarning').show();
@@ -734,6 +735,16 @@ function saveTalk() {
     var talk = findObj(talkId, progData);
   }
   talk.title = newTitle;
+  if (startTime) {
+    talk.starttime = startTime;
+  } else if (talk.starttime) {
+    delete talk.starttime;
+  }
+  if (endTime) {
+    talk.endtime = endTime;
+  } else if (talk.endtime) {
+    delete talk.endtime;
+  }
   talk.authors = splitAuthors($('#newTalkAuthor').val());
 
   // TODO: handle affiliations
@@ -835,6 +846,8 @@ function showTalkEditor(id) {
     $('#newTalkAffiliation').val('');
     $('#addTalkTitle').text('Add a new talk');
     $('#paperUrl').val('');
+    $('#currentTalkStartTime').val('');
+    $('#currentTalkEndTime').val('');
   } else {
     $('#talkDeleteButton').show();
     var talkObj = findObj(id, progData);
@@ -843,7 +856,23 @@ function showTalkEditor(id) {
     $('#newTalkAffiliation').val(talkObj.affiliations);
     $('#addTalkTitle').text('Edit a talk');
     $('#paperUrl').val(talkObj.paperUrl);
+    $('#currentTalkStartTime').val(talkObj.starttime);
+    $('#currentTalkEndTime').val(talkObj.endtime);
   }
+  var defaultTime = talkObj.starttime;
+  if (!defaultTime) {
+    defaultTime = '11:30';
+  }
+  $('#talkTimeDiv .time').timepicker({
+    'forceRoundTime': true,
+    'scrollDefault': defaultTime,
+    'show2400': true,
+    'minTime': '00:00',
+    'maxTime': '24:00',
+    'showDuration': false,
+    'step': 5,
+    'timeFormat': 'G:i'
+  });
 }
 
 // Save a category. This may come from an edit on an existing category or a new
@@ -967,6 +996,7 @@ function prepareAddTimeslotToDay(dayIndex) {
   $('#timeslotDiv .time').timepicker({
     'forceRoundTime': true,
     'show2400': true,
+    'scrollDefault': '11:30',
     'minTime': '00:00',
     'maxTime': '24:00',
     'showDuration': false,
@@ -1057,8 +1087,12 @@ function editTimeslot(dayIndex, slotIndex) {
 
   $('#currentStartTime').val(timeslot.starttime);
   $('#currentEndTime').val(timeslot.endtime);
-
+  var defaultTime = timeslot.starttime;
+  if (!defaultTime) {
+    defaultTime = '11:30';
+  }
   $('#timeDiv .time').timepicker({
+    'scrollDefault': defaultTime,
     'forceRoundTime': true,
     'minTime': '6:00',
     'maxTime': '24:00',
