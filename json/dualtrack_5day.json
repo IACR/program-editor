@@ -1,0 +1,659 @@
+{
+  "name": "Dual track, 5 days",
+  "config": {
+    "default_track_locations": [],
+    "default_talk_minutes": 25,
+    "unassigned_talks": [{
+      "name": "Uncategorized",
+      "talks": []
+    }]
+  },
+  "days": [
+    {
+      "date": "2016-08-01",
+      "timeslots": [
+        {
+          "starttime": "17:00",
+          "endtime": "20:00",
+          "sessions": [
+            {
+              "session_title": "Registration",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "17:30",
+          "endtime": "21:30",
+          "sessions": [
+            {
+              "session_title": "Reception",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-02",
+      "timeslots": [
+        {
+          "endtime": "8:45",
+          "starttime": "7:30",
+          "sessions": [
+            {
+              "session_title": "Registration",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "8:55",
+          "starttime": "8:45",
+          "sessions": [
+            {
+              "moderator": "General Chair, (add name)",
+              "session_title": "Opening remarks",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:50",
+          "starttime": "9:00",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:55",
+          "starttime": "9:50",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "endtime": "11:10",
+          "starttime": "9:55",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "11:40",
+          "starttime": "11:10",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "12:40",
+          "starttime": "11:40",
+          "sessions": [
+            {
+              "session_title": "Invited talk or award talks",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:40",
+          "sessions": [
+            {
+              "session_title": "Lunch",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:50",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:55",
+          "starttime": "14:50",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "endtime": "15:45",
+          "starttime": "14:55",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "16:15",
+          "starttime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "17:30",
+          "starttime": "16:15",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "21:00",
+          "starttime": "19:00",
+          "sessions": [
+            {
+              "session_title": "Dinner",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-03",
+      "timeslots": [
+        {
+          "endtime": "9:00",
+          "starttime": "7:30",
+          "sessions": [
+            {
+              "session_title": "Breakfast",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "10:25",
+          "starttime": "9:10",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "10:55",
+          "starttime": "10:25",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "11:45",
+          "starttime": "10:55",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "11:50",
+          "starttime": "11:45",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "endtime": "12:40",
+          "starttime": "11:50",
+          "sessions": [
+            {
+              "session_title": "Invited talk or award talks",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:40",
+          "sessions": [
+            {
+              "session_title": "Lunch",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "18:00",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "session_title": "Free afternoon"
+            }
+          ]
+        },
+        {
+          "endtime": "21:00",
+          "starttime": "18:00",
+          "sessions": [
+            {
+              "session_title": "Dinner Reception",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "19:30",
+          "starttime": "19:00",
+          "sessions": [
+            {
+              "session_title": "IACR Award Ceremony",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "23:00",
+          "starttime": "19:30",
+          "sessions": [
+            {
+              "session_title": "Rump Session",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-04",
+      "timeslots": [
+        {
+          "endtime": "8:50",
+          "starttime": "7:30",
+          "sessions": [
+            {
+              "session_title": "Breakfast",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:40",
+          "starttime": "8:50",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:45",
+          "starttime": "9:40",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "endtime": "11:00",
+          "starttime": "9:45",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "11:30",
+          "starttime": "11:00",
+          "sessions": [
+            {
+              "session_title": "Coffee Break",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "12:30",
+          "starttime": "11:30",
+          "sessions": [
+            {
+              "session_title": "Invited talk or award talks",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:30",
+          "sessions": [
+            {
+              "session_title": "Lunch",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "15:15",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "15:45",
+          "starttime": "15:15",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "16:35",
+          "starttime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "17:45",
+          "starttime": "16:45",
+          "sessions": [
+            {
+              "session_title": "IACR Membership Meeting",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "19:30",
+          "starttime": "18:00",
+          "sessions": [
+            {
+              "session_title": "Banquet",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-05",
+      "timeslots": [
+        {
+          "endtime": "8:50",
+          "starttime": "7:30",
+          "sessions": [
+            {
+              "session_title": "Breakfast",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "10:05",
+          "starttime": "8:50",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "10:30",
+          "starttime": "10:05",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "12:10",
+          "starttime": "10:30",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:10",
+          "sessions": [
+            {
+              "session_title": "Lunch",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
