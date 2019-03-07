@@ -354,7 +354,7 @@ input:invalid {
     to { -webkit-transform: rotate(360deg); }
 }
 
-a.paperUrl {
+a.paperUrl, a.sessionUrl {
     color: #0f0f0f !important;
     visibility:visible;
 }
