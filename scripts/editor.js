@@ -968,6 +968,12 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   $('#currentSessionIndex').val(sessionIndex);
   $('#currentSessionTitle').val(sessionObj.session_title);
 
+  if(sessionObj.session_url) {
+    $('#currentSessionURL').val(sessionObj.session_url);
+  } else {
+    $('#currentSessionURL').val('');
+  }
+
   if (sessionObj.moderator) {
     $('#currentSessionModerator').val(sessionObj.moderator);
   } else {
@@ -1229,6 +1235,13 @@ function saveSession() {
     return;
   }
   sessionObj.session_title = session_title;
+
+  var sessionURL = $('#currentSessionURL').val();
+  if (sessionURL) {
+    sessionObj.session_url = sessionURL;
+  } else {
+    delete sessionObj.session_url;
+  }
 
   var locationName = $('#currentSessionLocation').val();
   if (locationName) {
