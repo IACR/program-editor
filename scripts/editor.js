@@ -968,8 +968,8 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   $('#currentSessionIndex').val(sessionIndex);
   $('#currentSessionTitle').val(sessionObj.session_title);
 
-  if(sessionObj.sessionURL) {
-    $('#currentSessionURL').val(sessionObj.sessionURL);
+  if(sessionObj.session_url) {
+    $('#currentSessionURL').val(sessionObj.session_url);
   } else {
     $('#currentSessionURL').val('');
   }
