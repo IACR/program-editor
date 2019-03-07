@@ -518,8 +518,8 @@ function mergeTalks(data) {
 }
 
 // Show modal for uploading from websubrev.
-function showWebsubrevUpload() {
-  if ($('#uploadTalksMenu').hasClass('disabled')) {
+function showWebsubrevUpload(obeyMenu) {
+  if (obeyMenu && $('#uploadTalksMenu').hasClass('disabled')) {
     return false;
   }
   $('#uploadTalksModal').modal();

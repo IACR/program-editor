@@ -83,7 +83,7 @@
           </a>
           <ul class="dropdown-menu">
             <li id="uploadTalksMenu">
-              <a href="javascript:showWebsubrevUpload()" class="topNavItem">
+              <a href="javascript:showWebsubrevUpload(true)" class="topNavItem">
                 Upload talks
               </a>
             </li>
@@ -240,7 +240,7 @@
             <p>
               Next, upload a JSON file of accepted papers from websubrev.
             </p>
-            <button type="button" name="showUpload" onclick="showWebsubrevUpload()" class="btn btn-sm btn-success">
+            <button type="button" name="showUpload" onclick="showWebsubrevUpload(false)" class="btn btn-sm btn-success">
               Upload websubrev accepted talks
             </button>
             <button type="button" name="skipUpload" onclick="useEmptyTalks()" class="btn btn-sm btn-success">
