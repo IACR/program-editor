@@ -330,11 +330,11 @@ function saveMetadata() {
       theDate.add(1, 'd');
     }
   } else if (changeType === 'add') {
-    if ($('#newStartDate').val() === progData.days[0].date) {
+    if ($('#newStartdate').val() === progData.days[0].date) {
       // then we added a day at the end.
-      progData.days.push({'date': $('#newEndDate').val(), 'timeslots': []});
+      progData.days.push({'date': $('#newEnddate').val(), 'timeslots': []});
     } else {
-      progData.unshift({'date': $('#newStartDate').val(), 'timeslots': []});
+      progData.days.unshift({'date': $('#newStartdate').val(), 'timeslots': []});
     }
   } else if (changeType === 'delete') {
     // If there are any talks in sessions on that day, then we put
