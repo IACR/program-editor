@@ -476,8 +476,11 @@ function splitAuthors(val) {
 }
 
 
-// Merge the data from websubrev into the unassigned_talks
-// data structure. There is no duplicate elimination.
+// Merge the data from websubrev or cryptodb into the unassigned_talks
+// data structure. There is no duplicate elimination.  The formats
+// returned are different and each has its problems.  If websubrev
+// changes to separate affiliations better, we could have affiliations
+// associated to each author.
 function mergeTalks(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
     warningBox('JSON file is not websubrev format.');
