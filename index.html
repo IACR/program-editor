@@ -40,7 +40,7 @@
             </li>
             <li id="editMetadataMenu">
               <a href="javascript:showEditMetadata();" class="topNavItem">
-                Edit
+                Edit dates and name
               </a>
             </li>
             <li id="saveMenu">
@@ -67,7 +67,7 @@
           <ul class="dropdown-menu">
             <li id="downloadMenu">
               <a href="javascript:downloadJSON()" class="topNavItem">
-                Download JSON
+                Download JSON for website
               </a>
             </li>
             <li id="downloadPDFMenu">
@@ -82,9 +82,14 @@
             Import <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
+            <li id="importTalksMenu">
+              <a href="javascript:showImportFSEorCHES(true)" class="topNavItem">
+                Import papers from TCHES or ToSC
+              </a>
+            </li>
             <li id="uploadTalksMenu">
               <a href="javascript:showWebsubrevUpload(true)" class="topNavItem">
-                Upload talks
+                Upload papers in websubrev format
               </a>
             </li>
             <li id="importDOIMenu">
@@ -238,10 +243,15 @@
         <div class="row">
           <section id="uploadTalks" class="col-md-8 col-md-offset-2 form-group">
             <p>
-              Next, upload a JSON file of accepted papers from websubrev.
+              Next, specify the list of accepted papers. This can be an upload from websubrev
+              (a JSON file), or you can import accepted papers from TCHES or ToSC.
+              You can do this later if you like.
             </p>
             <button type="button" name="showUpload" onclick="showWebsubrevUpload(false)" class="btn btn-sm btn-success">
               Upload websubrev accepted talks
+            </button>
+            <button type="button" name="showImport" onclick="showImportFSEorCHES(false)" class="btn btn-sm btn-success">
+              Import from ToSC or TCHES
             </button>
             <button type="button" name="skipUpload" onclick="useEmptyTalks()" class="btn btn-sm btn-success">
               Skip for now
@@ -255,11 +265,15 @@
 
       <main id="parent">
         <div class="row">
-          <section class="col-md-12 instructions">
-            <p>
-              Instructions: Drag talks from the left column to the sessions on the right. Once you have placed all of the talks into sessions, you can export the JSON or html and edit that to suit any other requirements.
-            </p>
-          </section>
+          <div class="col-md-12">
+            <div class="alert alert-info alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p>
+                Instructions: Drag talks from the left column to the sessions on the right. You can edit sessions, talks, timeslots, days, etc. Once you are
+                satisfied with the program, you can export the JSON for the website. Remember that PDF doesn't work well on mobile.
+              </p>
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="col-md-3">
@@ -275,6 +289,11 @@
           <div class="col-md-9">
             <h3 class="text-center editorTitles">
               Schedule
+              <label data-toggle="tooltip" title="Edit dates" data-placement="top" data-trigger="hover" tabindex="0">
+                <button type="button" name="editMetadata" class="btn btn-success" id="addDayBtn" onclick="showEditMetadata()">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+              </label>
             </h3>
           </div>
         </div>
@@ -653,6 +672,48 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Modal for import for FSE or CHES (from cryptodb) -->
+    <aside class="modal fade" id="importTalksModal" role="dialog" aria-labelledby="importTitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="modal-title" id="importTitle">
+              Import talks from ToSC or TCHES.
+            </h2>
+          </div>
+          <div class="modal-body">
+            <p class="help-block">
+              Papers that have already been published by ToSC or TCHES may be imported below. A date range
+              is optional.
+            </p>
+            <label for="uploadTalksSelector">
+              <select class="form-control" id="importSelect">
+                <option value="" selected disabled>Select a journal</option>
+                <option value="tches">Transactions on Crypt. Hardware and Embedded Systems (TCHES)</option>
+                <option value="tosc">Transactions on Symmetric Cryptography (ToSC)</option>
+              </select>
+              Select a date range of publication dates.<br>
+              <label for="importstartdate">
+                <input type="date" id="importstartdate" name="importstartdate" class="form-control" value="">
+                Published after
+              </label>
+              <label for="importenddate">
+                <input type="date" id="importenddate" name="importenddate" class="form-control" value="">
+                Published before
+              </label>
+            </label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" onclick="importFSEorCHES()">Import papers</button>
           </div>
         </div>
       </div>

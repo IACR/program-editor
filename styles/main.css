@@ -140,7 +140,7 @@ a.topNavItem:hover {
   display: none;
 }
 
-#addTalkBtn, .addTimeslot, #addCategoryBtn {
+#addTalkBtn, .addTimeslot, #addCategoryBtn, #addDayBtn {
   width: 35px;
   height: 35px;
   text-align: center;
@@ -170,7 +170,7 @@ div.talk {
 }
 
 #talksList {
-  max-height: 700px;
+    max-height: 80vh;
   overflow-y: auto;
   padding: 5px;
   border: 1px solid lightgrey;
@@ -210,7 +210,7 @@ div.talk:hover {
 
 /*** Schedule Section ***/
 #renderedProgram {
-  max-height: 700px;
+  max-height: 80vh;
   overflow-y: auto;
   border: 1px solid lightgrey;
 }
