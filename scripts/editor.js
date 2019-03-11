@@ -28,7 +28,7 @@ function enableMenus() {
   $('#deleteMenu').removeClass('disabled');
   $('#downloadMenu').removeClass('disabled');
   $('#downloadPDFMenu').removeClass('disabled');
-  $('#importTalksMenu').addClass('disabled');
+  $('#importTalksMenu').removeClass('disabled');
   $('#uploadTalksMenu').removeClass('disabled');
   $('#importDOIMenu').removeClass('disabled');
 }
