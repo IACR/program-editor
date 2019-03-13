@@ -14,6 +14,7 @@ function disableMenus() {
   $('#deleteMenu').addClass('disabled');
   $('#downloadMenu').addClass('disabled');
   $('#downloadPDFMenu').addClass('disabled');
+  $('#importTalksMenu').addClass('disabled');
   $('#uploadTalksMenu').addClass('disabled');
   $('#importDOIMenu').addClass('disabled');
 }
@@ -27,6 +28,7 @@ function enableMenus() {
   $('#deleteMenu').removeClass('disabled');
   $('#downloadMenu').removeClass('disabled');
   $('#downloadPDFMenu').removeClass('disabled');
+  $('#importTalksMenu').removeClass('disabled');
   $('#uploadTalksMenu').removeClass('disabled');
   $('#importDOIMenu').removeClass('disabled');
 }
@@ -98,6 +100,7 @@ function showEditMetadata() {
   document.getElementById('deleteDayOption').selectedIndex = 0;
   $('#editMetadataModal').modal();
   updateNewDates();
+  return true;
 }
 
 function reallyDeleteProgram() {
@@ -385,6 +388,29 @@ function startEditor() {
   enableMenus();
 }
 
+// Note that the format imported from FSE or CHES is different than
+// the websubrev format. In particular, FSE and CHES have author
+// affiliations, author IDs from cryptodb, and additional fields.
+function importFSEorCHES() {
+  var venue = $('#importSelect').val();
+  if (venue === null) {
+    warningBox('A conference must be selected');
+    return false;
+  }
+  console.log('importing from ' + venue);
+  $.getJSON('https://iacr.org/cryptodb/data/export/ajax.php?venue=' + venue, function(data) {
+    if (!mergeTalks(data)) {
+      alert('there was a problem importing this data');
+      return;
+    }
+    $('#importTalksModal').modal('hide');
+    startEditor();
+  })
+  .fail(function(jqxhr, textStatus, error) {
+    warningBox('There was a problem with this data. Unable to recover.');
+  });
+}
+
 // Function to fetch json/accepted_demo.json and use that as
 // accepted talks. This is for demo only.
 function useDemoTalks() {
@@ -450,8 +476,11 @@ function splitAuthors(val) {
 }
 
 
-// Merge the data from websubrev into the unassigned_talks
-// data structure. There is no duplicate elimination.
+// Merge the data from websubrev or cryptodb into the unassigned_talks
+// data structure. There is no duplicate elimination.  The formats
+// returned are different and each has its problems.  If websubrev
+// changes to separate affiliations better, we could have affiliations
+// associated to each author.
 function mergeTalks(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
     warningBox('JSON file is not websubrev format.');
@@ -464,6 +493,7 @@ function mergeTalks(data) {
 
     if (!paper.hasOwnProperty('title') || !paper.hasOwnProperty('authors')) {
       console.log('JSON file has a paper with a missing title or authors');
+      console.dir(paper);
       warningBox('JSON file has a paper with a missing title or authors');
       return false;
     }
@@ -472,7 +502,20 @@ function mergeTalks(data) {
       paper.category = 'Uncategorized';
     }
     paper.id = "talk-" + createUniqueId();
-    paper.authors = splitAuthors(paper.authors);
+    if (Array.isArray(paper.authors)) { // TOSC or TCHES format
+      var authorArray = [];
+      var affiliations = [];
+      paper.authors.forEach(function(a) {
+        authorArray.push(a.publishedasname);
+        if (a.hasOwnProperty('affiliation')) {
+          affiliations.push(a.affiliation);
+        }
+      });
+      paper.authors = authorArray;
+      paper.affiliations = affiliations.join('; ');
+    } else { // websubrev format.
+      paper.authors = splitAuthors(paper.authors);
+    }
   }
 
   // create map from category name to array of talks for that category
@@ -498,7 +541,6 @@ function mergeTalks(data) {
       categoryList.push({'name': name, 'talks': categoryMap[name], 'id': 'category-' + categoryList.length});
     }
   }
-
   categoryList.sort(function(c1, c2) {
     if (c1.name < c2.name) {
       return -1;
@@ -523,6 +565,14 @@ function showWebsubrevUpload(obeyMenu) {
     return false;
   }
   $('#uploadTalksModal').modal();
+}
+
+// Show modal for uploading from websubrev.
+function showImportFSEorCHES(obeyMenu) {
+  if (obeyMenu && $('#importTalksMenu').hasClass('disabled')) {
+    return false;
+  }
+  $('#importTalksModal').modal();
 }
 
 // Style warnings and error message for better visibility to user
@@ -580,6 +630,9 @@ function addDrag() {
 // an object, but if it's an array then we have to call findObj on
 // each element in the array to look for the id.
 function findObj(id, currentNode) {
+  if (currentNode == null) {
+    return false;
+  }
   if (typeof currentNode === "string" || typeof currentNode === "number") {
     return false;
   }
