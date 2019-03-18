@@ -379,3 +379,6 @@ input#shiftDates {
     background-color: #1D707A !important;
     color: #EDF6F7 !important;
 }
+div.volume {
+    font-size: 0.9em;
+}
