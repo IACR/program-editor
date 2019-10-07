@@ -32,7 +32,7 @@ body {
   font-family: 'Raleway', sans-serif;
   background-color: rgba(134, 191, 203, 0.1);
   color: #12323C;
-  font-size: 1.7em;
+  /* font-size: 1.7em; */
 }
 
 h1, h2, h3, h4, h5 {
@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5 {
 
 .editorTitles {
   margin-top: 0px;
-  font-size: 1.7em;
+  /* font-size: 1.7em; */
   font-weight: bold;
 }
 
@@ -56,7 +56,7 @@ nav {
 nav a#navBrand {
   color: #F2F8F9;
   font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 1.4em;
+  /* font-size: 1.4em; */
   margin-bottom: 3px;
   margin-top: -1px;
 }
@@ -154,7 +154,7 @@ a.topNavItem:hover {
 }
 
 .categoryTitle {
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
 }
 
 section.category {
@@ -203,7 +203,7 @@ div.talk:hover {
 .authorList, .authorName {
   font-family: 'Raleway', sans-serif;
   text-align: left;
-  font-size: 0.9em;
+  /* font-size: 0.9em; */
 }
 
 
@@ -243,13 +243,13 @@ div.timeSlotDiv:hover > a {
 }
 
 p.timeSlot {
-  font-size: 0.9em;
+  /* font-size: 0.9em; */
   margin-top: 5px;
 }
 
 .talkTitle {
   font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   font-weight: bold;
   text-align: left;
 }
@@ -266,7 +266,7 @@ p.trackSwitch {
 }
 
 p.mutualEventTalkTitle {
-  font-size: 1.1em;
+  /* font-size: 1.1em; */
   font-weight: bold;
   text-align: center;
 }
@@ -303,7 +303,7 @@ span.authorName:last-of-type:after {
 }
 
 #newAuthorHelp, #newAffiliationHelp {
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
 }
 
 
@@ -380,5 +380,5 @@ input#shiftDates {
     color: #EDF6F7 !important;
 }
 div.volume {
-    font-size: 0.9em;
+    /* font-size: 0.9em; */
 }
