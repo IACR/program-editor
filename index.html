@@ -6,8 +6,8 @@
     <title>Program Editor</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/libs/css/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-   <link href="/libs/css/bootstrap/bootstrap-3.3.7-dist/flatly/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="/libs/css/bootstrap/dist/css/bootstrap.min.css" /> -->
+   <link href="styles/bootstrap.flatly.css" rel="stylesheet" />
 
     <!-- jQuery daterangepicker, jQuery timepicker, & Dragula -->
     <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css" rel="stylesheet" />
@@ -20,111 +20,91 @@
     <link href="/libs/fonts/open-sans-condensed.css" rel="stylesheet"/>
   </head>
   <body>
-    <nav class="navbar navbar-default" id="topNav" role="navigation">
-      <div class="navbar-header">
-        <a href="./" class="navbar-brand" id="navBrand">Program Creator</a>
-      </div>
-      <ul class="nav nav-pills navbar-right" id="topNavList">
-        <li>
-          <span class="topNavItem" id="save_status"></span>
+    <nav class="navbar navbar-expand navbar-custom" id="topNav" role="navigation">
+      <span class="navbar-brand" id="navBrand">Program Creator</span>
+      <ul class="navbar-nav ml-auto" id="topNavList">
+        <li class="nav-item">
+          <span class="navbar-text" id="save_status"></span>
         </li>
-        <li role="presentation" class="dropdown">
-          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            File <span class="caret"></span>
+        <li role="button" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="fileDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            File
           </a>
-          <ul class="dropdown-menu">
-            <li id="openMenu">
-              <a onclick="javascript:location.reload()" class="topNavItem">
-                Open
-              </a>
-            </li>
-            <li id="editMetadataMenu">
-              <a onclick="showEditMetadata();" class="topNavItem">
-                Edit dates and name
-              </a>
-            </li>
-            <li id="saveMenu">
-              <a onclick="saveProgram();" class="topNavItem">
-                Save
-              </a>
-            </li>
-            <li id="saveAsMenu">
-              <a onclick="saveAs();" class="topNavItem">
-                Save a copy...
-              </a>
-            </li>
-            <li id="deleteMenu">
-              <a onclick="showDeleteProgram();" class="topNavItem">
-                Delete from server
-              </a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="fileDD">
+            <a id="openMenu" onclick="javascript:location.reload()" class="dropdown-item">
+              Open
+            </a>
+            <a id="editMetadataMenu" onclick="showEditMetadata();" class="dropdown-item">
+              Edit dates and name
+            </a>
+            <a id="saveMenu" onclick="saveProgram();" class="dropdown-item">
+              Save
+            </a>
+            <a id="saveAsMenu" onclick="saveAs();" class="dropdown-item">
+              Save a copy...
+            </a>
+            <a id="deleteMenu" onclick="showDeleteProgram();" class="dropdown-item">
+              Delete from server
+            </a>
+          </div>
         </li>
-        <li role="presentation" class="dropdown">
-          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Download <span class="caret"></span>
+        <li role="button" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="downloadDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Download
           </a>
-          <ul class="dropdown-menu">
-            <li id="downloadMenu">
-              <a onclick="downloadJSON()" class="topNavItem">
-                Download JSON for website
-              </a>
-            </li>
-            <li id="downloadPDFMenu">
-              <a onclick="showPDFDownload()" class="topNavItem">
-                Download PDF for printing
-              </a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="downloadDD">
+            <a id="downloadMenu" onclick="downloadJSON()" class="dropdown-item">
+              Download JSON for website
+            </a>
+            <a id="downloadPDFMenu" onclick="showPDFDownload()" class="dropdown-item">
+              Download PDF for printing
+            </a>
+          </div>
         </li>
-        <li role="presentation" class="dropdown">
-          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Import <span class="caret"></span>
+        <li role="button" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="importDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Import
           </a>
-          <ul class="dropdown-menu">
-            <li id="importTalksMenu">
-              <a onclick="showImportFSEorCHES(true)" class="topNavItem">
-                Import papers from TCHES or ToSC
-              </a>
-            </li>
-            <li id="uploadTalksMenu">
-              <a onclick="showWebsubrevUpload(true)" class="topNavItem">
-                Upload papers in websubrev format
-              </a>
-            </li>
-            <li id="importDOIMenu">
-              <a onclick="startImportDOIs()" class="topNavItem">
-                Import paper URLs
-              </a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="importDD">
+            <a id="importTalksMenu" onclick="showImportFSEorCHES(true)" class="dropdown-item">
+              Import papers from TCHES or ToSC
+            </a>
+            <a id="uploadTalksMenu" onclick="showWebsubrevUpload(true)" class="dropdown-item">
+              Upload papers in websubrev format
+            </a>
+            <a id="importDOIMenu" onclick="startImportDOIs()" class="dropdown-item">
+              Import paper URLs
+            </a>
+          </div>
         </li>
-        <li>
-          <a target="_help" href="docs/help.html" class="topNavItem">
+        <li class="nav-item">
+          <a target="_help" href="docs/help.html" class="nav-link">
             Help
           </a>
         </li>
-        <li>
-          <a target="_help" href="https://github.com/kaymckelly/program-editor" class="topNavItem">
+        <li class="nav-item">
+          <a target="_help" href="https://github.com/kaymckelly/program-editor" class="nav-link">
             About
           </a>
         </li>
-        <li role="presentation" class="dropdown">
-          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <span class="caret"></span>
+        <li role="button" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="loginDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            user icon
+            <!-- TODO -->
+            <!-- <span class="glyphicon glyphicon-user" aria-hidden="true"></span> -->
           </a>
-          <ul class="dropdown-menu">
-            <li><span class="dropdownText" id="login_status">Login status unknown</span></li>
-            <li id="loginMenu">
-              <a onClick="$('#authModal').modal();this.blur()" class="topNavItem">
-                Log in
-              </a>
-            </li>
-            <li id="logoutMenu">
-              <a onclick="doLogout()" class="topNavItem">Log out</a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="loginDD">
+            <!-- TODO: styling fix -->
+            <span class="dropdown-item navbar-text" id="login_status">
+              Login status unknown
+            </span>
+            <a id="loginMenu" onClick="$('#authModal').modal();this.blur()" class="dropdown-item">
+              Log in
+            </a>
+            <a id="logoutMenu" onclick="doLogout()" class="dropdown-item">
+              Log out
+            </a>
+          </div>
         </li>
       </ul>
     </nav>
@@ -145,7 +125,7 @@
         <div class="row" id="auth-button">
           <div class="col-md-8">
             <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#authModal">
-              Log in for this app.
+              Log in for this app
             </button>
           </div>
         </div>
@@ -452,9 +432,9 @@
     </div>
 
     <!-- Bootstrap scripts -->
-    <script src="/libs/js/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/libs/js/jquery/3.3.1/jquery.min.js"></script>
     <noscript><h1>This tool will not work without javascript.</h1></noscript>
-    <script src="/libs/css/bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/libs/css/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Handlebars templates -->
     <script src="/libs/js/handlebars/handlebars-v4.1.0.js" type="text/javascript"></script>

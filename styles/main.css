@@ -32,7 +32,7 @@ body {
   font-family: 'Raleway', sans-serif;
   background-color: rgba(134, 191, 203, 0.1);
   color: #12323C;
-  font-size: 1.7em;
+  /* font-size: 1.7em; */
 }
 
 h1, h2, h3, h4, h5 {
@@ -41,32 +41,42 @@ h1, h2, h3, h4, h5 {
 
 .editorTitles {
   margin-top: 0px;
-  font-size: 1.7em;
+  /* font-size: 1.7em; */
   font-weight: bold;
 }
 
 
+
 /*** Nav Styling ***/
-nav {
-  padding-right: 14px;
-  background-color: #1D707A !important;
-  border-radius: 0 !important;
+/* NOTE: this is all you'll ever need to style if you want to change the navbar. */
+.navbar-custom {
+  background-color: #1D707A;
 }
 
-nav a#navBrand {
+/* brand */
+.navbar-custom .navbar-brand {
   color: #F2F8F9;
   font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 1.4em;
-  margin-bottom: 3px;
-  margin-top: -1px;
+  font-size: 1.7em;
 }
 
-ul#topNavList {
-  padding-top: 8px;
+/* text color */
+.navbar-custom .navbar-text {
+  color: purple;
 }
 
+/* link color */
+.navbar-custom .navbar-nav .nav-link {
+  color: #F2F8F9;
+}
 
-a.navDropdown {
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link, .navbar-custom .nav-item:focus .nav-link, .navbar-custom .nav-item:hover .nav-link {
+  color: #ffffff;
+}
+/* END here's all the navbar styling */
+
+/* a.navDropdown {
   color: #F2F8F9 !important;
   background-color: inherit !important;
 }
@@ -75,11 +85,11 @@ a.navDropdown:hover {
   background-color: rgba(24, 188, 156, 0.6) !important;
 }
 
-ul.dropdown-menu {
+div.dropdown-menu {
   background-color: #1D707A;
 }
 
-ul.dropdown-menu li a.topNavItem, span.topNavItem {
+div.dropdown-menu li a.topNavItem, span.topNavItem {
   color: #F2F8F9;
 }
 
@@ -101,7 +111,7 @@ a.topNavItem, span.topNavItem {
 
 a.topNavItem:hover {
   background-color: rgba(24, 188, 156, 0.6) !important;
-}
+} */
 
 
 /*** Setup Section ***/
@@ -154,7 +164,7 @@ a.topNavItem:hover {
 }
 
 .categoryTitle {
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
 }
 
 section.category {
@@ -203,7 +213,7 @@ div.talk:hover {
 .authorList, .authorName {
   font-family: 'Raleway', sans-serif;
   text-align: left;
-  font-size: 0.9em;
+  /* font-size: 0.9em; */
 }
 
 
@@ -243,13 +253,13 @@ div.timeSlotDiv:hover > a {
 }
 
 p.timeSlot {
-  font-size: 0.9em;
+  /* font-size: 0.9em; */
   margin-top: 5px;
 }
 
 .talkTitle {
   font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   font-weight: bold;
   text-align: left;
 }
@@ -266,7 +276,7 @@ p.trackSwitch {
 }
 
 p.mutualEventTalkTitle {
-  font-size: 1.1em;
+  /* font-size: 1.1em; */
   font-weight: bold;
   text-align: center;
 }
@@ -303,25 +313,12 @@ span.authorName:last-of-type:after {
 }
 
 #newAuthorHelp, #newAffiliationHelp {
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
 }
 
 
 
-/*** Top right menu ***/
-a.dropdown-toggle {
-    color: #202020;
-    background-color: rgba(24, 188, 156, 0.4);
-    margin-right: 10px;
-}
-
-div.top-row-expanded {
-    margin-bottom: 20px;
-}
-
-div.menu-lowered {
-    margin-top: 40px;
-}
+/*** mystery category ***/
 .talk a {
     visibility: hidden;
 }
@@ -380,5 +377,5 @@ input#shiftDates {
     color: #EDF6F7 !important;
 }
 div.volume {
-    font-size: 0.9em;
+    /* font-size: 0.9em; */
 }
