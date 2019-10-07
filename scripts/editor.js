@@ -100,7 +100,6 @@ function showEditMetadata() {
   document.getElementById('deleteDayOption').selectedIndex = 0;
   $('#editMetadataModal').modal();
   updateNewDates();
-  return true;
 }
 
 function reallyDeleteProgram() {
@@ -142,8 +141,11 @@ function saveAs() {
   if (progData.hasOwnProperty('database_id')) {
     delete progData.database_id;
   }
-  progData.name = 'Copy of ' + progData.name;
-  saveProgram();
+  var newName = prompt("Enter a name for new copy", "Copy of " + progData.name);
+  if (newName !== null) {
+    progData.name = newName;
+    saveProgram();
+  }
 }
 
 function currentTime() {
@@ -892,6 +894,7 @@ function showTalkEditor(id) {
   }
   $('#talkId').val(id);
 
+  var defaultTime = '11:30';
   if (id === "") { // then we're adding a new talk.
     $('#talkDeleteButton').hide();
     $('#newTalkTitle').val('');
@@ -904,17 +907,24 @@ function showTalkEditor(id) {
   } else {
     $('#talkDeleteButton').show();
     var talkObj = findObj(id, progData);
+    if (talkObj.starttime) {
+      defaultTime = talkObj.starttime;
+    }
     $('#newTalkTitle').val(talkObj.title);
     $('#newTalkAuthor').val(talkObj.authors.join(' and '))
     $('#newTalkAffiliation').val(talkObj.affiliations);
     $('#addTalkTitle').text('Edit a talk');
     $('#paperUrl').val(talkObj.paperUrl);
-    $('#currentTalkStartTime').val(talkObj.starttime);
-    $('#currentTalkEndTime').val(talkObj.endtime);
-  }
-  var defaultTime = talkObj.starttime;
-  if (!defaultTime) {
-    defaultTime = '11:30';
+    if (talkObj.starttime) {
+      $('#currentTalkStartTime').val(talkObj.starttime);
+    } else {
+      $('#currentTalkStartTime').val('');
+    }
+    if (talkObj.endtime) {
+      $('#currentTalkEndTime').val(talkObj.endtime);
+    } else {
+      $('#currentTalkEndTime').val('');
+    }
   }
   $('#talkTimeDiv .time').timepicker({
     'forceRoundTime': true,
@@ -926,6 +936,7 @@ function showTalkEditor(id) {
     'step': 5,
     'timeFormat': 'G:i'
   });
+  $('#editTalkBox').modal();
 }
 
 // Save a category. This may come from an edit on an existing category or a new
@@ -972,6 +983,7 @@ function showCategoryEditor(id) {
     var categoryObj = findObj(id, progData);
     $('#newCategoryName').val(categoryObj.name);
   }
+  $('#editCategoryBox').modal();
 }
 
 function deleteCategory() {
@@ -1040,6 +1052,7 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   }
 
   $('#allowTalks').prop('checked', sessionObj.hasOwnProperty('talks'));
+  $('#editSessionBox').modal();
 }
 
 // Function to add a timeslot to a day. This will be called to populate
@@ -1064,6 +1077,7 @@ function prepareAddTimeslotToDay(dayIndex) {
   });
   var getTimeDiv = document.getElementById('timeslotDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
+  $('#addTimeslot').modal();
 }
 
 // Simple utility function to convert HH:MM to just minutes. In other
@@ -1163,6 +1177,7 @@ function editTimeslot(dayIndex, slotIndex) {
 
   var getTimeDiv = document.getElementById('timeDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
+  $('#editTimeslot').modal();
 }
 
 // Sort the timeslots by starttime. This is called when a new timeslot
