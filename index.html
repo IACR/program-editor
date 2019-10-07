@@ -20,14 +20,14 @@
     <link href="/libs/fonts/open-sans-condensed.css" rel="stylesheet"/>
   </head>
   <body>
-    <nav class="navbar navbar-expand" id="topNav" role="navigation">
+    <nav class="navbar navbar-expand navbar-custom" id="topNav" role="navigation">
       <span class="navbar-brand" id="navBrand">Program Creator</span>
-      <ul class="navbar-nav" id="topNavList">
+      <ul class="navbar-nav ml-auto" id="topNavList">
         <li class="nav-item">
-          <span class="topNavItem" id="save_status"></span>
+          <span class="navbar-text" id="save_status"></span>
         </li>
         <li role="button" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle navDropdown" href="#" id="fileDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="fileDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             File
           </a>
           <div class="dropdown-menu" aria-labelledby="fileDD">
@@ -48,71 +48,63 @@
             </a>
           </div>
         </li>
-        <li role="button" class="dropdown">
-          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Download <span class="caret"></span>
+        <li role="button" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="downloadDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Download
           </a>
-          <ul class="dropdown-menu">
-            <li id="downloadMenu">
-              <a onclick="downloadJSON()" class="topNavItem">
-                Download JSON for website
-              </a>
-            </li>
-            <li id="downloadPDFMenu">
-              <a onclick="showPDFDownload()" class="topNavItem">
-                Download PDF for printing
-              </a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="downloadDD">
+            <a id="downloadMenu" onclick="downloadJSON()" class="dropdown-item">
+              Download JSON for website
+            </a>
+            <a id="downloadPDFMenu" onclick="showPDFDownload()" class="dropdown-item">
+              Download PDF for printing
+            </a>
+          </div>
         </li>
-        <li role="button" class="dropdown">
-          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Import <span class="caret"></span>
+        <li role="button" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="importDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Import
           </a>
-          <ul class="dropdown-menu">
-            <li id="importTalksMenu">
-              <a onclick="showImportFSEorCHES(true)" class="topNavItem">
-                Import papers from TCHES or ToSC
-              </a>
-            </li>
-            <li id="uploadTalksMenu">
-              <a onclick="showWebsubrevUpload(true)" class="topNavItem">
-                Upload papers in websubrev format
-              </a>
-            </li>
-            <li id="importDOIMenu">
-              <a onclick="startImportDOIs()" class="topNavItem">
-                Import paper URLs
-              </a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="importDD">
+            <a id="importTalksMenu" onclick="showImportFSEorCHES(true)" class="dropdown-item">
+              Import papers from TCHES or ToSC
+            </a>
+            <a id="uploadTalksMenu" onclick="showWebsubrevUpload(true)" class="dropdown-item">
+              Upload papers in websubrev format
+            </a>
+            <a id="importDOIMenu" onclick="startImportDOIs()" class="dropdown-item">
+              Import paper URLs
+            </a>
+          </div>
         </li>
-        <li>
-          <a target="_help" href="docs/help.html" class="topNavItem">
+        <li class="nav-item">
+          <a target="_help" href="docs/help.html" class="nav-link">
             Help
           </a>
         </li>
-        <li>
-          <a target="_help" href="https://github.com/kaymckelly/program-editor" class="topNavItem">
+        <li class="nav-item">
+          <a target="_help" href="https://github.com/kaymckelly/program-editor" class="nav-link">
             About
           </a>
         </li>
-        <li role="button" class="dropdown">
-          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <span class="caret"></span>
+        <li role="button" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="loginDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            user icon
+            <!-- TODO -->
+            <!-- <span class="glyphicon glyphicon-user" aria-hidden="true"></span> -->
           </a>
-          <ul class="dropdown-menu">
-            <li><span class="dropdownText" id="login_status">Login status unknown</span></li>
-            <li id="loginMenu">
-              <a onClick="$('#authModal').modal();this.blur()" class="topNavItem">
-                Log in
-              </a>
-            </li>
-            <li id="logoutMenu">
-              <a onclick="doLogout()" class="topNavItem">Log out</a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="loginDD">
+            <!-- TODO: styling fix -->
+            <span class="dropdown-item navbar-text" id="login_status">
+              Login status unknown
+            </span>
+            <a id="loginMenu" onClick="$('#authModal').modal();this.blur()" class="dropdown-item">
+              Log in
+            </a>
+            <a id="logoutMenu" onclick="doLogout()" class="dropdown-item">
+              Log out
+            </a>
+          </div>
         </li>
       </ul>
     </nav>
