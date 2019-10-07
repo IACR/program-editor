@@ -280,7 +280,7 @@
             <h3 class="text-center editorTitles">
               Unscheduled Talks
               <label data-toggle="tooltip" title="Add a talk" data-placement="top" data-trigger="hover" tabindex="0">
-                <button type="button" name="addTalk" class="btn btn-success" id="addTalkBtn" data-toggle="modal" data-target="#editTalkBox" onclick="showTalkEditor('')">
+                <button type="button" name="addTalk" class="btn btn-success" id="addTalkBtn" onclick="showTalkEditor('')">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
               </label>
@@ -348,7 +348,7 @@
           </script>
           </section>
           <label data-toggle="tooltip" title="Add a Category. These are not used in the program itself." data-placement="top" data-trigger="hover" tabindex="0" z-index="2" id="newCategoryButton">
-            <button type="button" name="addCategory" class="btn btn-success pull-right" id="addCategoryBtn" data-toggle="modal" data-target="#editCategoryBox" onclick="showCategoryEditor('')">
+            <button type="button" name="addCategory" class="btn btn-success pull-right" id="addCategoryBtn" onclick="showCategoryEditor('')">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
           </label>
@@ -362,7 +362,7 @@
                   <hr />
                   <h3 class="pageSubtitle">
                     {{formatDate date}} <label data-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover" tabindex="0">
-                      <button type="button" name="addTimeslot" class="addTimeslot btn btn-success" data-toggle="modal" data-target="#addTimeslot" onclick="prepareAddTimeslotToDay({{@index}})">
+                      <button type="button" name="addTimeslot" class="addTimeslot btn btn-success" onclick="prepareAddTimeslotToDay({{@index}})">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                       </button>
                     </label>

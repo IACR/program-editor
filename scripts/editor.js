@@ -100,7 +100,6 @@ function showEditMetadata() {
   document.getElementById('deleteDayOption').selectedIndex = 0;
   $('#editMetadataModal').modal();
   updateNewDates();
-  return true;
 }
 
 function reallyDeleteProgram() {
@@ -909,6 +908,10 @@ function showTalkEditor(id) {
     $('#talkDeleteButton').show();
     var talkObj = findObj(id, progData);
     defaultTime = talkObj.starttime;
+/* This was a conflict.
+    if (talkObj.starttime) {
+      defaultTime = talkObj.starttime;
+    }*/
     $('#newTalkTitle').val(talkObj.title);
     $('#newTalkAuthor').val(talkObj.authors.join(' and '))
     $('#newTalkAffiliation').val(talkObj.affiliations);
@@ -916,6 +919,18 @@ function showTalkEditor(id) {
     $('#paperUrl').val(talkObj.paperUrl);
     $('#currentTalkStartTime').val(talkObj.starttime);
     $('#currentTalkEndTime').val(talkObj.endtime);
+/* This was a conflict
+    if (talkObj.starttime) {
+      $('#currentTalkStartTime').val(talkObj.starttime);
+    } else {
+      $('#currentTalkStartTime').val('');
+    }
+    if (talkObj.endtime) {
+      $('#currentTalkEndTime').val(talkObj.endtime);
+    } else {
+      $('#currentTalkEndTime').val('');
+    }
+*/
   }
   $('#talkTimeDiv .time').timepicker({
     'forceRoundTime': true,
@@ -927,6 +942,7 @@ function showTalkEditor(id) {
     'step': 5,
     'timeFormat': 'G:i'
   });
+  $('#editTalkBox').modal();
 }
 
 // Save a category. This may come from an edit on an existing category or a new
@@ -973,6 +989,7 @@ function showCategoryEditor(id) {
     var categoryObj = findObj(id, progData);
     $('#newCategoryName').val(categoryObj.name);
   }
+  $('#editCategoryBox').modal();
 }
 
 function deleteCategory() {
@@ -1041,6 +1058,7 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   }
 
   $('#allowTalks').prop('checked', sessionObj.hasOwnProperty('talks'));
+  $('#editSessionBox').modal();
 }
 
 // Function to add a timeslot to a day. This will be called to populate
@@ -1065,6 +1083,7 @@ function prepareAddTimeslotToDay(dayIndex) {
   });
   var getTimeDiv = document.getElementById('timeslotDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
+  $('#addTimeslot').modal();
 }
 
 // Simple utility function to convert HH:MM to just minutes. In other
