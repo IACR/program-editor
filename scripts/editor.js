@@ -907,11 +907,9 @@ function showTalkEditor(id) {
   } else {
     $('#talkDeleteButton').show();
     var talkObj = findObj(id, progData);
-    defaultTime = talkObj.starttime;
-/* This was a conflict.
     if (talkObj.starttime) {
       defaultTime = talkObj.starttime;
-    }*/
+    }
     $('#newTalkTitle').val(talkObj.title);
     $('#newTalkAuthor').val(talkObj.authors.join(' and '))
     $('#newTalkAffiliation').val(talkObj.affiliations);
@@ -919,7 +917,6 @@ function showTalkEditor(id) {
     $('#paperUrl').val(talkObj.paperUrl);
     $('#currentTalkStartTime').val(talkObj.starttime);
     $('#currentTalkEndTime').val(talkObj.endtime);
-/* This was a conflict
     if (talkObj.starttime) {
       $('#currentTalkStartTime').val(talkObj.starttime);
     } else {
@@ -930,7 +927,6 @@ function showTalkEditor(id) {
     } else {
       $('#currentTalkEndTime').val('');
     }
-*/
   }
   $('#talkTimeDiv .time').timepicker({
     'forceRoundTime': true,
