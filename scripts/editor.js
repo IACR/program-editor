@@ -915,6 +915,8 @@ function showTalkEditor(id) {
     $('#newTalkAffiliation').val(talkObj.affiliations);
     $('#addTalkTitle').text('Edit a talk');
     $('#paperUrl').val(talkObj.paperUrl);
+    $('#currentTalkStartTime').val(talkObj.starttime);
+    $('#currentTalkEndTime').val(talkObj.endtime);
     if (talkObj.starttime) {
       $('#currentTalkStartTime').val(talkObj.starttime);
     } else {
