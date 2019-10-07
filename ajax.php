@@ -277,12 +277,24 @@ function isLoggedIn() {
   return isset($_SESSION['username']);
 }
 
+header('Content-Type: application/json');
+if (isset($_GET['id']) && isset($_GET['iacrref'])) {
+  try {
+    $pdo = new PDO('mysql:host=localhost;dbname=programs;charset=utf8', 'program_editor', $dbpassword);
+    doGetRow($pdo, $_GET['id']);
+    $pdo = null;
+    return;
+  } catch (PDOException $e) {
+    sendError('Unable to execute');
+    return;
+  }
+}
+
 // The rest of the code is executed for each request. We first check
 // if the user is trying to login and execute that. Next we
 // check if the user is already logged in. If so, then we check
 // if it's a POST or a GET, and route to the appropriate function.
 
-header('Content-Type: application/json');
 if ($_POST && isset($_POST['iacrref']) && isset($_POST['password'])) {
  doLogin($_POST['iacrref'], $_POST['password']);
  return;
