@@ -48,25 +48,16 @@ h1, h2, h3, h4, h5 {
 
 /*** Nav Styling ***/
 nav {
-  padding-right: 14px;
   background-color: #1D707A !important;
-  border-radius: 0 !important;
 }
 
-nav a#navBrand {
+nav span#navBrand {
   color: #F2F8F9;
   font-family: 'Open Sans Condensed', sans-serif;
-  /* font-size: 1.4em; */
-  margin-bottom: 3px;
-  margin-top: -1px;
+  font-size: 1.7em;
 }
 
-ul#topNavList {
-  padding-top: 8px;
-}
-
-
-a.navDropdown {
+/* a.navDropdown {
   color: #F2F8F9 !important;
   background-color: inherit !important;
 }
@@ -75,11 +66,11 @@ a.navDropdown:hover {
   background-color: rgba(24, 188, 156, 0.6) !important;
 }
 
-ul.dropdown-menu {
+div.dropdown-menu {
   background-color: #1D707A;
 }
 
-ul.dropdown-menu li a.topNavItem, span.topNavItem {
+div.dropdown-menu li a.topNavItem, span.topNavItem {
   color: #F2F8F9;
 }
 
@@ -101,7 +92,7 @@ a.topNavItem, span.topNavItem {
 
 a.topNavItem:hover {
   background-color: rgba(24, 188, 156, 0.6) !important;
-}
+} */
 
 
 /*** Setup Section ***/

@@ -20,47 +20,35 @@
     <link href="/libs/fonts/open-sans-condensed.css" rel="stylesheet"/>
   </head>
   <body>
-    <nav class="navbar" id="topNav" role="navigation">
-      <div class="navbar-header">
-        <a href="./" class="navbar-brand" id="navBrand">Program Creator</a>
-      </div>
-      <ul class="nav nav-pills navbar-right" id="topNavList">
-        <li>
+    <nav class="navbar navbar-expand" id="topNav" role="navigation">
+      <span class="navbar-brand" id="navBrand">Program Creator</span>
+      <ul class="navbar-nav" id="topNavList">
+        <li class="nav-item">
           <span class="topNavItem" id="save_status"></span>
         </li>
-        <li role="presentation" class="dropdown">
-          <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            File <span class="caret"></span>
+        <li role="button" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle navDropdown" href="#" id="fileDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            File
           </a>
-          <ul class="dropdown-menu">
-            <li id="openMenu">
-              <a onclick="javascript:location.reload()" class="topNavItem">
-                Open
-              </a>
-            </li>
-            <li id="editMetadataMenu">
-              <a onclick="showEditMetadata();" class="topNavItem">
-                Edit dates and name
-              </a>
-            </li>
-            <li id="saveMenu">
-              <a onclick="saveProgram();" class="topNavItem">
-                Save
-              </a>
-            </li>
-            <li id="saveAsMenu">
-              <a onclick="saveAs();" class="topNavItem">
-                Save a copy...
-              </a>
-            </li>
-            <li id="deleteMenu">
-              <a onclick="showDeleteProgram();" class="topNavItem">
-                Delete from server
-              </a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="fileDD">
+            <a id="openMenu" onclick="javascript:location.reload()" class="dropdown-item">
+              Open
+            </a>
+            <a id="editMetadataMenu" onclick="showEditMetadata();" class="dropdown-item">
+              Edit dates and name
+            </a>
+            <a id="saveMenu" onclick="saveProgram();" class="dropdown-item">
+              Save
+            </a>
+            <a id="saveAsMenu" onclick="saveAs();" class="dropdown-item">
+              Save a copy...
+            </a>
+            <a id="deleteMenu" onclick="showDeleteProgram();" class="dropdown-item">
+              Delete from server
+            </a>
+          </div>
         </li>
-        <li role="presentation" class="dropdown">
+        <li role="button" class="dropdown">
           <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             Download <span class="caret"></span>
           </a>
@@ -77,7 +65,7 @@
             </li>
           </ul>
         </li>
-        <li role="presentation" class="dropdown">
+        <li role="button" class="dropdown">
           <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             Import <span class="caret"></span>
           </a>
@@ -109,7 +97,7 @@
             About
           </a>
         </li>
-        <li role="presentation" class="dropdown">
+        <li role="button" class="dropdown">
           <a href="#" class="dropdown-toggle navDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             <span class="caret"></span>
