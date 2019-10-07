@@ -142,8 +142,11 @@ function saveAs() {
   if (progData.hasOwnProperty('database_id')) {
     delete progData.database_id;
   }
-  progData.name = 'Copy of ' + progData.name;
-  saveProgram();
+  var newName = prompt("Enter a name for new copy", "Copy of " + progData.name);
+  if (newName !== null) {
+    progData.name = newName;
+    saveProgram();
+  }
 }
 
 function currentTime() {
@@ -892,6 +895,7 @@ function showTalkEditor(id) {
   }
   $('#talkId').val(id);
 
+  var defaultTime = '11:30';
   if (id === "") { // then we're adding a new talk.
     $('#talkDeleteButton').hide();
     $('#newTalkTitle').val('');
@@ -904,6 +908,7 @@ function showTalkEditor(id) {
   } else {
     $('#talkDeleteButton').show();
     var talkObj = findObj(id, progData);
+    defaultTime = talkObj.starttime;
     $('#newTalkTitle').val(talkObj.title);
     $('#newTalkAuthor').val(talkObj.authors.join(' and '))
     $('#newTalkAffiliation').val(talkObj.affiliations);
@@ -911,10 +916,6 @@ function showTalkEditor(id) {
     $('#paperUrl').val(talkObj.paperUrl);
     $('#currentTalkStartTime').val(talkObj.starttime);
     $('#currentTalkEndTime').val(talkObj.endtime);
-  }
-  var defaultTime = talkObj.starttime;
-  if (!defaultTime) {
-    defaultTime = '11:30';
   }
   $('#talkTimeDiv .time').timepicker({
     'forceRoundTime': true,
@@ -1163,6 +1164,7 @@ function editTimeslot(dayIndex, slotIndex) {
 
   var getTimeDiv = document.getElementById('timeDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
+  $('#editTimeslot').modal();
 }
 
 // Sort the timeslots by starttime. This is called when a new timeslot
