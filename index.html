@@ -27,10 +27,12 @@
           <span class="navbar-text" id="save_status"></span>
         </li>
         <li role="button" class="nav-item dropdown">
+          <!-- NOTE/TODO: turns out dropdowns don't have to be anchors (as they did in Bootstrap 3.3); they can be buttons. which I tested and works beautifully with added .btn -->
+          <!-- BUG: once clicked, the dropdown menus cannot be opened again. unclear as to cause. a secondary bug is that they should work on hover rather than click, as they do on the running version -->
           <a class="nav-link dropdown-toggle" href="#" id="fileDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             File
           </a>
-          <div class="dropdown-menu" aria-labelledby="fileDD">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="fileDD">
             <a id="openMenu" onclick="javascript:location.reload()" class="dropdown-item">
               Open
             </a>
@@ -52,7 +54,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="downloadDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Download
           </a>
-          <div class="dropdown-menu" aria-labelledby="downloadDD">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="downloadDD">
             <a id="downloadMenu" onclick="downloadJSON()" class="dropdown-item">
               Download JSON for website
             </a>
@@ -65,7 +67,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="importDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Import
           </a>
-          <div class="dropdown-menu" aria-labelledby="importDD">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="importDD">
             <a id="importTalksMenu" onclick="showImportFSEorCHES(true)" class="dropdown-item">
               Import papers from TCHES or ToSC
             </a>
@@ -93,7 +95,7 @@
             <!-- TODO -->
             <!-- <span class="glyphicon glyphicon-user" aria-hidden="true"></span> -->
           </a>
-          <div class="dropdown-menu" aria-labelledby="loginDD">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="loginDD">
             <!-- TODO: styling fix -->
             <span class="dropdown-item navbar-text" id="login_status">
               Login status unknown
