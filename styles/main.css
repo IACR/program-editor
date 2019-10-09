@@ -137,14 +137,35 @@ div.dropdown-menu {
   display: none;
 }
 
-#addTalkBtn, .addTimeslot, #addCategoryBtn, #addDayBtn {
+/*** Plus button ***/
+span.addicon {
+  display:inline-block;
   width: 35px;
   height: 35px;
-  text-align: center;
   padding: 2px 1px;
-  border-radius: 30px;
+  border-radius: 50%;
   margin: 5px;
 }
+/* TODO fix the hover to something palatable. */
+span.addicon:hover {
+    filter: saturate(100) brightness(.6);
+}
+
+span.svgicon {
+    display: inline-block;
+    height:1.5em;
+    width:1.5em;
+    margin:0;
+    padding:0;
+}
+span.talkIcons {
+    display: inline-block;
+    height:1em;
+    width:1em;
+    margin:0;
+    padding:0;
+}
+
 
 #newCategoryButton {
     float: right; !important;
