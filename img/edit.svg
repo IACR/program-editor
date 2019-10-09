@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect height="100" width="100" fill="none"/>
+  <path fill="#1D707A" stroke="none" d="M10 90 v -15 l 50 -50 l 15 15 l -50 50z"/>
+  <path fill="#1D707A" stroke="none"
+        d="M65 20 l 10 -10
+           a 2 2 -90 0 1  2 0
+           l 13 13
+           a 2 2 90 0 1 0 2
+           l -10 10z"/>
+</svg>
