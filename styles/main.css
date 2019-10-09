@@ -366,3 +366,7 @@ input#shiftDates {
 div.volume {
     /* font-size: 0.9em; */
 }
+
+#alertInstr {
+  border: 2px solid #78C2CF;
+}
