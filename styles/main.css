@@ -370,3 +370,13 @@ div.volume {
 #alertInstr {
   border: 2px solid #78C2CF;
 }
+
+#alertInstr button.close {
+  font-size: 2em;
+  padding-top: 0.3rem !important;
+  color: black;
+}
+
+#alertInstr button.close:hover {
+  color: #78C2CF;
+}
