@@ -232,13 +232,6 @@ div.talk {
   padding: 5px;
   border: 1px solid lightgrey;
 }
-/*
-.categoryDiv a {
-    visibility: hidden;
-}
-.categoryDiv:hover a {
-    visibility: visible;
-}*/
 
 div.talk {
   border-radius: 8px;
