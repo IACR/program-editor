@@ -149,8 +149,6 @@ label#newCategoryButton {
     margin-bottom:5px;
 }
 
-
-
 .categoryTitle {
     /* font-size: 1.5em; */
 }
@@ -193,6 +191,8 @@ div.talk:hover {
     text-align: left;
     /* font-size: 0.9em; */
 }
+
+
 
 /*** Icons ***/
 a.editButton {
@@ -249,6 +249,8 @@ span.talkIcons {
 #newCategoryButton {
     float: right; !important;
 }
+
+
 
 /*** Schedule Section ***/
 .session {
@@ -374,12 +376,12 @@ input:invalid {
     to { -webkit-transform: rotate(360deg); }
 }
 
-
 input#shiftDates {
     text-align: center;
 }
 
-/*** mysteries abound ***/
+
+/*** Mystery section ***/
 /** TODO: get rid of panel **/
 .panel-custom {
     border-color: #1D707A !important;
