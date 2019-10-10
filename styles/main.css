@@ -17,23 +17,6 @@ h1, h2, h3, h4, h5 {
   color: inherit;
 }
 
-/*** Edit buttons are hidden until hover over appropriate item. ***/
-a.editButton {
-  visibility: hidden;
-}
-
-.session:hover > a.editButton,
-.categoryDiv:hover > a.editButton,
-.talk:hover > a.editButton {
-    visibility: visible;
-}
-
-/* You may not delete or edit the Uncategorized category. */
-#category-0 a.editButton {
-    visibility: hidden;
-}
-
-
 .editorTitles {
   margin-top: 0px;
   /* font-size: 1.7em; */
@@ -143,7 +126,6 @@ a.progName {
 
 /* These are designed to show a placeholder in an empty draggable area.
    TODO(kevin): the one for section.category doesn't work. */
-   /*NOTE(from kay): if possible, do move these to the correct section of this stylesheet (or I can do that, whichever) */
 section.category:empty:before {
     color: #12323C;
     content: attr(data-placeholder);
@@ -161,47 +143,13 @@ label#newCategoryButton {
     right: 40px;
 }
 
-
-/*** Icons ***/
-span.addicon {
-  display:inline-block;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  margin-left: 10px;
+.categoryDiv {
+    padding: 10px;
+    background-color: rgba(177, 181, 231, 0.3);
+    margin-bottom:5px;
 }
 
-span.addicon:hover {
-  background-color: #0D2E32;
-}
 
-span.addicon img {
-  display:inline-block;
-  width: 35px;
-  height: 35px;
-  vertical-align:baseline;
-}
-
-img.infoIcon {
-    height:1em;
-    width:1em;
-}
-
-span.editIcon {
-    display: inline-block;
-    height: 1.5em;
-    width: 1.5em;
-}
-
-span.talkIcons {
-    display: inline-block;
-    height: 1em;
-    width: 1em;
-}
-
-#newCategoryButton {
-    float: right; !important;
-}
 
 .categoryTitle {
     /* font-size: 1.5em; */
@@ -246,15 +194,65 @@ div.talk:hover {
     /* font-size: 0.9em; */
 }
 
+/*** Icons ***/
+a.editButton {
+  visibility: hidden;
+}
+
+.session:hover > a.editButton,
+.categoryDiv:hover > a.editButton,
+.talk:hover > a.editButton {
+    visibility: visible;
+}
+
+/* You may not delete or edit the Uncategorized category. */
+#category-0 a.editButton {
+    visibility: hidden;
+}
+
+span.addicon {
+  display:inline-block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+span.addicon:hover {
+  background-color: #0D2E32;
+}
+
+span.addicon img {
+  display:inline-block;
+  width: 35px;
+  height: 35px;
+  vertical-align:baseline;
+}
+
+img.infoIcon {
+    height:1em;
+    width:1em;
+}
+
+span.editIcon {
+    display: inline-block;
+    height: 1.5em;
+    width: 1.5em;
+}
+
+span.talkIcons {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+}
+
+#newCategoryButton {
+    float: right; !important;
+}
+
 /*** Schedule Section ***/
 .session {
   padding: 10px;
-}
-
-.categoryDiv {
-    padding: 10px;
-    background-color: rgba(177, 181, 231, 0.3);
-    margin-bottom:5px;
 }
 
 #renderedProgram {
