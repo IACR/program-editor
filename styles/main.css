@@ -17,16 +17,6 @@ h1, h2, h3, h4, h5 {
   color: inherit;
 }
 
-.session {
-  padding: 10px;
-}
-
-.categoryDiv {
-    padding: 10px;
-    background-color: rgba(177, 181, 231, 0.3);
-    margin-bottom:5px;
-}
-
 /*** Edit buttons are hidden until hover over appropriate item. ***/
 a.editButton {
   visibility: hidden;
@@ -257,6 +247,16 @@ div.talk:hover {
 }
 
 /*** Schedule Section ***/
+.session {
+  padding: 10px;
+}
+
+.categoryDiv {
+    padding: 10px;
+    background-color: rgba(177, 181, 231, 0.3);
+    margin-bottom:5px;
+}
+
 #renderedProgram {
   max-height: 80vh;
   overflow-y: auto;
