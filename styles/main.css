@@ -44,11 +44,22 @@ h1, h2, h3, h4, h5 {
   color: inherit;
 }
 
-.panel-body {
+.session {
   padding:10px;
 }
 
-/*.panel {
+/*** Edit buttons are hidden until hover over appropriate item. ***/
+a.editButton {
+  visibility: hidden;
+}
+
+.session:hover > a.editButton,
+.categoryDiv:hover > a.editButton,
+.talk:hover > a.editButton {
+    visibility: visible;
+}
+
+.panel {
   margin-bottom: 20px;
   background-color: #fff;
   border: 1px solid transparent;
@@ -61,7 +72,7 @@ h1, h2, h3, h4, h5 {
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-}*/
+}
 
 .editorTitles {
   margin-top: 0px;
@@ -275,14 +286,6 @@ div.session-talks {
   text-align: left;
 }
 
-/*.panel-body a {
-  visibility: hidden;
-}
-
-.panel-body:hover > a {
-    visibility: visible;
-}*/
-
 div.timeSlotDiv {
   min-height: 5em;
 }
@@ -411,14 +414,14 @@ input#shiftDates {
     text-align: center;
 }
 
-/*.panel-custom {
+.panel-custom {
     border-color: #1D707A !important;
 }
 
 .panel-heading-custom {
     background-color: #1D707A !important;
     color: #EDF6F7 !important;
-}*/
+}
 div.volume {
     /* font-size: 0.9em; */
 }
