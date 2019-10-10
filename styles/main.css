@@ -146,16 +146,26 @@ span.addicon {
   display:inline-block;
   width: 35px;
   height: 35px;
-  padding: 2px 1px;
   border-radius: 50%;
-  margin: 5px;
-}
-/* TODO fix the hover to something palatable. */
-span.addicon:hover {
-    filter: saturate(100) brightness(.6);
+  margin-left: 10px;
 }
 
-span.svgicon {
+span.addicon:hover {
+  background-color: #0D2E32;
+}
+span.addicon img {
+  display:inline-block;
+  width: 35px;
+  height: 35px;
+  vertical-align:baseline;
+}
+
+/*** svg icons ***/
+img.infoIcon {
+    height:1em;
+    width:1em;
+}
+span.editIcon {
     display: inline-block;
     height: 1.5em;
     width: 1.5em;

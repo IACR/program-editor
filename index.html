@@ -275,7 +275,7 @@
           <div class="talk" id="{{id}}">
             <a data-toggle="modal" data-target="editTalkBox" class="float-right" onclick="showTalkEditor('{{id}}')">
               <label data-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
-                <span class="svgicon"><img src="img/edit.svg"></span>
+                <span class="editIcon"><img src="img/edit.svg"></span>
               </label>
             </a>
             <h4 class="talkTitle">
@@ -304,7 +304,7 @@
                   <div class="categoryDiv">
                     <a data-toggle="modal" data-target="editCategoryBox" class="float-right" onclick="showCategoryEditor('{{id}}');">
                       <label data-toggle="tooltip" title="Edit the category" data-placement="bottom" data-trigger="hover" tabindex="0">
-                        <span class="svgicon"><img src="img/edit.svg"></span>
+                        <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
                     <h3 class="categoryTitle">
@@ -344,7 +344,7 @@
                 <div class="col-md-2 timeSlotDiv">
                     <a data-toggle="modal" data-target="editTimeslot" class="float-right" onclick="editTimeslot({{@../index}}, {{@index}})">
                       <label data-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
-                        <span class="svgicon"><img src="img/edit.svg"></span>
+                        <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
                   <br />
@@ -356,12 +356,12 @@
                   <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} panel-body" id="{{sessions.0.id}}">
                     <a data-toggle="modal" data-target="editSessionBox" class="float-right" onclick="editSession({{@../index}},{{@index}},0)">
                       <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
-                        <span class="svgicon"><img src="img/edit.svg"></span>
+                        <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
                     <h3 class="text-center">
                       {{sessions.0.session_title}}
-                      {{#if sessions.0.session_url}}&nbsp;&nbsp;<a class="sessionUrl" target="_session" href="{{sessions.0.session_url}}"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>{{/if}}
+                      {{#if sessions.0.session_url}}&nbsp;&nbsp;<a class="sessionUrl" target="_session" href="{{sessions.0.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
                     </h3>
                     {{#if sessions.0.location.name}}
                     <p class="text-center">
@@ -386,12 +386,12 @@
                   <div class="panel-body track2Event" id="{{sessions.1.id}}">
                     <a data-toggle="modal" data-target="editSessionBox" class="float-right" onclick="editSession({{@../index}},{{@index}},1)">
                       <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
-                        <span class="svgicon"><img src="img/edit.svg"></span>
+                        <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
                     <h3 class="text-center">
                       {{sessions.1.session_title}}
-                      {{#if sessions.1.session_url}}&nbsp;&nbsp;<a class="sessionUrl" target="_session" href="{{sessions.1.session_url}}"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>{{/if}}
+                      {{#if sessions.1.session_url}}&nbsp;&nbsp;<a class="sessionUrl" target="_session" href="{{sessions.1.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
                     </h3>
                     {{#if sessions.1.location.name}}
                     <p class="text-center">
