@@ -45,7 +45,10 @@ h1, h2, h3, h4, h5 {
 }
 
 .session {
-  padding:10px;
+  padding: 10px;
+}
+.categoryDiv {
+  padding: 10px;
 }
 
 /*** Edit buttons are hidden until hover over appropriate item. ***/
@@ -57,6 +60,11 @@ a.editButton {
 .categoryDiv:hover > a.editButton,
 .talk:hover > a.editButton {
     visibility: visible;
+}
+
+/* You may not delete or edit the Uncategorized category. */
+#category-0 a.editButton {
+    visibility: hidden;
 }
 
 .panel {
@@ -238,16 +246,13 @@ div.talk {
   padding: 5px;
   border: 1px solid lightgrey;
 }
+/*
 .categoryDiv a {
     visibility: hidden;
 }
 .categoryDiv:hover a {
     visibility: visible;
-}
-/* You may not delete or edit the Uncategorized category. */
-#category-0 > .categoryDiv > a {
-    visibility: hidden;
-}
+}*/
 
 div.talk {
   border-radius: 8px;

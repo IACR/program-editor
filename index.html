@@ -300,8 +300,7 @@
               <script id="talks-template" type="text/x-handlebars-template">
                 <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
                 {{#each unassigned_talks}}
-                <div id="{{id}}">
-                  <div class="categoryDiv">
+                <div class="categoryDiv" id="{{id}}">
                     <a data-toggle="modal" data-target="editCategoryBox" class="editButton float-right" onclick="showCategoryEditor('{{id}}');">
                       <label data-toggle="tooltip" title="Edit the category" data-placement="bottom" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
@@ -310,12 +309,11 @@
                     <h3 class="categoryTitle">
                       {{name}}
                     </h3>
-                  </div>
-                  <section class="category" data-placeholder="Drag talks here to unschedule">
+                    <section class="category" data-placeholder="Drag talks here to unschedule">
                     {{#each talks}}
                     {{> talk}}
                     {{/each}}
-                  </section>
+                    </section>
                 </div>
                 {{/each}}
               </script>
