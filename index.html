@@ -723,7 +723,7 @@
     <!-- Modal for adding, editing, or deleting a new talk. In case you are adding a talk,
          the delete button is not shown and the talkId field is empty.  -->
     <aside class="modal fade" id="editTalkBox" role="dialog" aria-labelledby="addTalkTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header" id="addTalkTitleDiv">
             <h2 class="modal-title" id="addTalkTitle">
@@ -734,86 +734,106 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
-              <input id="talkId" type="hidden" value=""/>
-              <div class="form-group">
-                <label for="newTalkTitle">
-                  Talk Title
-                </label>
-                <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control required" id="newTalkTitle" required="true" />
-              </div>
-              <div id="talkTitleWarning">
-                <div class="alert alert-danger">Talk title is required.</div>
-              </div>
-              <div class="form-group">
-                <label for="newTalkAuthors">
-                  Talk Author(s)
-                </label>
-                <p id="newAuthorHelp" class="form-text">
-                  Use BibTeX formatting (i.e. names are separated by and).
-                </p>
-                <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
-              </div>
-              <div class="form-group">
-                <label for="newTalkAffiliation">
-                  Affiliation
-                </label>
-                <p id="newAffiliationHelp" class="form-text">
-                  Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
-                </p>
-                <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
-              </div>
-              <div class="form-group">
-                <label for="newTalkCategory">
-                  Talk Category
-                </label>
-                <select id="newTalkCategory" class="form-control">
-                  <option value=""></option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="paperUrl">
-                  URL for paper
-                </label>
-                <span id="paperUrlHelp" class="form-text">
-                  Enter a URL for the paper (not eprint though!)
-                </span>
-                <input type="url" name="paperUrl" placeholder="URL for paper" class="form-control" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
-              </div>
-              <div id="paperUrlWarning">
-                <div class="alert alert-danger">The url must begin with http or https.</div>
-              </div>
-              <div class="form-group">
-                <label for="slidesUrl">
-                  URL for slides
-                </label>
-                <span id="slidesUrlHelp" class="form-text">
-                  Enter a URL for the slides
-                </span>
-                <input type="url" name="slidesUrl" placeholder="URL for slides" class="form-control" aria-describedby="slidesUrlHelp" id="slidesUrl" pattern="https?://.+"/>
-              </div>
-              <div id="slidesUrlWarning">
-                <div class="alert alert-danger">The url must begin with http or https.</div>
-              </div>
-              <div class="form-group">
-                <label for="startTime">
-                  Start time
-                </label>
-                to
-                <label for="endTime">
-                  End time
-                </label> (Optional)
-                <span id="talkTimeHelp" class="form-text">
-                  Note that these are not checked to fit the timeslot.
-                </span>
+            <div class="container-fluid">
+              <form>
+                <input id="talkId" type="hidden" value=""/>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="newTalkTitle">
+                        Talk Title
+                      </label>
+                      <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control required" id="newTalkTitle" required="true" />
+                    </div>
+                    <div id="talkTitleWarning">
+                      <div class="alert alert-danger">Talk title is required.</div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="newTalkCategory">
+                        Talk Category
+                      </label>
+                      <select id="newTalkCategory" class="form-control">
+                        <option value=""></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="newTalkAuthors">
+                        Talk Author(s)
+                      </label>
+                      <p id="newAuthorHelp" class="form-text">
+                        Use BibTeX formatting (i.e. names are separated by and).
+                      </p>
+                      <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="newTalkAffiliation">
+                        Affiliation
+                      </label>
+                      <p id="newAffiliationHelp" class="form-text">
+                        Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
+                      </p>
+                      <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="paperUrl">
+                        URL for paper
+                      </label>
+                      <span id="paperUrlHelp" class="form-text">
+                        Enter a URL for the paper (not eprint though!)
+                      </span>
+                      <input type="url" name="paperUrl" placeholder="URL for paper" class="form-control" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
+                    </div>
+                    <div id="paperUrlWarning">
+                      <div class="alert alert-danger">The url must begin with http or https.</div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="slidesUrl">
+                        URL for slides
+                      </label>
+                      <span id="slidesUrlHelp" class="form-text">
+                        Enter a URL for the slides
+                      </span>
+                      <input type="url" name="slidesUrl" placeholder="URL for slides" class="form-control" aria-describedby="slidesUrlHelp" id="slidesUrl" pattern="https?://.+"/>
+                    </div>
+                    <div id="slidesUrlWarning">
+                      <div class="alert alert-danger">The url must begin with http or https.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="startTime">
+                    Start time
+                  </label>
+                  to
+                  <label for="endTime">
+                    End time
+                  </label> (Optional)
+                  <span id="talkTimeHelp" class="form-text">
+                    Note that these are not checked to fit the timeslot.
+                  </span>
 
-              </div>
-              <div class="form-group form-inline" id="talkTimeDiv">
-                <input type="text" name="startTime" class="form-control time start" id="currentTalkStartTime" autocomplete="off" />
-                to
-                <input type="text" name="endTime" class="form-control time end" id="currentTalkEndTime" autocomplete="off" />
-              </div>
-            </form>
+                </div>
+                <div class="form-group form-inline" id="talkTimeDiv">
+                  <input type="text" name="startTime" class="form-control time start" id="currentTalkStartTime" autocomplete="off" />
+                  to
+                  <input type="text" name="endTime" class="form-control time end" id="currentTalkEndTime" autocomplete="off" />
+                </div>
+              </form>
+            </div>
           </div>
           <div id="deleteTalkWarning" class="modal-body">
             <div class="alert alert-danger">If you delete this talk, then you cannot recover the data. It will be permanently removed from the app.</div>
