@@ -273,7 +273,7 @@
         <!-- This is a handlebars partial that can be used in two places to display a talk. -->
         <script id="talk-partial" type="text/x-handlebars-template">
           <div class="talk" id="{{id}}">
-            <a data-toggle="modal" data-target="editTalkBox" class="float-right" onclick="showTalkEditor('{{id}}')">
+            <a data-toggle="modal" data-target="editTalkBox" class="editButton float-right" onclick="showTalkEditor('{{id}}')">
               <label data-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
                 <span class="editIcon"><img src="img/edit.svg"></span>
               </label>
@@ -302,7 +302,7 @@
                 {{#each unassigned_talks}}
                 <div id="{{id}}">
                   <div class="categoryDiv">
-                    <a data-toggle="modal" data-target="editCategoryBox" class="float-right" onclick="showCategoryEditor('{{id}}');">
+                    <a data-toggle="modal" data-target="editCategoryBox" class="editButton float-right" onclick="showCategoryEditor('{{id}}');">
                       <label data-toggle="tooltip" title="Edit the category" data-placement="bottom" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
@@ -342,7 +342,7 @@
               {{#if sessions}} <!-- only render slots that have sessions -->
               <div class="row">
                 <div class="col-md-2 timeSlotDiv">
-                    <a data-toggle="modal" data-target="editTimeslot" class="float-right" onclick="editTimeslot({{@../index}}, {{@index}})">
+                    <a data-toggle="modal" data-target="editTimeslot" class="editButton float-right" onclick="editTimeslot({{@../index}}, {{@index}})">
                       <label data-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
@@ -353,8 +353,8 @@
                   </p>
                 </div>
                 <div class="{{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
-                  <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} panel-body" id="{{sessions.0.id}}">
-                    <a data-toggle="modal" data-target="editSessionBox" class="float-right" onclick="editSession({{@../index}},{{@index}},0)">
+                  <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} session" id="{{sessions.0.id}}">
+                    <a data-toggle="modal" data-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},0)">
                       <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
@@ -383,8 +383,8 @@
                 </div>
                 {{#if twosessions}}
                 <div class="col-md-5">
-                  <div class="panel-body track2Event" id="{{sessions.1.id}}">
-                    <a data-toggle="modal" data-target="editSessionBox" class="float-right" onclick="editSession({{@../index}},{{@index}},1)">
+                  <div class="session track2Event" id="{{sessions.1.id}}">
+                    <a data-toggle="modal" data-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},1)">
                       <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
