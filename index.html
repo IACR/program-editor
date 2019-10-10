@@ -444,15 +444,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="editMetadataDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="editMetadataTitle">
               Edit conference name and dates
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <p class="help-block">
+            <p class="form-text">
               You can change the conference name and dates of the conference below.
             </p>
             <form class="form-inline">
@@ -512,7 +512,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
               Cancel
             </button>
             <button type="button" class="btn btn-success btn-sm" onclick="saveMetadata()">
@@ -528,8 +528,10 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h2 id="deleteProgramLabel" class="modal-title">Confirm Delete</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <p>You are about to delete this program from the server. This action cannot be reversed.</p>
@@ -537,7 +539,7 @@
           </div>
           <div class="modal-footer">
             <p id="delete_status"></p>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
             <a class="btn btn-danger btn-ok" onclick="reallyDeleteProgram();">Delete</a>
           </div>
         </div>
@@ -549,8 +551,10 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h2 class="modal-title" id="authModalLabel">Log in for IACR Program Creator</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <p>This app requires you to log in with your IACR reference number
@@ -577,26 +581,27 @@
           </div>
           <div class="modal-footer">
             <p id="login_progress"></p>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
             <button type="button" onClick="doLogin();this.blur()"class="btn btn-success">Log in</button>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Modal for import from crossref.org -->
     <aside class="modal fade" id="importDOISelection" role="dialog" aria-labelledby="importDOITitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="importDOIDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="importDOITitle">
               Import DOIs from crossref.org
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <p class="help-block">
+            <p class="form-text">
               This will attempt to import DOI URLs for the papers, but the matches are
               not guaranteed to be 100% accurate because they are not provided when the papers
               are uploaded.  You can always enter URLs individually,
@@ -611,7 +616,7 @@
           </div>
           <div class="modal-footer">
             <span id="doiStatus"></span>
-            <button id="doiCloseBtn" type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            <button id="doiCloseBtn" type="button" class="btn btn-light btn-sm" data-dismiss="modal">Close</button>
             <button id="doiSearchBtn" type="button" onclick="findDOIs()" class="float-right btn btn-success btn-sm">Search</button>
           </div>
           <div class="form-group importResults" id="importResults">
@@ -626,15 +631,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="uploadTitleDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="uploadTitle">
               Upload accepted talks from websubrev
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <p class="help-block">
+            <p class="form-text">
               Websubrev now allows program chairs to export a list of accepted talks. The format is described <a target="_help" href="./docs/help.html">here</a>.
             </p>
             <label for="uploadTalksSelector" class="btn btn-sm btn-success">
@@ -654,15 +659,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="importTitle">
               Import talks from ToSC or TCHES.
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <p class="help-block">
+            <p class="form-text">
               Papers that have already been published by ToSC or TCHES may be imported below. A date range
               is optional.
             </p>
@@ -684,7 +689,7 @@
             </label>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-success btn-sm" onclick="importFSEorCHES()">Import papers</button>
           </div>
         </div>
@@ -696,12 +701,12 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="warnBoxTitle">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="warningTitle">
               Warning
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <p id="modal-message">
@@ -721,12 +726,12 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="addTalkTitleDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="addTalkTitle">
               Add a new talk
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <form>
@@ -744,7 +749,7 @@
                 <label for="newTalkAuthors">
                   Talk Author(s)
                 </label>
-                <p id="newAuthorHelp" class="help-block">
+                <p id="newAuthorHelp" class="form-text">
                   Use BibTeX formatting (i.e. names are separated by and).
                 </p>
                 <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
@@ -753,7 +758,7 @@
                 <label for="newTalkAffiliation">
                   Affiliation
                 </label>
-                <p id="newAffiliationHelp" class="help-block">
+                <p id="newAffiliationHelp" class="form-text">
                   Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
                 </p>
                 <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
@@ -770,7 +775,7 @@
                 <label for="paperUrl">
                   URL for paper
                 </label>
-                <span id="paperUrlHelp" class="help-block">
+                <span id="paperUrlHelp" class="form-text">
                   Enter a URL for the paper (not eprint though!)
                 </span>
                 <input type="url" name="paperUrl" placeholder="URL for paper" class="form-control" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
@@ -782,7 +787,7 @@
                 <label for="slidesUrl">
                   URL for slides
                 </label>
-                <span id="slidesUrlHelp" class="help-block">
+                <span id="slidesUrlHelp" class="form-text">
                   Enter a URL for the slides
                 </span>
                 <input type="url" name="slidesUrl" placeholder="URL for slides" class="form-control" aria-describedby="slidesUrlHelp" id="slidesUrl" pattern="https?://.+"/>
@@ -798,7 +803,7 @@
                 <label for="endTime">
                   End time
                 </label> (Optional)
-                <span id="talkTimeHelp" class="help-block">
+                <span id="talkTimeHelp" class="form-text">
                   Note that these are not checked to fit the timeslot.
                 </span>
 
@@ -817,7 +822,7 @@
             <button id="talkDeleteButton" type="button" class="btn btn-danger btn-sm float-left" onclick="deleteTalk()">
               Delete talk completely
             </button>
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
               Cancel
             </button>
             <button type="button" class="btn btn-success btn-sm" onclick="saveTalk()">
@@ -834,12 +839,12 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="addCategoryTitleDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="categoryEditorTitle">
               Add a category
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <form>
@@ -859,7 +864,7 @@
             <button id="deleteCategoryButton" type="button" class="btn btn-danger btn-sm float-left" onclick="deleteCategory()">
               Delete category
             </button>
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
               Cancel
             </button>
             <button type="button" class="btn btn-success btn-sm" onclick="saveCategory()">
@@ -875,12 +880,12 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="timeEditTitleDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="timeEditTitle">
               Edit Time Slot
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <form>
@@ -905,7 +910,7 @@
                 <div id="addTrackToSession">
                   <br />
                   <br />
-                  <p class="help-block">
+                  <p class="form-text">
                     To split this session into two tracks, please check the box below.
                   </p>
                   <label for="numsessions">Add a track to this timeslot?</label>
@@ -918,7 +923,7 @@
             <div class="alert alert-danger">If you delete this timeslot, then any talks in the session will become unscheduled.</div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
               Cancel
             </button>
             <button id="deleteTimeslotButton" type="button" class="btn btn-danger btn-sm float-left" onclick="deleteTimeslot()">
@@ -937,12 +942,12 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="editSessionTitleDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="editSessionTitle">
               Edit Session
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <form>
@@ -985,7 +990,7 @@
             <div class="alert alert-danger">If you delete this session, then any talks in the session will become unscheduled.</div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
               Cancel
             </button>
             <button id="deleteSessionButton" type="button" class="btn btn-danger btn-sm float-left" onclick="deleteSession()">
@@ -1004,15 +1009,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header" id="addTimeslotDiv">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h2 class="modal-title" id="addTimeslotTitle">
               Add a Time Slot
             </h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <p class="help-block">
+            <p class="form-text">
               Timeslots are ordered by their start time but may overlap.
             </p>
             <br />
@@ -1049,7 +1054,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
               Cancel
             </button>
             <button type="button" class="btn btn-success btn-sm" onclick="addTimeslotToDay()">
@@ -1065,8 +1070,10 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h2 class="modal-title">Download PDF</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <p>The PDF file will be opened in a separate tab.</p>
@@ -1101,7 +1108,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
             <a class="btn btn-success btn-ok" onclick="downloadPDF();">Download PDF</a>
           </div>
         </div>
