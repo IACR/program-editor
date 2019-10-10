@@ -273,14 +273,14 @@
         <!-- This is a handlebars partial that can be used in two places to display a talk. -->
         <script id="talk-partial" type="text/x-handlebars-template">
           <div class="talk" id="{{id}}">
-            <a data-toggle="modal" data-target="editTalkBox" class="float-right" onclick="showTalkEditor('{{id}}')">
+            <a data-toggle="modal" data-target="editTalkBox" class="editButton float-right" onclick="showTalkEditor('{{id}}')">
               <label data-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
                 <span class="editIcon"><img src="img/edit.svg"></span>
               </label>
             </a>
             <h4 class="talkTitle">
-              {{title}}{{#if paperUrl}}&nbsp;&nbsp;<a class="paperUrl" target="_paper" href="{{paperUrl}}"><span class="talkIcons"><img src="img/md-document.svg" title="View the paper"></span></a>{{/if}}
-              {{#if slidesUrl}}&nbsp;&nbsp;<a class="paperUrl" target="_slides" href="{{slidesUrl}}"><span class="talkIcons"><img src="img/md-desktop.svg" title="View the slides"></span></a>{{/if}}
+              {{title}}{{#if paperUrl}}&nbsp;&nbsp;<a target="_paper" href="{{paperUrl}}"><span class="talkIcons"><img src="img/md-document.svg" title="View the paper"></span></a>{{/if}}
+              {{#if slidesUrl}}&nbsp;&nbsp;<a target="_slides" href="{{slidesUrl}}"><span class="talkIcons"><img src="img/md-desktop.svg" title="View the slides"></span></a>{{/if}}
               {{#if starttime}}({{starttime}}{{#if endtime}}-{{endtime}}{{/if}}){{/if}}
             </h4>
             <div class="authorList">
@@ -300,9 +300,8 @@
               <script id="talks-template" type="text/x-handlebars-template">
                 <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
                 {{#each unassigned_talks}}
-                <div id="{{id}}">
-                  <div class="categoryDiv">
-                    <a data-toggle="modal" data-target="editCategoryBox" class="float-right" onclick="showCategoryEditor('{{id}}');">
+                <div class="categoryDiv" id="{{id}}">
+                    <a data-toggle="modal" data-target="editCategoryBox" class="editButton float-right" onclick="showCategoryEditor('{{id}}');">
                       <label data-toggle="tooltip" title="Edit the category" data-placement="bottom" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
@@ -310,12 +309,11 @@
                     <h3 class="categoryTitle">
                       {{name}}
                     </h3>
-                  </div>
-                  <section class="category" data-placeholder="Drag talks here to unschedule">
+                    <section class="category" data-placeholder="Drag talks here to unschedule">
                     {{#each talks}}
                     {{> talk}}
                     {{/each}}
-                  </section>
+                    </section>
                 </div>
                 {{/each}}
               </script>
@@ -342,7 +340,7 @@
               {{#if sessions}} <!-- only render slots that have sessions -->
               <div class="row">
                 <div class="col-md-2 timeSlotDiv">
-                    <a data-toggle="modal" data-target="editTimeslot" class="float-right" onclick="editTimeslot({{@../index}}, {{@index}})">
+                    <a data-toggle="modal" data-target="editTimeslot" class="editButton float-right" onclick="editTimeslot({{@../index}}, {{@index}})">
                       <label data-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
@@ -353,25 +351,25 @@
                   </p>
                 </div>
                 <div class="{{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
-                  <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} panel-body" id="{{sessions.0.id}}">
-                    <a data-toggle="modal" data-target="editSessionBox" class="float-right" onclick="editSession({{@../index}},{{@index}},0)">
+                  <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} session" id="{{sessions.0.id}}">
+                    <a data-toggle="modal" data-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},0)">
                       <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
                     <h3 class="text-center">
                       {{sessions.0.session_title}}
-                      {{#if sessions.0.session_url}}&nbsp;&nbsp;<a class="sessionUrl" target="_session" href="{{sessions.0.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
+                      {{#if sessions.0.session_url}}&nbsp;&nbsp;<a target="_session" href="{{sessions.0.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
                     </h3>
                     {{#if sessions.0.location.name}}
-                    <p class="text-center">
+                    <div class="text-center">
                       {{sessions.0.location.name}}
-                    </p>
+                    </div>
                     {{/if}}
                     {{#if sessions.0.moderator}}
-                    <p class="text-center">
+                    <div class="text-center">
                       {{sessions.0.moderator}}
-                    </p>
+                    </div>
                     {{/if}}
 
                     {{#empty sessions.0.talks}}
@@ -383,25 +381,25 @@
                 </div>
                 {{#if twosessions}}
                 <div class="col-md-5">
-                  <div class="panel-body track2Event" id="{{sessions.1.id}}">
-                    <a data-toggle="modal" data-target="editSessionBox" class="float-right" onclick="editSession({{@../index}},{{@index}},1)">
+                  <div class="session track2Event" id="{{sessions.1.id}}">
+                    <a data-toggle="modal" data-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},1)">
                       <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
                     <h3 class="text-center">
                       {{sessions.1.session_title}}
-                      {{#if sessions.1.session_url}}&nbsp;&nbsp;<a class="sessionUrl" target="_session" href="{{sessions.1.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
+                      {{#if sessions.1.session_url}}&nbsp;&nbsp;<a target="_session" href="{{sessions.1.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
                     </h3>
                     {{#if sessions.1.location.name}}
-                    <p class="text-center">
+                    <div class="text-center">
                       {{sessions.1.location.name}}
-                    </p>
+                    </div>
                     {{/if}}
                     {{#if sessions.1.moderator}}
-                    <p class="text-center">
+                    <div class="text-center">
                       {{sessions.1.moderator}}
-                    </p>
+                    </div>
                     {{/if}}
                     {{#empty sessions.1.talks}}
                     {{#each sessions.1.talks}}
