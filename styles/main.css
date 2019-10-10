@@ -30,6 +30,7 @@ div.session-talks:empty:before {
 /*** General Styling ***/
 body {
   font-family: 'Raleway', sans-serif;
+  font-size: 14px;
   background-color: rgba(134, 191, 203, 0.1);
   color: #12323C;
   /* font-size: 1.7em; */
@@ -37,7 +38,30 @@ body {
 
 h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
 }
+
+.panel-body {
+  padding:10px;
+}
+
+/*.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}*/
 
 .editorTitles {
   margin-top: 0px;
@@ -244,19 +268,20 @@ div.talk:hover {
 }
 
 div.session-talks {
+  margin-top: 10px;
   min-height: 3em;
   background-color: rgba(29, 112, 122, 0.4);
   padding: 5px;
   text-align: left;
 }
 
-.panel-body a {
+/*.panel-body a {
   visibility: hidden;
 }
 
 .panel-body:hover > a {
     visibility: visible;
-}
+}*/
 
 div.timeSlotDiv {
   min-height: 5em;
@@ -386,14 +411,14 @@ input#shiftDates {
     text-align: center;
 }
 
-.panel-custom {
+/*.panel-custom {
     border-color: #1D707A !important;
 }
 
 .panel-heading-custom {
     background-color: #1D707A !important;
     color: #EDF6F7 !important;
-}
+}*/
 div.volume {
     /* font-size: 0.9em; */
 }
