@@ -139,7 +139,7 @@ section.category:empty:before {
 /* Floating action button */
 label#newCategoryButton {
     position: absolute;
-    bottom: 5px;
+    bottom: 2%;
     right: 40px;
 }
 
@@ -337,6 +337,10 @@ div.session-talks:empty:before {
 
 
 /*** Modals ***/
+.modal-body label {
+    font-weight: 600;
+}
+
 #warnBoxTitle {
   background-color: rgba(186, 0, 26, 0.7);
   color: #EDF6F7;
