@@ -244,7 +244,7 @@
 
       <main id="parent">
         <div class="row">
-          <div class="col-md-12 my-3">
+          <div class="col-md-12 my-2">
             <div id="alertInstr" class="alert alert-light alert-dismissible">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Instructions: Drag talks from the left column to the sessions on the right. You can edit sessions, talks, timeslots, days, etc. Once you are satisfied with the program, you can export the JSON for the website. Remember that PDF doesn't work well on mobile.
@@ -306,9 +306,9 @@
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
-                    <h3 class="categoryTitle">
+                    <h4 class="categoryTitle">
                       {{name}}
-                    </h3>
+                    </h4>
                     <section class="category" data-placeholder="Drag talks here to unschedule">
                     {{#each talks}}
                     {{> talk}}
@@ -329,11 +329,11 @@
               <div class="row">
                 <div class="col-md-5">
                   <hr />
-                  <h3 class="pageSubtitle">
+                  <h4 class="pageSubtitle">
                     {{formatDate date}} <label data-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover" tabindex="0">
                       <span class="addicon"><img src="img/add.svg" onclick="prepareAddTimeslotToDay({{@index}})"></span>
                     </label>
-                  </h3>
+                  </h4>
                 </div>
               </div>
               {{#each timeslots}}
@@ -357,10 +357,10 @@
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
-                    <h3 class="text-center">
+                    <h4 class="text-center">
                       {{sessions.0.session_title}}
                       {{#if sessions.0.session_url}}&nbsp;&nbsp;<a target="_session" href="{{sessions.0.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
-                    </h3>
+                    </h4>
                     {{#if sessions.0.location.name}}
                     <div class="text-center">
                       {{sessions.0.location.name}}
@@ -387,10 +387,10 @@
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
-                    <h3 class="text-center">
+                    <h4 class="text-center">
                       {{sessions.1.session_title}}
                       {{#if sessions.1.session_url}}&nbsp;&nbsp;<a target="_session" href="{{sessions.1.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
-                    </h3>
+                    </h4>
                     {{#if sessions.1.location.name}}
                     <div class="text-center">
                       {{sessions.1.location.name}}
