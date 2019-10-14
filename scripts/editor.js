@@ -589,9 +589,9 @@ function warningBox(text) {
 Handlebars.registerHelper('talkList', function(data, isSession, options) {
   if (data && data.length >= 0) {
     if (isSession) {
-      return new Handlebars.SafeString('<div class="session-talks" data-placeholder="Drag talks to this session">' + options.fn(this) + '</div>');
+      return new Handlebars.SafeString('<div class="session-talks text-center" data-placeholder="Drag talks to this session">' + options.fn(this) + '</div>');
     } else {
-      return new Handlebars.SafeString('<div class="category" data-placeholder="Drag talks here to unschedule">' + options.fn(this) + '</div>');
+      return new Handlebars.SafeString('<div class="category text-center" data-placeholder="Drag talks here to unschedule">' + options.fn(this) + '</div>');
     }
   }
 });
