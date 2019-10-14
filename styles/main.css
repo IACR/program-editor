@@ -124,8 +124,7 @@ a.progName {
   display: none;
 }
 
-/* These are designed to show a placeholder in an empty draggable area.
-   TODO(kevin): the one for section.category doesn't work. */
+/* These are designed to show a placeholder in an empty draggable area. */
 div.category:empty:before {
     color: #12323C;
     content: attr(data-placeholder);
