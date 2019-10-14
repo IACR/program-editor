@@ -3,7 +3,7 @@
 /*** General Styling ***/
 body {
   font-family: 'Raleway', sans-serif;
-  font-size: 14px;
+/*  font-size: 14px;*/
   background-color: rgba(134, 191, 203, 0.1);
   color: #12323C;
   /* font-size: 1.7em; */
@@ -288,7 +288,7 @@ p.timeSlot {
 
 .talkTitle {
   font-family: 'Open Sans Condensed', sans-serif;
-  /* font-size: 1.2em; */
+  font-size: 1.2rem;
   font-weight: bold;
   text-align: left;
 }
