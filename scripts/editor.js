@@ -896,6 +896,7 @@ function showTalkEditor(id) {
     $('#newTalkAffiliation').val('');
     $('#addTalkTitle').text('Add a new talk');
     $('#paperUrl').val('');
+    $('#slidesUrl').val('');
     $('#currentTalkStartTime').val('');
     $('#currentTalkEndTime').val('');
   } else {
@@ -909,6 +910,7 @@ function showTalkEditor(id) {
     $('#newTalkAffiliation').val(talkObj.affiliations);
     $('#addTalkTitle').text('Edit a talk');
     $('#paperUrl').val(talkObj.paperUrl);
+    $('#slidesUrl').val(talkObj.slidesUrl);
     $('#currentTalkStartTime').val(talkObj.starttime);
     $('#currentTalkEndTime').val(talkObj.endtime);
     if (talkObj.starttime) {
