@@ -124,9 +124,8 @@ a.progName {
   display: none;
 }
 
-/* These are designed to show a placeholder in an empty draggable area.
-   TODO(kevin): the one for section.category doesn't work. */
-section.category:empty:before {
+/* These are designed to show a placeholder in an empty draggable area. */
+div.category:empty:before {
     color: #12323C;
     content: attr(data-placeholder);
 }
@@ -153,7 +152,7 @@ label#newCategoryButton {
     /* font-size: 1.5em; */
 }
 
-section.category {
+div.category {
     padding: 3px;
     min-height: 3em;
     background-color: rgba(29, 112, 122, 0.4);
@@ -268,7 +267,6 @@ div.session-talks {
   min-height: 3em;
   background-color: rgba(29, 112, 122, 0.4);
   padding: 5px;
-  text-align: left;
 }
 
 div.timeSlotDiv {

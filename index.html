@@ -289,7 +289,7 @@
           <article id="categoryList" class="col-md-3">
 <div id="alertInstr" class="alert alert-light alert-dismissible">
               <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Instructions: Drag talks from the left column to the sessions on the right. You can edit sessions, talks, timeslots, days, etc. When finished, you can export the JSON for the website.
+                Instructions: Drag talks from the categories below to the sessions on the right. You can edit sessions, talks, timeslots, days, etc. When finished, you can export the JSON for the website.
 </div>
 <section id="talksList">
               <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
@@ -305,10 +305,11 @@
                     <h4 class="categoryTitle">
                       {{name}}
                     </h4>
-                    <section class="category" data-placeholder="Drag talks here to unschedule">
-                    {{#each talks}}
-                    {{> talk}}
-                    {{/each}}
+                      {{#talkList talks false}}
+                      {{#each talks}}
+                      {{> talk}}
+                      {{/each}}
+                      {{/talkList}}
                     </section>
                 </div>
                 {{/each}}
@@ -367,11 +368,11 @@
                     </div>
                     {{/if}}
 
-                    {{#empty sessions.0.talks}}
+                    {{#talkList sessions.0.talks true}}
                     {{#each sessions.0.talks}}
                     {{> talk}}
                     {{/each}}
-                    {{/empty}}
+                    {{/talkList}}
                   </div>
                 </div>
                 {{#if twosessions}}
@@ -396,11 +397,11 @@
                       {{sessions.1.moderator}}
                     </div>
                     {{/if}}
-                    {{#empty sessions.1.talks}}
+                    {{#talkList sessions.1.talks true}}
                     {{#each sessions.1.talks}}
                     {{> talk}}
                     {{/each}}
-                    {{/empty}}
+                    {{/talkList}}
                   </div>
                 </div>
                 {{/if}} <!-- end of second session -->
