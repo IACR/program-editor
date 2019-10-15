@@ -447,58 +447,54 @@
             <p class="form-text">
               You can change the conference name and dates of the conference below.
             </p>
-            <form class="form-inline">
-              <div class="form-group">
-                <label for="newName">
+            <form>
+              <div class="form-group row">
+                <label for="newName" class="col-md-4 col-form-label mb-2">
                   Program name
                 </label>
-                <input type="text" name="newName" placeholder="Program name (required)" class="form-control required" id="newName" required="true" />
+                <input type="text" name="newName" placeholder="Program name (required)" class="form-control required col-md-7" id="newName" required="true" />
               </div>
-              <hr/>
               <div id="changeDatesDiv" class="form-group">
                 <label for="newDates">
                   Dates for the conference
-                </label><br/>
-                <div class="panel panel-custom">
-                  <div class="panel-heading panel-heading-custom">
+                </label>
+                <br />
+                <div>
+                  <span class="customBadge">
                     Current dates
-                  </div>
-                  <div class="panel-body">
-                    <span id="originalStartdate"></span> to
-                    <span id="originalEnddate"></span>
-                  </div>
+                  </span>
+                  <span id="originalStartdate"></span> to
+                  <span id="originalEnddate"></span>
                 </div>
-                <select id="dateChange" name="dateChange" class="form-control" onchange="updateNewDates()">
+                <select id="dateChange" name="dateChange" class="form-control my-3" onchange="updateNewDates()">
                   <option value="">No date change</option>
                   <option value="shift">Shift dates</option>
                   <option value="add">Add a day</option>
                   <option value="delete">Delete a day</option>
                 </select>
                 <label id="shiftDateControl" for="shiftDates">
-                  Shift dates by <input size="4" type="number" id="shiftDates" value="0" onchange="updateNewDates()" oninput="updateNewDates()"> day(s)<br/>
+                  Shift dates by <input type="number" id="shiftDates" class="mx-2" value="0" onchange="updateNewDates()" oninput="updateNewDates()"> day(s)<br/>
                 </label>
-                <select id="addDayOption" name="addDayOption" class="required form-control" onchange="updateNewDates()">
+                <select id="addDayOption" name="addDayOption" class="required form-control mb-3" onchange="updateNewDates()">
                   <option value="" disabled>Choose before or after to add a day</option>
                   <option value="before">Before</option>
                   <option value="after">After</option>
                 </select>
-                <select id="deleteDayOption" name="deleteDayOption" class="required form-control" onchange="updateNewDates()">
+                <select id="deleteDayOption" name="deleteDayOption" class="required form-control mb-3" onchange="updateNewDates()">
                   <option value="" disabled>Choose first or last to delete</option>
                   <option value="first">Delete first day</option>
                   <option value="last">Delete last day</option>
                 </select>
-                  <br/><br/>
                 <p class="alert alert-danger" id="deleteWarning">
                   If you delete a day, then all talks currently scheduled on that day will become unscheduled and any sessions will be lost.
                 </p>
                 <input id="newStartdate" name="newStartdate" type="hidden"/>
                 <input id="newEnddate" name="newEnddate" type="hidden"/>
-                <div class="panel panel-custom" id="newDates">
-                  <div class="panel-heading panel-heading-custom">New dates:</div>
-                  <div class="panel-body">
-                    <span id="newDisplayStartdate"></span> to
-                    <span id="newDisplayEnddate"></span>
-                  </div>
+                <div id="newDates">
+                  <span class="customBadge">
+                    New dates
+                  </span>
+                    <span id="newDisplayStartdate"></span> to <span id="newDisplayEnddate"></span>
                 </div>
               </div>
             </form>

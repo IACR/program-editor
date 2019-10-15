@@ -370,19 +370,17 @@ div.progress {
   height: 2em;
 }
 
+.customBadge {
+  background-color: #1D707A;
+  color: #EDF6F7;
+  padding: 0.5rem;
+  margin: 1rem 0.5rem 1rem 0;
+  border-radius: 0.2rem;
+}
+
 
 
 /*** Mystery section ***/
-/** TODO: get rid of panel **/
-.panel-custom {
-    border-color: #1D707A !important;
-}
-
-.panel-heading-custom {
-    background-color: #1D707A !important;
-    color: #EDF6F7 !important;
-}
-
 #alertInstr {
   border: 2px solid #78C2CF;
 }
