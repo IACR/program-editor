@@ -390,6 +390,30 @@ function startEditor() {
   enableMenus();
 }
 
+// Data that is imported from cryptodb has a different schema
+// than data from websubrev. We normalize it so that
+// DOI => paperUrl (if it exists)
+// URL => paperUrl (if DOI does not exist)
+// presentationurl => slidesUrl
+// youtube => videoURL
+function canonicalizeCryptodb(data) {
+  papers = data.acceptedPapers;
+  for (var i = 0; i < papers.length; i++) {
+    paper = papers[i];
+    if ('DOI' in paper) {
+      paper['paperUrl'] = 'https://doi.org/' + paper['DOI'];
+    } else if ('URL' in paper) {
+      paper['paperUrl'] = paper['URL'];
+    }
+    if ('youtube' in paper) {
+      paper['videoUrl'] = 'https://youtube.com/watch?v=' + paper['youtube'];
+    }
+    if ('presentationurl' in paper) {
+      paper['slidesUrl'] = paper['presentationurl'];
+    }
+  }
+}
+
 // Note that the format imported from FSE or CHES is different than
 // the websubrev format. In particular, FSE and CHES have author
 // affiliations, author IDs from cryptodb, and additional fields.
@@ -401,6 +425,7 @@ function importFSEorCHES() {
   }
   console.log('importing from ' + venue);
   $.getJSON('https://iacr.org/cryptodb/data/export/ajax.php?venue=' + venue, function(data) {
+    canonicalizeCryptodb(data);
     if (!mergeTalks(data)) {
       alert('there was a problem importing this data');
       return;
