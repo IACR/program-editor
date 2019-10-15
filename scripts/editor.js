@@ -583,10 +583,16 @@ function warningBox(text) {
   $('#errorBox').modal();
 }
 
-// Custom helper for generating droppable div (i.e. distinguishing between sessions that can accept talks and those that can't)
-Handlebars.registerHelper('empty', function(data, options) {
+// Custom helper for generating droppable div.  It works by testing
+// to see if the data array exists. The isSession argument is used
+// to distinguish between the case of a session and a category.
+Handlebars.registerHelper('talkList', function(data, isSession, options) {
   if (data && data.length >= 0) {
-    return new Handlebars.SafeString('<div class="session-talks" data-placeholder="Drag talks to this session">' + options.fn(this) + '</div>');
+    if (isSession) {
+      return new Handlebars.SafeString('<div class="session-talks text-center" data-placeholder="Drag talks to this session">' + options.fn(this) + '</div>');
+    } else {
+      return new Handlebars.SafeString('<div class="category text-center" data-placeholder="Drag talks here to unschedule">' + options.fn(this) + '</div>');
+    }
   }
 });
 
@@ -601,26 +607,14 @@ function addDrag() {
   var containers = talks.concat(sessions);
 
   dragula(containers).on('drop', function(el, target, source, sibling) {
-    if (target.classList.contains('session-talks')) {
-      // hide drag & drop hint
-      target.firstChild.data = '';
-      target.style.border = '';
-
-      // TODO: make sure there's enough time in the session for these talks
-//      if (target.childNodes.length == 5) {
-//        var start = moment("10:55", "HH:MM");
-//        var end = moment("11:35", "HH:MM");
-//        warningBox('diff is ' + end.diff(start));
-//        warningBox('Are you sure you want more than 3 talks in a session?');
-//      }
-    }
-    if (source.classList.contains('session-talks')) {
-      // restore drag & drop hint
-      if (source.childNodes.length == 1) {
-        source.firstChild.data = 'Drag talks here';
-      }
-    }
     updateProgData(el, target, source, sibling);
+    // We use this test to see if the source is now empty of
+    // child elements, which indicates that we should redraw the hint
+    // for an empty session or category. source.firstElementChild is
+    // null if you just emptied the source in the drag.
+    if (source.firstElementChild === null) {
+      refresh();
+    }
   });
 }
 
@@ -902,6 +896,7 @@ function showTalkEditor(id) {
     $('#newTalkAffiliation').val('');
     $('#addTalkTitle').text('Add a new talk');
     $('#paperUrl').val('');
+    $('#slidesUrl').val('');
     $('#currentTalkStartTime').val('');
     $('#currentTalkEndTime').val('');
   } else {
@@ -915,6 +910,7 @@ function showTalkEditor(id) {
     $('#newTalkAffiliation').val(talkObj.affiliations);
     $('#addTalkTitle').text('Edit a talk');
     $('#paperUrl').val(talkObj.paperUrl);
+    $('#slidesUrl').val(talkObj.slidesUrl);
     $('#currentTalkStartTime').val(talkObj.starttime);
     $('#currentTalkEndTime').val(talkObj.endtime);
     if (talkObj.starttime) {
@@ -1692,7 +1688,7 @@ $(document).ready(function() {
   });
   checkLogin();
   // Make dropdown menus respond to hover.
-  $('ul.nav li.dropdown').hover(function() {
+  $('ul#topNavList li.dropdown').hover(function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(100);
   }, function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(100);

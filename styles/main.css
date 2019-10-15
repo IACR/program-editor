@@ -1,35 +1,9 @@
 /* Color scheme created by Kay McKelly: http://www.colourlovers.com/palette/4500426/teal_we_meet_again */
-/* These are designed to show a placeholder in an empty draggable area.
-   TODO(kevin): the one for section.category doesn't work. */
-   /*NOTE(from kay): if possible, do move these to the correct section of this stylesheet (or I can do that, whichever) */
-section.category:empty:before {
-    color: #12323C;
-    content: attr(data-placeholder);
-}
-
-/* Leave space so the floating action button doesn't cover the last pencil. */
-#talksList > div:last-child {
-    margin-bottom: 50px;
-}
-
-/* Floating action button */
-label#newCategoryButton {
-    position: absolute;
-    bottom: 5px;
-    right: 40px;
-}
-
-
-div.session-talks:empty:before {
-    color: #12323C;
-    content: attr(data-placeholder);
-}
-
-
 
 /*** General Styling ***/
 body {
   font-family: 'Raleway', sans-serif;
+/*  font-size: 14px;*/
   background-color: rgba(134, 191, 203, 0.1);
   color: #12323C;
   /* font-size: 1.7em; */
@@ -37,6 +11,10 @@ body {
 
 h1, h2, h3, h4, h5 {
   font-family: 'Open Sans Condensed', sans-serif;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
 }
 
 .editorTitles {
@@ -82,6 +60,10 @@ h1, h2, h3, h4, h5 {
   border-radius: 4px;
   background-color: rgba(24, 188, 156, 0.6);
 }
+#loginDD img {
+    height: 24px;
+    width: 24px;
+}
 
 /* change the color of active or hovered links */
 .navbar-custom .nav-item.active .nav-link, .navbar-custom .nav-item:focus .nav-link, .navbar-custom .nav-item:hover .nav-link, .dropdown-item {
@@ -106,6 +88,7 @@ div.dropdown-menu {
 #auth-button {
     display:none;
 }
+
 .login-alert {
     color: #ff0000;
     font-weight: bold;
@@ -130,82 +113,149 @@ div.dropdown-menu {
   display: none;
 }
 
+a.progName {
+  color: #1D404A;
+}
 
 
-/*** Talks Section ***/
+
+/*** Talks ***/
 #parent {
   display: none;
 }
 
-#addTalkBtn, .addTimeslot, #addCategoryBtn, #addDayBtn {
+/* These are designed to show a placeholder in an empty draggable area. */
+div.category:empty:before {
+    color: #12323C;
+    content: attr(data-placeholder);
+}
+
+/* Leave space so the floating action button doesn't cover the last pencil. */
+#talksList > div:last-child {
+    margin-bottom: 50px;
+}
+
+/* Floating action button */
+label#newCategoryButton {
+    position: absolute;
+    bottom: 2%;
+    right: 40px;
+}
+
+.categoryDiv {
+    padding: 10px;
+    background-color: rgba(177, 181, 231, 0.3);
+    margin-bottom:5px;
+}
+
+.categoryTitle {
+    /* font-size: 1.5em; */
+}
+
+div.category {
+    padding: 3px;
+    min-height: 3em;
+    background-color: rgba(29, 112, 122, 0.4);
+}
+
+div.talk {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+
+#talksList {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 5px;
+    border: 1px solid lightgrey;
+}
+
+div.talk {
+    border-radius: 8px;
+    background-color: #78C2CF;
+    border: 1px solid #1D707A;
+    margin: 5px;
+    padding: 8px;
+}
+
+div.talk:hover {
+    border: 1px solid #1D707A;
+    background-color: rgba(120, 194, 207, 0.3);
+    /*#14A6B5;*/
+}
+
+.authorList, .authorName {
+    font-family: 'Raleway', sans-serif;
+    text-align: left;
+    /* font-size: 0.9em; */
+}
+
+
+
+/*** Icons ***/
+a.editButton {
+  visibility: hidden;
+}
+
+.session:hover > a.editButton,
+.categoryDiv:hover > a.editButton,
+.talk:hover > a.editButton {
+    visibility: visible;
+}
+
+/* You may not delete or edit the Uncategorized category. */
+#category-0 a.editButton {
+    visibility: hidden;
+}
+
+span.addicon {
+  display:inline-block;
   width: 35px;
   height: 35px;
-  text-align: center;
-  padding: 2px 1px;
-  border-radius: 30px;
-  margin: 5px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+span.addicon:hover {
+  background-color: #0D2E32;
+}
+
+span.addicon img {
+  display:inline-block;
+  width: 35px;
+  height: 35px;
+  vertical-align:baseline;
+}
+
+img.infoIcon {
+    height:1em;
+    width:1em;
+}
+
+span.editIcon {
+    display: inline-block;
+    height: 1.5em;
+    width: 1.5em;
+}
+
+span.talkIcons {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
 }
 
 #newCategoryButton {
     float: right; !important;
 }
 
-.categoryTitle {
-  /* font-size: 1.5em; */
-}
-
-section.category {
-  padding: 3px;
-  min-height: 3em;
-  background-color: rgba(29, 112, 122, 0.4);
-}
-
-div.talk {
-  cursor: -webkit-grab;
-	cursor: -moz-grab;
-	cursor: grab;
-}
-
-#talksList {
-    max-height: 80vh;
-  overflow-y: auto;
-  padding: 5px;
-  border: 1px solid lightgrey;
-}
-.categoryDiv a {
-    visibility: hidden;
-}
-.categoryDiv:hover a {
-    visibility: visible;
-}
-/* You may not delete or edit the Uncategorized category. */
-#category-0 > .categoryDiv > a {
-    visibility: hidden;
-}
-
-div.talk {
-  border-radius: 8px;
-  background-color: #78C2CF;
-  border: 1px solid #1D707A;
-  margin: 5px;
-  padding: 8px;
-}
-
-div.talk:hover {
-  border: 1px solid #1D707A;
-  background-color: rgba(120, 194, 207, 0.3);
-  /*#14A6B5;*/
-}
-
-.authorList, .authorName {
-  font-family: 'Raleway', sans-serif;
-  text-align: left;
-  /* font-size: 0.9em; */
-}
-
 
 
 /*** Schedule Section ***/
+.session {
+  padding: 10px;
+}
+
 #renderedProgram {
   max-height: 80vh;
   overflow-y: auto;
@@ -213,18 +263,10 @@ div.talk:hover {
 }
 
 div.session-talks {
+  margin-top: 10px;
   min-height: 3em;
   background-color: rgba(29, 112, 122, 0.4);
   padding: 5px;
-  text-align: left;
-}
-
-.panel-body a {
-  visibility: hidden;
-}
-
-.panel-body:hover > a {
-    visibility: visible;
 }
 
 div.timeSlotDiv {
@@ -246,7 +288,7 @@ p.timeSlot {
 
 .talkTitle {
   font-family: 'Open Sans Condensed', sans-serif;
-  /* font-size: 1.2em; */
+  font-size: 1.2rem;
   font-weight: bold;
   text-align: left;
 }
@@ -286,9 +328,17 @@ span.authorName:last-of-type:after {
   content: '';
 }
 
+div.session-talks:empty:before {
+    color: #12323C;
+    content: attr(data-placeholder);
+}
 
 
 /*** Modals ***/
+.modal-body label {
+    font-weight: 600;
+}
+
 #warnBoxTitle {
   background-color: rgba(186, 0, 26, 0.7);
   color: #EDF6F7;
@@ -303,16 +353,6 @@ span.authorName:last-of-type:after {
   /* font-size: 0.8em; */
 }
 
-
-
-/*** mystery category ***/
-.talk a {
-    visibility: hidden;
-}
-.talk:hover > a {
-  visibility: visible;
-}
-
 input:invalid {
     border-color: red;
     box-shadow: inset 0 0.0625em 0.125em rgba(0,0,0,.2), 0 0 0.125em rgba(203,0,2,.8);
@@ -322,39 +362,18 @@ input:invalid {
     display: none;
 }
 
-/* Spinner for progress. */
-.glyphicon.spinning {
-    animation: spin 1s infinite linear;
-    -webkit-animation: spin2 1s infinite linear;
-}
-
-@keyframes spin {
-    from { transform: scale(1) rotate(0deg); }
-    to { transform: scale(1) rotate(360deg); }
-}
-
-@-webkit-keyframes spin2 {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-
-a.paperUrl, a.sessionUrl {
-    color: #0f0f0f !important;
-    visibility:visible;
-}
-
-a.progName {
-  color: #1D404A;
-}
-
-div.talk a {
-  color: #1D707A;
-}
-
 input#shiftDates {
     text-align: center;
 }
 
+div.progress {
+  height: 2em;
+}
+
+
+
+/*** Mystery section ***/
+/** TODO: get rid of panel **/
 .panel-custom {
     border-color: #1D707A !important;
 }
@@ -363,6 +382,17 @@ input#shiftDates {
     background-color: #1D707A !important;
     color: #EDF6F7 !important;
 }
-div.volume {
-    /* font-size: 0.9em; */
+
+#alertInstr {
+  border: 2px solid #78C2CF;
+}
+
+#alertInstr button.close {
+  font-size: 2em;
+  padding-top: 0.3rem !important;
+  color: black;
+}
+
+#alertInstr button.close:hover {
+  color: #78C2CF;
 }
