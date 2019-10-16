@@ -454,20 +454,17 @@
                 </label>
                 <input type="text" name="newName" placeholder="Program name (required)" class="form-control required col-md-7" id="newName" required />
               </div>
-              <div id="changeDatesDiv" class="form-group row mb-4">
+              <div id="changeDatesDiv" class="form-group row">
                 <label for="newDates" class="col-4 col-form-label">
                   Dates for the conference
                 </label>
-                <select id="dateChange" name="dateChange" class="form-control col-7" onchange="updateNewDates()">
-                  <option value="">No date change</option>
-                  <option value="shift">Shift dates</option>
-                  <option value="add">Add a day</option>
-                  <option value="delete">Delete a day</option>
-                </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-7 offset-md-4 pl-0">
+                <div class="col-7 px-0">
+                  <select id="dateChange" name="dateChange" class="form-control mb-3" onchange="updateNewDates()">
+                    <option value="">No date change</option>
+                    <option value="shift">Shift dates</option>
+                    <option value="add">Add a day</option>
+                    <option value="delete">Delete a day</option>
+                  </select>
                   <label id="shiftDateControl" for="shiftDates">
                     Shift dates by <input type="number" id="shiftDates" class="mx-2" value="0" min="-365" max="365" onchange="updateNewDates()" oninput="updateNewDates()"> day(s)<br/>
                   </label>
@@ -483,6 +480,11 @@
                   </select>
                 </div>
               </div>
+              <!-- <div class="form-group row">
+                <div class="col-7 offset-md-4 px-0"> -->
+
+                <!-- </div>
+              </div> -->
               <div class="form-group row">
                 <div class="col-4 text-right">
                   <label>
@@ -504,15 +506,13 @@
                   <span id="newDisplayStartdate"></span> to <span id="newDisplayEnddate"></span>
                 </div>
               </div>
-              <div class="form-group row">
-                <p class="alert alert-danger col-11" id="deleteWarning">
-                  If you delete a day, then all talks currently scheduled on that day will become unscheduled and any sessions will be lost.
-                </p>
-              </div>
+              <p class="alert alert-danger" id="deleteWarning">
+                If you delete a day, then all talks currently scheduled on that day will become unscheduled and any sessions will be lost.
+              </p>
               <input id="newStartdate" name="newStartdate" type="hidden"/>
               <input id="newEnddate" name="newEnddate" type="hidden"/>
             </form>
-          <!-- </div> -->
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
               Cancel
