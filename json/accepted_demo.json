@@ -8,7 +8,8 @@
         {
             "category": "Symmetric cryptography",
             "title": "Counter-in-Tweak: Authenticated Encryption Modes for Tweakable Block Ciphers",
-            "authors": "Thomas Peyrin and Yannick Seurin"
+            "authors": "Thomas Peyrin and Yannick Seurin",
+            "paperUrl": "https://doi.org/10.1007/978-3-662-53018-4_2"
         },
         {
             "category": "Secure Computation",
@@ -192,7 +193,8 @@
         {
             "category": "Algorithmic number theory",
             "title": "Efficient Algorithms for Supersingular Isogeny Diffie-Hellman",
-            "authors": "Craig Costello and Patrick Longa and Michael Naehrig"
+            "authors": "Craig Costello and Patrick Longa and Michael Naehrig",
+            "paperUrl": "https://dx.doi.org/10.1007/978-3-662-53018-4_21"
         },
         {
             "category": "Secure computation",
