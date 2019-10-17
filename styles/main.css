@@ -205,7 +205,7 @@ a.editButton {
 }
 
 /* You may not delete or edit the Uncategorized category. */
-#category-0 a.editButton {
+#category-0 > a.editButton {
     visibility: hidden;
 }
 
