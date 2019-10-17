@@ -373,16 +373,6 @@ div.progress {
 
 
 /*** Mystery section ***/
-/** TODO: get rid of panel **/
-.panel-custom {
-    border-color: #1D707A !important;
-}
-
-.panel-heading-custom {
-    background-color: #1D707A !important;
-    color: #EDF6F7 !important;
-}
-
 #alertInstr {
   border: 2px solid #78C2CF;
 }
