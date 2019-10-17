@@ -654,7 +654,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title" id="importTitle">
-              Import talks from ToSC or TCHES.
+              Import talks from ToSC or TCHES
             </h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -662,25 +662,35 @@
           </div>
           <div class="modal-body">
             <p class="form-text">
-              Papers that have already been published by ToSC or TCHES may be imported below. A date range
-              is optional.
+              Papers that have already been published by ToSC or TCHES may be imported below. A date range is optional.
             </p>
-            <label for="uploadTalksSelector">
+            <div class="form-group">
+              <label for="importSelect">
+                Select a journal
+              </label>
               <select class="form-control" id="importSelect">
-                <option value="" selected disabled>Select a journal</option>
+                <option value="" selected disabled></option>
                 <option value="tches">Transactions on Crypt. Hardware and Embedded Systems (TCHES)</option>
                 <option value="tosc">Transactions on Symmetric Cryptography (ToSC)</option>
               </select>
-              Select a date range of publication dates.<br>
-              <label for="importstartdate">
-                <input type="date" id="importstartdate" name="importstartdate" class="form-control" value="">
-                Published after
-              </label>
-              <label for="importenddate">
-                <input type="date" id="importenddate" name="importenddate" class="form-control" value="">
-                Published before
-              </label>
+            </div>
+            <label>
+              Select a date range of publication dates.
             </label>
+            <div class="form-group row">
+              <div class="col-6">
+                <input type="date" id="importstartdate" name="importstartdate" class="form-control" value="">
+                <label for="importstartdate" class="mt-1">
+                  Published after
+                </label>
+              </div>
+              <div class="col-6">
+                <input type="date" id="importenddate" name="importenddate" class="form-control" value="">
+                <label for="importenddate" class="mt-1">
+                  Published before
+                </label>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancel</button>
