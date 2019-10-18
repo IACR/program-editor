@@ -1123,16 +1123,19 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>The PDF file will be opened in a separate tab.</p>
-            <p>Note that formatting on paper is a work in progress, and may not be very usable
-              at this time.</p>
-            <form id="pdfform" method="POST" action="pdf/program.php" target="_programpdf" class="form-inline">
+            <p class="form-text">
+              The PDF file will be opened in a separate tab.
+            </p>
+            <p class="form-text">
+              Note that formatting on paper is a work in progress, and may not be very usable at this time.
+            </p>
+            <form id="pdfform" method="POST" action="pdf/program.php" target="_programpdf" class="form">
               <input type="hidden" name="json" value="">
-              <div class="form-group">
-                <label for="page_format">
-                  Page format:
+              <div class="form-group form-row">
+                <label for="page_format" class="col-form-label">
+                  Page format
                 </label>
-                <select name="page_format" id="page_format" class="form-control">
+                <select name="page_format" id="page_format" class="form-control col-8 ml-2">
                   <option value="Letter">US Letter</option>
                   <option value="Letter-L">US Letter landscape</option>
                   <option value="A4">A4</option>
@@ -1146,11 +1149,11 @@
                   <option value="HTML">Crude HTML for printing (not for web use)</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="two_column">
-                  Two column format:
+              <div class="form-check">
+                <input name="two_column" id="two_column" type="checkbox" class="form-check-input">
+                <label for="two_column" class="form-check-label">
+                  Two column format?
                 </label>
-                <input name="two_column" id="two_column" type="checkbox" class="form-control">
               </div>
             </form>
           </div>
