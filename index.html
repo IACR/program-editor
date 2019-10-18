@@ -1053,35 +1053,40 @@
             <p class="form-text">
               Timeslots are ordered by their start time but may overlap.
             </p>
-            <br />
             <form>
               <input type="hidden" id="dayIndex" value="" />
-              <div class="form-inline">
-                <div class="form-group">
-                  <label for="startTime">
-                    Start time
-                  </label>
-                  to
-                  <label for="endTime">
-                    End time
-                  </label>
-                </div>
-                <div class="form-group" id="timeslotDiv">
+              <div id="timeslotDiv" class="form-row form-group">
+                <div class="col-5">
+                  <label for="startTime">Start time</label>
                   <input type="text" name="startTime" class="form-control time start" id="newStartTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required/>
+                </div>
+                <div class="col-1 pt-5 text-center">
                   to
+                </div>
+                <div class="col-5">
+                  <label for="endTime">End time</label>
                   <input type="text" name="endTime" class="form-control time end" id="newEndTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required/>
                 </div>
-                <br />
-                <div class="form-group" id="timeSlotWarning">
-                  <div class="alert alert-danger">Start and end time are required.</div>
-                </div>
-                <label for="numtracks">Select the number of tracks.</label>
-                <select name="numtracks" id="selectSessionCount">
+              </div>
+              <!-- <div class="form-group"> -->
+                <!-- <label for="startTime" class="mr-3">Start time</label> <small>to</small> <label for="endTime" class="ml-3">End time</label>
+              </div>
+              <div class="form-group form-row" id="timeslotDiv">
+                <input type="text" name="startTime" class="form-control time start mr-2 col-5" id="newStartTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required/> <input type="text" name="endTime" class="form-control time end ml-2 col-5" id="newEndTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required/>
+              </div> -->
+              <div id="timeSlotWarning" class="alert alert-danger">Start and end time are required.</div>
+              <div class="form-group form-row">
+                <label for="numtracks" class="col-form-label">
+                  Select the number of tracks
+                </label>
+                <select name="numtracks" id="selectSessionCount" class="form-control ml-2 col-6">
                   <option value="1">One track</option>
                   <option value="2">Two tracks</option>
-                </select><br/>
-                <label for="includeTalks">Allow talks in the timeslot:</label>
-                <input type="checkbox" name="includeTalks" id="includeTalks"></input>
+                </select>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" name="includeTalks" id="includeTalks" class="form-check-input"></input>
+                <label for="includeTalks" class="form-check-label">Allow talks in the time slot?</label>
               </div>
             </form>
           </div>
