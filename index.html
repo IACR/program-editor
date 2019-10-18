@@ -832,23 +832,25 @@
                     </div>
                   </div>
                   <div class="col">
-                    <div class="form-group mb-0">
-                      <label for="startTime">
-                        Start time
-                      </label>
-                      to
-                      <label for="endTime">
-                        End time
-                      </label> (Optional)
+                    <div id="talkTimeDiv" class="form-row">
+                      <div class="col-6">
+                        <label for="startTime">
+                          Start time (optional)
+                        </label>
+                        <input type="text" name="startTime" class="form-control time start" id="currentTalkStartTime" autocomplete="off" />
+                      </div>
+                      <div class="col-6">
+                        <label for="endTime">
+                          End time (optional)
+                        </label>
+                        <input type="text" name="endTime" class="form-control time end" id="currentTalkEndTime" autocomplete="off" />
+                      </div>
                     </div>
-                    <div class="form-group form-inline" id="talkTimeDiv">
-                      <input type="text" name="startTime" class="form-control time start mr-2" id="currentTalkStartTime" autocomplete="off" />
-                      to
-                      <input type="text" name="endTime" class="form-control time end ml-2" id="currentTalkEndTime" autocomplete="off" />
-                      <small class="form-text">
-                        Note that these are not checked to fit the timeslot.
-                      </small>
-                    </div>
+                    <small class="form-text">
+                      Note that these are not checked to fit the timeslot.
+                    </small>
+                    <!-- <div class="form-group form-row">
+                    </div> -->
                   </div>
                 </div>
               </form>
@@ -932,10 +934,18 @@
               <input type="hidden" id="timeslotDayIndex" value="" />
               <input type="hidden" id="timeslotIndex" value="" />
               <div class="form">
-                <label for="startTime">Start time</label> to <label for="endTime">End time</label>
-                <div class="form-group form-inline mb-5" id="timeDiv">
-                  <input type="text" name="startTime" class="form-control time start mr-2" id="currentStartTime" autocomplete="off" /> to <input type="text" name="endTime" class="form-control time end ml-2" id="currentEndTime" autocomplete="off" />
+                <div class="form-row mb-4" id="timeDiv">
+                  <div class="col-6">
+                    <label for="startTime">Start time</label>
+                    <input type="text" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
+                  </div>
+                  <div class="col-6">
+                    <label for="endTime">End time</label>
+                    <input type="text" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
+                  </div>
                 </div>
+                <!-- <div class="form-group form-row >
+                </div> -->
                 <div id="addTrackToSession">
                   <p class="form-text mb-2">
                     To split this session into two tracks, please check the box below.
