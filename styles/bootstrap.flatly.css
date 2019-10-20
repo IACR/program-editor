@@ -11,7 +11,10 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic");
+/* iacr.org no longer takes content from off-site. Lato doesn't seem different enough
+ * from other sans-serif fonts to justify loading it locally.
+ * @import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic");
+*/
 :root {
   --blue: #2C3E50;
   --indigo: #6610f2;

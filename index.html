@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' https://api.crossref.org/";default-src: 'self'>
     <meta charset="utf-8">
 
     <title>Program Editor</title>
@@ -605,7 +606,8 @@
               Note that if Springer has not finished processing the papers for this conference, then they will not be available yet. You can always enter URLs individually at any time.
             </p>
             <div class="progress form-group">
-              <div id="doiProgress" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
+              <div id="doiSuccess" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
+              <div id="doiFailure" class="progress-bar bg-danger" role="progressbar" aria-valuenow="0" area-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
             </div>
           </div>
           <div class="modal-footer">
