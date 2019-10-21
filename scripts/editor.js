@@ -1493,7 +1493,7 @@ function matchDOI(data, textStatus, jqXHR) {
 // This class updates a boostrap progress bar with a given id. It keeps track
 // of several counters:
 //  successCount (how many were successfully matched to a paper)
-//  errorCount (how many lookups failed because of a server error).
+//  errorCount (how many lookups failed because of a server error)
 //  failureCount (how many matches failed to find an answer (either from a lack of match
 //     or a server error)
 //            
