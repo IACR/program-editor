@@ -1504,11 +1504,11 @@ function ProgressMonitor(totalCount) {
   } else {
     $('#doiStatus').text('');
   }
-  $('.progress').show();
   $('#doiSuccess').css('width', '0%');
   $('#doiFailure').css('width', '0%');
   $('#doiSuccess').prop('aria-valuenow', 0);
   $('#doiFailure').prop('aria-valuenow', 0);
+  $('.progress').show();
   this.totalCount = totalCount;
   this.failureCount = 0;
   this.successCount = 0;
