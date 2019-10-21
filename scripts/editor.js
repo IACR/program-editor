@@ -1461,9 +1461,11 @@ function startImportDOIs() {
 // Construct the URL to look up a talk in crossref. We use only the
 // first author.
 function getTalkUrl(talk) {
-  var url = "https://api.crossref.org/works?rows=20&query.title=";
-  url += talk.title.replace(' ', '+');
-  url += '&query.author=' + talk.authors[0].replace(' ', '+');
+  var url = "https://api.crossref.org/works?mailto=crossref@iacr.org&rows=20&query.bibliographic=";
+  // There is a weird error that if AND in caps occurs in the title, it gets
+  // a parse error. See https://gitlab.com/crossref/issues/issues/502
+  url += encodeURIComponent(talk.title); // .replace(' AND', ' and'));
+  url += '&query.author=' + encodeURIComponent(talk.authors[0]);
   return url;
 }
 
@@ -1483,36 +1485,51 @@ function matchDOI(data, textStatus, jqXHR) {
         jqXHR.talk.authors.length == item.author.length) {
       jqXHR.talk.paperUrl = item.URL;
       return true;
-    } else {
-      console.log(i + ':' + distance + ':' + item.title[0]);
     }
   }
   return false;
 }
 
-// This class updates a boostrap progress bar with a given id.
+// This class updates a boostrap progress bar with a given id. It keeps track
+// of several counters:
+//  successCount (how many were successfully matched to a paper)
+//  errorCount (how many lookups failed because of a server error)
+//  failureCount (how many matches failed to find an answer (either from a lack of match
+//     or a server error)
+//            
+//  It finishes when successCount + failureCount = totalCount
 function ProgressMonitor(totalCount) {
   if (totalCount == 0) {
     $('#doiStatus').text('No talks to look up');
   } else {
     $('#doiStatus').text('');
   }
+  $('#doiSuccess').css('width', '0%');
+  $('#doiFailure').css('width', '0%');
+  $('#doiSuccess').prop('aria-valuenow', 0);
+  $('#doiFailure').prop('aria-valuenow', 0);
   $('.progress').show();
-  $('#doiProgress').show();
-  $('#doiProgress').css('width', '0%');
-  $('#doiProgress').prop('aria-valuenow', 0);
-  $('#doiProgress').prop('aria-valuemax', 100);
   this.totalCount = totalCount;
   this.failureCount = 0;
   this.successCount = 0;
+  // Errors are different than match failures. This indicates that
+  // the ajax request had a failure.
+  this.errorCount = 0;
   this.updateWidget = function() {
     var msg = this.successCount + ' found out of ' + this.totalCount;
-    var val = Math.floor(100 * (this.successCount + this.failureCount) / this.totalCount);
-    $('#doiProgress').prop('aria-valuenow', val);
-    $('#doiProgress').css('width', String(val) + '%');
-    $('#doiProgress').html(val + '%');
+    var successVal = Math.floor(100 * this.successCount / this.totalCount);
+    var failureVal = Math.floor(100 * this.failureCount / this.totalCount);
+    $('#doiSuccess').prop('aria-valuenow', successVal);
+    $('#doiSuccess').css('width', String(successVal) + '%');
+    $('#doiSuccess').html(successVal + '%');
+    $('#doiFailure').prop('aria-valuenow', failureVal);
+    $('#doiFailure').css('width', String(failureVal) + '%');
+    $('#doiFailure').html(failureVal + '%');
     if (this.totalCount == this.failureCount + this.successCount) {
       msg = 'Finished! ' + msg;
+      if (this.errorCount) {
+        msg = msg + ' (' + this.errorCount + ' had server error(s))';
+      }
     }
     $('#doiStatus').text(msg);
   }
@@ -1521,7 +1538,13 @@ function ProgressMonitor(totalCount) {
     this.updateWidget();
   }
   this.reportFailure = function() {
+    console.log('failure reported');
     this.failureCount++;
+    this.updateWidget();
+  }
+  this.reportError = function(jqXHR) {
+    this.failureCount++;
+    this.errorCount++;
     this.updateWidget();
   }
 }
@@ -1575,8 +1598,14 @@ function findDOIs() {
           progressMonitor.reportFailure();
         }
       },
-      fail: function(jqXHR, textStatus, errorThrown) {
-        progressMonitor.reportFailure();
+      error: function(jqXHR, textStatus, errorThrown) {
+        // Note that this is not called on off-domain ajax.
+        // For this purpose we need to register a global handler
+        // for ajax requests.
+        console.dir(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+        progressMonitor.reportError();
       }
     });
   })).always(function() {
