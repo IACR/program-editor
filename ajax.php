@@ -141,7 +141,7 @@ function doLogin($userid, $password) {
   $userName = checkPassword($userid, $password);
   if ($userName) {
     session_unset();
-    session_destroy();
+    // session_destroy();
     ini_set('session.gc_maxlifetime', 1000000);
     session_set_cookie_params(0, '/tools', '.iacr.org', True);
     session_start();
@@ -302,7 +302,7 @@ if ($_POST && isset($_POST['iacrref']) && isset($_POST['password'])) {
 
 session_start();
 if ($_POST && isset($_POST['logout'])) {
-  session_destroy();
+  session_unset();
   echo json_encode(array('message' => 'User was logged out'));
   return;
 }
@@ -310,7 +310,7 @@ if ($_POST && isset($_POST['logout'])) {
 if (!isLoggedIn()) {
   sendError('Not logged in');
   return;
-} 
+}
 
 try {
   $pdo = new PDO('mysql:host=localhost;dbname=programs;charset=utf8', 'program_editor', $dbpassword);
@@ -325,7 +325,7 @@ try {
  } else { // A GET
    if (isset($_GET['id'])) {
      doGetRow($pdo, $_GET['id']);
-   } else {     
+   } else {
      doGetLatest($pdo);
    }
  }
