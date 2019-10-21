@@ -1052,8 +1052,10 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   if (progData.days[dayIndex].timeslots[slotIndex].sessions.length < 2) {
     // Can't delete the only session in a timeslot.
     $('#deleteSessionButton').hide();
+    $('#singleSessionInstructions').show();
   } else {
     $('#deleteSessionButton').show();
+    $('#singleSessionInstructions').hide();
   }
   $('#currentDayIndex').val(dayIndex);
   $('#currentSlotIndex').val(slotIndex);
