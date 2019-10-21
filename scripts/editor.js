@@ -1450,11 +1450,13 @@ function startImportDOIs() {
   $('#doiStatus').text('');
   $('#resultList').find('li').remove().end()
   $('.progress').hide();
+  $('#doiCloseBtn').removeAttr('disabled');
+  $('#doiCloseBtn').html('Cancel');
   $('#doiCloseBtn').removeClass('btn-success');
-  $('#doiCloseBtn').addClass('btn-secondary');
-  $('#doiSearchBtn').removeClass('disabled');
+  $('#doiCloseBtn').addClass('btn-light');
+  $('#doiSearchBtn').removeAttr('disabled');
   $('#doiSearchBtn').addClass('btn-success');
-  $('#doiSearchBtn').removeClass('btn-secondary');
+  $('#doiSearchBtn').removeClass('btn-light');
   $('#importDOISelection').modal();
 }
 
@@ -1553,9 +1555,10 @@ function ProgressMonitor(totalCount) {
 // a paperUrl field. This includes unassigned talks as well as
 // already scheduled talks.
 function findDOIs() {
-  $('#doiSearchBtn').addClass('disabled');
+  $('#doiSearchBtn').attr('disabled', true);
   $('#doiSearchBtn').removeClass('btn-success');
-  $('#doiSearchBtn').addClass('btn-secondary');
+  $('#doiSearchBtn').addClass('btn-light');
+  $('#doiCloseBtn').attr('disabled', true);
   var talks = [];
   progData.config.unassigned_talks.forEach(function(category) {
     category.talks.forEach(function(talk) {
@@ -1609,8 +1612,10 @@ function findDOIs() {
       }
     });
   })).always(function() {
+    $('#doiCloseBtn').removeAttr('disabled');
+    $('#doiCloseBtn').removeClass('btn-light');
     $('#doiCloseBtn').addClass('btn-success');
-    $('#doiCloseBtn').removeClass('btn-secondary');
+    $('#doiCloseBtn').html('Close');
     console.log('finished all lookups');
     refresh();
   });;
