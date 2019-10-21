@@ -129,14 +129,14 @@
           </div>
         </div>
         <div class="row">
-          <section id="newOrExisting" class="col-md-8 col-md-offset-2 setupStep">
+          <section id="newOrExisting" class="col-12 setupStep">
             <p>
               If you've been here before, you can edit an existing program. Otherwise, start from a new one. If you open one that is owned by
               someone else, then you may not overwrite their work but you can save your own copy.
             </p>
             <div class="row">
-              <div class="col-md-6">
-                <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm">
+              <div class="col-12">
+                <button type="button" name="newProg" onclick="createNew();this.blur()" class="btn btn-success btn-sm mr-2">
                   New
                 </button>
                 <button type="button" name="existingProg" onclick="editExisting();this.blur()" class="btn btn-success btn-sm">
@@ -151,7 +151,7 @@
         </div>
 
         <div class="row">
-          <section id="versionPicker" class="col-md-8 col-md-offset-2 setupStep">
+          <section id="versionPicker" class="col-12 setupStep">
             <table class="table table-bordered" id="versionList">
               <tr>
                 <th>Name</th>
@@ -164,7 +164,7 @@
         </div>
 
         <div class="row">
-          <section id="templateSelector" class="col-md-8 col-md-offset-2 setupStep">
+          <section id="templateSelector" class="col-7 setupStep">
             <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
               <option value="" disabled selected>
                 Select a template to get started (you can change things later)
@@ -195,43 +195,45 @@
         </div>
 
         <div class="row" id="nameEntry">
-          <section class="col-md-8 col-md-offset-2 setupStep">
-            <p>
+          <section class="col-7 setupStep">
+            <label for="inputName">
               Enter a name for the conference program.
-            </p>
-            <input type="text" name="inputName" id="inputName" />
-            <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success">
-              Next
-            </button>
+            </label>
+            <div class="d-flex">
+              <input type="text" name="inputName" id="inputName" class="form-control" />
+              <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success ml-2">
+                Next
+              </button>
+            </div>
           </section>
         </div>
         <div class="row">
-          <section id="datePicker" class="col-md-8 col-md-offset-2 setupStep">
+          <section id="datePicker" class="col-7 setupStep">
             <p>
               Choose the start and end date for your conference.
             </p>
-            <label for="startdate">From
-              <input type="text" id="startdate" name="startdate" />
-            </label>
-            <label for="enddate">to
-              <input type="text" id="enddate" name="enddate" />
-            </label>
+            <div class="d-flex">
+              <label for="startdate" class="col-form-label">From</label>
+              <input type="text" id="startdate" name="startdate" class="form-control mx-2" />
+              <label for="enddate" class="col-form-label">to</label>
+              <input type="text" id="enddate" name="enddate" class="form-control ml-2" />
+            </div>
           </section>
         </div>
         <div class="row">
-          <section id="uploadTalks" class="col-md-8 col-md-offset-2 form-group">
+          <section id="uploadTalks" class="col-12 form-group">
             <p>
               Next, specify the list of accepted papers. This can be an upload from websubrev
               (a JSON file), or you can import accepted papers from TCHES or ToSC.
               You can do this later if you like.
             </p>
-            <button type="button" name="showUpload" onclick="showWebsubrevUpload(false)" class="btn btn-sm btn-success">
+            <button type="button" name="showUpload" onclick="showWebsubrevUpload(false)" class="btn btn-sm btn-success mr-2">
               Upload websubrev accepted talks
             </button>
-            <button type="button" name="showImport" onclick="showImportFSEorCHES(false)" class="btn btn-sm btn-success">
+            <button type="button" name="showImport" onclick="showImportFSEorCHES(false)" class="btn btn-sm btn-success mr-2">
               Import from ToSC or TCHES
             </button>
-            <button type="button" name="skipUpload" onclick="useEmptyTalks()" class="btn btn-sm btn-success">
+            <button type="button" name="skipUpload" onclick="useEmptyTalks()" class="btn btn-sm btn-success mr-2">
               Skip for now
             </button>
             <button type="button" name="useDemoTalks" onclick="useDemoTalks()" class="btn btn-sm btn-success">
@@ -241,8 +243,8 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
 
+    <div class="container-fluid">
       <main id="parent" class="mt-4">
         <div class="row">
           <div class="col-md-3">
@@ -285,11 +287,11 @@
         </script>
         <div class="row">
           <article id="categoryList" class="col-md-3">
-<div id="alertInstr" class="alert alert-light alert-dismissible">
+            <div id="alertInstr" class="alert alert-light alert-dismissible">
               <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Instructions: Drag talks from the categories below to the sessions on the right. You can edit sessions, talks, timeslots, days, etc. When finished, you can export the JSON for the website.
-</div>
-<section id="talksList">
+            </div>
+            <section id="talksList">
               <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
               <script id="talks-template" type="text/x-handlebars-template">
                 <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
@@ -612,7 +614,7 @@
           </div>
           <div class="modal-footer">
             <span id="doiStatus"></span>
-            <button id="doiCloseBtn" type="button" class="btn btn-light btn-sm" data-dismiss="modal">Close</button>
+            <button id="doiCloseBtn" type="button" class="btn btn-sm btn-light" data-dismiss="modal">Cancel</button>
             <button id="doiSearchBtn" type="button" onclick="findDOIs()" class="float-right btn btn-success btn-sm">Search</button>
           </div>
           <div class="form-group importResults" id="importResults">
@@ -644,7 +646,7 @@
             </label>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -720,7 +722,7 @@
             </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
