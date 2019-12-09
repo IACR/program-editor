@@ -845,8 +845,11 @@ function saveTalk() {
   }
 
   if (talkId === "") {
+    var categoryIndex = 0;
     let category = $('#newTalkCategory').children(':selected');
-    var categoryIndex = new Number(category.attr('value'));
+    if (category) {
+      categoryIndex = new Number(category.attr('value'));
+    }
     progData.config.unassigned_talks[categoryIndex].talks.unshift(talk);
   }
   $('#editTalkBox').modal('hide');
