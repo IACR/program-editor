@@ -79,9 +79,6 @@
           },
           "keywords": {
             "type": "string"
-          },
-          "category": {
-            "type": "string"
           }
         }
       }
