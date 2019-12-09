@@ -828,9 +828,6 @@ function saveTalk() {
   // TODO: handle affiliations
   talk.affiliations = $('#newTalkAffiliation').val();
 
-  var category = $('#newTalkCategory').children(':selected');
-  talk.category = category.text();
-
   if (paperUrl) {
     talk.paperUrl = paperUrl;
   } else {
@@ -848,7 +845,11 @@ function saveTalk() {
   }
 
   if (talkId === "") {
-    var categoryIndex = new Number(category.attr('value'));
+    var categoryIndex = 0;
+    let category = $('#newTalkCategory').children(':selected');
+    if (category) {
+      categoryIndex = new Number(category.attr('value'));
+    }
     progData.config.unassigned_talks[categoryIndex].talks.unshift(talk);
   }
   $('#editTalkBox').modal('hide');
@@ -909,7 +910,13 @@ function showTalkEditor(id) {
   $('#deleteTalkWarning').hide();
   $('#talkDeleteButton').text('Delete talk');
   $('#newTalkCategory').find('option').remove().end()
-
+  if (id) {
+    $('#talkTimeSelector').show();
+    $('#categorySelector').hide();
+  } else {
+    $('#talkTimeSelector').hide();
+    $('#categorySelector').show();
+  }
   for (var i = 0; i < progData.config.unassigned_talks.length; i++) {
     $('#newTalkCategory').append($('<option>', {
       value:i, text:progData.config.unassigned_talks[i].name
@@ -1250,21 +1257,10 @@ function saveTimeslot() {
 // If a session is about to be deleted (either by deleting the one session
 // or by deleting the timeslot), then return the talks to the unassigned_talks
 // area.
-// TODO: this function may need to be rewritten because we really should
-// move talks to the category they're assigned to, rather than lumping them
-// all into unassigned. See issue #135.
 function moveTalksToUnassigned(session) {
   if (session.hasOwnProperty('talks')) {
     for (var i = 0; i < session.talks.length; i++) {
-      var talk = session.talks[i];
-      // Find the category in unassigned_talks that matches this talk.
-      var category = progData.config.unassigned_talks.find(function(cat) {
-        return cat.name === talk.category;
-      });
-      if (category === null) {
-        category = progData.config.unassigned_talks[0];
-      }
-      category.talks.push(talk);
+      progData.config.unassigned_talks[0].push(session.talks[i]);
     }
   }
 }
