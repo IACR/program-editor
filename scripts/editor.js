@@ -1728,6 +1728,15 @@ function checkLogin() {
 //   $('#uploadTalks').show(500);
 // }
 
+// return dictionary (object) of url parameters. NOTE that this fails on repeat params
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+
 // executes functions once document is ready
 $(document).ready(function() {
   document.getElementById('uploadTalksSelector').addEventListener('change', uploadTalks);
@@ -1757,4 +1766,9 @@ $(document).ready(function() {
   $('#topNavList a').on('click', function() {
     $('.dropdown-menu').fadeOut(100);
   });
+
+  // checking for ID in url
+  if ('id' in getUrlVars()) {
+    getConfig('ajax.php?id=' + getUrlVars()['id'],true);
+  }
 });
