@@ -45,7 +45,7 @@
 
       <div class="form-group row">
         <label for="templateSelect" class="col-3 col-form-label">Base conference template</label>
-        <select name="templateSelect" class="col-6" onchange="getConfig(this.value, false)">
+        <select name="templateSelect" class="col-6" onchange="getConfig(this.value)">
           <option value="" disabled selected>
             Please select a template
           </option>
@@ -75,7 +75,7 @@
 
       <div id="startEndDatePicker" class="form-group row">
         <label for="startDate" class="col-3 col-form-label">Conference dates</label>
-        <input id="startDate" type="text" class="col-3 mr-2" name="startDate" autocomplete="off" /> <label class="col-form-label">to</label> <input id="endDate" type="text" class="col-3 ml-2" name="endDate" autocomplete="off" />
+        <input id="startDate" type="text" class="col-3 mr-2" name="startDate" autocomplete="off" placeholder="Start date" /> <label class="col-form-label">to</label> <input id="endDate" type="text" class="col-3 ml-2" name="endDate" autocomplete="off" placeholder="End date" />
       </div>
 
       <button id="startEditor" class="btn btn-success btn-small" disabled>Start editor</button>

@@ -1,9 +1,3 @@
-/*
-  1) define progData (= template)
-  2) add name and unassigned talks to progData
-  3) submit progData and continue to editor proper
-*/
-
 // start with conference name in progData
 var progData = {name: document.getElementById('confName').value};
 
