@@ -32,6 +32,16 @@
     <p class="instructions mt-3 text-justify">
       These settings can all be changed later.
     </p>
+
+    <!-- Button to trigger login modal -->
+    <div class="row" id="auth-button">
+      <div class="col-md-8">
+        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#authModal">
+          Log in for this app
+        </button>
+      </div>
+    </div>
+
     <div class="container pt-4">
       <!-- TODO: setting up progData in browser memory then gonna do an AJAX call -->
       <textarea id="acceptedPapers" class="d-none" name="accepted" rows="8" cols="80" readonly>
@@ -40,7 +50,7 @@
 
       <div id="confNameInput" class="form-group row">
         <label for="name" class="col-3 col-form-label">Conference name</label>
-        <input id="confName" type="text" class="col-6" name="name" value="<?php echo $_POST['name']; ?>" oninput="updateName()" />
+        <input id="confName" type="text" class="col-6" name="name" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" oninput="updateName()" />
       </div>
 
       <div class="form-group row">
@@ -79,6 +89,48 @@
       </div>
 
       <button id="startEditor" class="btn btn-success btn-small" disabled>Start editor</button>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="authModalLabel">Log in for IACR Program Creator</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>This app requires you to log in with your IACR reference number
+              and password.
+            </p>
+            <form class="form-horizontal" onsubmit="return false;">
+              <div class="form-group">
+                <label for="iacrref" class="col-sm-3 control-label">IACR ref #</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="iacrref">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" id="password">
+                </div>
+              </div>
+            </form>
+            <p>
+              If you have forgotten your IACR reference number or password,
+              <a target="_blank" href="https://secure.iacr.org/membership/members/update.html">click here to recover it</a>.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <p id="login_progress"></p>
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+            <button type="button" onClick="doLogin();this.blur()"class="btn btn-success">Log in</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Bootstrap scripts -->
