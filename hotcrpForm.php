@@ -7,18 +7,17 @@
     <title>Program Editor</title>
 
     <!-- Bootstrap -->
-    <!-- <link rel="stylesheet" href="/libs/css/bootstrap/dist/css/bootstrap.min.css" /> -->
    <link href="styles/bootstrap.flatly.css" rel="stylesheet" />
 
-    <!-- jQuery daterangepicker, jQuery timepicker, & Dragula -->
+    <!-- jQuery daterangepicker -->
     <link href="./dependencies/jquery-daterange-picker/daterangepicker.min.css" rel="stylesheet" />
-    <link href="./dependencies/jquery-timepicker/jquery.timepicker.css" rel="stylesheet" />
 
     <!-- Styling: Custom -->
     <link href="./styles/main.css" rel="stylesheet" />
     <link href="/libs/fonts/raleway-regular.css" rel="stylesheet"/>
     <link href="/libs/fonts/open-sans-condensed.css" rel="stylesheet"/>
 
+    <!-- Page-specific styling -->
     <style>
       #startEndDatePicker {
         display: none;
@@ -34,7 +33,7 @@
       These settings can all be changed later.
     </p>
     <div class="container pt-4">
-      <!-- TODO: setting up progData in browser memory then gonna do an AJAX call so form will eventually be irrelevant -->
+      <!-- TODO: setting up progData in browser memory then gonna do an AJAX call -->
       <textarea id="acceptedPapers" class="d-none" name="accepted" rows="8" cols="80" readonly>
         <?php echo $_POST['accepted'] ?>
       </textarea>
@@ -78,7 +77,7 @@
         <label for="startDate" class="col-3 col-form-label">Conference dates</label>
         <input id="startDate" type="text" class="col-3 mr-2" name="startDate" autocomplete="off" /> <label class="col-form-label">to</label> <input id="endDate" type="text" class="col-3 ml-2" name="endDate" autocomplete="off" />
       </div>
-      
+
       <button id="startEditor" class="btn btn-success btn-small" disabled>Start editor</button>
     </div>
 
@@ -92,7 +91,7 @@
     <script src="./dependencies/jquery-daterange-picker/jquery.daterangepicker.min.js"></script>
     <script src="./dependencies/datepair/jquery.datepair.min.js"></script>
 
-    <!-- do the thing -->
+    <!-- Custom scripts -->
     <script src="./scripts/hotCRP.js"></script>
   </body>
 </html>
