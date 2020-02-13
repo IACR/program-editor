@@ -89,3 +89,65 @@ function getConfig(name) {
       warningBox('There was a problem with this conference template. Please try another.');
   });
 }
+
+// is user logged in?
+function checkLogin() {
+  $.ajax({
+    type: "GET",
+    url: "ajax.php",
+    success: function(data, textStatus, jqxhr) {
+      if (data.hasOwnProperty('username')) {
+        $('#authModal').modal('hide');
+      } else {
+        $('#auth-button').show(500);
+        $('#authModal').modal();
+      }
+    },
+    error: function(jqxhr, textStatus, error) {
+      console.dir(jqxhr);
+      console.dir(error);
+    }
+  });
+}
+
+// log user in
+function doLogin() {
+  // This send an AJAX POST and receives userid and userName in response
+  // if it works.
+  var iacrref = $('#iacrref').val();
+  var password = $('#password').val();
+  $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: {'iacrref': iacrref, 'password': password},
+    beforeSend: function(jqXHR, settings) {
+      console.log('before send');
+      $('#login_progress').removeClass('login-alert');
+      $('#login_progress').text('Checking...');
+      return true;
+    },
+    dataType: "json",
+    success: function(data, textStatus, jqxhr) {
+      console.dir(data);
+      if (data.hasOwnProperty('username')) {
+        $('#login_progress').text('');
+        $('#authModal').modal('hide');
+        if ($('#auth-button').is(':visible')) {
+          $('#auth-button').hide(500);
+        }
+      } else {
+        $('#login_progress').addClass('login-alert');
+        $('#login_progress').text(data['error']);
+      }
+    },
+    error: function(jqxhr, textStatus, error) {
+      $('#login_status').text('An error occurred:' + textStatus);
+      console.dir(jqxhr);
+      console.dir(error);
+    }
+  });
+}
+
+$(document).ready(function() {
+  checkLogin();
+})
