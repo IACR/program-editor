@@ -121,7 +121,7 @@ function reallyDeleteProgram() {
         $('#delete_status').text(data['error']);
       } else {
         $('#delete_status').text(progData.name + ' deleted');
-        location.reload();
+        navigateToHome();
       }
     },
     error: function(jqxhr, textStatus, error) {
@@ -1735,6 +1735,11 @@ function getUrlVars() {
       vars[key] = value;
   });
   return vars;
+}
+
+// navigates to url without parameters
+function navigateToHome() {
+  window.location.href = window.location.href.split('?')[0];
 }
 
 // executes functions once document is ready
