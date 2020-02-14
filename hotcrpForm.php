@@ -29,26 +29,27 @@
       <span class="navbar-brand" id="navBrand">Program Creator</span>
     </nav>
 
-    <p class="instructions mt-3 text-justify">
-      These settings can all be changed later.
-    </p>
 
-    <!-- Button to trigger login modal -->
-    <div class="row" id="auth-button">
-      <div class="col-md-8">
-        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#authModal">
-          Log in for this app
-        </button>
+    <div class="container">
+      <p class="instructions text-justify">
+        These settings can all be changed later.
+      </p>
+
+      <!-- Button to trigger login modal -->
+      <div class="row" id="auth-button">
+        <div class="col-md-8">
+          <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#authModal">
+            Log in for this app
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="container pt-4">
       <!-- TODO: setting up progData in browser memory then gonna do an AJAX call -->
       <textarea id="acceptedPapers" class="d-none" name="accepted" rows="8" cols="80" readonly>
         <?php echo $_POST['accepted'] ?>
       </textarea>
 
-      <div id="confNameInput" class="form-group row">
+      <div id="confNameInput" class="form-group row mt-4">
         <label for="name" class="col-3 col-form-label">Conference name</label>
         <input id="confName" type="text" class="col-6" name="name" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" oninput="updateName()" />
       </div>
