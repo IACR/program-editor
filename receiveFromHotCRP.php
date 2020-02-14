@@ -13,7 +13,6 @@
   session_start();
   if (!isLoggedIn()) {
     sendError('Not logged in');
-    var_dump($_SESSION);
     return;
   }
 
