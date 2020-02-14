@@ -148,6 +148,24 @@ function doLogin() {
   });
 }
 
+function submitEditorForm() {
+  if (document.getElementById('startEditor').disabled) {
+    console.log('Button is disabled');
+    return;
+  }
+  fetch('receiveFromHotCRP.php', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'progData=' + encodeURIComponent(JSON.stringify(progData))
+  }).then((response)=>response.text())
+  .then((data)=>{
+    console.dir(data);
+  }).catch((e)=>console.dir(e));
+}
+
 $(document).ready(function() {
   checkLogin();
 })
