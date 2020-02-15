@@ -10,6 +10,11 @@
 
   header('Content-Type: application/json');
 
+  if(!isset($_POST['progData'])) {
+    sendError('missing progData');
+    return;
+  }
+
   session_start();
   if (!isLoggedIn()) {
     sendError('Not logged in');
