@@ -74,7 +74,10 @@ function getConfig(name) {
 
     // updates name and add accepted papers
     progData.name = document.getElementById('confName').value;
-    progData.config.unassigned_talks = document.getElementById('acceptedPapers').value;
+    progData.config.unassigned_talks = [
+      {'name': 'Uncategorized',
+      'talks':  JSON.parse(document.getElementById('acceptedPapers').value).acceptedPapers}
+    ];
 
     // add dates to progData and show datepicker
     hotCrpDatePicker(progData.days.length);
