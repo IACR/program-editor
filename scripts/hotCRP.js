@@ -81,7 +81,6 @@ function getConfig(name) {
 
     // add dates to progData and show datepicker
     hotCrpDatePicker(progData.days.length);
-    // must have .removeAttr because jquery is a POS and adds display: block when .show is used -_-
     $('#datePickerRow').css('visibility', 'visible');
 
     document.getElementById('startDate').value = '';
