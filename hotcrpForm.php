@@ -19,8 +19,13 @@
 
     <!-- Page-specific styling -->
     <style>
-      #startEndDatePicker {
-        display: none;
+      #datePickerRow {
+        visibility: hidden;
+      }
+
+      /* no idea why this is needed but this is needed */
+      #startDate {
+        margin-left: -8px;
       }
     </style>
   </head>
@@ -49,44 +54,57 @@
         <?php echo $_POST['accepted'] ?>
       </textarea>
 
-      <div id="confNameInput" class="form-group row mt-4">
-        <label for="name" class="col-3 col-form-label">Conference name</label>
-        <input id="confName" type="text" class="col-6" name="name" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" oninput="updateName()" />
+      <div id="confNameInput" class="input-group row my-4">
+        <label for="name" class="col-3 col-form-label text-right">Conference name</label>
+        <div class="col-6">
+          <input id="confName" type="text" class="form-control" name="name" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>" oninput="updateName()" />
+          <div class="invalid-feedback">
+            There is already a program saved with this name. Please choose another.
+          </div>
+        </div>
       </div>
 
-      <div class="form-group row">
-        <label for="templateSelect" class="col-3 col-form-label">Base conference template</label>
-        <select name="templateSelect" class="col-6" onchange="getConfig(this.value)">
-          <option value="" disabled selected>
-            Please select a template
-          </option>
-          <option value="./json/crypto_config.json">
-            Crypto (5 days, dual track, bbq)
-          </option>
-          <option value="./json/ec_config.json">
-            Eurocrypt/Asiacrypt (5 days, dual track, banquet)
-          </option>
-          <option value="./json/pkc_config.json">
-            CHES/FSE/PKC/TCC (4 days, single track)
-          </option>
-          <option value="./json/basic_1day.json">
-            Basic one-day workshop
-          </option>
-          <option value="./json/basic_2day.json">
-            Basic two-day workshop
-          </option>
-          <option value="./json/basic_3day.json">
-            Basic three-day conference
-          </option>
-          <option value="./json/dualtrack_5day.json">
-            Dual track, five days
-          </option>
-        </select>
+      <div class="input-group row my-4">
+        <label for="templateSelect" class="col-3 col-form-label text-right">Base conference template</label>
+        <div class="col-6">
+          <select name="templateSelect" class="form-control" onchange="getConfig(this.value)">
+            <option value="" disabled selected>
+              Please select a template
+            </option>
+            <option value="./json/crypto_config.json">
+              Crypto (5 days, dual track, bbq)
+            </option>
+            <option value="./json/ec_config.json">
+              Eurocrypt/Asiacrypt (5 days, dual track, banquet)
+            </option>
+            <option value="./json/pkc_config.json">
+              CHES/FSE/PKC/TCC (4 days, single track)
+            </option>
+            <option value="./json/basic_1day.json">
+              Basic one-day workshop
+            </option>
+            <option value="./json/basic_2day.json">
+              Basic two-day workshop
+            </option>
+            <option value="./json/basic_3day.json">
+              Basic three-day conference
+            </option>
+            <option value="./json/dualtrack_5day.json">
+              Dual track, five days
+            </option>
+          </select>
+        </div>
       </div>
 
-      <div id="startEndDatePicker" class="form-group row">
-        <label for="startDate" class="col-3 col-form-label">Conference dates</label>
-        <input id="startDate" type="text" class="col-3 mr-2" name="startDate" autocomplete="off" placeholder="Start date" /> <label class="col-form-label">to</label> <input id="endDate" type="text" class="col-3 ml-2" name="endDate" autocomplete="off" placeholder="End date" />
+      <div id="datePickerRow" class="row my-4">
+        <!-- TODO: this is misaligned right compared to other labels -->
+        <label for="startDate" class="col-3 col-form-label text-right">Conference dates</label>
+        <div class="col-9">
+          <div id="startEndDatePicker" class="form-inline">
+            <input id="startDate" type="text" class="form-control mr-2" name="startDate" autocomplete="off" placeholder="Start date" /> <label class="col-form-label">to</label>
+            <input id="endDate" type="text" class="form-control ml-2" name="endDate" autocomplete="off" placeholder="End date" />
+          </div>
+        </div>
       </div>
 
       <button id="startEditor" onclick="submitEditorForm()" class="btn btn-success btn-small" disabled>Start editor</button>

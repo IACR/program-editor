@@ -81,7 +81,8 @@ function getConfig(name) {
 
     // add dates to progData and show datepicker
     hotCrpDatePicker(progData.days.length);
-    $('#startEndDatePicker').show(500);
+    // must have .removeAttr because jquery is a POS and adds display: block when .show is used -_-
+    $('#datePickerRow').css('visibility', 'visible');
 
     document.getElementById('startDate').value = '';
     document.getElementById('endDate').value = '';
@@ -163,9 +164,23 @@ function submitEditorForm() {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: 'progData=' + encodeURIComponent(JSON.stringify(progData))
-  }).then((response)=>response.text())
+  }).then((response)=>response.json())
   .then((data)=>{
     console.dir(data);
+    // TODO: better error displays to user
+    if (data.hasOwnProperty('error')) {
+      // looking for duplicates in db
+      console.log('line 171');
+      if (data.hasOwnProperty('errorInfo') && data.errorInfo[1] == 1062) {
+        console.dir(data.errorInfo);
+        document.getElementById('confName').classList.add('is-invalid');
+      }
+    }
+    else {
+      if (data.hasOwnProperty('id')) {
+        window.location.href = '//' + location.host + '?id=' + data.id;
+      }
+    }
   }).catch((e)=>console.dir(e));
 }
 

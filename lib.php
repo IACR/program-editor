@@ -1,7 +1,10 @@
 <?php
 // Utility function to send an error message.
-function sendError($message) {
+function sendError($message, $errorInfo = null) {
   $data = array("error" => $message);
+  if ($errorInfo != null) {
+    $data['errorInfo'] = $errorInfo;
+  }
   echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }
 
@@ -52,7 +55,7 @@ function doSave($pdo, $json) {
       $response = array("userid" => $userid, "database_id" => $pdo->lastInsertId());
       echo json_encode($response, JSON_UNESCAPED_UNICODE);
     } else {
-      sendError('Server error: unable to save');
+      sendError('Server error: unable to save', $stmt->errorInfo());
     }
   } else { // Check that the userid in the database is the same as the authenticated one.
     $database_id = $data['database_id'];
