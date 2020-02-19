@@ -74,9 +74,16 @@ function getConfig(name) {
 
     // updates name and add accepted papers
     progData.name = document.getElementById('confName').value;
+    let acceptedPapers = JSON.parse(document.getElementById('acceptedPapers').value).acceptedPapers;
+
+    acceptedPapers.forEach((paper, i) => {
+      paper.id = 'talk-' + createUniqueId();
+    });
+
     progData.config.unassigned_talks = [
-      {'name': 'Uncategorized',
-      'talks':  JSON.parse(document.getElementById('acceptedPapers').value).acceptedPapers}
+      {'id': 'category-' + createUniqueId(),
+      'name': 'Uncategorized',
+      'talks': acceptedPapers}
     ];
 
     // add dates to progData and show datepicker
@@ -169,15 +176,15 @@ function submitEditorForm() {
     // TODO: better error displays to user
     if (data.hasOwnProperty('error')) {
       // looking for duplicates in db
-      console.log('line 171');
       if (data.hasOwnProperty('errorInfo') && data.errorInfo[1] == 1062) {
         console.dir(data.errorInfo);
         document.getElementById('confName').classList.add('is-invalid');
       }
     }
     else {
-      if (data.hasOwnProperty('id')) {
-        window.location.href = '//' + location.host + '?id=' + data.id;
+      if (data.hasOwnProperty('database_id')) {
+        let url = window.location.href;
+        window.location.href = url.substring(0, url.lastIndexOf("/")) + '?id=' + data.database_id;
       }
     }
   }).catch((e)=>console.dir(e));
