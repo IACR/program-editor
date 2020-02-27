@@ -1,10 +1,14 @@
 {
   "name": "Eurocrypt/Asiacrypt (5 days, dual tracks, banquet)",
   "config": {
-    "default_track_locations": ["Location TBD", "Location TBD"],
+    "default_track_locations": [
+      {"name": "Location TBD"},
+      {"name": "Location TBD"}
+    ],
     "default_talk_minutes": 25,
     "unassigned_talks": [{
       "name": "Uncategorized",
+      "id": "category-0",
       "talks": []
     }]
   },

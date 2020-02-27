@@ -1,10 +1,18 @@
 {
   "name": "Dual track, 5 days",
   "config": {
-    "default_track_locations": [],
+    "default_track_locations": [
+      {
+        "name": "Location TBD"
+      },
+      {
+        "name": "Location TBD"
+      }
+    ],
     "default_talk_minutes": 25,
     "unassigned_talks": [{
       "name": "Uncategorized",
+      "id": "category-0",
       "talks": []
     }]
   },
