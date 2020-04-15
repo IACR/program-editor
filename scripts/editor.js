@@ -532,7 +532,11 @@ function mergeTalks(data) {
         paper.category = 'Uncategorized';
       }
     }
-    paper.id = "talk-" + createUniqueId();
+    if (paper.hasOwnProperty('pubkey')) {
+      paper.id = "talk-" + paper.pubkey;
+    } else {
+      paper.id = "talk-" + createUniqueId();
+    }
     if (Array.isArray(paper.authors)) { // TOSC or TCHES format
       var authorArray = [];
       var affiliations = [];

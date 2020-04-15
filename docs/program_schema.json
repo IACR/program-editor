@@ -91,6 +91,19 @@
     "config": {
       "type": "object",
       "properties": {
+        "timezone": {
+          "description": "Time zone for the first event of the conference.",
+          "$comment": "The abbr value is the name in https://tc39.es/ecma402/#sec-intl.datetimeformat.prototype.resolvedoptions, e.g., \"UTC\" or \"America/Los_Angeles\"",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "abbr": {
+              "type": "string"
+            }
+          }
+        },
         "default_track_locations": {
           "type": "array",
           "items": {
