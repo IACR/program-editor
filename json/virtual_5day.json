@@ -21,10 +21,7 @@
           "endtime": "13:15",
           "sessions": [
             {
-              "session_title": "Opening remarks",
-              "location": {
-                "name": "Location TBD"
-              }
+              "session_title": "Opening remarks"
             }
           ]
         },
@@ -89,10 +86,7 @@
           "endtime": "13:15",
           "sessions": [
             {
-              "session_title": "Opening remarks",
-              "location": {
-                "name": "Location TBD"
-              }
+              "session_title": "Opening remarks"
             }
           ]
         },
@@ -157,10 +151,7 @@
           "endtime": "13:15",
           "sessions": [
             {
-              "session_title": "Opening remarks",
-              "location": {
-                "name": "Location TBD"
-              }
+              "session_title": "Opening remarks"
             }
           ]
         },
@@ -225,10 +216,7 @@
           "endtime": "13:15",
           "sessions": [
             {
-              "session_title": "Opening remarks",
-              "location": {
-                "name": "Location TBD"
-              }
+              "session_title": "Opening remarks"
             }
           ]
         },
@@ -293,10 +281,7 @@
           "endtime": "13:15",
           "sessions": [
             {
-              "session_title": "Opening remarks",
-              "location": {
-                "name": "Location TBD"
-              }
+              "session_title": "Opening remarks"
             }
           ]
         },
