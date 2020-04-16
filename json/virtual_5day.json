@@ -1,0 +1,342 @@
+{
+  "name": "basic_1day_config",
+  "config": {
+    "default_track_locations": [{"name": "Enter a location"}],
+    "default_talk_minutes": 25,
+    "timezone": {
+      "name": "Universal Time",
+      "abbr": "UTC"
+    },
+    "unassigned_talks": [{
+      "name": "Uncategorized",
+      "talks": []
+    }]
+  },
+  "days": [
+    {
+      "date": "2020-05-11",
+      "timeslots": [
+        {
+          "starttime": "13:00",
+          "endtime": "13:15",
+          "sessions": [
+            {
+              "session_title": "Opening remarks"
+            }
+          ]
+        },
+        {
+          "starttime": "13:15",
+          "endtime": "14:15",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "14:15",
+          "endtime": "14:30",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "14:30",
+          "endtime": "15:30",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "15:30",
+          "endtime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "15:45",
+          "endtime": "16:45",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2020-05-12",
+      "timeslots": [
+        {
+          "starttime": "13:00",
+          "endtime": "13:15",
+          "sessions": [
+            {
+              "session_title": "Opening remarks"
+            }
+          ]
+        },
+        {
+          "starttime": "13:15",
+          "endtime": "14:15",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "14:15",
+          "endtime": "14:30",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "14:30",
+          "endtime": "15:30",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "15:30",
+          "endtime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "15:45",
+          "endtime": "16:45",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2020-05-13",
+      "timeslots": [
+        {
+          "starttime": "13:00",
+          "endtime": "13:15",
+          "sessions": [
+            {
+              "session_title": "Opening remarks"
+            }
+          ]
+        },
+        {
+          "starttime": "13:15",
+          "endtime": "14:15",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "14:15",
+          "endtime": "14:30",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "14:30",
+          "endtime": "15:30",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "15:30",
+          "endtime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "15:45",
+          "endtime": "16:45",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2020-05-14",
+      "timeslots": [
+        {
+          "starttime": "13:00",
+          "endtime": "13:15",
+          "sessions": [
+            {
+              "session_title": "Opening remarks"
+            }
+          ]
+        },
+        {
+          "starttime": "13:15",
+          "endtime": "14:15",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "14:15",
+          "endtime": "14:30",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "14:30",
+          "endtime": "15:30",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "15:30",
+          "endtime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "15:45",
+          "endtime": "16:45",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2020-05-14",
+      "timeslots": [
+        {
+          "starttime": "13:00",
+          "endtime": "13:15",
+          "sessions": [
+            {
+              "session_title": "Opening remarks"
+            }
+          ]
+        },
+        {
+          "starttime": "13:15",
+          "endtime": "14:15",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "14:15",
+          "endtime": "14:30",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "14:30",
+          "endtime": "15:30",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "starttime": "15:30",
+          "endtime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "starttime": "15:45",
+          "endtime": "16:45",
+          "sessions": [
+            {
+              "moderator": "Chair: TBD",
+              "session_title": "Session title TBD",
+	      "talks": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
