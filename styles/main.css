@@ -386,3 +386,7 @@ div.progress {
 #alertInstr button.close:hover {
   color: #78C2CF;
 }
+div.keywords {
+    text-align: left;
+    font-size: .75rem;
+}
