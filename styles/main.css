@@ -390,3 +390,6 @@ div.keywords {
     text-align: left;
     font-size: .75rem;
 }
+.mutualEvent div.keywords {
+    display: none;
+}
