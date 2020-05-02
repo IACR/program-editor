@@ -1479,16 +1479,18 @@ function getTalkUrl(talk) {
 function matchDOI(data, textStatus, jqXHR) {
   for (var i = 0; i < data.message.items.length; i++) {
     var item = data.message.items[i];
-    var distance = levenshtein_distance(jqXHR.talk.title.toLowerCase(),
+    if (item.hasOwnProperty('title')) {
+      var distance = levenshtein_distance(jqXHR.talk.title.toLowerCase(),
                                         item.title[0].toLowerCase());
-    // We searched on the title and first author, so if the title
-    // is pretty close and the number of authors is correct, we
-    // take it as a match. The number 4 was pulled out of the
-    // backside of a mule.
-    if (distance < 4 && item.author &&
-        jqXHR.talk.authors.length == item.author.length) {
-      jqXHR.talk.paperUrl = item.URL;
-      return true;
+      // We searched on the title and first author, so if the title
+      // is pretty close and the number of authors is correct, we
+      // take it as a match. The number 4 was pulled out of the
+      // backside of a mule.
+      if (distance < 4 && item.author &&
+          jqXHR.talk.authors.length == item.author.length) {
+        jqXHR.talk.paperUrl = item.URL;
+        return true;
+      }
     }
   }
   return false;
