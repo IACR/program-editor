@@ -52,7 +52,9 @@ function setProgData(data) {
     for (var j = 0; j < timeslots.length; j++) {
       if (timeslots[j].sessions) {
         for (var k = 0; k < timeslots[j]['sessions'].length; k++) {
-          timeslots[j]['sessions'][k].id = 'session-' + createUniqueId();
+          if (!timeslots[j]['sessions'][k].hasOwnProperty('id')) {
+            timeslots[j]['sessions'][k].id = 'session-' + createUniqueId();
+          }
         }
         if(timeslots[j]['sessions'].length > 1) {
           timeslots[j]['twosessions'] = true;
