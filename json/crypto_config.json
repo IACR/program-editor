@@ -5,6 +5,7 @@
     "default_talk_minutes": 25,
     "unassigned_talks": [{
       "name": "Uncategorized",
+      "id": "category-0",
       "talks": []
     }]
   },
