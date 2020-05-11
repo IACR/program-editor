@@ -973,7 +973,7 @@ function showTalkEditor(id) {
     'minTime': '00:00',
     'maxTime': '24:00',
     'showDuration': false,
-    'step': 5,
+    'step': 1,
     'timeFormat': 'G:i'
   });
   $('#editTalkBox').modal();
@@ -1114,7 +1114,7 @@ function prepareAddTimeslotToDay(dayIndex) {
     'minTime': '00:00',
     'maxTime': '24:00',
     'showDuration': false,
-    'step': 5,
+    'step': 1,
     'timeFormat': 'G:i'
   });
   var getTimeDiv = document.getElementById('timeslotDiv');
@@ -1213,7 +1213,7 @@ function editTimeslot(dayIndex, slotIndex) {
     'maxTime': '24:00',
     'show2400': true,
     'showDuration': false,
-    'step': 5,
+    'step': 1,
     'timeFormat': 'G:i'
   });
 

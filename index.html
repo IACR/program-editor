@@ -193,6 +193,9 @@
               <option value="./json/dualtrack_5day.json">
                 Dual track, five days
               </option>
+              <option value="./json/rump_session.json">
+                Rump Session (3 sessions, 30 minutes/session)
+              </option>
             </select>
           </section>
         </div>
@@ -277,9 +280,9 @@
               </label>
             </a>
             <h4 class="talkTitle">
+              {{#if starttime}}({{starttime}}{{#if endtime}}-{{endtime}}{{/if}}){{/if}}
               {{title}}{{#if paperUrl}}&nbsp;&nbsp;<a target="_paper" href="{{paperUrl}}"><span class="talkIcons"><img src="img/md-document.svg" title="View the paper"></span></a>{{/if}}
               {{#if slidesUrl}}&nbsp;&nbsp;<a target="_slides" href="{{slidesUrl}}"><span class="talkIcons"><img src="img/md-desktop.svg" title="View the slides"></span></a>{{/if}}
-              {{#if starttime}}({{starttime}}{{#if endtime}}-{{endtime}}{{/if}}){{/if}}
             </h4>
             <div class="authorList">
               {{#each authors}}
