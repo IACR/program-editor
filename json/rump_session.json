@@ -1,0 +1,86 @@
+{
+  "name": "rump_session",
+  "config": {
+    "default_track_locations": [{"name": "Enter a location"}],
+    "default_talk_minutes": 4,
+    "unassigned_talks": [{
+      "name": "Uncategorized",
+      "id": "category-0",
+      "talks": []
+    }]
+  },
+  "days": [
+    {
+      "date": "2020-05-01",
+      "timeslots": [
+        {
+          "endtime": "17:45",
+          "starttime": "17:15",
+          "sessions": [
+            {
+              "session_title": "First session",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "17:50",
+          "starttime": "17:45",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "endtime": "18:20",
+          "starttime": "17:50",
+          "sessions": [
+            {
+              "session_title": "Second session",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "18:25",
+          "starttime": "18:20",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "endtime": "18:55",
+          "starttime": "18:25",
+          "sessions": [
+            {
+              "session_title": "Third session",
+	      "talks": []
+            }
+          ]
+        },
+        {
+          "endtime": "19:00",
+          "starttime": "18:55",
+          "sessions": [
+            {
+              "session_title": "Break"
+            }
+          ]
+        },
+        {
+          "endtime": "19:30",
+          "starttime": "19:00",
+          "sessions": [
+            {
+              "session_title": "Fourth session",
+	      "talks": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
