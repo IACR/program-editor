@@ -71,6 +71,9 @@
             <option value="" disabled selected>
               Please select a template
             </option>
+            <option value="./json/virtual_5day.json">
+              Virtual conference (5 days, single track)
+            </option>
             <option value="./json/crypto_config.json">
               Crypto (5 days, dual track, bbq)
             </option>
@@ -91,6 +94,9 @@
             </option>
             <option value="./json/dualtrack_5day.json">
               Dual track, five days
+            </option>
+            <option value="./json/rump_session.json">
+              Rump Session (3 sessions, 30 minutes/session)
             </option>
           </select>
         </div>
