@@ -426,7 +426,16 @@ function importFSEorCHES() {
     return false;
   }
   console.log('importing from ' + venue);
-  $.getJSON('https://iacr.org/cryptodb/data/export/ajax.php?venue=' + venue, function(data) {
+  let url = 'https://iacr.org/cryptodb/data/export/ajax.php?venue=' + venue;
+  let elem = document.getElementById('importstartdate');
+  if (elem.value) {
+    url += '&startdate=' + elem.value;
+  }
+  elem = document.getElementById('importenddate');
+  if (elem.value) {
+    url += '&enddate=' + elem.value;
+  }
+  $.getJSON(url, function(data) {
     canonicalizeCryptodb(data);
     if (!mergeTalks(data)) {
       alert('there was a problem importing this data');
