@@ -426,7 +426,16 @@ function importFSEorCHES() {
     return false;
   }
   console.log('importing from ' + venue);
-  $.getJSON('https://iacr.org/cryptodb/data/export/ajax.php?venue=' + venue, function(data) {
+  let url = 'https://iacr.org/cryptodb/data/export/ajax.php?venue=' + venue;
+  let elem = document.getElementById('importstartdate');
+  if (elem.value) {
+    url += '&startdate=' + elem.value;
+  }
+  elem = document.getElementById('importenddate');
+  if (elem.value) {
+    url += '&enddate=' + elem.value;
+  }
+  $.getJSON(url, function(data) {
     canonicalizeCryptodb(data);
     if (!mergeTalks(data)) {
       alert('there was a problem importing this data');
@@ -1374,11 +1383,37 @@ function saveSession() {
   refresh();
 }
 
+// Function to remove dead youtube links if they exist.
+function removeNulls() {
+  progData.days.forEach(function(day) {
+    day.timeslots.forEach(function(timeslot) {
+      if (timeslot.hasOwnProperty('sessions')) {
+        timeslot.sessions.forEach(function(session) {
+          if (session.hasOwnProperty('talks')) {
+            session.talks.forEach(function(talk) {
+              if (talk.hasOwnProperty('videoUrl') && talk['videoUrl'].endsWith('=null')) {
+                delete talk.videoUrl;
+              }
+              if (talk.hasOwnProperty('youtube') && talk['youtube'] == null) {
+                delete talk.youtube;
+              }
+              if (talk.hasOwnProperty('award') && talk['award'] == null) {
+                delete talk.award;
+              }
+            });
+          }
+        });
+      }
+    });
+  });
+}
+
 // Download edited JSON program
 function downloadJSON() {
   if ($('#downloadMenu').hasClass('disabled')) {
     return false;
   }
+  removeNulls();
   var atag = document.createElement('a');
   atag.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(progData, null, 2)));
   atag.setAttribute('download', 'program.json');
