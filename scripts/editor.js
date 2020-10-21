@@ -552,10 +552,10 @@ function mergeTalks(data) {
       var authorArray = [];
       var affiliations = [];
       paper.authors.forEach(function(a) {
-        if (a.hasOwnProperty('publishedasname')) {
-          authorArray.push(a.publishedasname);
-        } else if (a instanceof String) {
+        if (a instanceof String) {
           authorArray.push(a);
+        } else if (a.hasOwnProperty('publishedasname')) {
+          authorArray.push(a.publishedasname);
         }
         if (a.hasOwnProperty('affiliation')) {
           affiliations.push(a.affiliation);
