@@ -552,13 +552,19 @@ function mergeTalks(data) {
       var authorArray = [];
       var affiliations = [];
       paper.authors.forEach(function(a) {
-        authorArray.push(a.publishedasname);
+        if (a instanceof String) {
+          authorArray.push(a);
+        } else if (a.hasOwnProperty('publishedasname')) {
+          authorArray.push(a.publishedasname);
+        }
         if (a.hasOwnProperty('affiliation')) {
           affiliations.push(a.affiliation);
         }
       });
       paper.authors = authorArray;
-      paper.affiliations = affiliations.join('; ');
+      if (affiliations.length) {
+        paper.affiliations = affiliations.join('; ');
+      }
     } else { // websubrev format.
       paper.authors = splitAuthors(paper.authors);
     }
