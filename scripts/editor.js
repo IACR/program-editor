@@ -23,7 +23,8 @@ function disableMenus() {
 function enableMenus() {
   $('#save_status').text(progData.name);
   $('#editMetadataMenu').removeClass('disabled');
-  $('#saveMenu').removeClass('disabled');
+  // NOTE: commented out because autosave currently enabled
+  // $('#saveMenu').removeClass('disabled');
   $('#saveAsMenu').removeClass('disabled');
   $('#deleteMenu').removeClass('disabled');
   $('#downloadMenu').removeClass('disabled');
@@ -222,6 +223,7 @@ function refresh() {
   drawProgram();
   drawTalks();
   addDrag();
+  saveProgram();
 }
 
 // parse JSON file to create initial program structure
@@ -366,7 +368,6 @@ function saveMetadata() {
     }
   }
   $('#editMetadataModal').modal('hide');
-  saveProgram();
   refresh();
 }
 
@@ -664,6 +665,9 @@ function addDrag() {
     // null if you just emptied the source in the drag.
     if (source.firstElementChild === null) {
       refresh();
+    }
+    else {
+      saveProgram();
     }
   });
 }
