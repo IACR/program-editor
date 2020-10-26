@@ -957,6 +957,7 @@ function showTalkEditor(id) {
   if (id === "") { // then we're adding a new talk.
     $('#talkDeleteButton').hide();
     $('#newTalkTitle').val('');
+    $('#talkNote').val('');
     $('#newTalkAuthor').val('');
     $('#newTalkAffiliation').val('');
     $('#addTalkTitle').text('Add a new talk');
@@ -971,6 +972,7 @@ function showTalkEditor(id) {
       defaultTime = talkObj.starttime;
     }
     $('#newTalkTitle').val(talkObj.title);
+    $('#talkNote').val(talkObj.talkNote);
     $('#newTalkAuthor').val(talkObj.authors.join(' and '))
     $('#newTalkAffiliation').val(talkObj.affiliations);
     $('#addTalkTitle').text('Edit a talk');
