@@ -191,6 +191,12 @@ div.talk:hover {
     /* font-size: 0.9em; */
 }
 
+.talkNote {
+  text-align: left;
+  font-family: 'Raleway', sans-serif;
+  font-style: italic;
+}
+
 
 
 /*** Icons ***/

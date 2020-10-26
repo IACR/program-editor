@@ -284,6 +284,11 @@
               {{title}}{{#if paperUrl}}&nbsp;&nbsp;<a target="_paper" href="{{paperUrl}}"><span class="talkIcons"><img src="img/md-document.svg" title="View the paper"></span></a>{{/if}}
               {{#if slidesUrl}}&nbsp;&nbsp;<a target="_slides" href="{{slidesUrl}}"><span class="talkIcons"><img src="img/md-desktop.svg" title="View the slides"></span></a>{{/if}}
             </h4>
+            {{#if talkNote}}
+              <div class="talkNote">
+                {{{talkNote}}}
+              </div>
+            {{/if}}
             <div class="authorList">
               {{#each authors}}
                 <span class="authorName">{{this}}</span>
@@ -448,7 +453,7 @@
     <script src="./dependencies/datepair/jquery.datepair.min.js"></script>
 
     <!-- Additional/custom scripts -->
-    <script src="./scripts/editor.js?version=8"></script>
+    <script src="./scripts/editor.js?version=9"></script>
 
     <!-- modal to edit config metadata -->
     <aside class="modal fade" id="editMetadataModal" role="dialog" aria-labelledby="editMetadataTitle">
@@ -778,11 +783,38 @@
                   </div>
                   <div class="col">
                     <div class="form-group">
+                      <label for="talkNote">
+                        Additional Notes
+                      </label>
+                      <input type="text" name="talkNote" placeholder="Optional: name of presenter, awards, etc" class="form-control" aria-describedby="talkNoteHelp" id="talkNote" maxlength="77" />
+                      <small id="talkNoteHelp" class="form-text">
+                        This is where you might enter additional information
+                        about the paper. Examples include soft merges, awards,
+                        name of presenter, etc. This is not intendeded for
+                        an abstract.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="newTalkAuthors">
+                        Talk Author(s)
+                      </label>
+                      <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
+                      <small id="newAuthorHelp" class="form-text">
+                        Use BibTeX formatting (i.e. names are separated by and).
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
                       <label for="paperUrl">
                         URL for paper
                       </label>
                       <input type="url" name="paperUrl" placeholder="URL for paper" class="form-control" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
-                      <small class="form-text">
+                      <small id="paperUrlHelp" class="form-text">
                         These can be imported automatically with the import menu. Do not use ePrint urls.
                       </small>
                     </div>
@@ -794,12 +826,12 @@
                 <div class="row">
                   <div class="col">
                     <div class="form-group">
-                      <label for="newTalkAuthors">
-                        Talk Author(s)
+                      <label for="newTalkAffiliation">
+                        Affiliation
                       </label>
-                      <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
-                      <small class="form-text">
-                        Use BibTeX formatting (i.e. names are separated by and).
+                      <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
+                      <small id="newAffiliationHelp" class="form-text">
+                        Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
                       </small>
                     </div>
                   </div>
@@ -813,21 +845,6 @@
                     <div id="slidesUrlWarning">
                       <div class="alert alert-danger">The url must begin with http or https.</div>
                     </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="newTalkAffiliation">
-                        Affiliation
-                      </label>
-                      <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
-                      <small class="form-text">
-                        Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
-                      </small>
-                    </div>
-                  </div>
-                  <div class="col">
                     <!-- TODO: set up url for video field -->
                     <!-- <div class="form-group">
                       <label for="videoUrl">
