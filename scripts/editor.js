@@ -803,6 +803,7 @@ function saveTalk() {
   var newTitle = $('#newTalkTitle').val();
   var paperUrl = $('#paperUrl').val();
   var slidesUrl = $('#slidesUrl').val();
+  var talkNote = $('#talkNote').val();
   var startTime = $('#currentTalkStartTime').val();
   var endTime = $('#currentTalkEndTime').val();
   // validating talk title, paper url, and slides url
@@ -838,6 +839,9 @@ function saveTalk() {
     var talk = findObj(talkId, progData);
   }
   talk.title = newTitle;
+  if (talkNote) {
+    talk.talkNote = talkNote;
+  }
   if (startTime) {
     talk.starttime = startTime;
   } else if (talk.starttime) {
