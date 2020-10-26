@@ -782,7 +782,7 @@
                         URL for paper
                       </label>
                       <input type="url" name="paperUrl" placeholder="URL for paper" class="form-control" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
-                      <small class="form-text">
+                      <small id="paperUrlHelp" class="form-text">
                         These can be imported automatically with the import menu. Do not use ePrint urls.
                       </small>
                     </div>
@@ -798,7 +798,7 @@
                         Talk Author(s)
                       </label>
                       <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
-                      <small class="form-text">
+                      <small id="newAuthorHelp" class="form-text">
                         Use BibTeX formatting (i.e. names are separated by and).
                       </small>
                     </div>
@@ -822,7 +822,7 @@
                         Affiliation
                       </label>
                       <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
-                      <small class="form-text">
+                      <small id="newAffiliationHelp" class="form-text">
                         Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
                       </small>
                     </div>
@@ -833,7 +833,7 @@
                         Additional Notes
                       </label>
                       <input type="text" name="talkNote" placeholder="Additional notes, paper subtitle, etc" class="form-control" aria-describedby="talkNoteHelp" id="talkNote" maxlength="77" />
-                      <small class="form-text">
+                      <small id="talkNoteHelp" class="form-text">
                         This is where you might enter additional information
                         about the paper. Examples include soft merges, awards,
                         name of presenter, etc. Do not use this section to
