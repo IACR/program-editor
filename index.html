@@ -284,6 +284,11 @@
               {{title}}{{#if paperUrl}}&nbsp;&nbsp;<a target="_paper" href="{{paperUrl}}"><span class="talkIcons"><img src="img/md-document.svg" title="View the paper"></span></a>{{/if}}
               {{#if slidesUrl}}&nbsp;&nbsp;<a target="_slides" href="{{slidesUrl}}"><span class="talkIcons"><img src="img/md-desktop.svg" title="View the slides"></span></a>{{/if}}
             </h4>
+            {{#if talkNote}}
+              <div class="talkNote">
+                {{{talkNote}}}
+              </div>
+            {{/if}}
             <div class="authorList">
               {{#each authors}}
                 <span class="authorName">{{this}}</span>
