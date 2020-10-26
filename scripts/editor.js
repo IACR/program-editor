@@ -24,7 +24,7 @@ function enableMenus() {
   $('#save_status').text(progData.name);
   $('#editMetadataMenu').removeClass('disabled');
   // NOTE: commented out because autosave currently enabled
-  // $('#saveMenu').removeClass('disabled');
+  $('#saveMenu').removeClass('disabled');
   $('#saveAsMenu').removeClass('disabled');
   $('#deleteMenu').removeClass('disabled');
   $('#downloadMenu').removeClass('disabled');
