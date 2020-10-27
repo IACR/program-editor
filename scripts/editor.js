@@ -549,14 +549,24 @@ function mergeTalks(data) {
     } else {
       paper.id = "talk-" + createUniqueId();
     }
+    // Authors could be one of several things:
+    // 1) a string like "David Wiley; Steve Burns" (websubrev format)
+    // 2) an array of strings
+    // 3) an array of objects
     if (Array.isArray(paper.authors)) { // TOSC or TCHES format
-      var authorArray = [];
+      // affiliations might be in the array of authors.
       var affiliations = [];
+      var authorArray = [];
       paper.authors.forEach(function(a) {
-        if (a instanceof String) {
+        if (typeof(a) === 'string') {
           authorArray.push(a);
         } else if (a.hasOwnProperty('publishedasname')) {
           authorArray.push(a.publishedasname);
+        } else if (a.hasOwnProperty('name')) {
+          authorArray.push(a.name);
+        } else {
+          console.log('unknown author type');
+          console.dir(a);
         }
         if (a.hasOwnProperty('affiliation')) {
           affiliations.push(a.affiliation);
@@ -566,9 +576,10 @@ function mergeTalks(data) {
       if (affiliations.length) {
         paper.affiliations = affiliations.join('; ');
       }
-    } else { // websubrev format.
+    } else { // websubrev format has a string.
       paper.authors = splitAuthors(paper.authors);
     }
+    // Affiliations could be separate or in authors.
   }
 
   // create map from category name to array of talks for that category
