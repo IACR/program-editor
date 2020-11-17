@@ -74,7 +74,9 @@ function setProgData(data) {
 function editExisting() {
   $('#templateSelector').hide();
   $('#nameEntry').hide();
+  $('#timezonePicker').hide();
   $('#datePicker').hide();
+  $('#datesButton').hide();
   $('#datesButton').hide();
   $('#uploadTalks').hide();
   $('#versionPicker').show(500);
@@ -203,6 +205,7 @@ function createNew() {
   $('#templateSelect').val('');
   $('#versionPicker').hide();
   $('#nameEntry').hide();
+  $('#timezonePicker').hide();
   $('#datePicker').hide();
   $('#datesButton').hide();
 }
@@ -231,8 +234,12 @@ function createDatePicker(numDays) {
 
 function showUploadTalks() {
   // Called after selecting dates and timezone.
+  $('#timezonePicker').hide();
+  $('#datePicker').hide();
+  $('#datesButton').hide();
   setDates();
   $('#uploadTalks').show(500);
+  return true;
 }
 
 // called when a change is made to unassigned_talks or progData.
@@ -273,6 +280,7 @@ function addName() {
   }
   progData.name = $('#inputName').val();
   $('#nameEntry').hide();
+  $('#timezonePicker').show(500);
   $('#datePicker').show(500);
   $('#timezone').innerHTML = '';
   moment.tz.names().forEach(tz => {

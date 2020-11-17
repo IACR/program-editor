@@ -166,64 +166,70 @@
           </section>
         </div>
 
-        <div class="row">
-          <section id="templateSelector" class="col-7 setupStep">
-            <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
-              <option value="" disabled selected>
-                Select a template to get started (you can change things later)
-              </option>
-              <option value="./json/virtual_5day.json">
-                Virtual conference (5 days, single track)
-              </option>
-              <option value="./json/crypto_config.json">
-                Crypto (5 days, dual track, bbq)
-              </option>
-              <option value="./json/ec_config.json">
-                Eurocrypt/Asiacrypt (5 days, dual track, banquet)
-              </option>
-              <option value="./json/pkc_config.json">
-                CHES/FSE/PKC/TCC (4 days, single track)
-              </option>
-              <option value="./json/basic_1day.json">
-                Basic one-day workshop
-              </option>
-              <option value="./json/basic_2day.json">
-                Basic two-day workshop
-              </option>
-              <option value="./json/basic_3day.json">
-                Basic three-day conference
-              </option>
-              <option value="./json/dualtrack_5day.json">
-                Dual track, five days
-              </option>
-              <option value="./json/rump_session.json">
-                Rump Session (3 sessions, 30 minutes/session)
-              </option>
-            </select>
-          </section>
+        <div id="templateSelector">
+          <div class="row">
+            <section class="col-7 setupStep">
+              <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
+                <option value="" disabled selected>
+                  Select a template to get started (you can change things later)
+                </option>
+                <option value="./json/virtual_5day.json">
+                  Virtual conference (5 days, single track)
+                </option>
+                <option value="./json/crypto_config.json">
+                  Crypto (5 days, dual track, bbq)
+                </option>
+                <option value="./json/ec_config.json">
+                  Eurocrypt/Asiacrypt (5 days, dual track, banquet)
+                </option>
+                <option value="./json/pkc_config.json">
+                  CHES/FSE/PKC/TCC (4 days, single track)
+                </option>
+                <option value="./json/basic_1day.json">
+                  Basic one-day workshop
+                </option>
+                <option value="./json/basic_2day.json">
+                  Basic two-day workshop
+                </option>
+                <option value="./json/basic_3day.json">
+                  Basic three-day conference
+                </option>
+                <option value="./json/dualtrack_5day.json">
+                  Dual track, five days
+                </option>
+                <option value="./json/rump_session.json">
+                  Rump Session (3 sessions, 30 minutes/session)
+                </option>
+              </select>
+            </section>
+          </div>
         </div>
 
-        <div class="row" id="nameEntry">
-          <section class="col-7 setupStep">
-            <label for="inputName">
-              Enter a name for the conference program.
-            </label>
-            <div class="d-flex">
-              <input type="text" name="inputName" id="inputName" class="form-control" />
-              <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success ml-2">
-                Next
-              </button>
-            </div>
-          </section>
+        <div id="nameEntry">
+          <div class="row">
+            <section class="col-7 setupStep">
+              <label for="inputName">
+                Enter a name for the conference program.
+              </label>
+              <div class="d-flex">
+                <input type="text" name="inputName" id="inputName" class="form-control" />
+                <button type="button" name="addName" onclick="addName()" class="btn btn-sm btn-success ml-2">
+                  Next
+                </button>
+              </div>
+            </section>
+          </div>
         </div>
         <div class="row">
-          <section id="datePicker" class="col-7 setupStep">
-            <div class="row">
-              <label for="timezone" class="col-6 col-form-label">
+          <section id="timezonePicker" class="col-7 setupStep">
+            <label for="timezone">
               Timezone used for entering times:
             </label>
             <select class="form-control col-6" id="timezone"></select>
-            </div>
+          </section>
+        </div>
+        <div class="row">
+          <section id="datePicker" class="mt-3 col-7 setupStep">
             <p>
               Choose the start and end date for your conference, and a timezone.
             </p>
@@ -234,12 +240,10 @@
                 <label for="enddate" class="col-form-label">to</label>
                 <input type="text" id="enddate" name="enddate" class="form-control ml-2" />
               </div>
-              <div class="col-4">
-                <button type="button" id="datesButton" onclick="showUploadTalks()" class="ml-2 btn btn-sm btn-success">Set dates/timezone</button>
-              </div>
             </div>
           </section>
         </div>
+        <button type="button" id="datesButton" onclick="showUploadTalks()" class="btn btn-sm btn-success">Set dates/timezone</button>
         <div class="row">
           <section id="uploadTalks" class="col-12 form-group">
             <p>
