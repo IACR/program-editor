@@ -46,7 +46,7 @@ function setProgData(data) {
     data.config.uniqueIDIndex = 0;
   }
   if (!data.config.timezone) {
-    data.config.timezone = {'name': 'Etc/UTC', 'abbr': 'UTC'};
+    data.config.timezone = {'name': 'UTC', 'abbr': 'UTC'};
   }
   progData = data;
   var days = progData.days;
@@ -76,7 +76,6 @@ function editExisting() {
   $('#nameEntry').hide();
   $('#timezonePicker').hide();
   $('#datePicker').hide();
-  $('#datesButton').hide();
   $('#datesButton').hide();
   $('#uploadTalks').hide();
   $('#versionPicker').show(500);
