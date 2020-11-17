@@ -45,6 +45,9 @@ function setProgData(data) {
   if (!data.config.uniqueIDIndex) {
     data.config.uniqueIDIndex = 0;
   }
+  if (!data.config.timezone) {
+    data.config.timezone = {'name': 'UTC', 'abbr': 'UTC'};
+  }
   progData = data;
   var days = progData.days;
 
@@ -71,7 +74,9 @@ function setProgData(data) {
 function editExisting() {
   $('#templateSelector').hide();
   $('#nameEntry').hide();
+  $('#timezonePicker').hide();
   $('#datePicker').hide();
+  $('#datesButton').hide();
   $('#uploadTalks').hide();
   $('#versionPicker').show(500);
   $.getJSON('ajax.php', function(data) {
@@ -102,6 +107,12 @@ function showEditMetadata() {
   document.getElementById('addDayOption').selectedIndex = 0;
   document.getElementById('deleteDayOption').selectedIndex = 0;
   $('#editMetadataModal').modal();
+  let currenttz = progData.config.timezone.name;
+  console.dir(currenttz);
+  moment.tz.names().forEach(tz => {
+    let selected = (currenttz === tz) ? 'selected ' : '';
+    $('#newtimezone').append(`<option ${selected} value="${tz}">${tz}</option>`);
+  });
   updateNewDates();
 }
 
@@ -193,7 +204,9 @@ function createNew() {
   $('#templateSelect').val('');
   $('#versionPicker').hide();
   $('#nameEntry').hide();
+  $('#timezonePicker').hide();
   $('#datePicker').hide();
+  $('#datesButton').hide();
 }
 
 // jQuery date picker
@@ -213,9 +226,19 @@ function createDatePicker(numDays) {
     setValue: function(s,s1,s2) {
       $('#startdate').val(s1);
       $('#enddate').val(s2);
-      setDates(s1);
+      $('#datesButton').show();
     }
   });
+}
+
+function showUploadTalks() {
+  // Called after selecting dates and timezone.
+  $('#timezonePicker').hide();
+  $('#datePicker').hide();
+  $('#datesButton').hide();
+  setDates();
+  $('#uploadTalks').show(500);
+  return true;
 }
 
 // called when a change is made to unassigned_talks or progData.
@@ -256,18 +279,23 @@ function addName() {
   }
   progData.name = $('#inputName').val();
   $('#nameEntry').hide();
+  $('#timezonePicker').show(500);
   $('#datePicker').show(500);
+  $('#timezone').innerHTML = '';
+  moment.tz.names().forEach(tz => {
+    let selected = (tz === 'UTC') ? 'selected ' : '';
+    $('#timezone').append(`<option ${selected} value="${tz}">${tz}</option>`);
+  });
   createDatePicker(progData.days.length);
 }
 
 // set start/end dates in progData
-function setDates(startdate) {
-  var day = moment(startdate);
+function setDates() {
+  var day = moment($('#startdate').val());
   for (var i = 0; i < progData.days.length; i++) {
     progData.days[i].date = day.format('YYYY-MM-DD');
     day.add(1, 'days');
   }
-  $('#uploadTalks').show(500);
 }
 
 // Called from the editMetadataModal to update new dates. This is
@@ -326,6 +354,11 @@ function saveMetadata() {
   if (newName !== progData.name) {
     progData.name = newName;
     $('#save_status').text(progData.name);
+  }
+  let tzname = $('#newtimezone option:selected').val();
+  if (tzname) {
+    // TODO: apparently abbr should reflect daylight savings.
+    progData.config.timezone = {'name': tzname, 'abbr': tzname};
   }
   // Updating dates is easy when it's a shift or add, but harder
   // when it is a delete because talks have to be sent to the
