@@ -218,14 +218,25 @@
         </div>
         <div class="row">
           <section id="datePicker" class="col-7 setupStep">
+            <div class="row">
+              <label for="timezone" class="col-6 col-form-label">
+              Timezone used for entering times:
+            </label>
+            <select class="form-control col-6" id="timezone"></select>
+            </div>
             <p>
-              Choose the start and end date for your conference.
+              Choose the start and end date for your conference, and a timezone.
             </p>
-            <div class="d-flex">
-              <label for="startdate" class="col-form-label">From</label>
-              <input type="text" id="startdate" name="startdate" class="form-control mx-2" />
-              <label for="enddate" class="col-form-label">to</label>
-              <input type="text" id="enddate" name="enddate" class="form-control ml-2" />
+            <div class="row">
+              <div class="col-8 d-flex">
+                <label for="startdate" class="col-form-label">From</label>
+                <input type="text" id="startdate" name="startdate" class="form-control mx-2" />
+                <label for="enddate" class="col-form-label">to</label>
+                <input type="text" id="enddate" name="enddate" class="form-control ml-2" />
+              </div>
+              <div class="col-4">
+                <button type="button" id="datesButton" onclick="showUploadTalks()" class="ml-2 btn btn-sm btn-success">Set dates/timezone</button>
+              </div>
             </div>
           </section>
         </div>
@@ -451,12 +462,13 @@
     <!-- Dependencies (dragula, momentJS, jQuery daterangepicker, jQuery timepicker, & datepair) -->
     <script src="./dependencies/dragula/dragula.js"></script>
     <script src="https://iacr.org/libs/js/moment/moment.min.js"></script>
+    <script src="https://iacr.org/libs/js/moment/moment-timezone-with-data-10-year-range.js"></script>
     <script src="./dependencies/jquery-daterange-picker/jquery.daterangepicker.min.js"></script>
     <script src="./dependencies/jquery-timepicker/jquery.timepicker.min.js"></script>
     <script src="./dependencies/datepair/jquery.datepair.min.js"></script>
 
     <!-- Additional/custom scripts -->
-    <script src="./scripts/editor.js?version=10"></script>
+    <script src="./scripts/editor.js?version=11"></script>
 
     <!-- modal to edit config metadata -->
     <aside class="modal fade" id="editMetadataModal" role="dialog" aria-labelledby="editMetadataTitle">
@@ -480,6 +492,13 @@
                   Program name
                 </label>
                 <input type="text" name="newName" placeholder="Program name (required)" class="form-control required col-md-7" id="newName" required />
+              </div>
+              <div class="form-group row mb-4">
+                <label for="newtimezone" class="col-4 col-form-label">
+                  Timezone used:
+                </label>
+                <select class="form-control col-6" id="newtimezone">
+                </select>
               </div>
               <div id="changeDatesDiv" class="form-group row">
                 <label for="newDates" class="col-4 col-form-label">
