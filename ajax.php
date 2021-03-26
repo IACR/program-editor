@@ -1,4 +1,5 @@
 <?php
+// This is from https://github.com/IACR/auth-client-php
 include("../auth/auth.php");
 include("cred.php");
 include("lib.php");
