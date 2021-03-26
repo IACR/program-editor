@@ -1,5 +1,5 @@
 <?php
-include("../common/auth.php");
+include("../auth/auth.php");
 include("cred.php");
 include("lib.php");
 // The schema for the database table is as follows:
@@ -134,8 +134,10 @@ function doLogin($userid, $password) {
   // This uses login through the IACR membership database. If
   // the userid and password are correct, then it sets several
   // $_SESSION parameters for userid and username.
-  $userName = checkPassword($userid, $password);
-  if ($userName) {
+  $userInfo = array();
+  $response = \IACR\Authentication\Client\checkPassword($userid, $password, $userInfo);
+  if ($response) {
+    $userName = $userInfo['firstname'] . ' ' . $userInfo['lastname'];
     session_unset();
     // session_destroy();
     ini_set('session.gc_maxlifetime', 1000000);
