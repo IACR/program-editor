@@ -135,6 +135,8 @@ function doLogin($userid, $password) {
   // the userid and password are correct, then it sets several
   // $_SESSION parameters for userid and username.
   $userInfo = array();
+  // This uses the authentication protocol described here:
+  // https://github.com/IACR/auth-client-php
   $response = \IACR\Authentication\Client\checkPassword($userid, $password, $userInfo);
   if ($response) {
     $userName = $userInfo['firstname'] . ' ' . $userInfo['lastname'];
