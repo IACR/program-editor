@@ -850,6 +850,7 @@ function saveTalk() {
   var talkNote = $('#talkNote').val();
   var startTime = $('#currentTalkStartTime').val();
   var endTime = $('#currentTalkEndTime').val();
+  var paperId = $('#paperId').val();
   // validating talk title, paper url, and slides url
   if (!newTitle) {
     $('#talkTitleWarning').show();
@@ -885,6 +886,8 @@ function saveTalk() {
   talk.title = newTitle;
   if (talkNote) {
     talk.talkNote = talkNote;
+  } else if (talk.talkNote) {
+    delete talk.talkNode;
   }
   if (startTime) {
     talk.starttime = startTime;
@@ -895,6 +898,11 @@ function saveTalk() {
     talk.endtime = endTime;
   } else if (talk.endtime) {
     delete talk.endtime;
+  }
+  if (paperId) {
+    talk.paperId = paperId;
+  } else if (talk.paperId) {
+    delete talk.paperId;
   }
   talk.authors = splitAuthors($('#newTalkAuthor').val());
 
@@ -1009,6 +1017,7 @@ function showTalkEditor(id) {
     $('#slidesUrl').val('');
     $('#currentTalkStartTime').val('');
     $('#currentTalkEndTime').val('');
+    $('#paperId').val('');
   } else {
     $('#talkDeleteButton').show();
     var talkObj = findObj(id, progData);
@@ -1033,6 +1042,11 @@ function showTalkEditor(id) {
       $('#currentTalkEndTime').val(talkObj.endtime);
     } else {
       $('#currentTalkEndTime').val('');
+    }
+    if (talkObj.hasOwnProperty('paperId')) {
+      $('#paperId').val(talkObj.paperId);
+    } else {
+      $('#paperId').val('');
     }
   }
   $('#talkTimeDiv .time').timepicker({
