@@ -1,6 +1,6 @@
 <?php
 // This is from https://github.com/IACR/auth-client-php
-include("../auth/auth.php");
+include("../auth/auth-client-php/auth.php");
 include("cred.php");
 include("lib.php");
 // The schema for the database table is as follows:
@@ -138,7 +138,10 @@ function doLogin($userid, $password) {
   $userInfo = array();
   // This uses the authentication protocol described here:
   // https://github.com/IACR/auth-client-php
-  $response = \IACR\Authentication\Client\checkPassword($userid, $password, $userInfo);
+  $error_code = null;
+  $error_message = null;
+  
+  $response = \IACR\Authentication\Client\checkPassword($userid, $password, $userInfo, $error_code, $error_message);
   if ($response) {
     $userName = $userInfo['firstname'] . ' ' . $userInfo['lastname'];
     session_unset();
@@ -154,7 +157,7 @@ function doLogin($userid, $password) {
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
   } else {
     $_SESSION['logged_in'] = False;
-    sendError('Incorrect username or password');
+    sendError('Incorrect username or password: ' . $error_code);
   }
 }
 
