@@ -4,7 +4,7 @@
     "default_track_locations": [{"name": "Enter a location"}],
     "default_talk_minutes": 25,
     "timezone": {
-      "name": "Universal Time",
+      "name": "UTC",
       "abbr": "UTC"
     },
     "unassigned_talks": [{

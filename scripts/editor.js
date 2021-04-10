@@ -167,6 +167,28 @@ function currentTime() {
   return now.toLocaleTimeString() + ' ' + now.toLocaleDateString();
 }
 
+// This function performs JSON.stringify, but the keys are guaranteed to be
+// ordered in a deterministic way. We make sure that an object having
+// starttime,endtime has them in this order at the beginning.  Note that allKeys
+// will contain all keys at all levels, but when the second stringify() is
+// called, it only takes keys at the level in order.  This depends on the
+// definition of how stringify works; see the ecmascript standard:
+// https://262.ecma-international.org/11.0/#sec-json.stringify
+function orderedStringify(obj, space) {
+  var allKeys = [];
+  // Find all keys at all levels (except starttime, endtime)
+  JSON.stringify(obj, function(key, value) {
+    if (key !== 'starttime' && key !== 'endtime') {
+      allKeys.push(key);
+    }
+    return value;});
+  allKeys.sort();
+  // Now put 'starttime' and 'endtime' at beginning.
+  allKeys.unshift('starttime', 'endtime');
+  // This will build the string with keys in order with starttime, endtime first.
+  return JSON.stringify(obj, allKeys, space);
+}
+
 function saveProgram() {
   if ($('#saveMenu').hasClass('disabled')) {
     console.log('disabled');
@@ -175,7 +197,7 @@ function saveProgram() {
   $.ajax({
     type: "POST",
     url: "ajax.php",
-    data: {'json': JSON.stringify(progData)},
+    data: {'json': orderedStringify(obj, 2)},
     beforeSend: function(jqXHR, settings) {
       $('#save_status').html('Saving...');
     },
@@ -604,6 +626,10 @@ function mergeTalks(data) {
         if (a.hasOwnProperty('affiliation')) {
           affiliations.push(a.affiliation);
         }
+        // For backward-compatibility, we accept either affiliation or affiliations
+        if (a.hasOwnProperty('affiliations')) {
+          affiliations.push(a.affiliations);
+        }
       });
       paper.authors = authorArray;
       if (affiliations.length) {
@@ -613,6 +639,9 @@ function mergeTalks(data) {
       paper.authors = splitAuthors(paper.authors);
     }
     // Affiliations could be separate or in authors.
+    if (Array.isArray(paper.affiliations)) {
+      paper.affiliations = paper.affiliations.join('; ');
+    }
   }
 
   // create map from category name to array of talks for that category
@@ -887,7 +916,7 @@ function saveTalk() {
   if (talkNote) {
     talk.talkNote = talkNote;
   } else if (talk.talkNote) {
-    delete talk.talkNode;
+    delete talk.talkNote;
   }
   if (startTime) {
     talk.starttime = startTime;
@@ -1489,7 +1518,7 @@ function downloadJSON() {
   }
   removeNulls();
   var atag = document.createElement('a');
-  atag.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(progData, null, 2)));
+  atag.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(orderedStringify(progData, 2)));
   atag.setAttribute('download', 'program.json');
 
   if (document.createEvent) {
