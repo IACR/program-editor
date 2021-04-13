@@ -85,8 +85,8 @@ td.time {
         <td class="twosessions">
 	  <table class="session"><tbody>
               <tr><td><span class="session_title">{{session.session_title}}</span>
-		  {% if session.location.name %}<br><span class="moderator">Location: {{session.location.name}}</span>{% endif %}
-                  {% if session.moderator %}<br><span class="moderator">Chair: {{session.moderator}}</span>{% endif %}</td></tr>
+		  {% if session.location.name %}<br><span class="moderator">{{session.location.name}}</span>{% endif %}
+                  {% if session.moderator %}<br><span class="moderator">{{session.moderator}}</span>{% endif %}</td></tr>
              {% for talk in session.talks %}
               <tr><td>
 		  <span class="title">
@@ -106,8 +106,8 @@ td.time {
               <tr>
 		<td align="center">
 		  <span class="session_title">{{session.session_title}}</span>
-		  {% if session.location.name %}<br><span class="location">Location: {{session.location.name}}</span>{% endif %}
-		  {% if session.moderator %}<br><span class="moderator centered">Chair: {{session.moderator}}</span>{% endif %}
+		  {% if session.location.name %}<br><span class="location">{{session.location.name}}</span>{% endif %}
+		  {% if session.moderator %}<br><span class="moderator centered">{{session.moderator}}</span>{% endif %}
 		</td>
 	      </tr>
               {% if session.talks %}
