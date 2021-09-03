@@ -1078,6 +1078,7 @@ function showTalkEditor(id) {
     } else {
       $('#currentTalkEndTime').val('');
     }
+    $('#abstractRow').removeClass('show');
     if (talkObj.hasOwnProperty('abstract')) {
       $('#talkAbstract').val(talkObj.abstract);
     } else {
