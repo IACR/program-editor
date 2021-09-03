@@ -874,6 +874,7 @@ function saveTalk() {
   var isValidated = true;
 
   var newTitle = $('#newTalkTitle').val();
+  var talkAbstract = $('#talkAbstract').val();
   var paperUrl = $('#paperUrl').val();
   var slidesUrl = $('#slidesUrl').val();
   var talkNote = $('#talkNote').val();
@@ -917,6 +918,11 @@ function saveTalk() {
     talk.talkNote = talkNote;
   } else if (talk.talkNote) {
     delete talk.talkNote;
+  }
+  if (talkAbstract) {
+    talk.abstract = talkAbstract;
+  } else if (talk.abstract) {
+    delete talk.abstract;
   }
   if (startTime) {
     talk.starttime = startTime;
@@ -1071,6 +1077,11 @@ function showTalkEditor(id) {
       $('#currentTalkEndTime').val(talkObj.endtime);
     } else {
       $('#currentTalkEndTime').val('');
+    }
+    if (talkObj.hasOwnProperty('abstract')) {
+      $('#talkAbstract').val(talkObj.abstract);
+    } else {
+      $('#talkAbstract').val('');
     }
     if (talkObj.hasOwnProperty('paperId')) {
       $('#paperId').val(talkObj.paperId);
