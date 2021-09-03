@@ -472,7 +472,7 @@
     <script src="./dependencies/datepair/jquery.datepair.min.js"></script>
 
     <!-- Additional/custom scripts -->
-    <script src="./scripts/editor.js?version=12"></script>
+    <script src="./scripts/editor.js?version=13"></script>
 
     <!-- modal to edit config metadata -->
     <aside class="modal fade" id="editMetadataModal" role="dialog" aria-labelledby="editMetadataTitle">
@@ -911,6 +911,17 @@
                     </div>
                     <small class="form-text">
                       Note that these are not checked to fit the time slot.
+                    </small>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-6">
+                    <label for="paperId">
+                      ID for paper (must be unique)
+                    </label>
+                    <input type="text" id="paperId" name="paperId" class="form-control" autocomplete="off" />
+                    <small class="form-text">
+                      This is intended to contain the ID from HotCRP, and must be unique.
                     </small>
                   </div>
                 </div>
