@@ -601,8 +601,8 @@ function mergeTalks(data) {
           console.log('unknown author type');
           console.dir(a);
         }
-        if (a.hasOwnProperty('affiliation')) {
-          affiliations.push(a.affiliation);
+        if (a.hasOwnProperty('affiliations')) {
+          affiliations.push(a.affiliations);
         }
       });
       paper.authors = authorArray;
@@ -613,6 +613,9 @@ function mergeTalks(data) {
       paper.authors = splitAuthors(paper.authors);
     }
     // Affiliations could be separate or in authors.
+    if (Array.isArray(paper.affiliations)) {
+      paper.affiliations = paper.affiliations.join('; ');
+    }
   }
 
   // create map from category name to array of talks for that category
@@ -885,6 +888,8 @@ function saveTalk() {
   talk.title = newTitle;
   if (talkNote) {
     talk.talkNote = talkNote;
+  } else if (talk.talkNote) {
+    delete talk.talkNote;
   }
   if (startTime) {
     talk.starttime = startTime;

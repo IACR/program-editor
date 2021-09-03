@@ -111,7 +111,7 @@
       "properties": {
         "timezone": {
           "description": "Time zone for the first event of the conference.",
-          "$comment": "The abbr value is the name in https://tc39.es/ecma402/#sec-intl.datetimeformat.prototype.resolvedoptions, e.g., \"UTC\" or \"America/Los_Angeles\"",
+          "$comment": "The name value is from the IANA timezone database, e.g., \"UTC\" or \"America/Los_Angeles\". The abbr value can be something like KST. The name should return true for ECMAscript IsValidTimeZoneName(name).",
           "type": "object",
           "properties": {
             "name": {
