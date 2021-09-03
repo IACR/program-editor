@@ -472,7 +472,7 @@
     <script src="./dependencies/datepair/jquery.datepair.min.js"></script>
 
     <!-- Additional/custom scripts -->
-    <script src="./scripts/editor.js?version=13"></script>
+    <script src="./scripts/editor.js?version=14"></script>
 
     <!-- modal to edit config metadata -->
     <aside class="modal fade" id="editMetadataModal" role="dialog" aria-labelledby="editMetadataTitle">
@@ -924,7 +924,21 @@
                       This is intended to contain the ID from HotCRP, and must be unique.
                     </small>
                   </div>
+                  <div class="col-6">
+                    <label for="abstract">
+                      Abstract for paper.
+                    </label>
+                    <div><a class="btn btn-sm btn-outline-primary" data-toggle="collapse" href="#abstractRow" role="button" aria-expanded="false" aria-controls="abstractRow">Show abstract below ▾</a></div>
+                    <small class="form-text">
+                      An abstract is optional.
+                    </small>
+                  </div>
                 </div>
+                <div id="abstractRow" class="row mt-2 collapse">
+                  <div class="col-8 offset-2">
+                    <label>Abstract</label>
+                    <textarea rows="8" id="talkAbstract" name="talkAbstract" class="form-control" placeholder="Enter abstract here"></textarea>
+                  </div>
               </form>
             </div>
           </div>
