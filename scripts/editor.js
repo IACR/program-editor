@@ -197,7 +197,7 @@ function saveProgram() {
   $.ajax({
     type: "POST",
     url: "ajax.php",
-    data: {'json': orderedStringify(obj, 2)},
+    data: {'json': orderedStringify(progData, 2)},
     beforeSend: function(jqXHR, settings) {
       $('#save_status').html('Saving...');
     },
