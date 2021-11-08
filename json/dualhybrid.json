@@ -1,0 +1,370 @@
+{
+  "name": "Dual virtual track, 5 days",
+  "config": {
+    "default_track_locations": [
+      {
+        "name": "Location TBD"
+      },
+      {
+        "name": "Location TBD"
+      }
+    ],
+    "default_talk_minutes": 25,
+    "timezone": {
+      "name": "UTC",
+      "abbr": "UTC"
+    },
+    "unassigned_talks": [{
+      "name": "Uncategorized",
+      "id": "category-0",
+      "talks": []
+    }]
+  },
+  "days": [
+    {
+      "date": "2016-08-02",
+      "timeslots": [
+        {
+          "starttime": "08:00",
+          "endtime": "08:15",
+          "sessions": [
+            {
+              "moderator": "General Chair, (add name)",
+              "session_title": "Opening remarks",
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "08:15",
+          "endtime": "09:15",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "09:15",
+          "endtime": "09:30",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "starttime": "09:30",
+          "endtime": "10:30",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "10:30",
+          "endtime": "10:45",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "starttime": "10:45",
+          "endtime": "11:45",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-03",
+      "timeslots": [
+        {
+          "starttime": "08:00",
+          "endtime": "09:00",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "09:00",
+          "endtime": "09:15",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "starttime": "09:15",
+          "endtime": "10:15",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "10:15",
+          "endtime": "10:30",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "starttime": "10:30",
+          "endtime": "11:30",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-04",
+      "timeslots": [
+        {
+          "starttime": "08:00",
+          "endtime": "09:00",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "09:00",
+          "endtime": "09:15",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "starttime": "09:15",
+          "endtime": "10:15",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "10:15",
+          "endtime": "10:30",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "starttime": "10:30",
+          "endtime": "11:30",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-05",
+      "timeslots": [
+        {
+          "starttime": "08:00",
+          "endtime": "09:00",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "09:00",
+          "endtime": "09:15",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "starttime": "09:15",
+          "endtime": "10:15",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "10:15",
+          "endtime": "10:30",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "starttime": "10:30",
+          "endtime": "11:30",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Unknown"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
