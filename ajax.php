@@ -1,6 +1,10 @@
 <?php
-// This is from https://github.com/IACR/auth-client-php
-include("../auth/auth-client-php/auth.php");
+// This is from https://github.com/IACR/auth
+include("/var/www/auth-API/auth-client-php/auth.php");
+$auth_application_id = 'program_editor';
+$auth_application_key = 'cc384fd8bc47e041fc2ec0aa09d8e379257bf6654554b783547ad117347fc2ec';
+$auth_endpoint_url = 'https://register.iacr.org/auth';
+
 include("cred.php");
 include("lib.php");
 // The schema for the database table is as follows:
@@ -137,7 +141,7 @@ function doLogin($userid, $password) {
   // $_SESSION parameters for userid and username.
   $userInfo = array();
   // This uses the authentication protocol described here:
-  // https://github.com/IACR/auth-client-php
+  // https://github.com/IACR/auth
   $error_code = null;
   $error_message = null;
   

@@ -368,6 +368,11 @@ input:invalid {
     display: none;
 }
 
+input {
+    /* from bootstrap 5 */
+    color: #212529 !important;
+}
+
 input#shiftDates {
     text-align: center;
 }

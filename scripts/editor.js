@@ -1053,6 +1053,7 @@ function showTalkEditor(id) {
     $('#currentTalkStartTime').val('');
     $('#currentTalkEndTime').val('');
     $('#paperId').val('');
+    $('#talkAbstract').val('');
   } else {
     $('#talkDeleteButton').show();
     var talkObj = findObj(id, progData);
