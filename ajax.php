@@ -1,11 +1,13 @@
 <?php
 // This is from https://github.com/IACR/auth
-include("/var/www/auth-API/auth-client-php/auth.php");
-$auth_application_id = 'program_editor';
-$auth_application_key = 'cc384fd8bc47e041fc2ec0aa09d8e379257bf6654554b783547ad117347fc2ec';
-$auth_endpoint_url = 'https://register.iacr.org/auth';
-
 include("cred.php");
+if (!isset($USERINFO)) {
+  include("/var/www/auth-API/auth-client-php/auth.php");
+  $auth_application_id = 'program_editor';
+  $auth_application_key = 'cc384fd8bc47e041fc2ec0aa09d8e379257bf6654554b783547ad117347fc2ec';
+  $auth_endpoint_url = 'https://register.iacr.org/auth';
+}
+
 include("lib.php");
 // The schema for the database table is as follows:
 // mysql> describe programs;
@@ -136,6 +138,7 @@ function doGetRow($pdo, $id) {
 }
 
 function doLogin($userid, $password) {
+  global $USERINFO;
   // This uses login through the IACR membership database. If
   // the userid and password are correct, then it sets several
   // $_SESSION parameters for userid and username.
@@ -145,14 +148,20 @@ function doLogin($userid, $password) {
   $error_code = null;
   $error_message = null;
   
-  $response = \IACR\Authentication\Client\checkPassword($userid, $password, $userInfo, $error_code, $error_message);
+  if (isset($USERINFO)) {
+    $userInfo = $USERINFO;
+    $response = TRUE;
+  } else {
+    $response = \IACR\Authentication\Client\checkPassword($userid, $password, $userInfo, $error_code, $error_message);
+  }
   if ($response) {
     $userName = $userInfo['firstname'] . ' ' . $userInfo['lastname'];
     session_unset();
     // session_destroy();
     ini_set('session.gc_maxlifetime', 1000000);
-    session_set_cookie_params(0, '/tools', '.iacr.org', True);
-    session_start();
+    if (!isset($USERINFO)) {
+      session_set_cookie_params(0, '/tools', '.iacr.org', True);
+    }
     $_SESSION['logged_in'] = True;
     $_SESSION['userid'] = $userid;
     $_SESSION['username'] = $userName;
@@ -210,6 +219,9 @@ if ($_POST && isset($_POST['iacrref']) && isset($_POST['password'])) {
  return;
 }
 
+if (isset($USERINFO)) {
+  session_save_path('/tmp');
+}
 session_start();
 if ($_POST && isset($_POST['logout'])) {
   session_unset();
