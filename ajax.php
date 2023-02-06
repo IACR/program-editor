@@ -96,7 +96,7 @@ function doGetLatest($pdo) {
   $stmt->closeCursor();
   $stmt = null;
   if (!$values) {
-    $values = array();;
+    $values = array();
   }
   $values = array("programs" => $values, "username" => $_SESSION["username"]);
   echo json_encode($values, JSON_UNESCAPED_UNICODE);
@@ -159,9 +159,8 @@ function doLogin($userid, $password) {
     session_unset();
     // session_destroy();
     ini_set('session.gc_maxlifetime', 1000000);
-    if (!isset($USERINFO)) {
-      session_set_cookie_params(0, '/tools', '.iacr.org', True);
-    }
+    session_set_cookie_params(0, '/tools', '.iacr.org', True);
+    session_start();
     $_SESSION['logged_in'] = True;
     $_SESSION['userid'] = $userid;
     $_SESSION['username'] = $userName;
@@ -214,14 +213,15 @@ if (isset($_GET['id']) && isset($_GET['iacrref'])) {
 // check if the user is already logged in. If so, then we check
 // if it's a POST or a GET, and route to the appropriate function.
 
+if (isset($USERINFO)) {
+  session_save_path('/tmp');
+}
+
 if ($_POST && isset($_POST['iacrref']) && isset($_POST['password'])) {
  doLogin($_POST['iacrref'], $_POST['password']);
  return;
 }
 
-if (isset($USERINFO)) {
-  session_save_path('/tmp');
-}
 session_start();
 if ($_POST && isset($_POST['logout'])) {
   session_unset();
