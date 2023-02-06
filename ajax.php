@@ -96,9 +96,10 @@ function doGetLatest($pdo) {
   $stmt->closeCursor();
   $stmt = null;
   if (!$values) {
-    $values = array();;
+    $values = array();
   }
   $values = array("programs" => $values, "username" => $_SESSION["username"]);
+  
   echo json_encode($values, JSON_UNESCAPED_UNICODE);
 }
 

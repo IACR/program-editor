@@ -64,7 +64,7 @@
         </li>
         <li role="button" class="nav-item dropdown">
           <!-- NOTE/TODO: turns out dropdowns don't have to be anchors (as they did in Bootstrap 3.3); they can be buttons. which I tested and works beautifully with added .btn -->
-          <a class="nav-link dropdown-toggle" href="#" id="fileDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="fileDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             File
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="fileDD">
@@ -86,7 +86,7 @@
           </div>
         </li>
         <li role="button" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="downloadDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="downloadDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Download
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="downloadDD">
@@ -99,7 +99,7 @@
           </div>
         </li>
         <li role="button" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="importDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="importDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Import
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="importDD">
@@ -125,7 +125,7 @@
           </a>
         </li>
         <li role="button" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="loginDD" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="loginDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="img/md-person.svg">
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="loginDD">
@@ -161,7 +161,7 @@
         <!-- Button to trigger login modal -->
         <div class="row" id="auth-button">
           <div class="col-md-8">
-            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#authModal">
+            <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#authModal">
               Log in for this app
             </button>
           </div>
@@ -315,7 +315,7 @@
           <div class="col-md-3">
             <h3 class="text-center editorTitles">
               Unscheduled Talks
-              <label data-toggle="tooltip" title="Add a talk" data-placement="top" data-trigger="hover" tabindex="0">
+              <label data-bs-toggle="tooltip" title="Add a talk" data-placement="top" data-trigger="hover" tabindex="0">
                 <span class="addicon"><img src="img/add.svg" onclick="showTalkEditor('')"></span>
               </label>
             </h3>
@@ -323,7 +323,7 @@
           <div class="col-md-9">
             <h3 class="text-center editorTitles">
               Schedule
-              <label data-toggle="tooltip" title="Edit dates" data-placement="top" data-trigger="hover" tabindex="0">
+              <label data-bs-toggle="tooltip" title="Edit dates" data-placement="top" data-trigger="hover" tabindex="0">
                 <span class="addicon"><img src="img/add.svg" onclick="showEditMetadata()"></span>
               </label>
             </h3>
@@ -333,8 +333,8 @@
         <!-- This is a handlebars partial that can be used in two places to display a talk. -->
         <script id="talk-partial" type="text/x-handlebars-template">
           <div class="talk" id="{{id}}">
-            <a data-toggle="modal" data-target="editTalkBox" class="editButton float-right" onclick="showTalkEditor('{{id}}')">
-              <label data-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
+            <a data-bs-toggle="modal" data-bs-target="editTalkBox" class="editButton float-right" onclick="showTalkEditor('{{id}}')">
+              <label data-bs-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
                 <span class="editIcon"><img src="img/edit.svg"></span>
               </label>
             </a>
@@ -377,8 +377,8 @@
                 <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
                 {{#each unassigned_talks}}
                 <div class="categoryDiv" id="{{id}}">
-                    <a data-toggle="modal" data-target="editCategoryBox" class="editButton float-right" onclick="showCategoryEditor('{{id}}');">
-                      <label data-toggle="tooltip" title="Edit the category" data-placement="bottom" data-trigger="hover" tabindex="0">
+                    <a data-bs-toggle="modal" data-bs-target="editCategoryBox" class="editButton float-right" onclick="showCategoryEditor('{{id}}');">
+                      <label data-bs-toggle="tooltip" title="Edit the category" data-placement="bottom" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
@@ -395,7 +395,7 @@
                 {{/each}}
               </script>
             </section>
-            <label data-toggle="tooltip" title="Add a Category. These are not used in the program itself." data-placement="top" data-trigger="hover" tabindex="0" z-index="2" id="newCategoryButton">
+            <label data-bs-toggle="tooltip" title="Add a Category. These are not used in the program itself." data-placement="top" data-trigger="hover" tabindex="0" z-index="2" id="newCategoryButton">
               <span class="addicon"><img src="img/add.svg" onclick="showCategoryEditor('')"></span>
             </label>
           </article>
@@ -406,7 +406,7 @@
               <div class="row">
                 <div class="col-md-5">
                   <h4 class="pageSubtitle">
-                    {{formatDate date}} <label data-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover" tabindex="0">
+                    {{formatDate date}} <label data-bs-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover" tabindex="0">
                       <span class="addicon"><img src="img/add.svg" onclick="prepareAddTimeslotToDay({{@index}})"></span>
                     </label>
                   </h4>
@@ -416,8 +416,8 @@
               {{#if sessions}} <!-- only render slots that have sessions -->
               <div class="row">
                 <div class="col-md-2 timeSlotDiv">
-                    <a data-toggle="modal" data-target="editTimeslot" class="editButton float-right" onclick="editTimeslot({{@../index}}, {{@index}})">
-                      <label data-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
+                    <a data-bs-toggle="modal" data-bs-target="editTimeslot" class="editButton float-right" onclick="editTimeslot({{@../index}}, {{@index}})">
+                      <label data-bs-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
@@ -440,8 +440,8 @@
                   <div class="{{#greaterThan sessions.length 2}}tab-content{{else}}d-flex{{/greaterThan}}" id="sessions-{{@index}}">
                     {{#each sessions}}
                     <div class="session {{#if @root.tabbedSessions}}tab-pane fade{{/if}} {{#if @first }}show active{{/if}}" id="session-{{@../index}}-{{@index}}" role="tabpanel" aria-labelled-by="btn-{{@../index}}-{{@index}}">
-                      <a data-toggle="modal" data-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},1)">
-                        <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
+                      <a data-bs-toggle="modal" data-bs-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},1)">
+                        <label data-bs-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
                           <span class="editIcon"><img src="img/edit.svg"></span>
                         </label>
                       </a>
@@ -470,8 +470,8 @@
                 </div>
                 <div class="d-none {{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
                   <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} session" id="{{sessions.0.id}}">
-                    <a data-toggle="modal" data-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},0)">
-                      <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
+                    <a data-bs-toggle="modal" data-bs-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},0)">
+                      <label data-bs-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
@@ -500,8 +500,8 @@
                 {{#if twosessions}}
                 <div class="d-none col-md-5">
                   <div class="session track2Event" id="{{sessions.1.id}}">
-                    <a data-toggle="modal" data-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},1)">
-                      <label data-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
+                    <a data-bs-toggle="modal" data-bs-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},1)">
+                      <label data-bs-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
                         <span class="editIcon"><img src="img/edit.svg"></span>
                       </label>
                     </a>
@@ -1026,7 +1026,7 @@
                     <label for="abstract">
                       Abstract for paper.
                     </label>
-                    <div><a class="btn btn-sm btn-outline-primary" data-toggle="collapse" href="#abstractRow" role="button" aria-expanded="false" aria-controls="abstractRow">Show abstract below ▾</a></div>
+                    <div><a class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" href="#abstractRow" role="button" aria-expanded="false" aria-controls="abstractRow">Show abstract below ▾</a></div>
                     <small class="form-text">
                       An abstract is optional.
                     </small>
