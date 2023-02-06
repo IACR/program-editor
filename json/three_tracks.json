@@ -1,0 +1,687 @@
+{
+  "name": "Crypto template",
+  "config": {
+    "default_track_locations": [{"name": "Lotte Lehman Hall"}, {"name": "Campbell Hall"}],
+    "default_talk_minutes": 25,
+    "unassigned_talks": [{
+      "name": "Uncategorized",
+      "id": "category-0",
+      "talks": []
+    }]
+  },
+  "days": [
+    {
+      "date": "2016-08-14",
+      "timeslots": [
+        {
+          "starttime": "17:00",
+          "endtime": "20:00",
+          "sessions": [
+            {
+              "session_title": "Registration",
+              "location": {
+                "name": "Anacapa Formal Lounge"
+              }
+            }
+          ]
+        },
+        {
+          "starttime": "17:30",
+          "endtime": "21:30",
+          "sessions": [
+            {
+              "session_title": "Reception Dinner",
+              "location": {
+                "name": "Anacapa Lawn"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-15",
+      "timeslots": [
+        {
+          "endtime": "8:45",
+          "starttime": "7:30",
+          "sessions": [
+            {
+              "session_title": "Breakfast",
+              "location": {
+                "name": "De La Guerra Dining Commons"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "8:55",
+          "starttime": "8:45",
+          "sessions": [
+            {
+              "moderator": "Crypto General Chair, (add name)",
+              "session_title": "Opening remarks",
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:50",
+          "starttime": "9:00",
+          "sessions": [
+            {
+              "session_title": "Session 1",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavillion"
+              }
+            },
+            {
+              "session_title": "Session 2",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehman Hall"
+              }
+            },
+            {
+              "session_title": "Session 3",
+              "talks": [],
+              "location": {
+                "name": "Girvetz 1004"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:55",
+          "starttime": "9:50",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "endtime": "11:10",
+          "starttime": "9:55",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavillion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "11:40",
+          "starttime": "11:10",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "University Center Lagoon Plaza"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "12:40",
+          "starttime": "11:40",
+          "sessions": [
+            {
+              "session_title": "Invited talk or award talks",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:40",
+          "sessions": [
+            {
+              "session_title": "Lunch",
+              "location": {
+                "name": "De La Guerra Dining Commons"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:50",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "session_title": "Session 1",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavillion"
+              }
+            },
+            {
+              "session_title": "Session 2",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            },
+            {
+              "session_title": "Session 3",
+              "talks": [],
+              "location": {
+                "name": "Girvetz 1004"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:55",
+          "starttime": "14:50",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "endtime": "15:45",
+          "starttime": "14:55",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavillion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "16:15",
+          "starttime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "University Center Lagoon Plaza"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "17:30",
+          "starttime": "16:15",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavillion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "21:00",
+          "starttime": "19:00",
+          "sessions": [
+            {
+              "session_title": "Dinner",
+              "location": {
+                "name": "Anacapa Lawn"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-16",
+      "timeslots": [
+        {
+          "endtime": "9:00",
+          "starttime": "7:30",
+          "sessions": [
+            {
+              "session_title": "Breakfast",
+              "location": {
+                "name": "De La Guerra Dining Commons"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "10:25",
+          "starttime": "9:10",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehman Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "10:55",
+          "starttime": "10:25",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "University Center Lagoon Plaza"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "11:45",
+          "starttime": "10:55",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehman Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "11:50",
+          "starttime": "11:45",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "endtime": "12:40",
+          "starttime": "11:50",
+          "sessions": [
+            {
+              "session_title": "Invited talk or award talks",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:40",
+          "sessions": [
+            {
+              "session_title": "Lunch",
+              "location": {
+                "name": "De La Guerra Dining Commons"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "18:00",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "session_title": "Free afternoon"
+            }
+          ]
+        },
+        {
+          "endtime": "21:00",
+          "starttime": "18:00",
+          "sessions": [
+            {
+              "session_title": "Dinner Reception",
+              "location": {
+                "name": "University Center Lagoon Plaza"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "19:30",
+          "starttime": "19:00",
+          "sessions": [
+            {
+              "session_title": "IACR Award Ceremony",
+              "location": {
+                "name": "University Center Corwin Pavilion"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "23:00",
+          "starttime": "19:30",
+          "sessions": [
+            {
+              "session_title": "Rump Session",
+              "location": {
+                "name": "University Center Corwin Pavilion"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-17",
+      "timeslots": [
+        {
+          "endtime": "8:50",
+          "starttime": "7:30",
+          "sessions": [
+            {
+              "session_title": "Breakfast",
+              "location": {
+                "name": "De La Guerra Dining Commons"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:40",
+          "starttime": "8:50",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "9:45",
+          "starttime": "9:40",
+          "sessions": [
+            {
+              "session_title": "Track-switch break"
+            }
+          ]
+        },
+        {
+          "endtime": "11:00",
+          "starttime": "9:45",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "11:30",
+          "starttime": "11:00",
+          "sessions": [
+            {
+              "session_title": "Coffee Break",
+              "location": {
+                "name": "Plaza outside Campbell Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "12:30",
+          "starttime": "11:30",
+          "sessions": [
+            {
+              "session_title": "Invited talk or award talks",
+              "talks": [],
+              "location": {
+                "name": "Campbell Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:30",
+          "sessions": [
+            {
+              "session_title": "Lunch",
+              "location": {
+                "name": "De La Guerra Dining Commons"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "15:15",
+          "starttime": "14:00",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "15:45",
+          "starttime": "15:15",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "University Center Lagoon Plaza"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "16:35",
+          "starttime": "15:45",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "17:45",
+          "starttime": "16:45",
+          "sessions": [
+            {
+              "session_title": "IACR Membership Meeting",
+              "location": {
+                "name": "University Center Corwin Pavilion"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "19:30",
+          "starttime": "18:00",
+          "sessions": [
+            {
+              "session_title": "Beach Barbeque",
+              "location": {
+                "name": "Goleta Beach"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "22:30",
+          "starttime": "19:30",
+          "sessions": [
+            {
+              "starttime": "21:00",
+              "session_title": "Crypto Caf\u00e9",
+              "location": {
+                "name": "Anacapa Formal Lounge and Anacapa Front Lawn"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2016-08-18",
+      "timeslots": [
+        {
+          "endtime": "8:50",
+          "starttime": "7:30",
+          "sessions": [
+            {
+              "session_title": "Breakfast",
+              "location": {
+                "name": "De La Guerra Dining Commons"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "10:05",
+          "starttime": "8:50",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "10:30",
+          "starttime": "10:05",
+          "sessions": [
+            {
+              "session_title": "Break",
+              "location": {
+                "name": "University Center Lagoon Plaza"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "12:10",
+          "starttime": "10:30",
+          "sessions": [
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Corwin Pavilion"
+              }
+            },
+            {
+              "session_title": "Session title TBD",
+              "talks": [],
+              "location": {
+                "name": "Lotte Lehmann Hall"
+              }
+            }
+          ]
+        },
+        {
+          "endtime": "14:00",
+          "starttime": "12:10",
+          "sessions": [
+            {
+              "session_title": "Lunch",
+              "location": {
+                "name": "De La Guerra Dining Commons"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
