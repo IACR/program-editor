@@ -99,7 +99,7 @@ function doGetLatest($pdo) {
     $values = array();
   }
   $values = array("programs" => $values, "username" => $_SESSION["username"]);
-  
+
   echo json_encode($values, JSON_UNESCAPED_UNICODE);
 }
 
@@ -163,6 +163,7 @@ function doLogin($userid, $password) {
     if (!isset($USERINFO)) {
       session_set_cookie_params(0, '/tools', '.iacr.org', True);
     }
+    session_start();
     $_SESSION['logged_in'] = True;
     $_SESSION['userid'] = $userid;
     $_SESSION['username'] = $userName;
@@ -210,6 +211,10 @@ if (isset($_GET['id']) && isset($_GET['iacrref'])) {
   }
 }
 
+if (isset($USERINFO)) {
+  session_save_path('/tmp');
+}
+
 // The rest of the code is executed for each request. We first check
 // if the user is trying to login and execute that. Next we
 // check if the user is already logged in. If so, then we check
@@ -220,9 +225,6 @@ if ($_POST && isset($_POST['iacrref']) && isset($_POST['password'])) {
  return;
 }
 
-if (isset($USERINFO)) {
-  session_save_path('/tmp');
-}
 session_start();
 if ($_POST && isset($_POST['logout'])) {
   session_unset();
