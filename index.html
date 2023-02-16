@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Security-Policy" content="connect-src 'self' https://api.crossref.org/";default-src: 'self'>
     <meta charset="utf-8">
 
     <title>Program Editor</title>
@@ -41,106 +40,107 @@
      .session:first-child:nth-last-child(2) ~ .session {
        width: 50%;
      }
-
-     /* three sessions */
-     .session:first-child:nth-last-child(3),
-     .session:first-child:nth-last-child(3) ~ .session {
-/*       width: 33.3333%;*/
+     /* first session of two. */
+     .session:first-child:nth-last-child(2) {
+       margin-right: .35rem;
      }
-
-     /* four sessions */
-     .session:first-child:nth-last-child(4),
-     .session:first-child:nth-last-child(4) ~ .session {
-       width: 25%;
+     /* second session of two. */
+     .session:first-child:nth-last-child(2) ~ .session {
+       margin-left: .35rem;
      }
     </style>
+    <!-- Bootstrap scripts -->
+    <script src="https://iacr.org/libs/js/jquery/3.3.1/jquery.min.js"></script>
+    <noscript><h1>This tool will not work without javascript.</h1></noscript>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
   </head>
   <body>
-<nav class="navbar navbar-expand navbar-custom" id="topNav" role="navigation">
-      <span class="navbar-brand" id="navBrand">Program Creator</span>
-      <ul class="navbar-nav ml-auto" id="topNavList">
-        <li class="nav-item">
-          <span class="navbar-text" id="save_status"></span>
-        </li>
-        <li role="button" class="nav-item dropdown">
-          <!-- NOTE/TODO: turns out dropdowns don't have to be anchors (as they did in Bootstrap 3.3); they can be buttons. which I tested and works beautifully with added .btn -->
-          <a class="nav-link dropdown-toggle" href="#" id="fileDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            File
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="fileDD">
-            <a id="openMenu" onclick="navigateToHome()" class="dropdown-item">
-              Open
+    <nav class="navbar navbar-expand navbar-custom" id="topNav" role="navigation">
+      <div class="container-fluid me-5">
+        <span class="navbar-brand" id="navBrand">Program Creator</span>
+        <span class="navbar-text ms-auto" id="save_status"></span>
+        <ul class="navbar-nav" id="topNavList">
+          <li role="button" class="nav-item dropdown">
+            <!-- NOTE/TODO: turns out dropdowns don't have to be anchors (as they did in Bootstrap 3.3); they can be buttons. which I tested and works beautifully with added .btn -->
+            <a class="nav-link dropdown-toggle" href="#" id="fileDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              File
             </a>
-            <a id="editMetadataMenu" onclick="showEditMetadata();" class="dropdown-item">
-              Edit dates and name
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="fileDD">
+              <a id="openMenu" onclick="navigateToHome()" class="dropdown-item">
+                Open
+              </a>
+              <a id="editMetadataMenu" onclick="showEditMetadata();" class="dropdown-item">
+                Edit dates and name
+              </a>
+              <a id="saveMenu" onclick="saveProgram();" class="dropdown-item">
+                Save (autosave ON)
+              </a>
+              <a id="saveAsMenu" onclick="saveAs();" class="dropdown-item">
+                Save a copy...
+              </a>
+              <a id="deleteMenu" onclick="showDeleteProgram();" class="dropdown-item">
+                Delete from server
+              </a>
+            </div>
+          </li>
+          <li role="button" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="downloadDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Download
             </a>
-            <a id="saveMenu" onclick="saveProgram();" class="dropdown-item">
-              Save (autosave ON)
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="downloadDD">
+              <a id="downloadMenu" onclick="downloadJSON()" class="dropdown-item">
+                Download JSON for website
+              </a>
+              <a id="downloadPDFMenu" onclick="showPDFDownload()" class="dropdown-item">
+                Download PDF for printing
+              </a>
+            </div>
+          </li>
+          <li role="button" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="importDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Import
             </a>
-            <a id="saveAsMenu" onclick="saveAs();" class="dropdown-item">
-              Save a copy...
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="importDD">
+              <a id="importTalksMenu" onclick="showImportFSEorCHES(true)" class="dropdown-item">
+                Import papers from TCHES or ToSC
+              </a>
+              <a id="uploadTalksMenu" onclick="showWebsubrevUpload(true)" class="dropdown-item">
+                Upload papers in websubrev format
+              </a>
+              <a id="importDOIMenu" onclick="startImportDOIs()" class="dropdown-item">
+                Import paper URLs
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a target="_help" href="docs/help.html" class="nav-link">
+              Help
             </a>
-            <a id="deleteMenu" onclick="showDeleteProgram();" class="dropdown-item">
-              Delete from server
+          </li>
+          <li class="nav-item">
+            <a target="_help" href="https://github.com/kaymckelly/program-editor" class="nav-link">
+              About
             </a>
-          </div>
-        </li>
-        <li role="button" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="downloadDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Download
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="downloadDD">
-            <a id="downloadMenu" onclick="downloadJSON()" class="dropdown-item">
-              Download JSON for website
+          </li>
+          <li role="button" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="loginDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="img/md-person.svg">
             </a>
-            <a id="downloadPDFMenu" onclick="showPDFDownload()" class="dropdown-item">
-              Download PDF for printing
-            </a>
-          </div>
-        </li>
-        <li role="button" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="importDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Import
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="importDD">
-            <a id="importTalksMenu" onclick="showImportFSEorCHES(true)" class="dropdown-item">
-              Import papers from TCHES or ToSC
-            </a>
-            <a id="uploadTalksMenu" onclick="showWebsubrevUpload(true)" class="dropdown-item">
-              Upload papers in websubrev format
-            </a>
-            <a id="importDOIMenu" onclick="startImportDOIs()" class="dropdown-item">
-              Import paper URLs
-            </a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a target="_help" href="docs/help.html" class="nav-link">
-            Help
-          </a>
-        </li>
-        <li class="nav-item">
-          <a target="_help" href="https://github.com/kaymckelly/program-editor" class="nav-link">
-            About
-          </a>
-        </li>
-        <li role="button" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="loginDD" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="img/md-person.svg">
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="loginDD">
-            <span class="dropdown-item navbar-text" id="login_status">
-              Login status unknown
-            </span>
-            <a id="loginMenu" onClick="$('#authModal').modal();this.blur()" class="dropdown-item">
-              Log in
-            </a>
-            <a id="logoutMenu" onclick="doLogout()" class="dropdown-item">
-              Log out
-            </a>
-          </div>
-        </li>
-      </ul>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDD" style="right: 0 !important; left auto !important">
+              <span class="dropdown-item navbar-text" id="login_status">
+                Login status unknown
+              </span>
+              <a id="loginMenu" onClick="$('#authModal').modal();this.blur()" class="dropdown-item">
+                Log in
+              </a>
+              <a id="logoutMenu" onclick="doLogout()" class="dropdown-item">
+                Log out
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
     </nav>
 
     <div class="container">
@@ -182,8 +182,8 @@
                 </button>
               </div>
               <!-- <div class="col-md-6">
-                <input class="form-control input-sm" type="text" placeholder="Search for a program (not yet working)">
-              </div> -->
+                   <input class="form-control input-sm" type="text" placeholder="Search for a program (not yet working)">
+                   </div> -->
             </div>
           </section>
         </div>
@@ -195,7 +195,7 @@
                 <th>Name</th>
                 <th>Owner</th>
                 <th>Last modified</th>
-<!--                <th><button type="button" class="btn btn-sm btn-disabled">Delete selected</button></th>-->
+                <!--                <th><button type="button" class="btn btn-sm btn-disabled">Delete selected</button></th>-->
               </tr>
             </table>
           </section>
@@ -315,7 +315,7 @@
           <div class="col-md-3">
             <h3 class="text-center editorTitles">
               Unscheduled Talks
-              <label data-bs-toggle="tooltip" title="Add a talk" data-placement="top" data-trigger="hover" tabindex="0">
+              <label data-bs-toggle="tooltip" title="Add a talk" data-bs-placement="top" data-bs-trigger="hover" tabindex="0">
                 <span class="addicon"><img src="img/add.svg" onclick="showTalkEditor('')"></span>
               </label>
             </h3>
@@ -323,7 +323,7 @@
           <div class="col-md-9">
             <h3 class="text-center editorTitles">
               Schedule
-              <label data-bs-toggle="tooltip" title="Edit dates" data-placement="top" data-trigger="hover" tabindex="0">
+              <label data-bs-toggle="tooltip" title="Edit dates" data-bs-placement="top" data-bs-trigger="hover" tabindex="0">
                 <span class="addicon"><img src="img/add.svg" onclick="showEditMetadata()"></span>
               </label>
             </h3>
@@ -333,8 +333,8 @@
         <!-- This is a handlebars partial that can be used in two places to display a talk. -->
         <script id="talk-partial" type="text/x-handlebars-template">
           <div class="talk" id="{{id}}">
-            <a data-bs-toggle="modal" data-bs-target="editTalkBox" class="editButton float-right" onclick="showTalkEditor('{{id}}')">
-              <label data-bs-toggle="tooltip" title="Edit the talk" data-placement="top" data-trigger="hover" tabindex="0">
+            <a class="editButton float-end" onclick="showTalkEditor('{{id}}')">
+              <label data-bs-toggle="tooltip" title="Edit the talk" data-bs-placement="top" data-bs-trigger="hover" tabindex="0">
                 <span class="editIcon"><img src="img/edit.svg"></span>
               </label>
             </a>
@@ -344,13 +344,13 @@
               {{#if slidesUrl}}&nbsp;&nbsp;<a target="_slides" href="{{slidesUrl}}"><span class="talkIcons"><img src="img/md-desktop.svg" title="View the slides"></span></a>{{/if}}
             </h4>
             {{#if talkNote}}
-              <div class="talkNote">
-                {{{talkNote}}}
-              </div>
+            <div class="talkNote">
+              {{{talkNote}}}
+            </div>
             {{/if}}
             <div class="authorList">
               {{#each authors}}
-                <span class="authorName">{{this}}</span>
+              <span class="authorName">{{this}}</span>
               {{/each}}
             </div>
             {{#if affiliations }}
@@ -367,9 +367,9 @@
         </script>
         <div class="row">
           <article id="categoryList" class="col-md-3">
-            <div id="alertInstr" class="alert alert-light alert-dismissible">
-              <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                Instructions: Drag talks from the categories below to the sessions on the right. You can edit sessions, talks, time slots, days, etc. When finished, you can export the JSON for the website.
+            <div id="alertInstr" class="alert alert-light">
+              <button type="button" class="close float-end btn" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              Instructions: Drag talks from the categories below to the sessions on the right. You can edit sessions, talks, time slots, days, etc. When finished, you can export the JSON for the website.
             </div>
             <section id="talksList">
               <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
@@ -377,27 +377,27 @@
                 <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
                 {{#each unassigned_talks}}
                 <div class="categoryDiv" id="{{id}}">
-                    <a data-bs-toggle="modal" data-bs-target="editCategoryBox" class="editButton float-right" onclick="showCategoryEditor('{{id}}');">
-                      <label data-bs-toggle="tooltip" title="Edit the category" data-placement="bottom" data-trigger="hover" tabindex="0">
-                        <span class="editIcon"><img src="img/edit.svg"></span>
-                      </label>
-                    </a>
-                    <h4 class="categoryTitle">
-                      {{name}}
-                    </h4>
-                      {{#talkList talks false}}
-                      {{#each talks}}
-                      {{> talk}}
-                      {{/each}}
-                      {{/talkList}}
-                    </section>
+                  <a class="editButton float-end" onclick="showCategoryEditor('{{id}}');">
+                    <label data-bs-toggle="tooltip" title="Edit the category" data-bs-placement="bottom" data-bs-trigger="hover" tabindex="0">
+                      <span class="editIcon"><img src="img/edit.svg"></span>
+                    </label>
+                  </a>
+                  <h4 class="categoryTitle">
+                    {{name}}
+                  </h4>
+                  {{#talkList talks false}}
+                  {{#each talks}}
+                  {{> talk}}
+                  {{/each}}
+                  {{/talkList}}
+            </section>
                 </div>
                 {{/each}}
               </script>
-            </section>
-            <label data-bs-toggle="tooltip" title="Add a Category. These are not used in the program itself." data-placement="top" data-trigger="hover" tabindex="0" z-index="2" id="newCategoryButton">
-              <span class="addicon"><img src="img/add.svg" onclick="showCategoryEditor('')"></span>
-            </label>
+          </section>
+          <label data-bs-toggle="tooltip" title="Add a Category. These are not used in the program itself." data-bs-placement="top" data-bs-trigger="hover" tabindex="0" z-index="2" id="newCategoryButton">
+            <span class="addicon"><img src="img/add.svg" onclick="showCategoryEditor('')"></span>
+          </label>
           </article>
           <article id="renderedProgram" class="col-md-9 pt-3">
             <!-- Handlebars script, renders editable program based on the user-selected program template -->
@@ -406,42 +406,42 @@
               <div class="row">
                 <div class="col-md-5">
                   <h4 class="pageSubtitle">
-                    {{formatDate date}} <label data-bs-toggle="tooltip" title="Add a time slot" data-placement="top" data-trigger="hover" tabindex="0">
-                      <span class="addicon"><img src="img/add.svg" onclick="prepareAddTimeslotToDay({{@index}})"></span>
+                    {{formatDate date}} <label data-bs-toggle="tooltip" title="Add a time slot" data-bs-placement="top" data-bs-trigger="hover" tabindex="0">
+                    <span class="addicon"><img src="img/add.svg" onclick="prepareAddTimeslotToDay({{@index}})"></span>
                     </label>
                   </h4>
                 </div>
               </div>
               {{#each timeslots}}
               {{#if sessions}} <!-- only render slots that have sessions -->
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-md-2 timeSlotDiv">
-                    <a data-bs-toggle="modal" data-bs-target="editTimeslot" class="editButton float-right" onclick="editTimeslot({{@../index}}, {{@index}})">
-                      <label data-bs-toggle="tooltip" title="Edit the time slot" data-placement="top" data-trigger="hover" tabindex="0">
-                        <span class="editIcon"><img src="img/edit.svg"></span>
-                      </label>
-                    </a>
+                  <a class="editButton float-end" onclick="editTimeslot({{@../index}}, {{@index}})">
+                    <label data-bs-toggle="tooltip" title="Edit the time slot" data-bs-placement="top" data-bs-trigger="hover" tabindex="0">
+                      <span class="editIcon"><img src="img/edit.svg"></span>
+                    </label>
+                  </a>
                   <br />
                   <p class="timeSlot text-center">
                     {{starttime}}-{{endtime}}
                   </p>
                 </div>
-                <div class="col-md-10 sessionlist">
+                <div class="col-md-10 sessionlist ps-0">
                   {{setTabbed sessions}}
                   {{#if @root.tabbedSessions}}
                   <ul class="nav nav-tabs mt-2" role="tablist">
                     {{#each sessions}}
                     <li class="nav-item {{#if @first}}active{{/if}}" role="presentation">
-                      <button id="btn-{{@../index}}-{{@index}}" class="nav-link {{#if @first}}active{{/if}}" href="#session-{{@../index}}-{{@index}}" data-bs-toggle="tab" data-bs-target="#session-{{@../index}}-{{@index}}" type="button" role="tab" aria-controls="session-{{@../index}}-{{@index}}">{{session_title}}</button>
+                      <button id="btn-{{@../../index}}-{{@../index}}-{{@index}}" class="nav-link {{#if @first}}active{{/if}}" href="#session-{{@../../index}}-{{@../index}}-{{@index}}" data-bs-toggle="tab" data-bs-target="#session-{{@../../index}}-{{@../index}}-{{@index}}" type="button" role="tab" aria-controls="session-{{@../../index}}-{{@../index}}-{{@index}}">{{session_title}}</button>
                     </li>
                     {{/each}}
                   </ul>
                   {{/if}}
-                  <div class="{{#greaterThan sessions.length 2}}tab-content{{else}}d-flex{{/greaterThan}}" id="sessions-{{@index}}">
+                  <div class="{{#if @root.tabbedSessions}}tab-content{{else}}d-flex{{/if}}" id="sessions-{{@index}}">
                     {{#each sessions}}
-                    <div class="session {{#if @root.tabbedSessions}}tab-pane fade{{/if}} {{#if @first }}show active{{/if}}" id="session-{{@../index}}-{{@index}}" role="tabpanel" aria-labelled-by="btn-{{@../index}}-{{@index}}">
-                      <a data-bs-toggle="modal" data-bs-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},1)">
-                        <label data-bs-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
+                    <div class="session {{#if @root.tabbedSessions}}tab-pane fade {{#if @first}} active show{{/if}}{{/if}}" id="session-{{@../../index}}-{{@../index}}-{{@index}}" role="tabpanel" aria-labelled-by="btn-{{@../index}}-{{@index}}">
+                      <a class="editButton float-end" onclick="editSession({{@../../index}},{{@../index}},{{@index}})">
+                        <label data-bs-toggle="tooltip" title="Edit the session" data-bs-placement="top" data-bs-trigger="hover" tabindex="0">
                           <span class="editIcon"><img src="img/edit.svg"></span>
                         </label>
                       </a>
@@ -468,65 +468,6 @@
                     {{/each}}
                   </div>
                 </div>
-                <div class="d-none {{#if twosessions}}col-md-5{{else}}col-md-10{{/if}}">
-                  <div class="{{#if twosessions}}track1Event{{else}}mutualEvent{{/if}} session" id="{{sessions.0.id}}">
-                    <a data-bs-toggle="modal" data-bs-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},0)">
-                      <label data-bs-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
-                        <span class="editIcon"><img src="img/edit.svg"></span>
-                      </label>
-                    </a>
-                    <h4 class="text-center">
-                      {{sessions.0.session_title}}
-                      {{#if sessions.0.session_url}}&nbsp;&nbsp;<a target="_session" href="{{sessions.0.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
-                    </h4>
-                    {{#if sessions.0.location.name}}
-                    <div class="text-center">
-                      {{sessions.0.location.name}}
-                    </div>
-                    {{/if}}
-                    {{#if sessions.0.moderator}}
-                    <div class="text-center">
-                      {{sessions.0.moderator}}
-                    </div>
-                    {{/if}}
-
-                    {{#talkList sessions.0.talks true}}
-                    {{#each sessions.0.talks}}
-                    {{> talk}}
-                    {{/each}}
-                    {{/talkList}}
-                  </div>
-                </div>
-                {{#if twosessions}}
-                <div class="d-none col-md-5">
-                  <div class="session track2Event" id="{{sessions.1.id}}">
-                    <a data-bs-toggle="modal" data-bs-target="editSessionBox" class="editButton float-right" onclick="editSession({{@../index}},{{@index}},1)">
-                      <label data-bs-toggle="tooltip" title="Edit the session" data-placement="top" data-trigger="hover" tabindex="0">
-                        <span class="editIcon"><img src="img/edit.svg"></span>
-                      </label>
-                    </a>
-                    <h4 class="text-center">
-                      {{sessions.1.session_title}}
-                      {{#if sessions.1.session_url}}&nbsp;&nbsp;<a target="_session" href="{{sessions.1.session_url}}"><img class="infoIcon" title="Additional information" src="img/info.svg"></a>{{/if}}
-                    </h4>
-                    {{#if sessions.1.location.name}}
-                    <div class="text-center">
-                      {{sessions.1.location.name}}
-                    </div>
-                    {{/if}}
-                    {{#if sessions.1.moderator}}
-                    <div class="text-center">
-                      {{sessions.1.moderator}}
-                    </div>
-                    {{/if}}
-                    {{#talkList sessions.1.talks true}}
-                    {{#each sessions.1.talks}}
-                    {{> talk}}
-                    {{/each}}
-                    {{/talkList}}
-                  </div>
-                </div>
-                {{/if}} <!-- end of second session -->
               </div>
               {{/if}} <!-- sessions -->
               {{/each}} <!-- timeslots -->
@@ -538,25 +479,15 @@
       </main>
     </div>
 
-    <!-- Bootstrap scripts -->
-    <script src="https://iacr.org/libs/js/jquery/3.3.1/jquery.min.js"></script>
-    <noscript><h1>This tool will not work without javascript.</h1></noscript>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
     <!-- Handlebars templates -->
     <script src="https://iacr.org/libs/js/handlebars/handlebars-v4.1.0.js" type="text/javascript"></script>
     <script>
-     Handlebars.registerHelper('greaterThan', function (v1, v2, options) {
-       'use strict';
-       if (v1>v2) {
-         return options.fn(this);
-       }
-       return options.inverse(this);
-     });
+     // Called at the beginning of a timeslot to set @root.tabbedSessions and @root.twoSessions
      Handlebars.registerHelper('setTabbed', function (sessionlist, options) {
        if (!options.data.root) {
-          options.data.root = {};
+         options.data.root = {};
        }
+       options.data.root['twoSessions'] = (sessionlist.length == 2);
        options.data.root['tabbedSessions'] = (sessionlist.length > 2);
      });
     </script>
@@ -580,7 +511,7 @@
             <h3 class="modal-title" id="editMetadataTitle">
               Edit conference name and dates
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -629,7 +560,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-4 text-right">
+                <div class="col-4 text-end">
                   <label>
                     Current dates:
                   </label>
@@ -640,7 +571,7 @@
                 </div>
               </div>
               <div id="newDates" class="form-group row">
-                <div class="col-4 text-right">
+                <div class="col-4 text-end">
                   <label>
                     New dates:
                   </label>
@@ -657,7 +588,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
               Cancel
             </button>
             <button type="button" class="btn btn-success btn-sm" onclick="saveMetadata()">
@@ -674,7 +605,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h2 id="deleteProgramLabel" class="modal-title">Confirm Delete</h2>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -684,7 +615,7 @@
           </div>
           <div class="modal-footer">
             <p id="delete_status"></p>
-            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-danger" onclick="reallyDeleteProgram();">Delete</button>
           </div>
         </div>
@@ -697,7 +628,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title" id="authModalLabel">Log in for IACR Program Creator</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -726,7 +657,7 @@
           </div>
           <div class="modal-footer">
             <p id="login_progress"></p>
-            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
             <button type="button" onClick="doLogin();this.blur()"class="btn btn-success">Log in</button>
           </div>
         </div>
@@ -741,7 +672,7 @@
             <h3 class="modal-title" id="importDOITitle">
               Import DOIs from crossref.org
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -759,8 +690,8 @@
           </div>
           <div class="modal-footer">
             <span id="doiStatus"></span>
-            <button id="doiCloseBtn" type="button" class="btn btn-sm btn-light" data-dismiss="modal">Cancel</button>
-            <button id="doiSearchBtn" type="button" onclick="findDOIs()" class="float-right btn btn-success btn-sm">Search</button>
+            <button id="doiCloseBtn" type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Cancel</button>
+            <button id="doiSearchBtn" type="button" onclick="findDOIs()" class="float-end btn btn-success btn-sm">Search</button>
           </div>
           <div class="form-group importResults" id="importResults">
             <ol id="resultList"></ol>
@@ -777,7 +708,7 @@
             <h3 class="modal-title" id="uploadTitle">
               Upload accepted talks from websubrev
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -791,7 +722,7 @@
             </label>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -805,7 +736,7 @@
             <h3 class="modal-title" id="importTitle">
               Import talks from ToSC or TCHES
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -842,7 +773,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-success btn-sm" onclick="importFSEorCHES()">Import papers</button>
           </div>
         </div>
@@ -857,7 +788,7 @@
             <h3 class="modal-title" id="warningTitle">
               Warning
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -867,7 +798,7 @@
             </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -882,7 +813,7 @@
             <h3 class="modal-title" id="addTalkTitle">
               Add a new talk
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -971,14 +902,14 @@
                     </div>
                     <!-- TODO: set up url for video field -->
                     <!-- <div class="form-group">
-                      <label for="videoUrl">
-                        URL for video
-                      </label>
-                      <input type="url" name="videoUrl" placeholder="URL for video" class="form-control" aria-describedby="videoUrlHelp" id="videoUrl" pattern="https?://.+"/>
-                    </div>
-                    <div id="videoUrlWarning">
-                      <div class="alert alert-danger">The url must begin with http or https.</div>
-                    </div> -->
+                         <label for="videoUrl">
+                         URL for video
+                         </label>
+                         <input type="url" name="videoUrl" placeholder="URL for video" class="form-control" aria-describedby="videoUrlHelp" id="videoUrl" pattern="https?://.+"/>
+                         </div>
+                         <div id="videoUrlWarning">
+                         <div class="alert alert-danger">The url must begin with http or https.</div>
+                         </div> -->
                   </div>
                 </div>
                 <div class="row">
@@ -1038,24 +969,24 @@
                     <textarea rows="8" id="talkAbstract" name="talkAbstract" class="form-control" placeholder="Enter abstract here"></textarea>
                   </div>
               </form>
+                </div>
+            </div>
+            <div id="deleteTalkWarning" class="modal-body">
+              <div class="alert alert-danger">If you delete this talk, then you cannot recover the data. It will be permanently removed from the app.</div>
+            </div>
+            <div class="modal-footer">
+              <button id="talkDeleteButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteTalk()">
+                Delete talk completely
+              </button>
+              <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
+                Cancel
+              </button>
+              <button type="button" class="btn btn-success btn-sm" onclick="saveTalk()">
+                Save Talk
+              </button>
             </div>
           </div>
-          <div id="deleteTalkWarning" class="modal-body">
-            <div class="alert alert-danger">If you delete this talk, then you cannot recover the data. It will be permanently removed from the app.</div>
-          </div>
-          <div class="modal-footer">
-            <button id="talkDeleteButton" type="button" class="btn btn-danger btn-sm float-left" onclick="deleteTalk()">
-              Delete talk completely
-            </button>
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
-              Cancel
-            </button>
-            <button type="button" class="btn btn-success btn-sm" onclick="saveTalk()">
-              Save Talk
-            </button>
-          </div>
         </div>
-      </div>
     </aside>
 
     <!-- Modal for adding or editing a category. In case you are adding a category,
@@ -1067,7 +998,7 @@
             <h3 class="modal-title" id="categoryEditorTitle">
               Add a category
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -1086,10 +1017,10 @@
             <div class="alert alert-danger">If you delete this category, then the talks in this category become uncategorized.</div>
           </div>
           <div class="modal-footer">
-            <button id="deleteCategoryButton" type="button" class="btn btn-danger btn-sm float-left" onclick="deleteCategory()">
+            <button id="deleteCategoryButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteCategory()">
               Delete category
             </button>
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
               Cancel
             </button>
             <button type="button" class="btn btn-success btn-sm" onclick="saveCategory()">
@@ -1108,7 +1039,7 @@
             <h3 class="modal-title" id="timeEditTitle">
               Edit Time Slot
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -1130,10 +1061,10 @@
                 </div>
                 <div id="addTrackToSession">
                   <p class="form-text mb-2">
-                    To split this session into two tracks, please check the box below.
+                    To add a session, please check the box below.
                   </p>
                   <div class="form-check">
-                    <input type="checkbox" name="numsessions" id="makeDualSession" class="form-check-input"></input>
+                    <input type="checkbox" name="numsessions" id="addSession" class="form-check-input"></input>
                     <label for="numsessions" class="form-check-label">Add a track to this timeslot?</label>
                   </div>
                 </div>
@@ -1144,13 +1075,13 @@
             <div class="alert alert-danger">If you delete this timeslot, then any talks in the session will become unscheduled.</div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
               Cancel
             </button>
-            <button id="deleteTimeslotButton" type="button" class="btn btn-danger btn-sm float-left" onclick="deleteTimeslot()">
+            <button id="deleteTimeslotButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteTimeslot()">
               Delete Time Slot
             </button>
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveTimeslot()">
+            <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" onclick="saveTimeslot()">
               Save Changes
             </button>
           </div>
@@ -1166,7 +1097,7 @@
             <h3 class="modal-title" id="editSessionTitle">
               Edit Session
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -1218,13 +1149,13 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
               Cancel
             </button>
-            <button id="deleteSessionButton" type="button" class="btn btn-danger btn-sm float-left" onclick="deleteSession()">
+            <button id="deleteSessionButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteSession()">
               Delete Session
             </button>
-            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="saveSession()">
+            <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" onclick="saveSession()">
               Save Session
             </button>
           </div>
@@ -1240,7 +1171,7 @@
             <h3 class="modal-title" id="addTimeslotTitle">
               Add a Time Slot
             </h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -1268,6 +1199,7 @@
                 <select name="numtracks" id="selectSessionCount" class="form-control ml-2 col-6">
                   <option value="1">One track</option>
                   <option value="2">Two tracks</option>
+                  <option value="3">Three tracks</option>
                 </select>
               </div>
               <div class="form-check">
@@ -1277,7 +1209,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
               Cancel
             </button>
             <button type="button" class="btn btn-success btn-sm" onclick="addTimeslotToDay()">
@@ -1294,7 +1226,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">Download PDF</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -1334,7 +1266,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-success" onclick="downloadPDF();">Download PDF</button>
           </div>
         </div>

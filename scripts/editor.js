@@ -60,9 +60,6 @@ function setProgData(data) {
             timeslots[j]['sessions'][k].id = 'session-' + createUniqueId();
           }
         }
-        if(timeslots[j]['sessions'].length > 1) {
-          timeslots[j]['twosessions'] = true;
-        }
       }
     }
   }
@@ -94,7 +91,7 @@ function showDeleteProgram() {
   if ($('#deleteMenu').hasClass('disabled')) {
     return false;
   }
-  $('#deleteProgramModal').modal();
+  bootstrap.Modal.getOrCreateInstance('#deleteProgramModal').show();
 }
 
 function showEditMetadata() {
@@ -106,7 +103,7 @@ function showEditMetadata() {
   document.getElementById('shiftDates').value = 0;
   document.getElementById('addDayOption').selectedIndex = 0;
   document.getElementById('deleteDayOption').selectedIndex = 0;
-  $('#editMetadataModal').modal();
+  bootstrap.Modal.getOrCreateInstance('#editMetadataModal').show();
   let currenttz = progData.config.timezone.name;
   console.dir(currenttz);
   moment.tz.names().forEach(tz => {
@@ -422,7 +419,7 @@ function saveMetadata() {
       progData.days.splice(dayToDeleteIndex, 1);
     }
   }
-  $('#editMetadataModal').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#editMetadataModal').hide();
   refresh();
 }
 
@@ -431,13 +428,32 @@ function drawTalks() {
   var theCompiledHtml = talksTemplate(progData.config);
   var renderedTalks = document.getElementById('talksList');
   renderedTalks.innerHTML = theCompiledHtml;
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 }
 
 // draw program template
 function drawProgram() {
+  // save the array of ids for <button> under <li>s that have .active
+  // class, so we can restore them. Normally the first one would be
+  // drawn as active, so we use javascript to restore which one is active.
+  active_ids = [];
+  [...document.querySelectorAll('.nav-tabs .nav-item .nav-link.active')].map(el => {
+    console.log(el);
+    if ('id' in el) {
+      active_ids.push(el.id);
+    }
+  });
   var theCompiledHtml = progTemplate(progData);
   var renderedProgram = document.getElementById('renderedProgram');
   renderedProgram.innerHTML = theCompiledHtml;
+  // restore active tabs.
+  active_ids.forEach(id => {
+    el = document.getElementById(id);
+    if (el && !el.classList.contains('active')) {
+      bootstrap.Tab.getOrCreateInstance(el).show();
+    }
+  });
 }
 
 function startEditor() {
@@ -497,7 +513,7 @@ function importFSEorCHES() {
       alert('there was a problem importing this data');
       return;
     }
-    $('#importTalksModal').modal('hide');
+    bootstrap.Modal.getOrCreateInstance('#importTalksModal').hide();
     startEditor();
   })
   .fail(function(jqxhr, textStatus, error) {
@@ -551,7 +567,7 @@ function uploadTalks(evt) {
         evt.target.value = '';
         return;
       }
-      $('#uploadTalksModal').modal('hide');
+      bootstrap.Modal.getOrCreateInstance('#uploadTalksModal').hide();
       startEditor();
     } catch (ee) {
       warningBox('Unable to parse file as JSON.');
@@ -690,7 +706,7 @@ function showWebsubrevUpload(obeyMenu) {
   if (obeyMenu && $('#uploadTalksMenu').hasClass('disabled')) {
     return false;
   }
-  $('#uploadTalksModal').modal();
+  bootstrap.Modal.getOrCreateInstance('#uploadTalksModal').show();
 }
 
 // Show modal for uploading from websubrev.
@@ -698,13 +714,13 @@ function showImportFSEorCHES(obeyMenu) {
   if (obeyMenu && $('#importTalksMenu').hasClass('disabled')) {
     return false;
   }
-  $('#importTalksModal').modal();
+  bootstrap.Modal.getOrCreateInstance('#importTalksModal').show();
 }
 
 // Style warnings and error message for better visibility to user
 function warningBox(text) {
   $('#modal-message').text(text);
-  $('#errorBox').modal();
+  bootstrap.Modal.getOrCreateInstance('#errorBox').show();
 }
 
 // Custom helper for generating droppable div.  It works by testing
@@ -968,7 +984,7 @@ function saveTalk() {
     }
     progData.config.unassigned_talks[categoryIndex].talks.unshift(talk);
   }
-  $('#editTalkBox').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#editTalkBox').hide();
   refresh();
 }
 
@@ -979,7 +995,7 @@ function deleteTalk() {
     $('#talkDeleteButton').text('Really delete the paper');
     return;
   }
-  $('#editTalkBox').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#editTalkBox').hide();
   var talkId = $('#talkId').val();
 
   // This is tricky because we have to find the talk by id and delete
@@ -1101,7 +1117,7 @@ function showTalkEditor(id) {
     'step': 1,
     'timeFormat': 'G:i'
   });
-  $('#editTalkBox').modal();
+  bootstrap.Modal.getOrCreateInstance('#editTalkBox').show();
 }
 
 // Save a category. This may come from an edit on an existing category or a new
@@ -1127,7 +1143,7 @@ function saveCategory() {
       category.name = newName;
     }
   }
-  $('#editCategoryBox').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#editCategoryBox').hide();
   refresh();
 }
 
@@ -1148,7 +1164,7 @@ function showCategoryEditor(id) {
     var categoryObj = findObj(id, progData);
     $('#newCategoryName').val(categoryObj.name);
   }
-  $('#editCategoryBox').modal();
+  bootstrap.Modal.getOrCreateInstance('#editCategoryBox').show();
 }
 
 function deleteCategory() {
@@ -1157,7 +1173,7 @@ function deleteCategory() {
     $('#deleteCategoryButton').text('Really delete the category');
     return;
   }
-  $('#editCategoryBox').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#editCategoryBox').hide();
   var categoryId = $('#categoryId').val();
   var categoryIndex = progData.config.unassigned_talks.findIndex(function(el) {
     return el.id === categoryId;
@@ -1219,7 +1235,7 @@ function editSession(dayIndex, slotIndex, sessionIndex) {
   }
 
   $('#allowTalks').prop('checked', sessionObj.hasOwnProperty('talks'));
-  $('#editSessionBox').modal();
+  bootstrap.Modal.getOrCreateInstance('#editSessionBox').show();
 }
 
 // Function to add a timeslot to a day. This will be called to populate
@@ -1244,7 +1260,7 @@ function prepareAddTimeslotToDay(dayIndex) {
   });
   var getTimeDiv = document.getElementById('timeslotDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
-  $('#addTimeslot').modal();
+  bootstrap.Modal.getOrCreateInstance('#addTimeslot').show();
 }
 
 // Simple utility function to convert HH:MM to just minutes. In other
@@ -1263,7 +1279,7 @@ function addTimeslotToDay() {
     $('#timeSlotWarning').show();
     return;
   }
-  $('#addTimeslot').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#addTimeslot').hide();
   var dayIndex = $("#dayIndex").val();
   var numTracks = parseInt($("#selectSessionCount").val());
 
@@ -1280,10 +1296,6 @@ function addTimeslotToDay() {
       session.talks = [];
     }
     timeslot.sessions.push(session);
-  }
-
-  if (numTracks > 1) {
-    timeslot['twosessions'] = true;
   }
 
   // Timeslots are ordered by start time and may be overlapping.
@@ -1316,9 +1328,10 @@ function editTimeslot(dayIndex, slotIndex) {
   var timeslot = progData.days[dayIndex].timeslots[slotIndex];
   $('#timeslotDayIndex').val(dayIndex);
   $('#timeslotIndex').val(slotIndex);
-  $('#makeDualSession').prop('checked', false);
+  $('#addSession').prop('checked', false);
 
-  if (timeslot.sessions.length === 1) {
+  // At the moment we allow up to four sessions.
+  if (timeslot.sessions.length < 4) {
     // enable the checkbox to add a session.
     $('#addTrackToSession').show();
   } else {
@@ -1344,7 +1357,7 @@ function editTimeslot(dayIndex, slotIndex) {
 
   var getTimeDiv = document.getElementById('timeDiv');
   var timeSlotInputs = new Datepair(getTimeDiv);
-  $('#editTimeslot').modal();
+  bootstrap.Modal.getOrCreateInstance('#editTimeslot').show();
 }
 
 // Sort the timeslots by starttime. This is called when a new timeslot
@@ -1368,7 +1381,7 @@ function saveTimeslot() {
   timeSlot.starttime = $("#currentStartTime").val();
   timeSlot.endtime = $("#currentEndTime").val();
 
-  if ($('#makeDualSession').is(':checked') && timeSlot.sessions.length === 1) {
+    if ($('#addSession').is(':checked')) {
     // Add a new (empty) session. If the existing session has talks,
     // then the new one should too.
     var newSession = {"session_title": "Edit session to change title",
@@ -1377,7 +1390,6 @@ function saveTimeslot() {
       newSession.talks = [];
     }
     timeSlot.sessions.push(newSession);
-    timeSlot.twosessions = true;
   }
 
   // Sort the timeslots again, because they may be out of order if startTime changed.
@@ -1403,7 +1415,7 @@ function deleteTimeslot() {
     return;
   }
 
-  $('#editTimeslot').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#editTimeslot').hide();
   var dayIndex = $("#timeslotDayIndex").val();
   var slotIndex = $("#timeslotIndex").val();
   var timeSlot = progData.days[dayIndex].timeslots[slotIndex];
@@ -1433,15 +1445,14 @@ function deleteSession() {
 
   if (timeSlot.sessions.length === 1) {
     warningBox('You should delete the timeslot instead.');
-    $('#editSessionBox').modal('hide');
+    bootstrap.Modal.getOrCreateInstance('#editSessionBox').hide();
     return;
   }
 
-  $('#editSessionBox').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#editSessionBox').hide();
   var sessionObj = timeSlot.sessions[sessionIndex];
   moveTalksToUnassigned(sessionObj);
   timeSlot.sessions.splice(sessionIndex, 1);
-  timeSlot.twosessions = false;
   refresh();
 }
 
@@ -1547,7 +1558,7 @@ function showPDFDownload() {
   if ($('#downloadPDFMenu').hasClass('disabled')) {
     return false;
   }
-  $('#downloadPDFModal').modal();
+  bootstrap.Modal.getOrCreateInstance('#downloadPDFModal').show();
 }
 
 function downloadPDF() {
@@ -1556,7 +1567,7 @@ function downloadPDF() {
   f.json.value = JSON.stringify(progData);
   window.open('', '_programpdf');
   f.submit();
-  $('#downloadPDFModal').modal('hide');
+  bootstrap.Modal.getOrCreateInstance('#downloadPDFModal').hide();
 }
 
 // From https://gist.github.com/andrei-m/982927
@@ -1612,7 +1623,7 @@ function startImportDOIs() {
   $('#doiSearchBtn').removeAttr('disabled');
   $('#doiSearchBtn').addClass('btn-success');
   $('#doiSearchBtn').removeClass('btn-light');
-  $('#importDOISelection').modal();
+  bootstrap.Modal.getOrCreateInstance('#importDOISelection').show();
 }
 
 // Construct the URL to look up a talk in crossref. We use only the
@@ -1799,7 +1810,7 @@ function doLogin() {
       if (data.hasOwnProperty('username')) {
         $('#login_status').text('Logged in as ' + data['username']);
         $('#login_progress').text('');
-        $('#authModal').modal('hide');
+        bootstrap.Modal.getOrCreateInstance('#authModal').hide();
         $('#logoutMenu').show();
         $('#loginMenu').hide();
         if ($('#auth-button').is(':visible')) {
@@ -1840,7 +1851,7 @@ function doLogout() {
         $('#login_status').text('Logged out');
         $('#logoutMenu').hide();
         $('#loginMenu').show();
-        $('#authModal').modal();
+        bootstrap.Modal.getOrCreateInstance('#authModal').show();
       }
     },
     error: function(jqxhr, textStatus, error) {
@@ -1858,7 +1869,7 @@ function checkLogin() {
     success: function(data, textStatus, jqxhr) {
       if (data.hasOwnProperty('username')) {
         $('#login_status').text('Logged in as ' + data['username']);
-        $('#authModal').modal('hide');
+        bootstrap.Modal.getOrCreateInstance('#authModal').hide();
         $('#loginMenu').hide();
         $('#logoutMenu').show();
         if (progData === undefined) {
@@ -1869,7 +1880,7 @@ function checkLogin() {
         $('#logoutMenu').hide();
         $('#loginMenu').show();
         $('#auth-button').show(500);
-        $('#authModal').modal();
+        bootstrap.Modal.getOrCreateInstance('#authModal').show();
       }
     },
     error: function(jqxhr, textStatus, error) {
@@ -1915,11 +1926,6 @@ $(document).ready(function() {
   talksTemplate = Handlebars.compile(theTemplateScript);
   Handlebars.registerPartial("talk", $('#talk-partial').html());
   disableMenus();
-  // Register tooltip plugin.
-  $('body').tooltip({
-    trigger: 'hover',
-    selector: '[data-toggle="tooltip"]'
-  });
   checkLogin();
   // Make dropdown menus respond to hover.
   $('ul#topNavList li.dropdown').hover(function() {
