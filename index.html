@@ -431,6 +431,9 @@
                   {{#if @root.tabbedSessions}}
                   <ul class="nav nav-tabs mt-2" role="tablist">
                     {{#each sessions}}
+                    <!-- {{@../../index}} is the day index
+                         {{@../index}} is the timeslot index
+                         {{@index}} is the session index -->
                     <li class="nav-item {{#if @first}}active{{/if}}" role="presentation">
                       <button id="btn-{{@../../index}}-{{@../index}}-{{@index}}" class="nav-link {{#if @first}}active{{/if}}" href="#session-{{@../../index}}-{{@../index}}-{{@index}}" data-bs-toggle="tab" data-bs-target="#session-{{@../../index}}-{{@../index}}-{{@index}}" type="button" role="tab" aria-controls="session-{{@../../index}}-{{@../index}}-{{@index}}">{{session_title}}</button>
                     </li>
