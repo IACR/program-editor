@@ -832,7 +832,7 @@
                 <label for="newTalkTitle">
                   Talk Title
                 </label>
-                <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control required my-1" id="newTalkTitle" />
+                <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control my-1" id="newTalkTitle" required />
                 <p id="talkTitleWarning" class="text-danger">
                   Talk title is required
                 </p>
@@ -849,11 +849,11 @@
                 </small>
               </div>
 
-              <div class="form-group mb-3">
+              <div class="mb-3">
                 <label for="newTalkAffiliation">
-                  Affiliation
+                  Author Affiliation(s)
                 </label>
-                <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control my-1"
+                <input type="text" name="newTalkAffiliation" class="form-control my-1"
                   aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
                 <small id="newAffiliationHelp" class="form-text">
                   Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter
@@ -861,32 +861,23 @@
                 </small>
               </div>
 
-              <!-- TODO: this spacing on the div below will not work for this case -->
               <div class="mb-3">
-                <label for="abstract">
+                <label for="talkAbstract">
                   Abstract
                 </label>
-                <!-- TODO: I advocate for removing the button and just showing the frickin textarea -->
-                <div><a class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" href="#abstractRow" role="button"
-                    aria-expanded="false" aria-controls="abstractRow">Show abstract below ▾</a></div>
-                <small class="form-text">
+                <textarea rows="3" id="talkAbstract" name="talkAbstract" class="form-control my-1" 
+                aria-describedby="abstractHelp"
+                  placeholder="Enter abstract here"></textarea>
+                <small id="abstractHelp" class="form-text">
                   An abstract is optional.
                 </small>
               </div>
               
-              <div id="abstractRow" class="row mt-2 collapse">
-                <div class="col-8 offset-2">
-                  <label>Abstract</label>
-                  <textarea rows="8" id="talkAbstract" name="talkAbstract" class="form-control"
-                    placeholder="Enter abstract here"></textarea>
-                </div>
-              </div>
-              
-              <div class="form-group mb-3">
+              <div class="mb-3">
                 <label for="talkNote">
                   Additional Notes
                 </label>
-                <input type="text" name="talkNote" placeholder="Optional: name of presenter, awards, etc" class="form-control my-1" aria-describedby="talkNoteHelp" id="talkNote" maxlength="77" />
+                <input type="text" name="talkNote" class="form-control my-1" aria-describedby="talkNoteHelp" id="talkNote" maxlength="77" />
                 <small id="talkNoteHelp" class="form-text">
                   This is where you might enter additional information
                   about the paper. Examples include soft merges, awards,
@@ -895,51 +886,50 @@
                 </small>
               </div>
 
-              <div class="form-group mb-3">
+              <div class="mb-3">
                 <label for="paperUrl">
-                  URL for paper
+                  Paper URL
                 </label>
-                <input type="url" name="paperUrl" placeholder="URL for paper" class="form-control my-1" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
+                <input type="url" name="paperUrl" class="form-control my-1" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
+                <p id="paperUrlWarning" class="text-danger">
+                  The url must begin with http or https
+                </p>
                 <small id="paperUrlHelp" class="form-text">
                   These can be imported automatically with the import menu. Do not use ePrint urls.
                 </small>
               </div>
-              <div id="paperUrlWarning">
-                <div class="alert alert-danger">The url must begin with http or https.</div>
-              </div>
 
-              <div class="form-group mb-3">
+              <div class="mb-3">
                 <label for="slidesUrl">
-                  URL for slides
+                  Slides URL
                 </label>
-                <input type="url" name="slidesUrl" placeholder="URL for slides" class="form-control my-1" aria-describedby="slidesUrlHelp" id="slidesUrl" pattern="https?://.+"/>
-              </div>
-              <div id="slidesUrlWarning">
-                <div class="alert alert-danger">The url must begin with http or https.</div>
+                <input type="url" name="slidesUrl" class="form-control my-1" aria-describedby="slidesUrlHelp" id="slidesUrl" pattern="https?://.+"/>
+                <p id="slidesUrlWarning" class="text-danger">
+                  The url must begin with http or https
+                </p>
               </div>
 
               <!-- TODO: set up url for video field -->
-              <!-- <div class="form-group mb-3">
-                    <label for="videoUrl">
-                    URL for video
-                    </label>
-                    <input type="url" name="videoUrl" placeholder="URL for video" class="form-control my-1" aria-describedby="videoUrlHelp" id="videoUrl" pattern="https?://.+"/>
-                    </div>
-                    <div id="videoUrlWarning">
-                    <div class="alert alert-danger">The url must begin with http or https.</div>
-                    </div> -->
-                    
-              <!-- <div class="row"> -->
-                <div class="mb-3" id="categorySelector">
-                  <div class="form-group">
-                    <label for="newTalkCategory">
-                      Talk Category
-                    </label>
-                    <select id="newTalkCategory" class="form-control my-1">
-                      <option value=""></option>
-                    </select>
-                  </div>
-                </div>
+              <!-- <div class="mb-3">
+                <label for="videoUrl">
+                  Video URL
+                </label>
+                <input type="url" name="videoUrl" class="form-control my-1" aria-describedby="videoUrlHelp" id="videoUrl" pattern="https?://.+"/>
+                <p id="videoUrlWarning" class="text-danger">
+                  The url must begin with http or https
+                </p>
+              </div> -->
+              
+              <!-- NOTE: the only time this is relevant (and visible) is when you are adding a new talk. It does not 
+              appear when editing a talk. -->
+              <div class="mb-3" id="categorySelector">
+                <label for="newTalkCategory">
+                  Talk Category
+                </label>
+                <select id="newTalkCategory" class="form-select my-1">
+                  <option value=""></option>
+                </select>
+              </div>
 
                 <div class="col" id="talkTimeSelector">
                   <div id="talkTimeDiv" class="form-row">
