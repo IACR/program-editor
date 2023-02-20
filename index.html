@@ -810,7 +810,6 @@
     <!-- Modal for adding, editing, or deleting a new talk. In case you are adding a talk,
          the delete button is not shown and the talkId field is empty.  -->
     <aside class="modal fade" id="editTalkBox" role="dialog" aria-labelledby="addTalkTitle" tabindex="-1">
-      <!-- TODO: is role necessary? -->
       <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header px-4" id="addTalkTitleDiv">
@@ -821,8 +820,6 @@
             </button>
           </div>
           <div class="modal-body ps-4 pe-5">
-            <!-- TODO: getting rid of forms if they're not necessary? more reading required -->
-            <form>
               <input id="talkId" type="hidden" value=""/>
 
               <!-- TODO: propose we use either a placeholder OR help text but not both (when possible). see https://ux.stackexchange.com/questions/78459/should-help-text-be-above-or-below-the-input
@@ -831,17 +828,17 @@
               examples or expected format rather than just reiterating instructions (see 
               https://uxplanet.org/the-anatomy-of-input-field-c3ef863e01d7)'
               -->
-              <div class="form-group mb-3">
+              <div class="mb-3">
                 <label for="newTalkTitle">
                   Talk Title
                 </label>
-                <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control required my-1" id="newTalkTitle" required />
-              </div>
-              <div id="talkTitleWarning">
-                <div class="alert alert-danger">Talk title is required.</div>
+                <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control required my-1" id="newTalkTitle" />
+                <p id="talkTitleWarning" class="text-danger">
+                  Talk title is required
+                </p>
               </div>
 
-              <div class="form-group mb-3">
+              <div class="mb-3">
                 <label for="newTalkAuthors">
                   Talk Author(s)
                 </label>
@@ -975,7 +972,7 @@
                   Typically this is the ID from HotCRP. This field must be unique.
                 </small>
               </div>
-            </form>
+            <!-- </form> -->
 
             <!-- TODO: should we be using two modal body classes in one modal? eek -->
             <div id="deleteTalkWarning" class="modal-body">
