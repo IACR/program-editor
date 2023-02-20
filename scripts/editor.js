@@ -1109,7 +1109,6 @@ function showTalkEditor(id) {
     }
   }
   $('#talkTimeSelector .time').timepicker({
-    'forceRoundTime': true,
     'scrollDefault': defaultTime,
     'show2400': true,
     'minTime': '00:00',
