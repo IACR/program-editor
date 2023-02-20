@@ -1108,7 +1108,7 @@ function showTalkEditor(id) {
       $('#paperId').val('');
     }
   }
-  $('#talkTimeDiv .time').timepicker({
+  $('#talkTimeSelector .time').timepicker({
     'forceRoundTime': true,
     'scrollDefault': defaultTime,
     'show2400': true,
