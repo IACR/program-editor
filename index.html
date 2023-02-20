@@ -604,7 +604,7 @@
 
     <!-- delete program modal -->
     <div class="modal fade" id="deleteProgramModal" tabindex="-1" role="dialog" aria-labelledby="deleteProgramLabel">
-      <div class="modal-dialog">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h2 id="deleteProgramLabel" class="modal-title">Confirm Delete</h2>
@@ -809,185 +809,165 @@
 
     <!-- Modal for adding, editing, or deleting a new talk. In case you are adding a talk,
          the delete button is not shown and the talkId field is empty.  -->
-    <aside class="modal fade" id="editTalkBox" role="dialog" aria-labelledby="addTalkTitle">
-      <div class="modal-dialog modal-xl" role="document">
+    <aside class="modal fade" id="editTalkBox" role="dialog" aria-labelledby="addTalkTitle" tabindex="-1">
+      <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="addTalkTitleDiv">
+          <div class="modal-header px-4" id="addTalkTitleDiv">
             <h3 class="modal-title" id="addTalkTitle">
               Add a new talk
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             </button>
           </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <form>
-                <input id="talkId" type="hidden" value=""/>
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="newTalkTitle">
-                        Talk Title
-                      </label>
-                      <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control required" id="newTalkTitle" required />
-                      <small class="form-text">
-                        This should be the title of the original paper.
-                      </small>
-                    </div>
-                    <div id="talkTitleWarning">
-                      <div class="alert alert-danger">Talk title is required.</div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="talkNote">
-                        Additional Notes
-                      </label>
-                      <input type="text" name="talkNote" placeholder="Optional: name of presenter, awards, etc" class="form-control" aria-describedby="talkNoteHelp" id="talkNote" maxlength="77" />
-                      <small id="talkNoteHelp" class="form-text">
-                        This is where you might enter additional information
-                        about the paper. Examples include soft merges, awards,
-                        name of presenter, etc. This is not intendeded for
-                        an abstract.
-                      </small>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="newTalkAuthors">
-                        Talk Author(s)
-                      </label>
-                      <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control" aria-describedby="newAuthorHelp" id="newTalkAuthor" />
-                      <small id="newAuthorHelp" class="form-text">
-                        Use BibTeX formatting (i.e. names are separated by and).
-                      </small>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="paperUrl">
-                        URL for paper
-                      </label>
-                      <input type="url" name="paperUrl" placeholder="URL for paper" class="form-control" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
-                      <small id="paperUrlHelp" class="form-text">
-                        These can be imported automatically with the import menu. Do not use ePrint urls.
-                      </small>
-                    </div>
-                    <div id="paperUrlWarning">
-                      <div class="alert alert-danger">The url must begin with http or https.</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="newTalkAffiliation">
-                        Affiliation
-                      </label>
-                      <input type="text" name="newTalkAffiliation" placeholder="Author affiliation(s)" class="form-control" aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
-                      <small id="newAffiliationHelp" class="form-text">
-                        Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter the same institution twice.
-                      </small>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="slidesUrl">
-                        URL for slides
-                      </label>
-                      <input type="url" name="slidesUrl" placeholder="URL for slides" class="form-control" aria-describedby="slidesUrlHelp" id="slidesUrl" pattern="https?://.+"/>
-                    </div>
-                    <div id="slidesUrlWarning">
-                      <div class="alert alert-danger">The url must begin with http or https.</div>
-                    </div>
-                    <!-- TODO: set up url for video field -->
-                    <!-- <div class="form-group">
-                         <label for="videoUrl">
-                         URL for video
-                         </label>
-                         <input type="url" name="videoUrl" placeholder="URL for video" class="form-control" aria-describedby="videoUrlHelp" id="videoUrl" pattern="https?://.+"/>
-                         </div>
-                         <div id="videoUrlWarning">
-                         <div class="alert alert-danger">The url must begin with http or https.</div>
-                         </div> -->
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col" id="categorySelector">
-                    <div class="form-group">
-                      <label for="newTalkCategory">
-                        Talk Category
-                      </label>
-                      <select id="newTalkCategory" class="form-control">
-                        <option value=""></option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col" id="talkTimeSelector">
-                    <div id="talkTimeDiv" class="form-row">
-                      <div class="col-6">
-                        <label for="startTime">
-                          Start time (optional)
-                        </label>
-                        <input type="text" name="startTime" class="form-control time start" id="currentTalkStartTime" autocomplete="off" />
-                      </div>
-                      <div class="col-6">
-                        <label for="endTime">
-                          End time (optional)
-                        </label>
-                        <input type="text" name="endTime" class="form-control time end" id="currentTalkEndTime" autocomplete="off" />
-                      </div>
-                    </div>
-                    <small class="form-text">
-                      Note that these are not checked to fit the time slot.
-                    </small>
-                  </div>
-                </div>
-                <div class="row mt-4">
-                  <div class="col-6">
-                    <label for="paperId">
-                      ID for paper (must be unique)
-                    </label>
-                    <input type="text" id="paperId" name="paperId" class="form-control" autocomplete="off" />
-                    <small class="form-text">
-                      This is intended to contain the ID from HotCRP, and must be unique.
-                    </small>
-                  </div>
-                  <div class="col-6">
-                    <label for="abstract">
-                      Abstract for paper.
-                    </label>
-                    <div><a class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" href="#abstractRow" role="button" aria-expanded="false" aria-controls="abstractRow">Show abstract below ▾</a></div>
-                    <small class="form-text">
-                      An abstract is optional.
-                    </small>
-                  </div>
-                </div>
-                <div id="abstractRow" class="row mt-2 collapse">
-                  <div class="col-8 offset-2">
-                    <label>Abstract</label>
-                    <textarea rows="8" id="talkAbstract" name="talkAbstract" class="form-control" placeholder="Enter abstract here"></textarea>
-                  </div>
-              </form>
-                </div>
+          <div class="modal-body ps-4 pe-5">
+            <input id="talkId" type="hidden" value=""/>
+            
+            <div class="mb-3">
+              <label for="newTalkTitle">
+                Talk Title
+              </label>
+              <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control my-1" id="newTalkTitle" required />
+              <p id="talkTitleWarning" class="text-danger">
+                Talk title is required
+              </p>
             </div>
-            <div id="deleteTalkWarning" class="modal-body">
-              <div class="alert alert-danger">If you delete this talk, then you cannot recover the data. It will be permanently removed from the app.</div>
+
+            <div class="mb-3">
+              <label for="newTalkAuthor">
+                Talk Author(s)
+              </label>
+              <input type="text" name="newTalkAuthor" class="form-control my-1"
+                aria-describedby="newAuthorHelp" id="newTalkAuthor" />
+              <small id="newAuthorHelp" class="form-text">
+                Use BibTeX formatting (i.e. names are separated by and).
+              </small>
             </div>
-            <div class="modal-footer">
-              <button id="talkDeleteButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteTalk()">
-                Delete talk completely
-              </button>
-              <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
-                Cancel
-              </button>
-              <button type="button" class="btn btn-success btn-sm" onclick="saveTalk()">
-                Save Talk
-              </button>
+
+            <div class="mb-3">
+              <label for="newTalkAffiliation">
+                Author Affiliation(s)
+              </label>
+              <input type="text" name="newTalkAffiliation" class="form-control my-1"
+                aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
+              <small id="newAffiliationHelp" class="form-text">
+                Enter affiliations for authors, separated by semicolon. If authors share an affiliation, there is no need to enter
+                the same institution twice.
+              </small>
             </div>
+
+            <div class="mb-3">
+              <label for="talkAbstract">
+                Abstract
+              </label>
+              <textarea rows="3" id="talkAbstract" name="talkAbstract" class="form-control my-1" 
+              aria-describedby="abstractHelp"
+                placeholder="Enter abstract here"></textarea>
+              <small id="abstractHelp" class="form-text">
+                An abstract is optional.
+              </small>
+            </div>
+            
+            <div class="mb-3">
+              <label for="talkNote">
+                Additional Notes
+              </label>
+              <input type="text" name="talkNote" class="form-control my-1" aria-describedby="talkNoteHelp" id="talkNote" maxlength="77" />
+              <small id="talkNoteHelp" class="form-text">
+                This is where you might enter additional information
+                about the paper. Examples include soft merges, awards,
+                name of presenter, etc. This is not intended for
+                an abstract.
+              </small>
+            </div>
+
+            <div class="mb-3">
+              <label for="paperUrl">
+                Paper URL
+              </label>
+              <input type="url" name="paperUrl" class="form-control my-1" aria-describedby="paperUrlHelp" id="paperUrl" pattern="https?://.+"/>
+              <p id="paperUrlWarning" class="text-danger">
+                The url must begin with http or https
+              </p>
+              <small id="paperUrlHelp" class="form-text">
+                These can be imported automatically with the import menu. Do not use ePrint urls.
+              </small>
+            </div>
+
+            <div class="mb-3">
+              <label for="slidesUrl">
+                Slides URL
+              </label>
+              <input type="url" name="slidesUrl" class="form-control my-1" aria-describedby="slidesUrlHelp" id="slidesUrl" pattern="https?://.+"/>
+              <p id="slidesUrlWarning" class="text-danger">
+                The url must begin with http or https
+              </p>
+            </div>
+
+            <!-- TODO: set up url for video field -->
+            <!-- <div class="mb-3">
+              <label for="videoUrl">
+                Video URL
+              </label>
+              <input type="url" name="videoUrl" class="form-control my-1" aria-describedby="videoUrlHelp" id="videoUrl" pattern="https?://.+"/>
+              <p id="videoUrlWarning" class="text-danger">
+                The url must begin with http or https
+              </p>
+            </div> -->
+            
+            <!-- NOTE: the only time this is relevant (and visible) is when you are adding a new talk. It does not 
+            appear when editing a talk. -->
+            <div class="mb-3" id="categorySelector">
+              <label for="newTalkCategory">
+                Talk Category
+              </label>
+              <select id="newTalkCategory" class="form-select my-1">
+                <option value=""></option>
+              </select>
+            </div>
+
+            <div class="row mb-3" id="talkTimeSelector">
+              <div class="col-6">
+                <label for="currentTalkStartTime">
+                  Start time
+                </label>
+                <input type="time" name="startTime" class="form-control time start my-1" id="currentTalkStartTime" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="currentTalkEndTime">
+                  End time
+                </label>
+                <input type="time" name="endTime" class="form-control time end my-1" id="currentTalkEndTime" autocomplete="off" />
+              </div>
+              <small class="form-text">
+                Specific times are optional. Please note that these are not checked as to whether they actually fit within the
+                assigned time slot.
+              </small>
+            </div>
+            
+            <div class="mb-3">
+              <label for="paperId">
+                Paper ID
+              </label>
+              <input type="text" id="paperId" name="paperId" class="form-control my-1" autocomplete="off" />
+              <small class="form-text">
+                Typically this is the ID from HotCRP. This field must be unique.
+              </small>
+            </div>
+
+            <div id="deleteTalkWarning" class="alert alert-danger">
+              If you delete this talk, then you cannot recover the data. It will be permanently removed from the app.
+            </div>
+          </div>  <!-- END modal-body -->
+          <div class="modal-footer">
+            <button id="talkDeleteButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteTalk()">
+              Delete talk completely
+            </button>
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-success btn-sm" onclick="saveTalk()">
+              Save talk
+            </button>
           </div>
         </div>
     </aside>
@@ -1225,7 +1205,7 @@
 
     <!-- modal to download PDF -->
     <div class="modal fade" id="downloadPDFModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">Download PDF</h3>
