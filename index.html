@@ -830,16 +830,12 @@
               this is apparently a more lengthy topic than I expected so this is rough notes. let's use placeholder text to suggest 
               examples or expected format rather than just reiterating instructions (see 
               https://uxplanet.org/the-anatomy-of-input-field-c3ef863e01d7)'
-              
               -->
               <div class="form-group mb-3">
                 <label for="newTalkTitle">
                   Talk Title
                 </label>
                 <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control required my-1" id="newTalkTitle" required />
-                <small class="form-text">
-                  This should be the title of the original paper.
-                </small>
               </div>
               <div id="talkTitleWarning">
                 <div class="alert alert-danger">Talk title is required.</div>
@@ -849,8 +845,7 @@
                 <label for="newTalkAuthors">
                   Talk Author(s)
                 </label>
-                <!-- TODO: shouldn't talk authors be a required field?' -->
-                <input type="text" name="newTalkAuthor" placeholder="Author names separated by and" class="form-control my-1"
+                <input type="text" name="newTalkAuthor" class="form-control my-1"
                   aria-describedby="newAuthorHelp" id="newTalkAuthor" />
                 <small id="newAuthorHelp" class="form-text">
                   Use BibTeX formatting (i.e. names are separated by and).
@@ -949,8 +944,7 @@
                   </div>
                 </div>
 
-                <!-- TODO: this doesn't actually exist???? -->
-                <!-- <div class="col" id="talkTimeSelector">
+                <div class="col" id="talkTimeSelector">
                   <div id="talkTimeDiv" class="form-row">
                     <div class="col-6">
                       <label for="startTime">
@@ -968,19 +962,17 @@
                   <small class="form-text">
                     Note that these are not checked to fit the time slot.
                   </small>
-                </div> -->
+                </div>
               <!-- </div> -->
               
               <!-- <div class="row mt-4"> -->
               <div class="mb-3">
-                <!-- TODO: proposed new title for this category (more streamlined) -->
                 <label for="paperId">
-                  HotCRP Paper ID
+                  Paper ID
                 </label>
-                <!-- TODO: shouldn't this be input type num or something? -->
                 <input type="text" id="paperId" name="paperId" class="form-control my-1 w-25" autocomplete="off" />
                 <small class="form-text">
-                  This is intended to contain the ID from HotCRP, and must be unique.
+                  Typically this is the ID from HotCRP. This field must be unique.
                 </small>
               </div>
             </form>

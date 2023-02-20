@@ -992,6 +992,7 @@ function saveTalk() {
 function deleteTalk() {
   if (!$('#deleteTalkWarning').is(':visible')) {
     $('#deleteTalkWarning').show();
+    $('#deleteTalkWarning')[0].scrollIntoView({behavior: 'smooth', block: 'end'}); 
     $('#talkDeleteButton').text('Really delete the paper');
     return;
   }
