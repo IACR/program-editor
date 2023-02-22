@@ -563,6 +563,7 @@ function uploadTalks(evt) {
     } try {
       var data = JSON.parse(textFile.result);
       if (!mergeTalks(data)) {
+        $('#uploadTalksWarning').show();
         console.log('failed to merge');
         evt.target.value = '';
         return;
@@ -593,9 +594,10 @@ function splitAuthors(val) {
 // associated to each author.
 function mergeTalks(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
-    warningBox('JSON file is not websubrev format.');
+    // warningBox('JSON file is not websubrev format.');
     return false;
   }
+
   var acceptedPapers = data.acceptedPapers;
 
   for (var i = 0; i < acceptedPapers.length; i++) {
@@ -706,10 +708,11 @@ function showWebsubrevUpload(obeyMenu) {
   if (obeyMenu && $('#uploadTalksMenu').hasClass('disabled')) {
     return false;
   }
+  $('#uploadTalksWarning').hide();
   bootstrap.Modal.getOrCreateInstance('#uploadTalksModal').show();
 }
 
-// Show modal for uploading from websubrev.
+// Show modal for uploading from ToSC or TCHES.
 function showImportFSEorCHES(obeyMenu) {
   if (obeyMenu && $('#importTalksMenu').hasClass('disabled')) {
     return false;

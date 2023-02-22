@@ -106,7 +106,7 @@
                 Import papers from TCHES or ToSC
               </a>
               <a id="uploadTalksMenu" onclick="showWebsubrevUpload(true)" class="dropdown-item">
-                Upload papers in websubrev format
+                Upload accepted papers
               </a>
               <a id="importDOIMenu" onclick="startImportDOIs()" class="dropdown-item">
                 Import paper URLs
@@ -150,7 +150,7 @@
             <p class="text-justify">
               This app allows you to create a program for a conference. The things you need to
               get started are the dates of your conference and the list of accepted papers
-              from websubrev (you could type those in again, but why bother?). The list of
+              from HotCRP (you could type those in again, but why bother?). The list of
               accepted papers is accessible as a JSON file from the program chair interface.
             </p>
             <p class="alert alert-info">
@@ -288,12 +288,12 @@
         <div class="row">
           <section id="uploadTalks" class="col-12 form-group">
             <p>
-              Next, specify the list of accepted papers. This can be an upload from websubrev
+              Next, specify the list of accepted papers. This can be an upload from HotCRP
               (a JSON file), or you can import accepted papers from TCHES or ToSC.
               You can do this later if you like.
             </p>
             <button type="button" name="showUpload" onclick="showWebsubrevUpload(false)" class="btn btn-sm btn-success mr-2">
-              Upload websubrev accepted talks
+              Upload accepted papers
             </button>
             <button type="button" name="showImport" onclick="showImportFSEorCHES(false)" class="btn btn-sm btn-success mr-2">
               Import from ToSC or TCHES
@@ -372,7 +372,7 @@
               <button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <section id="talksList">
-              <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
+              <!-- Handlebars script that renders the list of talks based on user-uploaded json file with HotCRP output -->
               <script id="talks-template" type="text/x-handlebars-template">
                 <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
                 {{#each unassigned_talks}}
@@ -708,21 +708,31 @@
       </div>
     </aside>
 
-    <!-- Modal for upload from websubrev -->
+    <!-- Modal for upload from HotCRP -->
     <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labelledby="uploadTitle">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header px-4" id="uploadTitleDiv">
             <h3 class="modal-title" id="uploadTitle">
-              Upload accepted talks from websubrev
+              Upload accepted papers
             </h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body ps-4 pe-5">
             <p>
-              Websubrev now allows program chairs to export a list of accepted talks. The format is described in <a target="_help" href="./docs/help.html">the help docs</a>.
+              If you are a program chair for Crypto, Eurocrypt, Asiacrypt, TCC, or PKC, then there is a menu item inside HotCRP  
+              'IACR integration' &#8658; 'Accepted papers'. That will allow you to download the required file. As an alternative, the file may also be found at /json/papers.json on the conference website.
             </p>
+            <p>
+              For FSE and CHES, you will have four files of accepted papers. This is where you should upload each list to the program editor directly.
+            </p>
+            <!-- <p>
+              The required format is described in <a target="_help" href="./docs/help.html">the help docs</a>.
+            </p> -->
             <input id="uploadTalksSelector" class="form-control mb-3" type="file" accept=".json">
+            <p id="uploadTalksWarning" class="text-danger">
+              Files must be in the format exported from HotCRP under 'IACR integration'.
+            </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
