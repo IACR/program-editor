@@ -373,10 +373,6 @@ input {
     color: #212529 !important;
 }
 
-/* input#shiftDates {
-    text-align: center;
-} */
-
 #currentOrChangedDates {
   border: 2px solid rgba(24, 188, 156, 0.4);
 }
@@ -392,14 +388,6 @@ div.progress {
   border: 2px solid #78C2CF;
 }
 
-/* #alertInstr button.close {
-  font-size: 0.8rem;
-  color: #030B0C!important;
-}
-
-#alertInstr button.close:hover {
-  color: #18bc9c!important;
-} */
 div.keywords {
     text-align: left;
     font-size: .75rem;
