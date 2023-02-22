@@ -619,15 +619,13 @@
 
     <!-- delete program modal -->
     <div class="modal fade" id="deleteProgramModal" tabindex="-1" role="dialog" aria-labelledby="deleteProgramLabel">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h2 id="deleteProgramLabel" class="modal-title">Confirm Delete</h2>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+          <div class="modal-header px-4">
+            <h2 id="deleteProgramLabel" class="modal-title">Confirm delete</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body ps-4 pe-5">
             <p>You are about to delete this program from the server. This action cannot be reversed.</p>
             <p>Are you sure you want to delete it?</p>
           </div>
@@ -642,33 +640,33 @@
 
     <!-- Auth Modal -->
     <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="authModalLabel">Log in for IACR Program Creator</h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+          <div class="modal-header px-4">
+            <h3 class="modal-title" id="authModalLabel">Log in</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <p>This app requires you to log in with your IACR reference number
+          <div class="modal-body ps-4 pe-5">
+            <p>
+              This app requires you to log in with your IACR reference number
               and password.
             </p>
-            <form class="form-horizontal" onsubmit="return false;">
-              <div class="form-group">
-                <label for="iacrref" class="col-sm-3 control-label">IACR ref #</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="iacrref">
-                </div>
+            <!-- TODO: do we still need a form for login? -->
+            <!-- <form onsubmit="return false;"> -->
+              <div class="mb-3">
+                <label for="iacrref">
+                  IACR ref #
+                </label>
+                <input type="text" class="form-control my-1" id="iacrref">
               </div>
-              <div class="form-group">
-                <label for="password" class="col-sm-3 control-label">Password</label>
-                <div class="col-sm-8">
-                  <input type="password" class="form-control" id="password">
-                </div>
+              <div class="mb-3">
+                <label for="password">
+                  Password
+                </label>
+                <input type="password" class="form-control my-1" id="password">
               </div>
-            </form>
-            <p>
+            <!-- </form> -->
+            <p class="mt-3">
               If you have forgotten your IACR reference number or password,
               <a target="_blank" href="https://secure.iacr.org/membership/members/update.html">click here to recover it</a>.
             </p>
