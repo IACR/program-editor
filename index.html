@@ -757,27 +757,28 @@
               </label>
               <select class="form-select my-1" id="importSelect">
                 <option value="" selected disabled></option>
-                <option value="tches">Transactions on Crypt. Hardware and Embedded Systems (TCHES)</option>
+                <option value="tches">Transactions on Cryptographic Hardware and Embedded Systems (TCHES)</option>
                 <option value="tosc">Transactions on Symmetric Cryptography (ToSC)</option>
               </select>
             </div>
-            <label>
-              Select a date range of publication dates (both are optional)
-            </label>
-            <div class="form-group row">
-              <div class="col-6">
-                <input type="date" id="importstartdate" name="importstartdate" class="form-control" value="">
-                <label for="importstartdate" class="mt-1">
+
+            <div class="row mb-0">
+              <div class="col">
+                <label for="importstartdate">
                   Published after
                 </label>
+                <input type="date" id="importstartdate" name="importstartdate" class="form-control my-1" value="">
               </div>
-              <div class="col-6">
-                <input type="date" id="importenddate" name="importenddate" class="form-control" value="">
-                <label for="importenddate" class="mt-1">
+              <div class="col">
+                <label for="importenddate">
                   Published before
                 </label>
+                <input type="date" id="importenddate" name="importenddate" class="form-control my-1" value="">
               </div>
             </div>
+            <small class="form-text mt-1">
+              Select a date range of publication for desired papers. Both fields above are optional.
+            </small>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
