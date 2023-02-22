@@ -71,7 +71,7 @@
                 Open
               </a>
               <a id="editMetadataMenu" onclick="showEditMetadata();" class="dropdown-item">
-                Edit dates and name
+                Edit name and dates
               </a>
               <a id="saveMenu" onclick="saveProgram();" class="dropdown-item">
                 Save (autosave ON)
@@ -204,7 +204,7 @@
         <div id="templateSelector">
           <div class="row">
             <section class="col-7 setupStep">
-              <select id="templateSelect" class="form-control input-sm" onchange="getConfig(this.value, false)">
+              <select id="templateSelect" class="form-select input-sm" onchange="getConfig(this.value, false)">
                 <option value="" disabled selected>
                   Select a template to get started (you can change things later)
                 </option>
@@ -266,7 +266,7 @@
             <label for="timezone">
               Choose a timezone.
             </label>
-            <select class="form-control col-6" id="timezone"></select>
+            <select class="form-select col-6" id="timezone"></select>
           </section>
         </div>
         <div class="row">
@@ -367,9 +367,9 @@
         </script>
         <div class="row">
           <article id="categoryList" class="col-md-3">
-            <div id="alertInstr" class="alert alert-light">
-              <button type="button" class="close float-end btn" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div id="alertInstr" class="alert alert-light alert-dismissible fade show" role="alert">
               Instructions: Drag talks from the categories below to the sessions on the right. You can edit sessions, talks, time slots, days, etc. When finished, you can export the JSON for the website.
+              <button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <section id="talksList">
               <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
@@ -510,85 +510,97 @@
     <aside class="modal fade" id="editMetadataModal" role="dialog" aria-labelledby="editMetadataTitle">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="editMetadataDiv">
+          <div class="modal-header px-4" id="editMetadataDiv">
             <h3 class="modal-title" id="editMetadataTitle">
               Edit conference name and dates
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <p class="form-text">
-              You can change the conference name and dates of the conference below.
-            </p>
-            <form>
-              <div class="form-group row mb-4">
-                <label for="newName" class="col-4 col-form-label">
-                  Program name
-                </label>
-                <input type="text" name="newName" placeholder="Program name (required)" class="form-control required col-md-7" id="newName" required />
-              </div>
-              <div class="form-group row mb-4">
-                <label for="newtimezone" class="col-4 col-form-label">
-                  Timezone used:
-                </label>
-                <select class="form-control col-6" id="newtimezone">
+          <div class="modal-body ps-4 pe-5">
+            <div class="mb-3">
+              <label for="newName">
+                Program name
+              </label>
+              <input type="text" name="newName" placeholder="Program name (required)" class="form-control my-1" id="newName" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="newtimezone">
+                Timezone
+              </label>
+              <select class="form-select my-1" id="newtimezone"></select>
+            </div>
+
+            <div id="changeDatesDiv" class="mb-3">
+              <label for="dateChange">
+                Change conference date(s)
+              </label>
+              <div class="my-1">
+                <select id="dateChange" name="dateChange" class="form-select mb-3" onchange="updateNewDates()">
+                  <option value="">No date change</option>
+                  <option value="shift">Shift dates</option>
+                  <option value="add">Add a day</option>
+                  <option value="delete">Delete a day</option>
+                </select>
+
+                <div id="shiftDateControl" class="row align-items-center">
+                  <div class="col-auto pe-0">
+                    <label for="shiftDates">
+                      Shift dates by
+                    </label>
+                  </div>
+                  <div class="col-auto px-2">
+                    <input type="number" id="shiftDates" class="form-control" value="0" min="-365" max="365"
+                      onchange="updateNewDates()" oninput="updateNewDates()">
+                  </div>
+                  <div class="col-auto ps-0">
+                    days
+                  </div>
+                </div>
+
+                <select id="addDayOption" name="addDayOption" class="form-select mb-3 w-50" onchange="updateNewDates()">
+                  <option value="" disabled>When do you want to add a day?</option>
+                  <option value="before">Before</option>
+                  <option value="after">After</option>
+                </select>
+
+                <select id="deleteDayOption" name="deleteDayOption" class="form-select mb-3 w-50" onchange="updateNewDates()">
+                  <option value="" disabled>Which day do you want to delete?</option>
+                  <option value="first">Delete first day</option>
+                  <option value="last">Delete last day</option>
                 </select>
               </div>
-              <div id="changeDatesDiv" class="form-group row">
-                <label for="newDates" class="col-4 col-form-label">
-                  Dates for the conference
-                </label>
-                <div class="col-7 px-0">
-                  <select id="dateChange" name="dateChange" class="form-control mb-3" onchange="updateNewDates()">
-                    <option value="">No date change</option>
-                    <option value="shift">Shift dates</option>
-                    <option value="add">Add a day</option>
-                    <option value="delete">Delete a day</option>
-                  </select>
-                  <label id="shiftDateControl" for="shiftDates">
-                    Shift dates by <input type="number" id="shiftDates" class="mx-2" value="0" min="-365" max="365" onchange="updateNewDates()" oninput="updateNewDates()"> day(s)<br/>
-                  </label>
-                  <select id="addDayOption" name="addDayOption" class="required form-control mb-3" onchange="updateNewDates()">
-                    <option value="" disabled>Choose before or after to add a day</option>
-                    <option value="before">Before</option>
-                    <option value="after">After</option>
-                  </select>
-                  <select id="deleteDayOption" name="deleteDayOption" class="required form-control mb-3" onchange="updateNewDates()">
-                    <option value="" disabled>Choose first or last to delete</option>
-                    <option value="first">Delete first day</option>
-                    <option value="last">Delete last day</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
+            </div>
+            
+            <div id="currentOrChangedDates" class="p-4 mt-3">
+              <div class="row">
                 <div class="col-4 text-end">
-                  <label>
-                    Current dates:
-                  </label>
+                  <strong>
+                    Current dates
+                  </strong>
                 </div>
-                <div class="col-7 pl-0">
+                <div class="col-7">
                   <span id="originalStartdate"></span> to
                   <span id="originalEnddate"></span>
                 </div>
               </div>
-              <div id="newDates" class="form-group row">
+              <div id="newDates" class="row mt-1">
                 <div class="col-4 text-end">
-                  <label>
-                    New dates:
-                  </label>
+                  <strong>
+                    New dates
+                  </strong>
                 </div>
-                <div class="col-7 pl-0">
+                <div class="col-7">
                   <span id="newDisplayStartdate"></span> to <span id="newDisplayEnddate"></span>
                 </div>
               </div>
-              <p class="alert alert-danger" id="deleteWarning">
-                If you delete a day, then all talks currently scheduled on that day will become unscheduled and any sessions will be lost.
-              </p>
-              <input id="newStartdate" name="newStartdate" type="hidden"/>
-              <input id="newEnddate" name="newEnddate" type="hidden"/>
-            </form>
+            </div>
+
+            <p class="alert alert-danger mt-3" id="deleteWarning">
+              If you delete a day, then all talks currently scheduled on that day will become unscheduled and any sessions will be lost.
+            </p>
+            <input id="newStartdate" name="newStartdate" type="hidden"/>
+            <input id="newEnddate" name="newEnddate" type="hidden"/>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
@@ -604,15 +616,13 @@
 
     <!-- delete program modal -->
     <div class="modal fade" id="deleteProgramModal" tabindex="-1" role="dialog" aria-labelledby="deleteProgramLabel">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h2 id="deleteProgramLabel" class="modal-title">Confirm Delete</h2>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+          <div class="modal-header px-4">
+            <h2 id="deleteProgramLabel" class="modal-title">Confirm delete</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body ps-4 pe-5">
             <p>You are about to delete this program from the server. This action cannot be reversed.</p>
             <p>Are you sure you want to delete it?</p>
           </div>
@@ -627,33 +637,30 @@
 
     <!-- Auth Modal -->
     <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="authModalLabel">Log in for IACR Program Creator</h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+          <div class="modal-header px-4">
+            <h3 class="modal-title" id="authModalLabel">Log in</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <p>This app requires you to log in with your IACR reference number
+          <div class="modal-body ps-4 pe-5">
+            <p>
+              This app requires you to log in with your IACR reference number
               and password.
             </p>
-            <form class="form-horizontal" onsubmit="return false;">
-              <div class="form-group">
-                <label for="iacrref" class="col-sm-3 control-label">IACR ref #</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="iacrref">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="password" class="col-sm-3 control-label">Password</label>
-                <div class="col-sm-8">
-                  <input type="password" class="form-control" id="password">
-                </div>
-              </div>
-            </form>
-            <p>
+            <div class="mb-3">
+              <label for="iacrref">
+                IACR reference number
+              </label>
+              <input type="text" class="form-control my-1" id="iacrref">
+            </div>
+            <div class="mb-3">
+              <label for="password">
+                Password
+              </label>
+              <input type="password" class="form-control my-1" id="password">
+            </div>
+            <p class="mt-3">
               If you have forgotten your IACR reference number or password,
               <a target="_blank" href="https://secure.iacr.org/membership/members/update.html">click here to recover it</a>.
             </p>
@@ -669,26 +676,24 @@
 
     <!-- Modal for import from crossref.org -->
     <aside class="modal fade" id="importDOISelection" role="dialog" aria-labelledby="importDOITitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="importDOIDiv">
+          <div class="modal-header px-4" id="importDOIDiv">
             <h3 class="modal-title" id="importDOITitle">
               Import DOIs from crossref.org
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <p class="form-text">
+          <div class="modal-body ps-4 pe-5">
+            <p>
               This will attempt to import DOI URLs for the papers. However, the matches are not guaranteed to be 100% accurate, as they are not provided when the papers are uploaded.
             </p>
-            <p class="form-text">
+            <p>
               Note that if Springer has not finished processing the papers for this conference, then they will not be available yet. You can always enter URLs individually at any time.
             </p>
-            <div class="progress form-group">
-              <div id="doiSuccess" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
-              <div id="doiFailure" class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" area-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
+            <div class="progress">
+              <div id="doiSuccess" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
+              <div id="doiFailure" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="0" area-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
             </div>
           </div>
           <div class="modal-footer">
@@ -705,24 +710,19 @@
 
     <!-- Modal for upload from websubrev -->
     <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labelledby="uploadTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="uploadTitleDiv">
+          <div class="modal-header px-4" id="uploadTitleDiv">
             <h3 class="modal-title" id="uploadTitle">
               Upload accepted talks from websubrev
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <p class="form-text">
-              Websubrev now allows program chairs to export a list of accepted talks. The format is described <a target="_help" href="./docs/help.html">here</a>.
+          <div class="modal-body ps-4 pe-5">
+            <p>
+              Websubrev now allows program chairs to export a list of accepted talks. The format is described in <a target="_help" href="./docs/help.html">the help docs</a>.
             </p>
-            <label for="uploadTalksSelector" class="btn btn-sm btn-success">
-              <input type="file" accept=".json" id="uploadTalksSelector" />
-              Upload JSON file
-            </label>
+            <input id="uploadTalksSelector" class="form-control mb-3" type="file" accept=".json">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
@@ -733,47 +733,46 @@
 
     <!-- Modal for import for FSE or CHES (from cryptodb) -->
     <aside class="modal fade" id="importTalksModal" role="dialog" aria-labelledby="importTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header px-4">
             <h3 class="modal-title" id="importTitle">
               Import talks from ToSC or TCHES
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <p class="form-text">
+          <div class="modal-body ps-4 pe-5">
+            <p>
               Papers that have already been published by ToSC or TCHES may be imported below.
             </p>
-            <div class="form-group">
+            <div class="mb-3">
               <label for="importSelect">
                 Select a journal
               </label>
-              <select class="form-control" id="importSelect">
+              <select class="form-select my-1" id="importSelect">
                 <option value="" selected disabled></option>
-                <option value="tches">Transactions on Crypt. Hardware and Embedded Systems (TCHES)</option>
-                <option value="tosc">Transactions on Symmetric Cryptography (ToSC)</option>
+                <option value="tches">Transactions on Cryptographic Hardware and Embedded Systems (TCHES)</option>
+                <option value="tosc">Transactions on Symmetric Cryptology (ToSC)</option>
               </select>
             </div>
-            <label>
-              Select a date range of publication dates (both are optional)
-            </label>
-            <div class="form-group row">
-              <div class="col-6">
-                <input type="date" id="importstartdate" name="importstartdate" class="form-control" value="">
-                <label for="importstartdate" class="mt-1">
+
+            <div class="row mb-0">
+              <div class="col">
+                <label for="importstartdate">
                   Published after
                 </label>
+                <input type="date" id="importstartdate" name="importstartdate" class="form-control my-1" value="">
               </div>
-              <div class="col-6">
-                <input type="date" id="importenddate" name="importenddate" class="form-control" value="">
-                <label for="importenddate" class="mt-1">
+              <div class="col">
+                <label for="importenddate">
                   Published before
                 </label>
+                <input type="date" id="importenddate" name="importenddate" class="form-control my-1" value="">
               </div>
             </div>
+            <small class="form-text mt-1">
+              Select a date range of publication for desired papers. Both fields above are optional.
+            </small>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
@@ -791,9 +790,7 @@
             <h3 class="modal-title" id="warningTitle">
               Warning
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <p id="modal-message">
@@ -816,15 +813,14 @@
             <h3 class="modal-title" id="addTalkTitle">
               Add a new talk
             </h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body ps-4 pe-5">
             <input id="talkId" type="hidden" value=""/>
             
             <div class="mb-3">
               <label for="newTalkTitle">
-                Talk Title
+                Talk title
               </label>
               <input type="text" name="newTalkTitle" placeholder="Talk title (required)" class="form-control my-1" id="newTalkTitle" required />
               <p id="talkTitleWarning" class="text-danger">
@@ -834,7 +830,7 @@
 
             <div class="mb-3">
               <label for="newTalkAuthor">
-                Talk Author(s)
+                Talk author(s)
               </label>
               <input type="text" name="newTalkAuthor" class="form-control my-1"
                 aria-describedby="newAuthorHelp" id="newTalkAuthor" />
@@ -845,7 +841,7 @@
 
             <div class="mb-3">
               <label for="newTalkAffiliation">
-                Author Affiliation(s)
+                Author affiliation(s)
               </label>
               <input type="text" name="newTalkAffiliation" class="form-control my-1"
                 aria-describedby="newAffiliationHelp" id="newTalkAffiliation" />
@@ -869,7 +865,7 @@
             
             <div class="mb-3">
               <label for="talkNote">
-                Additional Notes
+                Additional notes
               </label>
               <input type="text" name="talkNote" class="form-control my-1" aria-describedby="talkNoteHelp" id="talkNote" maxlength="77" />
               <small id="talkNoteHelp" class="form-text">
@@ -918,7 +914,7 @@
             appear when editing a talk. -->
             <div class="mb-3" id="categorySelector">
               <label for="newTalkCategory">
-                Talk Category
+                Talk category
               </label>
               <select id="newTalkCategory" class="form-select my-1">
                 <option value=""></option>
@@ -1020,7 +1016,7 @@
         <div class="modal-content">
           <div class="modal-header" id="timeEditTitleDiv">
             <h3 class="modal-title" id="timeEditTitle">
-              Edit Time Slot
+              Edit time slot
             </h3>
             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -1078,7 +1074,7 @@
         <div class="modal-content">
           <div class="modal-header" id="editSessionTitleDiv">
             <h3 class="modal-title" id="editSessionTitle">
-              Edit Session
+              Edit session
             </h3>
             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -1092,7 +1088,7 @@
               <input type="hidden" id="currentSessionIndex" value="" />
               <div class="form-group">
                 <label for="sessionTitle">
-                  Session Title
+                  Session title
                 </label>
                 <input type="text" name="sessionTitle" placeholder="Session title" class="form-control required" id="currentSessionTitle" required/>
               </div>
@@ -1136,10 +1132,10 @@
               Cancel
             </button>
             <button id="deleteSessionButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteSession()">
-              Delete Session
+              Delete session
             </button>
             <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" onclick="saveSession()">
-              Save Session
+              Save session
             </button>
           </div>
         </div>
@@ -1152,7 +1148,7 @@
         <div class="modal-content">
           <div class="modal-header" id="addTimeslotDiv">
             <h3 class="modal-title" id="addTimeslotTitle">
-              Add a Time Slot
+              Add a time slot
             </h3>
             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -1179,7 +1175,7 @@
                 <label for="numtracks" class="col-form-label">
                   Select the number of tracks
                 </label>
-                <select name="numtracks" id="selectSessionCount" class="form-control ml-2 col-6">
+                <select name="numtracks" id="selectSessionCount" class="form-select ml-2 col-6">
                   <option value="1">One track</option>
                   <option value="2">Two tracks</option>
                   <option value="3">Three tracks</option>
@@ -1226,7 +1222,7 @@
                 <label for="page_format" class="col-form-label">
                   Page format
                 </label>
-                <select name="page_format" id="page_format" class="form-control col-8 ml-2">
+                <select name="page_format" id="page_format" class="form-select col-8 ml-2">
                   <option value="Letter">US Letter</option>
                   <option value="Letter-L">US Letter landscape</option>
                   <option value="A4">A4</option>

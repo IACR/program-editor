@@ -109,7 +109,7 @@ div.dropdown-menu {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#uploadmenu, #templateSelector, #timezonePicker, #datePicker, #datesButton, #uploadTalks, #uploadTalksSelector, #versionPicker, #nameEntry {
+#uploadmenu, #templateSelector, #timezonePicker, #datePicker, #datesButton, #uploadTalks, #versionPicker, #nameEntry {
   display: none;
 }
 
@@ -373,8 +373,8 @@ input {
     color: #212529 !important;
 }
 
-input#shiftDates {
-    text-align: center;
+#currentOrChangedDates {
+  border: 2px solid rgba(24, 188, 156, 0.4);
 }
 
 div.progress {
@@ -388,15 +388,6 @@ div.progress {
   border: 2px solid #78C2CF;
 }
 
-#alertInstr button.close {
-  font-size: 2em;
-  padding-top: 0.3rem !important;
-  color: black;
-}
-
-#alertInstr button.close:hover {
-  color: #78C2CF;
-}
 div.keywords {
     text-align: left;
     font-size: .75rem;
