@@ -1018,56 +1018,49 @@
 
     <!-- Modal for editing a timeslot -->
     <aside class="modal fade" id="editTimeslot" role="dialog" aria-labelledby="timeEditTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="timeEditTitleDiv">
+          <div class="modal-header px-4" id="timeEditTitleDiv">
             <h3 class="modal-title" id="timeEditTitle">
               Edit time slot
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
-              <!-- NOTE: used only for saving edited time slot to progData -->
-              <input type="hidden" id="timeslotDayIndex" value="" />
-              <input type="hidden" id="timeslotIndex" value="" />
-              <div class="form">
-                <div class="form-row mb-4" id="timeDiv">
-                  <div class="col-6">
-                    <label for="startTime">Start time</label>
-                    <input type="text" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
-                  </div>
-                  <div class="col-6">
-                    <label for="endTime">End time</label>
-                    <input type="text" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
-                  </div>
-                </div>
-                <div id="addTrackToSession">
-                  <p class="form-text mb-2">
-                    To add a session, please check the box below.
-                  </p>
-                  <div class="form-check">
-                    <input type="checkbox" name="numsessions" id="addSession" class="form-check-input"></input>
-                    <label for="numsessions" class="form-check-label">Add a track to this timeslot?</label>
-                  </div>
-                </div>
+            <!-- NOTE: used only for saving edited time slot to progData -->
+            <input type="hidden" id="timeslotDayIndex" value="" />
+            <input type="hidden" id="timeslotIndex" value="" />
+
+            <div class="row mb-3" id="timeDiv">
+              <div class="col">
+                <label for="startTime">Start time</label>
+                <input type="text" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
               </div>
-            </form>
+              <div class="col">
+                <label for="endTime">End time</label>
+                <input type="text" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
+              </div>
+            </div>
+
+            <div class="form-check mb-3" id="addTrackToSession">
+              <label for="addSession" class="form-check-label">Add a track to this timeslot?</label>
+              <input type="checkbox" name="numsessions" id="addSession" class="form-check-input" />
+            </div>
+
+            <div class="alert alert-danger" id="deleteTimeslotWarning">
+              If you delete this timeslot, then any talks in the session will become unscheduled.
+            </div>
           </div>
-          <div class="modal-body" id="deleteTimeslotWarning">
-            <div class="alert alert-danger">If you delete this timeslot, then any talks in the session will become unscheduled.</div>
-          </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
               Cancel
             </button>
             <button id="deleteTimeslotButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteTimeslot()">
-              Delete Time Slot
+              Delete time slot
             </button>
             <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" onclick="saveTimeslot()">
-              Save Changes
+              Save changes
             </button>
           </div>
         </div>
