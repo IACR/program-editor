@@ -985,23 +985,21 @@
         <div class="modal-content">
           <div class="modal-header px-4" id="addCategoryTitleDiv">
             <h3 class="modal-title" id="categoryEditorTitle">
-              Add a category
+              Add category
             </h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body ps-4 pe-5">
-            <form>
-              <input id="categoryId" type="hidden" value=""/>
-              <div class="form-group">
-                <label for="newCategoryName">
-                  Category name
-                </label>
-                <input type="text" name="newCategoryName" placeholder="Category name (required)" class="form-control required" id="newCategoryName" required />
-              </div>
-            </form>
-          </div>
-          <div id="deleteCategoryWarning" class="modal-body">
-            <div class="alert alert-danger">If you delete this category, then the talks in this category become uncategorized.</div>
+            <input id="categoryId" type="hidden" value=""/>
+            <div class="mb-3">
+              <label for="newCategoryName">
+                Category name
+              </label>
+              <input type="text" name="newCategoryName" placeholder="Category name (required)" class="form-control my-1" id="newCategoryName" required />
+            </div>
+            <div id="deleteCategoryWarning" class="alert alert-danger">
+              If you delete this category, then the talks in this category become uncategorized.
+            </div>
           </div>
           <div class="modal-footer">
             <button id="deleteCategoryButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteCategory()">
