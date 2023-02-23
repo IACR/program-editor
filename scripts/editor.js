@@ -1204,7 +1204,9 @@ function deleteCategory() {
 // Prepopulate edit session modal with relevant fields from parent div of clicked edit button
 function editSession(dayIndex, slotIndex, sessionIndex) {
   $('#deleteSessionWarning').hide();
+  $('#sessionTitleWarning').hide();
   $('#deleteSessionButton').text('Delete session');
+
   var sessionObj = progData.days[dayIndex].timeslots[slotIndex].sessions[sessionIndex];
   if (progData.days[dayIndex].timeslots[slotIndex].sessions.length < 2) {
     // Can't delete the only session in a timeslot.
@@ -1469,8 +1471,14 @@ function saveSession() {
 
   // Session title is required.
   if (session_title === "") {
-    warningBox('Session title is required.');
-    return;
+    // warningBox('Session title is required.');
+    var sessTitle = $('#currentSessionTitle').val();
+    if (!sessTitle) {
+      $('#sessionTitleWarning').show();
+      return;
+    } else {
+      $('#sessionTitleWarning').hide();
+    }
   }
   sessionObj.session_title = session_title;
 
@@ -1509,7 +1517,7 @@ function saveSession() {
       console.dir('no talks array found');
     }
   }
-
+  bootstrap.Modal.getOrCreateInstance('#editSessionBox').hide();
   refresh();
 }
 
