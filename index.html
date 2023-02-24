@@ -1033,11 +1033,11 @@
             <div class="row mb-3" id="timeDiv">
               <div class="col">
                 <label for="startTime">Start time</label>
-                <input type="text" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
+                <input type="time" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
               </div>
               <div class="col">
                 <label for="endTime">End time</label>
-                <input type="text" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
+                <input type="time" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
               </div>
             </div>
             <div class="form-check mb-3" id="addTrackToSession">
@@ -1155,11 +1155,11 @@
             <div id="timeslotDiv" class="row mb-3">
               <div class="col">
                 <label for="newStartTime">Start time</label>
-                <input type="text" name="startTime" class="form-control time start my-1" id="newStartTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required/>
+                <input type="time" name="startTime" class="form-control time start my-1" id="newStartTime" autocomplete="off" required/>
               </div>
               <div class="col">
                 <label for="newEndTime">End time</label>
-                <input type="text" name="endTime" class="form-control time end my-1" id="newEndTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required/>
+                <input type="time" name="endTime" class="form-control time end my-1" id="newEndTime" autocomplete="off" required/>
               </div>
               <div id="timeSlotWarning" class="alert alert-danger col-12 mt-2">
                 Start and end time are both required.
