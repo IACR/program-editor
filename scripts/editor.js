@@ -1470,7 +1470,6 @@ function saveSession() {
 
   // Session title is required.
   if (session_title === "") {
-    // warningBox('Session title is required.');
     var sessTitle = $('#currentSessionTitle').val();
     if (!sessTitle) {
       $('#sessionTitleWarning').show();
