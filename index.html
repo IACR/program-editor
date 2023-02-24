@@ -1201,19 +1201,20 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body ps-4 pe-5">
-            <p class="form-text">
+            <p>
               The PDF file will be opened in a separate tab.
             </p>
-            <p class="form-text">
-              Note that formatting on paper is a work in progress, and may not be very usable at this time.
+            <p class="alert alert-warning">
+              Formatting on paper is a work in progress, and may not be very usable at this time.
             </p>
-            <form id="pdfform" method="POST" action="pdf/program.php" target="_programpdf" class="form">
+            <form id="pdfform" method="POST" action="pdf/program.php" target="_programpdf">
+              <!-- TODO: wat -->
               <input type="hidden" name="json" value="">
-              <div class="form-group form-row">
-                <label for="page_format" class="col-form-label">
+              <div class="mb-3">
+                <label for="page_format">
                   Page format
                 </label>
-                <select name="page_format" id="page_format" class="form-select col-8 ml-2">
+                <select name="page_format" id="page_format" class="form-select my-1">
                   <option value="Letter">US Letter</option>
                   <option value="Letter-L">US Letter landscape</option>
                   <option value="A4">A4</option>
@@ -1228,16 +1229,16 @@
                 </select>
               </div>
               <div class="form-check">
-                <input name="two_column" id="two_column" type="checkbox" class="form-check-input">
                 <label for="two_column" class="form-check-label">
                   Two column format?
                 </label>
+                <input name="two_column" id="two_column" type="checkbox" class="form-check-input">
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success" onclick="downloadPDF();">Download PDF</button>
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" onclick="downloadPDF();">Download PDF</button>
           </div>
         </div>
       </div>
