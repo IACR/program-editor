@@ -594,7 +594,6 @@ function splitAuthors(val) {
 // associated to each author.
 function mergeTalks(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
-    // warningBox('JSON file is not websubrev format.');
     return false;
   }
 
