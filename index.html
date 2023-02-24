@@ -103,10 +103,10 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="importDD">
               <a id="importTalksMenu" onclick="showImportFSEorCHES(true)" class="dropdown-item">
-                Import papers from TCHES or ToSC
+                Import from TCHES or ToSC
               </a>
               <a id="uploadTalksMenu" onclick="showWebsubrevUpload(true)" class="dropdown-item">
-                Upload papers in websubrev format
+                Upload accepted papers
               </a>
               <a id="importDOIMenu" onclick="startImportDOIs()" class="dropdown-item">
                 Import paper URLs
@@ -150,7 +150,7 @@
             <p class="text-justify">
               This app allows you to create a program for a conference. The things you need to
               get started are the dates of your conference and the list of accepted papers
-              from websubrev (you could type those in again, but why bother?). The list of
+              from HotCRP (you could type those in again, but why bother?). The list of
               accepted papers is accessible as a JSON file from the program chair interface.
             </p>
             <p class="alert alert-info">
@@ -288,12 +288,12 @@
         <div class="row">
           <section id="uploadTalks" class="col-12 form-group">
             <p>
-              Next, specify the list of accepted papers. This can be an upload from websubrev
+              Next, specify the list of accepted papers. This can be an upload from HotCRP
               (a JSON file), or you can import accepted papers from TCHES or ToSC.
               You can do this later if you like.
             </p>
             <button type="button" name="showUpload" onclick="showWebsubrevUpload(false)" class="btn btn-sm btn-success mr-2">
-              Upload websubrev accepted talks
+              Upload accepted papers
             </button>
             <button type="button" name="showImport" onclick="showImportFSEorCHES(false)" class="btn btn-sm btn-success mr-2">
               Import from ToSC or TCHES
@@ -372,7 +372,7 @@
               <button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <section id="talksList">
-              <!-- Handlebars script that renders the list of talks based on user-uploaded json file with websubrev output -->
+              <!-- Handlebars script that renders the list of talks based on user-uploaded json file with HotCRP output -->
               <script id="talks-template" type="text/x-handlebars-template">
                 <!-- BUG: may have gray outline remaining after click b/c is button rather than anchor, as edit session pencil is -->
                 {{#each unassigned_talks}}
@@ -708,21 +708,31 @@
       </div>
     </aside>
 
-    <!-- Modal for upload from websubrev -->
+    <!-- Modal for upload from HotCRP -->
     <aside class="modal fade" id="uploadTalksModal" role="dialog" aria-labelledby="uploadTitle">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header px-4" id="uploadTitleDiv">
             <h3 class="modal-title" id="uploadTitle">
-              Upload accepted talks from websubrev
+              Upload accepted papers
             </h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body ps-4 pe-5">
             <p>
-              Websubrev now allows program chairs to export a list of accepted talks. The format is described in <a target="_help" href="./docs/help.html">the help docs</a>.
+              If you are a program chair for Crypto, Eurocrypt, Asiacrypt, TCC, or PKC, then there is a menu item inside HotCRP  
+              'IACR integration' &#8658; 'Accepted papers'. That will allow you to download the required file. As an alternative, the file may also be found at /json/papers.json on the conference website.
             </p>
+            <p>
+              For FSE and CHES, you will have four files of accepted papers. This is where you should upload each list to the program editor directly.
+            </p>
+            <!-- <p>
+              The required format is described in <a target="_help" href="./docs/help.html">the help docs</a>.
+            </p> -->
             <input id="uploadTalksSelector" class="form-control mb-3" type="file" accept=".json">
+            <p id="uploadTalksWarning" class="text-danger">
+              Files must be in the format exported from HotCRP under 'IACR integration'.
+            </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
@@ -737,7 +747,7 @@
         <div class="modal-content">
           <div class="modal-header px-4">
             <h3 class="modal-title" id="importTitle">
-              Import talks from ToSC or TCHES
+              Import from ToSC or TCHES
             </h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -784,21 +794,21 @@
 
     <!-- Modal for warnings and errors -->
     <aside class="modal fade" id="errorBox" role="dialog" aria-labelledby="warningTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="warnBoxTitle">
+          <div class="modal-header px-4" id="warnBoxTitle">
             <h3 class="modal-title" id="warningTitle">
               Warning
             </h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body ps-4 pe-5">
             <p id="modal-message">
               Something's not quite right here.
             </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">Ok</button>
           </div>
         </div>
       </div>
@@ -971,29 +981,25 @@
     <!-- Modal for adding or editing a category. In case you are adding a category,
          the delete button is not shown and the categoryId field is empty.  -->
     <aside class="modal fade" id="editCategoryBox" role="dialog" aria-labelledby="categoryEditorTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="addCategoryTitleDiv">
+          <div class="modal-header px-4" id="addCategoryTitleDiv">
             <h3 class="modal-title" id="categoryEditorTitle">
-              Add a category
+              Add category
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <form>
-              <input id="categoryId" type="hidden" value=""/>
-              <div class="form-group">
-                <label for="newCategoryName">
-                  Category name
-                </label>
-                <input type="text" name="newCategoryName" placeholder="Category name (required)" class="form-control required" id="newCategoryName" required />
-              </div>
-            </form>
-          </div>
-          <div id="deleteCategoryWarning" class="modal-body">
-            <div class="alert alert-danger">If you delete this category, then the talks in this category become uncategorized.</div>
+          <div class="modal-body ps-4 pe-5">
+            <input id="categoryId" type="hidden" value=""/>
+            <div class="mb-3">
+              <label for="newCategoryName">
+                Category name
+              </label>
+              <input type="text" name="newCategoryName" placeholder="Category name (required)" class="form-control my-1" id="newCategoryName" required />
+            </div>
+            <div id="deleteCategoryWarning" class="alert alert-danger">
+              If you delete this category, then the talks in this category become uncategorized.
+            </div>
           </div>
           <div class="modal-footer">
             <button id="deleteCategoryButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteCategory()">
@@ -1012,56 +1018,45 @@
 
     <!-- Modal for editing a timeslot -->
     <aside class="modal fade" id="editTimeslot" role="dialog" aria-labelledby="timeEditTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="timeEditTitleDiv">
+          <div class="modal-header px-4" id="timeEditTitleDiv">
             <h3 class="modal-title" id="timeEditTitle">
               Edit time slot
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <form>
-              <!-- NOTE: used only for saving edited time slot to progData -->
-              <input type="hidden" id="timeslotDayIndex" value="" />
-              <input type="hidden" id="timeslotIndex" value="" />
-              <div class="form">
-                <div class="form-row mb-4" id="timeDiv">
-                  <div class="col-6">
-                    <label for="startTime">Start time</label>
-                    <input type="text" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
-                  </div>
-                  <div class="col-6">
-                    <label for="endTime">End time</label>
-                    <input type="text" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
-                  </div>
-                </div>
-                <div id="addTrackToSession">
-                  <p class="form-text mb-2">
-                    To add a session, please check the box below.
-                  </p>
-                  <div class="form-check">
-                    <input type="checkbox" name="numsessions" id="addSession" class="form-check-input"></input>
-                    <label for="numsessions" class="form-check-label">Add a track to this timeslot?</label>
-                  </div>
-                </div>
+          <div class="modal-body ps-4 pe-5">
+            <!-- NOTE: used only for saving edited time slot to progData -->
+            <input type="hidden" id="timeslotDayIndex" value="" />
+            <input type="hidden" id="timeslotIndex" value="" />
+            <div class="row mb-3" id="timeDiv">
+              <div class="col">
+                <label for="startTime">Start time</label>
+                <input type="time" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
               </div>
-            </form>
-          </div>
-          <div class="modal-body" id="deleteTimeslotWarning">
-            <div class="alert alert-danger">If you delete this timeslot, then any talks in the session will become unscheduled.</div>
+              <div class="col">
+                <label for="endTime">End time</label>
+                <input type="time" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
+              </div>
+            </div>
+            <div class="form-check mb-3" id="addTrackToSession">
+              <label for="addSession" class="form-check-label">Add a track to this timeslot?</label>
+              <input type="checkbox" name="numsessions" id="addSession" class="form-check-input" />
+            </div>
+            <div class="alert alert-danger" id="deleteTimeslotWarning">
+              If you delete this timeslot, then any talks in the session will become unscheduled.
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
               Cancel
             </button>
             <button id="deleteTimeslotButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteTimeslot()">
-              Delete Time Slot
+              Delete time slot
             </button>
             <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" onclick="saveTimeslot()">
-              Save Changes
+              Save changes
             </button>
           </div>
         </div>
@@ -1070,60 +1065,60 @@
 
     <!-- Modal for editing a session -->
     <aside class="modal fade" id="editSessionBox" role="dialog" aria-labelledby="editSessionTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="editSessionTitleDiv">
+          <div class="modal-header px-4" id="editSessionTitleDiv">
             <h3 class="modal-title" id="editSessionTitle">
               Edit session
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <form>
-              <!-- NOTE: These are used to look up the session that is being edited. -->
-              <input type="hidden" id="currentDayIndex" value="" />
-              <input type="hidden" id="currentSlotIndex" value="" />
-              <input type="hidden" id="currentSessionIndex" value="" />
-              <div class="form-group">
-                <label for="sessionTitle">
-                  Session title
-                </label>
-                <input type="text" name="sessionTitle" placeholder="Session title" class="form-control required" id="currentSessionTitle" required/>
-              </div>
-              <div class="form-group">
-                <label for="currentSessionURL">
-                  Information URL
-                </label>
-                <input type="url" name="currentSessionURL" placeholder="Optional URL for session information" class="form-control" id="currentSessionURL"/>
-                <small class="form-text">
-                  For example, a map or website for the location or session that is not specific to a talk.
-                </small>
-              </div>
-              <div class="form-group">
-                <label for="currentSessionLocation">
-                  Location
-                </label>
-                <input type="text" name="currentSessionLocation" placeholder="Optional session location" class="form-control" id="currentSessionLocation" />
-              </div>
-              <div class="form-group">
-                <label for="currentSessionModerator">
-                  Moderator
-                </label>
-                <input type="text" name="currentSessionModerator" placeholder="Optional session moderator (e.g. 'Chair: Alan Turing')" class="form-control" id="currentSessionModerator" />
-              </div>
-              <div class="form-check">
-                <input type="checkbox" name="allowTalks" id="allowTalks" class="form-check-input">
-                <label class="form-check-label" for="allowTalks">
-                  Allow talks in this session?
-                </label>
-              </div>
-            </form>
-            <div id="singleSessionInstructions" class="mt-3">
+          <div class="modal-body ps-4 pe-5">
+            <!-- NOTE: These are used to look up the session that is being edited. -->
+            <input type="hidden" id="currentDayIndex" value="" />
+            <input type="hidden" id="currentSlotIndex" value="" />
+            <input type="hidden" id="currentSessionIndex" value="" />
+            <div class="mb-3">
+              <label for="currentSessionTitle">
+                Session title
+              </label>
+              <input type="text" name="sessionTitle" class="form-control my-1" id="currentSessionTitle" required/>
+              <p id="sessionTitleWarning" class="text-danger">
+                Session title is required
+              </p>
+            </div>
+            <div class="mb-3">
+              <label for="currentSessionURL">
+                Session information URL
+              </label>
+              <input type="url" name="currentSessionURL" placeholder="Optional" class="form-control my-1" id="currentSessionURL" 
+              aria-describedby="sessInfoHelp" />
+              <small id="sessInfoHelp" class="form-text">
+                This can be useful for links to things like a map or a website for the location.
+              </small>
+            </div>
+            <div class="mb-3">
+              <label for="currentSessionLocation">
+                Location
+              </label>
+              <input type="text" name="currentSessionLocation" placeholder="Optional" class="form-control my-1" id="currentSessionLocation" />
+            </div>
+            <div class="mb-3">
+              <label for="currentSessionModerator">
+                Session chair or moderator
+              </label>
+              <input type="text" name="currentSessionModerator" placeholder="Chair: Alan Turing (optional)" class="form-control" id="currentSessionModerator" />
+            </div>
+            <div class="form-check mb-3">
+              <label class="form-check-label" for="allowTalks">
+                Allow talks in this session?
+              </label>
+              <input type="checkbox" name="allowTalks" id="allowTalks" class="form-check-input">
+            </div>
+            <div id="singleSessionInstructions" class="mb-3 alert alert-info">
               If you want to delete this session, you must delete the time slot.
             </div>
-            <div id="deleteSessionWarning" class="alert alert-danger my-2">
+            <div id="deleteSessionWarning" class="alert alert-danger">
               If you delete this session, then any talks in the session will become unscheduled.
             </div>
           </div>
@@ -1134,7 +1129,7 @@
             <button id="deleteSessionButton" type="button" class="btn btn-danger btn-sm float-start" onclick="deleteSession()">
               Delete session
             </button>
-            <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal" onclick="saveSession()">
+            <button type="button" class="btn btn-success btn-sm" onclick="saveSession()">
               Save session
             </button>
           </div>
@@ -1144,48 +1139,46 @@
 
     <!-- Modal for adding a timeslot (creates a blank session(s)) -->
     <aside class="modal fade" id="addTimeslot" role="dialog" aria-labelledby="addTimeslotTitle">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="addTimeslotDiv">
+          <div class="modal-header px-4" id="addTimeslotDiv">
             <h3 class="modal-title" id="addTimeslotTitle">
               Add a time slot
             </h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <p class="form-text">
+          <div class="modal-body ps-4 pe-5">
+            <p>
               Time slots are ordered by their start time but may overlap.
             </p>
-            <form>
-              <input type="hidden" id="dayIndex" value="" />
-              <div id="timeslotDiv" class="form-row form-group">
-                <div class="col-6">
-                  <label for="startTime">Start time</label>
-                  <input type="text" name="startTime" class="form-control time start" id="newStartTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required/>
-                </div>
-                <div class="col-6">
-                  <label for="endTime">End time</label>
-                  <input type="text" name="endTime" class="form-control time end" id="newEndTime" autocomplete="off" pattern="^[0-2]?[0-9]:[0-9]{2}$" required/>
-                </div>
+            <input type="hidden" id="dayIndex" value="" />
+            <div id="timeslotDiv" class="row mb-3">
+              <div class="col">
+                <label for="newStartTime">Start time</label>
+                <input type="time" name="startTime" class="form-control time start my-1" id="newStartTime" autocomplete="off" required/>
               </div>
-              <div id="timeSlotWarning" class="alert alert-danger">Start and end time are required.</div>
-              <div class="form-group form-row">
-                <label for="numtracks" class="col-form-label">
-                  Select the number of tracks
-                </label>
-                <select name="numtracks" id="selectSessionCount" class="form-select ml-2 col-6">
-                  <option value="1">One track</option>
-                  <option value="2">Two tracks</option>
-                  <option value="3">Three tracks</option>
-                </select>
+              <div class="col">
+                <label for="newEndTime">End time</label>
+                <input type="time" name="endTime" class="form-control time end my-1" id="newEndTime" autocomplete="off" required/>
               </div>
-              <div class="form-check">
-                <input type="checkbox" name="includeTalks" id="includeTalks" class="form-check-input"></input>
-                <label for="includeTalks" class="form-check-label">Allow talks in the time slot?</label>
+              <div id="timeSlotWarning" class="alert alert-danger col-12 mt-2">
+                Start and end time are both required.
               </div>
-            </form>
+            </div>
+            <div class="mb-3">
+              <label for="numtracks" class="col-form-label">
+                Select the number of tracks
+              </label>
+              <select name="numtracks" id="selectSessionCount" class="form-select my-1">
+                <option value="1">One track</option>
+                <option value="2">Two tracks</option>
+                <option value="3">Three tracks</option>
+              </select>
+            </div>
+            <div class="form-check mb-3">
+              <label for="includeTalks" class="form-check-label">Allow talks in the time slot?</label>
+              <input type="checkbox" name="includeTalks" id="includeTalks" class="form-check-input"></input>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
@@ -1201,28 +1194,26 @@
 
     <!-- modal to download PDF -->
     <div class="modal fade" id="downloadPDFModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header px-4">
             <h3 class="modal-title">Download PDF</h3>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <p class="form-text">
+          <div class="modal-body ps-4 pe-5">
+            <p>
               The PDF file will be opened in a separate tab.
             </p>
-            <p class="form-text">
-              Note that formatting on paper is a work in progress, and may not be very usable at this time.
+            <p class="alert alert-warning">
+              Formatting on paper is a work in progress, and may not be very usable at this time.
             </p>
-            <form id="pdfform" method="POST" action="pdf/program.php" target="_programpdf" class="form">
+            <form id="pdfform" method="POST" action="pdf/program.php" target="_blank">
               <input type="hidden" name="json" value="">
-              <div class="form-group form-row">
-                <label for="page_format" class="col-form-label">
+              <div class="mb-3">
+                <label for="page_format">
                   Page format
                 </label>
-                <select name="page_format" id="page_format" class="form-select col-8 ml-2">
+                <select name="page_format" id="page_format" class="form-select my-1">
                   <option value="Letter">US Letter</option>
                   <option value="Letter-L">US Letter landscape</option>
                   <option value="A4">A4</option>
@@ -1237,16 +1228,16 @@
                 </select>
               </div>
               <div class="form-check">
-                <input name="two_column" id="two_column" type="checkbox" class="form-check-input">
                 <label for="two_column" class="form-check-label">
                   Two column format?
                 </label>
+                <input name="two_column" id="two_column" type="checkbox" class="form-check-input">
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success" onclick="downloadPDF();">Download PDF</button>
+            <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success btn-sm" onclick="downloadPDF();">Download PDF</button>
           </div>
         </div>
       </div>

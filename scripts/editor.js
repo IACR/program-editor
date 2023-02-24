@@ -563,6 +563,7 @@ function uploadTalks(evt) {
     } try {
       var data = JSON.parse(textFile.result);
       if (!mergeTalks(data)) {
+        $('#uploadTalksWarning').show();
         console.log('failed to merge');
         evt.target.value = '';
         return;
@@ -593,9 +594,9 @@ function splitAuthors(val) {
 // associated to each author.
 function mergeTalks(data) {
   if (!data.hasOwnProperty('acceptedPapers') || !Array.isArray(data.acceptedPapers)) {
-    warningBox('JSON file is not websubrev format.');
     return false;
   }
+
   var acceptedPapers = data.acceptedPapers;
 
   for (var i = 0; i < acceptedPapers.length; i++) {
@@ -706,10 +707,11 @@ function showWebsubrevUpload(obeyMenu) {
   if (obeyMenu && $('#uploadTalksMenu').hasClass('disabled')) {
     return false;
   }
+  $('#uploadTalksWarning').hide();
   bootstrap.Modal.getOrCreateInstance('#uploadTalksModal').show();
 }
 
-// Show modal for uploading from websubrev.
+// Show modal for uploading from ToSC or TCHES.
 function showImportFSEorCHES(obeyMenu) {
   if (obeyMenu && $('#importTalksMenu').hasClass('disabled')) {
     return false;
@@ -1201,7 +1203,9 @@ function deleteCategory() {
 // Prepopulate edit session modal with relevant fields from parent div of clicked edit button
 function editSession(dayIndex, slotIndex, sessionIndex) {
   $('#deleteSessionWarning').hide();
+  $('#sessionTitleWarning').hide();
   $('#deleteSessionButton').text('Delete session');
+
   var sessionObj = progData.days[dayIndex].timeslots[slotIndex].sessions[sessionIndex];
   if (progData.days[dayIndex].timeslots[slotIndex].sessions.length < 2) {
     // Can't delete the only session in a timeslot.
@@ -1466,8 +1470,13 @@ function saveSession() {
 
   // Session title is required.
   if (session_title === "") {
-    warningBox('Session title is required.');
-    return;
+    var sessTitle = $('#currentSessionTitle').val();
+    if (!sessTitle) {
+      $('#sessionTitleWarning').show();
+      return;
+    } else {
+      $('#sessionTitleWarning').hide();
+    }
   }
   sessionObj.session_title = session_title;
 
@@ -1506,7 +1515,7 @@ function saveSession() {
       console.dir('no talks array found');
     }
   }
-
+  bootstrap.Modal.getOrCreateInstance('#editSessionBox').hide();
   refresh();
 }
 
