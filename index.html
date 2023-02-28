@@ -14,7 +14,7 @@
     <link href="./dependencies/dragula/dragula.css" rel="stylesheet" />
 
     <!-- Styling: Custom -->
-    <link href="./styles/main.css" rel="stylesheet" />
+    <link href="./styles/main.css?v=2" rel="stylesheet" />
     <link href="https://iacr.org/libs/fonts/raleway-regular.css" rel="stylesheet"/>
     <link href="https://iacr.org/libs/fonts/open-sans-condensed.css" rel="stylesheet"/>
     <style>
@@ -153,9 +153,9 @@
               from HotCRP (you could type those in again, but why bother?). The list of
               accepted papers is accessible as a JSON file from the program chair interface.
             </p>
-            <p class="alert alert-info">
+<!--            <p class="alert alert-info">
               NOTE: for virtual conferences, times should be entered in UTC
-            </p>
+            </p>-->
           </section>
         </div>
         <!-- Button to trigger login modal -->
@@ -504,7 +504,7 @@
     <script src="./dependencies/datepair/jquery.datepair.min.js"></script>
 
     <!-- Additional/custom scripts -->
-    <script src="./scripts/editor.js?version=15"></script>
+    <script src="./scripts/editor.js?version=16"></script>
 
     <!-- modal to edit config metadata -->
     <aside class="modal fade" id="editMetadataModal" role="dialog" aria-labelledby="editMetadataTitle">
@@ -936,13 +936,13 @@
                 <label for="currentTalkStartTime">
                   Start time
                 </label>
-                <input type="time" name="startTime" class="form-control time start my-1" id="currentTalkStartTime" autocomplete="off" />
+                <input type="text" name="startTime" class="form-control time start my-1" id="currentTalkStartTime" autocomplete="off" />
               </div>
               <div class="col-6">
                 <label for="currentTalkEndTime">
                   End time
                 </label>
-                <input type="time" name="endTime" class="form-control time end my-1" id="currentTalkEndTime" autocomplete="off" />
+                <input type="text" name="endTime" class="form-control time end my-1" id="currentTalkEndTime" autocomplete="off" />
               </div>
               <small class="form-text">
                 Specific times are optional. Please note that these are not checked as to whether they actually fit within the
@@ -1033,11 +1033,11 @@
             <div class="row mb-3" id="timeDiv">
               <div class="col">
                 <label for="startTime">Start time</label>
-                <input type="time" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
+                <input type="text" name="startTime" class="form-control time start" id="currentStartTime" autocomplete="off" />
               </div>
               <div class="col">
                 <label for="endTime">End time</label>
-                <input type="time" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
+                <input type="text" name="endTime" class="form-control time end" id="currentEndTime" autocomplete="off" />
               </div>
             </div>
             <div class="form-check mb-3" id="addTrackToSession">
@@ -1155,11 +1155,11 @@
             <div id="timeslotDiv" class="row mb-3">
               <div class="col">
                 <label for="newStartTime">Start time</label>
-                <input type="time" name="startTime" class="form-control time start my-1" id="newStartTime" autocomplete="off" required/>
+                <input type="text" name="startTime" class="form-control time start my-1" id="newStartTime" autocomplete="off" required/>
               </div>
               <div class="col">
                 <label for="newEndTime">End time</label>
-                <input type="time" name="endTime" class="form-control time end my-1" id="newEndTime" autocomplete="off" required/>
+                <input type="text" name="endTime" class="form-control time end my-1" id="newEndTime" autocomplete="off" required/>
               </div>
               <div id="timeSlotWarning" class="alert alert-danger col-12 mt-2">
                 Start and end time are both required.
