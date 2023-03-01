@@ -431,18 +431,18 @@
                   {{#if @root.tabbedSessions}}
                   <ul class="nav nav-tabs mt-2" role="tablist">
                     {{#each sessions}}
-                    <!-- {{@../../index}} is the day index
-                         {{@../index}} is the timeslot index
-                         {{@index}} is the session index -->
                     <li class="nav-item {{#if @first}}active{{/if}}" role="presentation">
-                      <button id="btn-{{@../../index}}-{{@../index}}-{{@index}}" class="nav-link {{#if @first}}active{{/if}}" href="#session-{{@../../index}}-{{@../index}}-{{@index}}" data-bs-toggle="tab" data-bs-target="#session-{{@../../index}}-{{@../index}}-{{@index}}" type="button" role="tab" aria-controls="session-{{@../../index}}-{{@../index}}-{{@index}}">{{session_title}}</button>
+                      <button id="btn-{{id}}" class="nav-link {{#if @first}}active{{/if}}" href="#{{id}}" data-bs-toggle="tab" data-bs-target="#{{id}}" type="button" role="tab" aria-controls="{{id}}">{{session_title}}</button>
                     </li>
                     {{/each}}
                   </ul>
                   {{/if}}
                   <div class="{{#if @root.tabbedSessions}}tab-content{{else}}d-flex{{/if}}" id="sessions-{{@index}}">
                     {{#each sessions}}
-                    <div class="session {{#if @root.tabbedSessions}}tab-pane fade {{#if @first}} active show{{/if}}{{/if}}" id="session-{{@../../index}}-{{@../index}}-{{@index}}" role="tabpanel" aria-labelled-by="btn-{{@../index}}-{{@index}}">
+                    <div class="session {{#if @root.tabbedSessions}}tab-pane fade {{#if @first}} active show{{/if}}{{/if}}" id="{{id}}" role="tabpanel" aria-labelled-by="btn-{{id}}">
+                      <!-- {{@../../index}} is the day index
+                           {{@../index}} is the timeslot index
+                           {{@index}} is the session index -->
                       <a class="editButton float-end" onclick="editSession({{@../../index}},{{@../index}},{{@index}})">
                         <label data-bs-toggle="tooltip" title="Edit the session" data-bs-placement="top" data-bs-trigger="hover" tabindex="0">
                           <span class="editIcon"><img src="img/edit.svg"></span>
