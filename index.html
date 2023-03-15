@@ -248,16 +248,37 @@
             Some help text, because idk how to explain what this is for
           </div>
 
-          <label for="talkUpload">Upload or select talks</label>
-          <!-- TODO: unclear what type of input required; I opted for file upload -->
-
-          <div class="nextPrevBtns">
-            <button>
+          <label for="talkUpload" class="mt-3">Upload or select talks</label>
+          <div class="d-flex justify-content-between my-1">
+            <button class="btn btn-outline-dark">
+              Upload from HotCRP
+            </button>
+            <button class="btn btn-outline-dark">
+              Import from TCHES or ToSC
+            </button>
+            <button class="btn btn-outline-dark">
+              Use demo data
+            </button>
+            <button class="btn btn-outline-dark">
+              Skip for now
+            </button>
+          </div>
+          <div id="talkUploadHelp" class="form-text">
+            This is an optional step and can be an upload from HotCRP
+            (a JSON file), an import of papers from TCHES or ToSC, or using our demo data.
+          </div>
   
+          <!-- TODO: remove .mb-5 once page is actually put together -->
+          <div class="nextPrevBtns d-flex mt-3 mb-5">
+            <button class="btn border border-0 me-2">
+              <img src="img/arrow-left.svg" alt="previous">
+            </button>
+            <button class="btn border border-0">
+              <img src="img/arrow-right.svg" alt="next">
             </button>
           </div>
         </div>
-        
+
         <div class="row">
           <section id="versionPicker" class="col-12 setupStep">
             <table class="table table-bordered" id="versionList">
