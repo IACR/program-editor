@@ -194,16 +194,36 @@
           <input type="text" class="form-control my-1" id="confName" placeholder="Keycrypt 2050" required />
 
           <label for="confType" class="mt-3">Type of conference</label>
-          <select name="confType" id="confType" class="form-select my-1" required>
-            <option selected></option>
-            <option value="workshop1">Basic one-day workshop (single track)</option>
-            <option value="workshop2">Basic two-day workshop (single track)</option>
-            <option value="basic3">Basic three-day conference (single track)</option>
-            <option value="basic4">Basic four-day conference (single track)</option>
-            <option value="basic5">Basic five-day conference (single track)</option>
-            <option value="crypto">Crypto (5 days, dual track, beach barbeque)</option>
-            <option value="asiaEuro">Asiacrypt/Eurocrypt (5 days, dual track, banquet)</option>
-          </select>
+          <select name="confType" id="confType" class="form-select my-1" required aria-describedby="confTypeHelp">
+            <option selected disabled></option>
+            <optgroup label="IACR events">
+              <option value="asiacrypt">Asiacrypt (5 days, dual track, banquet)</option>
+              <option value="ches">CHES (4 days, single track, banquet)</option>
+              <option value="crypto">Crypto (5 days, dual track, beach barbeque)</option>
+              <option value="eurocrypt">Eurocrypt (5 days, dual track, banquet)</option>
+              <option value="fse">FSE (5 days, single track, dinner)</option>
+              <option value="pkc">PKC (4 days, single track)</option>
+              <option value="rwc">RWC (3 days, single track, lightning talks)</option>
+              <option value="tcc">TCC (4 days, single track, business meeting)</option>
+            </optgroup>
+            <optgroup label="Rump sessions and affiliated events">
+              <option value="rumpSess">Rump session (split into three parts, 5 minute slots)</option>
+              <option value="workshop1">One-day affiliated event or workshop (single track)</option>
+              <option value="workshop2">Two-day affiliated event or workshop (single track)</option>
+            </optgroup>
+            <optgroup label="Non-specific conference types">
+              <option value="basic3Single">Basic three-day conference (single track)</option>
+              <option value="basic4Single">Basic four-day conference (single track)</option>
+              <option value="basic5Single">Basic five-day conference (single track)</option>
+              <!-- <option value="basic3Dual">Basic three-day conference (dual track)</option>
+              <option value="basic4Dual">Basic four-day conference (dual track)</option>
+              <option value="basic5Dual">Basic five-day conference (dual track)</option> -->
+            </optgroup>
+          </select><div id="confTypeHelp" class="form-text">
+            <strong>If you are an IACR event, you must select the applicable type of event.</strong> 
+            All IACR events (with the exception of RWC) by default include a rump session, slots for two 
+            invited talks, and a slot for an awards ceremony unless otherwise noted.
+          </div>
 
           <!-- TODO: ideally add default value of now, min val must be now or later -->
           <div class="row">
