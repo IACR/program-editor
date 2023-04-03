@@ -194,7 +194,7 @@
           <input type="text" class="form-control my-1" id="confName" placeholder="Keycrypt 2050" required autofocus />
 
           <label for="confType" class="mt-3">Type of conference</label>
-          <select name="confType" id="confType" class="form-select my-1" required aria-describedby="confTypeHelp">
+          <select name="confType" id="confType" class="form-select my-1" required aria-describedby="confTypeHelp" onchange="updateNewForm()">
             <option selected disabled></option>
             <optgroup label="IACR events">
               <option value="asiacrypt">Asiacrypt (banquet + IACR business meeting)</option>
