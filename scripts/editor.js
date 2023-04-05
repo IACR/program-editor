@@ -4,6 +4,7 @@
 var progData;
 var progTemplate;
 var talksTemplate;
+var futureEvents;
 
 // This is called when the app is opened, and disables menu items that only make
 // sense if a program is being edited.
@@ -1950,4 +1951,67 @@ $(document).ready(function() {
   if ('id' in getUrlVars()) {
     getConfig('ajax.php?id=' + getUrlVars()['id'],true);
   }
+  fetchEventsCalendar();
 });
+
+function fetchEventsCalendar() {
+  fetch('/events/ajax/query.php?future=all')
+    .then(resp => resp.json())
+    .then(result => {
+      futureEvents = result;
+      console.dir(result);
+    });
+}
+
+function fetchTimeZone(lat, lon) {
+  var url = 'https://api.geoapify.com/v1/geocode/reverse?lat=' + lat + '&lon=' + lon + '&format=json&apiKey=f5307358f9b8400284c96e014f6f9225';
+  fetch(url)
+    .then(resp => resp.json())
+    .then(result => {
+      if (result.length) {
+        console.log(result[0].timezone)
+      } else {
+        console.log('no location found');
+      }
+    });
+}
+
+function updateNewForm() {
+  let eventType = document.getElementById('confType').value;
+  let cityElem = document.getElementById('city');
+  let countryElem = document.getElementById('country');
+  let startDateElem = document.getElementById('startDate');
+  let endDateElem = document.getElementById('endDate');
+  let timezoneElem = document.getElementById('timezone');
+  let numTrackElem = document.getElementById('numTrack');
+  cityElem.value = '';
+  countryElem.value = '';
+  startDateElem.value = '0000-00-00';
+  endDateElem.value = '0000-00-00';
+  timezoneElem.value = '';
+  numTrack.value = 2; // the default
+  console.log(eventType);
+  for (let i=0; i < futureEvents.length; i++) {
+    if (futureEvents[i].eventtype == eventType) {
+      let event = futureEvents[i];
+      console.log('selected');
+      console.log(event);
+      cityElem.value = event.city;
+      countryElem.value = event.country;
+      startDateElem.value = event.startdate;
+      endDateElem.value = event.enddate;
+      if (eventType == 'asiacrypt' ||
+          eventType == 'crypto' ||
+          eventType == 'eurocrypt') {
+        numTrack.value = 3;
+      } else if (eventType == 'rwc' ||
+                 eventType == 'tcc' ||
+                 eventType == 'pkc' ||
+                 eventType == 'rumpSess') {
+        numTrack.value = 1;
+      }
+      return;
+    }
+  }
+  
+}
